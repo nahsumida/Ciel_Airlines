@@ -1,0 +1,29 @@
+{
+  "name": "projintegrador_web",
+  "version": "1.0.0",
+  "description": "ciel airlines",
+  "main": "source/server.ts",
+  "scripts": {
+    "dev": "nodemon source/server.ts",
+    "build": "rm -rf build/ && prettier --write source/ && tsc"
+},
+  "keywords": [
+    "ciel",
+    "airlines",
+    "projeto",
+    "integrador"
+  ],
+  "author": "jessica kushida",
+  "license": "ISC",
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/express": "^4.17.18",
+    "@types/morgan": "^1.9.6",
+    "axios": "^1.5.1",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
