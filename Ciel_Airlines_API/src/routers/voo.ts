@@ -22,12 +22,12 @@ vooRouter.get("/listarVoo", async(req:any, res:any)=>{
             connectString : process.env.ORACLE_DB_CONN_STR
         });
      
-        let resultadoConsulta = await connection.execute("SELECT * FROM VOO");
+        let resSelect = await connection.execute("SELECT * FROM VOO");
     
         await connection.close();
         cr.status = "SUCCESS"; 
         cr.message = "Dados obtidos";
-        cr.payload = resultadoConsulta.rows;
+        cr.payload = resSelect.rows;
     }catch(e){
         if(e instanceof Error){
         cr.message = e.message;
@@ -117,13 +117,13 @@ vooRouter.post("/incluirVoo", async(req:any, res:any)=>{
         connectString : process.env.ORACLE_DB_CONN_STR
         });
 
-        const cmdInsertAeroporto = `INSERT INTO VOO 
+        const cmdInsert = `INSERT INTO VOO 
         (IDVOO, DATA, TRECHO, HORAPARTIDA, HORACHEGADA, AEROIDA, AEROVOLTA, PRECO, AERONAVE)
         VALUES (ID_VOO_SEQ.NEXTVAL, :1, :2, :3, :4, :5, :6, :7, :8)`
 
         const dados = [data, trecho, horaPartida, horaChegada, aeroIda, aeroVolta, preco, aeronave]
 
-        let resInsert = await connection.execute(cmdInsertAeroporto, dados);
+        let resInsert = await connection.execute(cmdInsert, dados);
 
         await connection.commit();
 

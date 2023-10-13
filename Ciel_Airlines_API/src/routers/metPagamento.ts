@@ -22,12 +22,12 @@ metodoPagamentoRouter.get("/listarAeronave", async(req:any, res:any)=>{
             connectString : process.env.ORACLE_DB_CONN_STR
         });
      
-        let resultadoConsulta = await connection.execute("SELECT * FROM AERONAVE");
+        let resSelect = await connection.execute("SELECT * FROM AERONAVE");
     
         await connection.close();
         cr.status = "SUCCESS"; 
         cr.message = "Dados obtidos";
-        cr.payload = resultadoConsulta.rows;
+        cr.payload = resSelect.rows;
     }catch(e){
         if(e instanceof Error){
         cr.message = e.message;
@@ -108,13 +108,13 @@ metodoPagamentoRouter.post("/incluirMetodoPagamento", async(req:any, res:any)=>{
         connectString : process.env.ORACLE_DB_CONN_STR
         });
 
-        const cmdInsertAeroporto = `INSERT INTO METODOPAGAMENTO 
+        const cmdInsert = `INSERT INTO METODOPAGAMENTO 
         (IDMETODO, NOMEMETODO)
         VALUES (ID_METODO_SEQ.NEXTVAL, :1)`
 
         const dados = [nomeMetodo]
 
-        let resInsert = await connection.execute(cmdInsertAeroporto, dados);
+        let resInsert = await connection.execute(cmdInsert, dados);
 
         await connection.commit();
 

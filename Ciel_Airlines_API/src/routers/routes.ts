@@ -15,7 +15,6 @@ oracledb.createPool({
   poolTimeout: 5000
 });
 
-
 type CustomResponse = {
     status: string,
     message: string,
@@ -44,12 +43,12 @@ router.get("/listarTeste", async(req:any, res:any)=>{
             connectString : process.env.ORACLE_DB_CONN_STR
         });
      
-        let resultadoConsulta = await connection.execute("SELECT * FROM TEST");
+        let resSelect = await connection.execute("SELECT * FROM TEST");
     
         await connection.close();
         cr.status = "SUCCESS"; 
         cr.message = "Dados obtidos";
-        cr.payload = resultadoConsulta.rows;
+        cr.payload = resSelect.rows;
 
     }catch(e){
         if(e instanceof Error){
@@ -110,13 +109,7 @@ router.delete("/excluirTeste", async(req:any, res:any)=>{
 router.post("/inserirTeste", async(req:any, res:any)=>{
   
   const nametest = req.body.nametest as string;
- 
-  // correção: verificar se tudo chegou para prosseguir com o cadastro.
-  // verificar se chegaram os parametros
-  // VALIDAR se estão bons (de acordo com os critérios - exemplo: 
-  // não pode qtdeAssentos ser número e ao mesmo tempo o valor ser -5)
 
-  // definindo um objeto de resposta.
   let cr: CustomResponse = {
     status: "ERROR",
     message: "",
@@ -132,13 +125,13 @@ router.post("/inserirTeste", async(req:any, res:any)=>{
       connectString : process.env.ORACLE_DB_CONN_STR
     });
 
-    const cmdInsertTeste = `INSERT INTO TEST 
+    const cmdInsert = `INSERT INTO TEST 
     (TEST_ID, TEST_NAME)
     VALUES (16, :1)`
 
     const dados = [nametest]
 
-    let resInsert = await connection.execute(cmdInsertTeste, dados);
+    let resInsert = await connection.execute(cmdInsert, dados);
   
     await connection.commit();
 
@@ -151,7 +144,7 @@ router.post("/inserirTeste", async(req:any, res:any)=>{
 
   }catch(e){
     if(e instanceof Error){
-      cr.message = e.message;
+      cr.message = e.message;'\s'
       console.log(e.message);
     }else{
       cr.message = "Erro ao conectar ao oracle. Sem detalhes";

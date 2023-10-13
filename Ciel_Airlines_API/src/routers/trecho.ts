@@ -22,12 +22,12 @@ trechoRouter.get("/listarTrecho", async(req:any, res:any)=>{
             connectString : process.env.ORACLE_DB_CONN_STR
         });
      
-        let resultadoConsulta = await connection.execute("SELECT * FROM TRECHO");
+        let resSelect = await connection.execute("SELECT * FROM TRECHO");
     
         await connection.close();
         cr.status = "SUCCESS"; 
         cr.message = "Dados obtidos";
-        cr.payload = resultadoConsulta.rows;
+        cr.payload = resSelect.rows;
     }catch(e){
         if(e instanceof Error){
         cr.message = e.message;
@@ -110,13 +110,13 @@ trechoRouter.post("/incluirTrecho", async(req:any, res:any)=>{
         connectString : process.env.ORACLE_DB_CONN_STR
         });
 
-        const cmdInsertAeroporto = `INSERT INTO TRECHO 
+        const cmdInsert = `INSERT INTO TRECHO 
         (IDTRECHO, CIDADESAIDA, CIDADECHEGADA)
         VALUES (ID_TRECHO_SEQ.NEXTVAL, :1, :2)`
 
         const dados = [cidadeSaida, cidadeChegada]
 
-        let resInsert = await connection.execute(cmdInsertAeroporto, dados);
+        let resInsert = await connection.execute(cmdInsert, dados);
 
         await connection.commit();
 

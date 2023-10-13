@@ -22,12 +22,12 @@ vendaRouter.get("/listarVenda", async(req:any, res:any)=>{
             connectString : process.env.ORACLE_DB_CONN_STR
         });
      
-        let resultadoConsulta = await connection.execute("SELECT * FROM VENDA");
+        let resSelect = await connection.execute("SELECT * FROM VENDA");
     
         await connection.close();
         cr.status = "SUCCESS"; 
         cr.message = "Dados obtidos";
-        cr.payload = resultadoConsulta.rows;
+        cr.payload = resSelect.rows;
     }catch(e){
         if(e instanceof Error){
         cr.message = e.message;

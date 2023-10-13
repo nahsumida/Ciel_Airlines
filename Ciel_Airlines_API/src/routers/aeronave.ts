@@ -22,12 +22,12 @@ aeronaveRouter.get("/listarAeronave", async(req:any, res:any)=>{
             connectString : process.env.ORACLE_DB_CONN_STR
         });
      
-        let resultadoConsulta = await connection.execute("SELECT * FROM AERONAVE");
+        let resSelect = await connection.execute("SELECT * FROM AERONAVE");
     
         await connection.close();
         cr.status = "SUCCESS"; 
         cr.message = "Dados obtidos";
-        cr.payload = resultadoConsulta.rows;
+        cr.payload = resSelect.rows;
     }catch(e){
         if(e instanceof Error){
         cr.message = e.message;
@@ -97,7 +97,6 @@ aeronaveRouter.post("/inserirAeronave", async(req:any, res:any)=>{
     // VALIDAR se estão bons (de acordo com os critérios - exemplo: 
     // não pode qtdeAssentos ser número e ao mesmo tempo o valor ser -5)
   
-    // definindo um objeto de resposta.
     let cr: CustomResponse = {
       status: "ERROR",
       message: "",
@@ -113,13 +112,13 @@ aeronaveRouter.post("/inserirAeronave", async(req:any, res:any)=>{
         connectString : process.env.ORACLE_DB_CONN_STR
       });
   
-      const cmdInsertAeronave = `INSERT INTO AERONAVE 
+      const cmdInsert = `INSERT INTO AERONAVE 
       (NUMIDENTIFICACAO, MODELO, FABRICANTE, ANOFABRICACAO, COMPANHIAAEREA, MAPAASSENTO)
       VALUES (:1, :2, :3, :4, :5, :6)`
 
       const dados = [numIdentificacao, modelo, fabricante, anoFabricacao, companhiaAerea, mapaAssento]
   
-      let resInsert = await connection.execute(cmdInsertAeronave, dados);
+      let resInsert = await connection.execute(cmdInsert, dados);
     
       await connection.commit();
   
