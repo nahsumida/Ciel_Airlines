@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <link rel="stylesheet" href="aeroporto.css">
+
+        <link rel="icon" href="assents/img/favicon-32x32.png">
+
+        <title>Mapa de Assentos - Cadastro</title>
+
+        <script>
+
+            function preencheuID(){
+                let resultado = false;
+
+                const IDSelecionado = document.getElementById('IDMapa').value;
+                if(IDSelecionado.length > 0){
+                    resultado = true;
+                }
+                return resultado;
+            }
+
+            function preencheuNumDeFileira(){
+                let resultado = false;
+
+                const FileiraSelecionado = document.getElementById('NumDeFileira').value;
+                if(FileiraSelecionado.length > 0){
+                    resultado = true;
+                }
+                return resultado;
+            }
+
+            function preencheuNumPorFileira(){
+                let resultado = false;
+
+                const FileiraSelecionado = document.getElementById('NumPorFileira').value;
+                if(FileiraSelecionado.length > 0){
+                    resultado = true;
+                }
+                return resultado;
+            }
+
+
+
+            function MessageStatus(msg, error){
+                var pStatus = document.getElementById("status");
+
+                if(error === true){
+                    pStatus.className = " statusError";
+                }
+                else{
+                    pStatus.className = 'statusSucess'
+                }
+                pStatus.textContent = msg;
+            }
+
+            function fetchInserir(body){
+                const requestOptions = {
+                    method: 'PUT', Headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+                };
+
+                return fetch('http://localhost:3000/inserirMapaAssentos', requestOptions).then(T => T.json())
+            }
+
+            function inserirMapaAssentos(){
+                if(!preencheuID()){
+                    MessageStatus("Preencha o ID do mapa!", true);
+                    return
+                }
+                if(!preencheuNumDeFileira()){
+                    MessageStatus("Preencha o número de fileiras!", true);
+                    return
+                }
+                if(!preencheuNumPorFileira()){
+                    MessageStatus("Preencha o número por fileiras!", true);
+                    return
+                }
+            }
+
+
+        </script>
+    </head>
+    <body>
+        <main>
+            <h1>Adicionar novo mapa de assentos</h1>
+            <form>
+                <p>
+                    <label for="IDMapa">ID Mapa:</label><br/>
+                    <input type="text" id="IDMapa" name="IDMapa"/>
+                </p>
+
+                <p>
+                    <label for="NumDeFileira">Numero de Fileiras:</label><br/>
+                    <input type="number" id="NumDeFileira" name="NumDeFileira"/>
+                </p>
+
+                <p>
+                    <label for="NumPorFileira">Numero por Fileiras:</label><br/>
+                    <input type="number" id="NumPorFileira" name="NumPorFileira"/>
+                </p>
+
+                <p>
+                    <button type="button" onclick="" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+
+                    <button type="button" id="btnSair" name="btnSair">Sair</button>
+                </p>
+                <p id="status" class="statusError"></p>
+            </form>
+        </main>
+    </body>
+</html>
