@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <link rel="stylesheet" href="aeroporto.css">
+
+        <link rel="icon" href="assents/img/favicon-32x32.png">
+
+        <title>VOO - Cadastro</title>
+
+        <script>
+
+            function preencheuID(){
+                let resultado = false;
+
+                const IDSelecionado = document.getElementById('IDVoo').value;
+                if(IDSelecionado.length > 0){
+                    resultado = true;
+                }
+                return resultado;
+            }
+
+            function preencheuHoraPartida(){
+                let resultado = false;
+
+                const HoraSelecionada = document.getElementById('HoraPartida').value;
+                if(HoraSelecionada.length > 0){
+                    resultado = true;
+                }
+                return resultado;
+            }
+
+            function preencheuHoraChegada(){
+                let resultado = false;
+
+                const HoraSelecionada = document.getElementById('HoraChegada').value;
+                if(HoraSelecionada.length > 0){
+                    resultado = true;
+                }
+                return resultado;
+            }
+
+            //trecho
+            //aeroida
+            //aerovolta
+            //aeronave
+
+
+            function MessageStatus(msg, error){
+                var pStatus = document.getElementById("status");
+
+                if(error === true){
+                    pStatus.className = " statusError";
+                }
+                else{
+                    pStatus.className = 'statusSucess'
+                }
+                pStatus.textContent = msg;
+            }
+
+            function fetchInserir(body){
+                const requestOptions = {
+                    method: 'PUT', Headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+                };
+
+                return fetch('http://localhost:3000/inserirVoo', requestOptions).then(T => T.json())
+            }
+
+            function inserirVoo(){
+                if(!preencheuID()){
+                    MessageStatus("Preencha o id do voo!", true);
+                    return
+                }
+                if(!preencheuHoraChegada()){
+                    MessageStatus("preencha a hora de chegada!", true);
+                    return
+                }
+                if(!preencheuHoraPartida()){
+                    MessageStatus("Preencha a hora da partida!", true);
+                    return
+                }
+            
+            //trecho
+            //aeroida
+            //aerovolta
+            //aeronave
+
+            }
+
+
+
+        </script>
+    </head>
+    <body>
+        <main>
+            <h1>Adicionar novo Voo</h1>
+            <form>
+                <p>
+                    <label for="IDVoo">ID Voo:</label><br/>
+                    <input type="text" id="IDVoo" name="IDVoo"/>
+                </p>
+
+                <p>
+                    <label for="Data">Data:</label><br/>
+                    <input type="date" id="Data" name="Data"/>
+                </p>
+
+                <p>
+                    <label for="Trecho">Trecho:</label><br/>
+                    <select name="Trecho" id="Trecho">
+                    <option value="0" selected>Selecione: </option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="HoraPartida">Hora Partida:</label><br/>
+                    <input type="number" id="HoraPartida" name="HoraPartida"/>
+                </p>
+
+                <p>
+                    <label for="HoraChegada">Hora Chegada:</label><br/>
+                    <input type="number" id="HoraChegada" name="HoraChegada"/>
+                </p>
+
+                <p>
+                    <label for="AeroIda">Aeroporto IDA:</label><br/>
+                    <select name="AeroIda" id="AeroIda">
+                    <option value="0" selected>Selecione: </option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="AeroVolta">Aeroporto Volta:</label><br/>
+                    <select name="AeroVolta" id="AeroVolta">
+                    <option value="0" selected>Selecione: </option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="preco">Preço:</label><br/>
+                    <input type="number" id="preco" name="preco"/>
+                </p>
+
+                <p>
+                    <label for="Aeronave">Aeronave:</label><br/>
+                    <select name="Aeronave" id="Aeronave">
+                    <option value="0" selected>Selecione: </option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    </select>
+                </p>
+
+                <p>
+                    <button type="button" onclick="" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+
+                    <button type="button" id="btnSair" name="btnSair">Sair</button>
+                </p>
+                <p id="status" class="statusError"></p>
+            </form>
+        </main>
+    </body>
+</html>
