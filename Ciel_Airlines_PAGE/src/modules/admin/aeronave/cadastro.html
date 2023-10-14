@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <link rel="stylesheet" href="aeroporto.css">
+        <link rel="icon" href="assents/img/favicon-32x32.png">
+
+        <title>Aeronaves - Cadastro</title>
+
+        <script>
+
+            function preencheuModelo(){
+                let resultado = false;
+
+                const modeloSelecionado = document.getElementById('Modelo').value;
+                if(modeloSelecionado.length > 0){
+                    resultado = true;
+                }
+                return resultado;
+            }
+
+
+            function anoValido(){
+                var strAno = document.getElementById('anoFabricacao').value;
+
+                const ano = parseInt(strAno);
+                console.log("Ano : " + ano.toString());
+                if(ano >= 1990 && ano <= 2026){
+                    resultado = true;
+                }
+                return resultado;
+            }
+
+            function preencheuFab(){
+                let resultado = false;
+
+                const fabricanteSelecionado = document.getElementById('fabricante').value;
+                if(fabricanteSelecionado.lenght > 0){
+                    resultado = true;
+                }
+                return resultado;
+            }
+
+            function totalAssentosValido(){
+                let resultado = false;
+                const strAssento = document.getElementById('Total_assentos').value;
+                const assentos = parseInt(strAssento);
+                if(assentos >0){
+                    resultado = true;
+                }
+                return resultado;
+            }
+
+            // num de identificaçao
+            // mapa de assento
+            //companhia aerea
+
+            function MessageStatus(msg, error){
+                var pStatus = document.getElementById("status");
+
+                if(error === true){
+                    pStatus.className = " statusError";
+                }
+                else{
+                    pStatus.className = 'statusSucess'
+                }
+                pStatus.textContent = msg;
+            }
+
+            function fetchInserir(body){
+                const requestOptions = {
+                    method: 'PUT', Headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+                };
+
+                return fetch('http://localhost:3000/inserirAeronave', requestOptions).then(T => T.json())
+            }
+
+            function inserirAeronave(){
+                if(!preencheuModelo()){
+                    MessageStatus("Preencha modelo!", true);
+                    return
+                }
+                if(!anoValido()){
+                    MessageStatus("Ano invalido!", true);
+                    return
+                }
+                if(!preencheuFab()){
+                    MessageStatus("Preencha o nome do Fabricante!", true);
+                    return
+                }
+                if(!totalAssentosValido()){
+                    showStatusMessage("Preencha  o total de assentos.", true);
+                    return;
+                }
+
+               
+                // num de identificaçao
+                // mapa de assento
+                //companhia aerea
+            }
+
+
+        </script>
+    </head>
+    <body>
+        <main>
+            <h1>Adicionar nova Aeronave</h1>
+            <form>
+                <p>
+                    <label for="Modelo">Modelo Aeronave:</label><br/>
+                    <input type="text" id="Modelo" name="Modelo" maxlength="10"/>
+                </p>
+
+                <p>
+                    <label for="NumIdentificacao">Número Identificação:</label><br/>
+                    <select name="NumIdentificacao" id="NumIdentificacao">
+                    <option value="0" selected>Selecione: </option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="fabricante">Fabricante:</label><br/>
+                    <input type="text" id="fabricante" name="fabricante" maxlength="20"/>
+                </p>
+
+                <p>
+                    <label for="anoFabricacao">Ano de fabricação:</label><br/>
+                    <input type="text" id="anoFabricacao" name="anoFabricacao" maxlength="4" size="5"/>
+                </p>
+
+                <p>
+                    <label for="mapaAssento">Mapa de assentos:</label><br/>
+                    <select name="mapaAssento" id="mapaAssento">
+                    <option value="0" selected>Selecione: </option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="Total_assentos">Total Assentos:</label><br/>
+                    <input type="text" id="Total_assentos" name="Total_assentos">
+                </p>
+
+                <p>
+                    <label for="CompanhiaAerea">Companhia Aerea:</label><br/>
+                    <select name="CompanhiaAerea" id="CompanhiaAerea">
+                    <option value="0" selected>Selecione: </option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    </select>
+                </p>
+
+                <p>
+                    <button type="button" onclick="" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+
+                    <button type="button" id="btnSair" name="btnSair">Sair</button>
+                </p>
+                <p id="status" class="statusError"></p>
+            </form>
+        </main>
+    </body>
+</html>
