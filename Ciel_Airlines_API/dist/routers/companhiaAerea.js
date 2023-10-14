@@ -26,11 +26,11 @@ exports.companhiaAereaRouter.get("/listarAeronave", (req, res) => __awaiter(void
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resultadoConsulta = yield connection.execute("SELECT * FROM COMPANHIAAEREA");
+        let resSelect = yield connection.execute("SELECT * FROM COMPANHIAAEREA");
         yield connection.close();
         cr.status = "SUCCESS";
         cr.message = "Dados obtidos";
-        cr.payload = resultadoConsulta.rows;
+        cr.payload = resSelect.rows;
     }
     catch (e) {
         if (e instanceof Error) {
@@ -42,6 +42,97 @@ exports.companhiaAereaRouter.get("/listarAeronave", (req, res) => __awaiter(void
         }
     }
     finally {
+        res.send(cr);
+    }
+}));
+exports.companhiaAereaRouter.delete("/excluirCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const idCompanhiaAerea = req.body.idCompanhiaAerea;
+    let cr = {
+        status: "ERROR",
+        message: "",
+        payload: undefined,
+    };
+    try {
+        const connection = yield oracledb_1.default.getConnection({
+            user: process.env.ORACLE_DB_USER,
+            password: process.env.ORACLE_DB_SECRET,
+            connectString: process.env.ORACLE_DB_CONN_STR
+        });
+        let resDelete = yield connection.execute(`DELETE COMPANHIAAEREA WHERE IDCOMPANHIAAEREA = :1`, [idCompanhiaAerea]);
+        yield connection.commit();
+        yield connection.close();
+        const rowsDeleted = resDelete.rowsAffected;
+        if (rowsDeleted !== undefined && rowsDeleted === 1) {
+            cr.status = "SUCCESS";
+            cr.message = "Dado excluído.";
+        }
+        else {
+            cr.message = "Dado não excluído. Verifique se o id informado está correto.";
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            cr.message = e.message;
+            console.log(e.message);
+        }
+        else {
+            cr.message = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        res.send(cr);
+    }
+}));
+exports.companhiaAereaRouter.post("/inserirCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const nomeCompanhiaAerea = req.body.nomeCompanhiaAerea;
+    // correção: verificar se tudo chegou para prosseguir com o cadastro.
+    // verificar se chegaram os parametros
+    // VALIDAR se estão bons (de acordo com os critérios - exemplo: 
+    // não pode qtdeAssentos ser número e ao mesmo tempo o valor ser -5)
+    // definindo um objeto de resposta.
+    let cr = {
+        status: "ERROR",
+        message: "",
+        payload: undefined,
+    };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection({
+            user: process.env.ORACLE_DB_USER,
+            password: process.env.ORACLE_DB_SECRET,
+            connectString: process.env.ORACLE_DB_CONN_STR
+        });
+        const cmdInsert = `INSERT INTO COMPANHIA_AEREA 
+    (ID_COMPANHIA, NOME_COMPANHIA)
+    VALUES (ID_COMPANHIA_SEQ.NEXTVAL, :1)`;
+        const dados = [nomeCompanhiaAerea];
+        let resInsert = yield connection.execute(cmdInsert, dados);
+        yield connection.commit();
+        const rowsInserted = resInsert.rowsAffected;
+        console.log(rowsInserted);
+        if (rowsInserted !== undefined && rowsInserted === 1) {
+            cr.status = "SUCCESS";
+            cr.message = "Dado inserido.";
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            cr.message = e.message;
+            console.log(e.message);
+        }
+        else {
+            cr.message = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        if (connection) {
+            try {
+                yield connection.close({ drop: true });
+            }
+            catch (err) {
+                console.error(err);
+            }
+        }
         res.send(cr);
     }
 }));

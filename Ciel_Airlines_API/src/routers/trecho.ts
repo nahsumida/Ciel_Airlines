@@ -86,8 +86,8 @@ trechoRouter.delete("/excluirTrecho", async(req:any, res:any)=>{
 
 trechoRouter.post("/incluirTrecho", async(req:any, res:any)=>{
 
-    const cidadeSaida = req.body.cidadeSaida as string;
-    const cidadeChegada = req.body.cidadeChegada as string;
+    const aeroChegada = req.body.aeroChegada as string;
+    const aeroSaida = req.body.aeroSaida as string;
 
     // correção: verificar se tudo chegou para prosseguir com o cadastro.
     // verificar se chegaram os parametros
@@ -111,10 +111,10 @@ trechoRouter.post("/incluirTrecho", async(req:any, res:any)=>{
         });
 
         const cmdInsert = `INSERT INTO TRECHO 
-        (IDTRECHO, CIDADESAIDA, CIDADECHEGADA)
+        (IDTRECHO, AEROSAIDA, AEROCHEGADA)
         VALUES (ID_TRECHO_SEQ.NEXTVAL, :1, :2)`
 
-        const dados = [cidadeSaida, cidadeChegada]
+        const dados = [aeroSaida, aeroChegada]
 
         let resInsert = await connection.execute(cmdInsert, dados);
 

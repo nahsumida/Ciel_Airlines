@@ -91,7 +91,7 @@ aeronaveRouter.post("/inserirAeronave", async(req:any, res:any)=>{
     const anoFabricacao = req.body.anoFabricacao as number;
     const companhiaAerea = req.body.companhiaAerea as number;
     const mapaAssento =  req.body.mapaAssento as number;
-   
+    const totalAssento = req.body.totalAssento as number;
     // correção: verificar se tudo chegou para prosseguir com o cadastro.
     // verificar se chegaram os parametros
     // VALIDAR se estão bons (de acordo com os critérios - exemplo: 
@@ -113,10 +113,10 @@ aeronaveRouter.post("/inserirAeronave", async(req:any, res:any)=>{
       });
   
       const cmdInsert = `INSERT INTO AERONAVE 
-      (NUMIDENTIFICACAO, MODELO, FABRICANTE, ANOFABRICACAO, COMPANHIAAEREA, MAPAASSENTO)
+      (NUM_IDENTIFICACAO, MODELO, FABRICANTE, ANO_FABRICACAO, COMPANHIA_AEREA, MAPA_ASSENTO, TOTAL_ASSENTO)
       VALUES (:1, :2, :3, :4, :5, :6)`
 
-      const dados = [numIdentificacao, modelo, fabricante, anoFabricacao, companhiaAerea, mapaAssento]
+      const dados = [numIdentificacao, modelo, fabricante, anoFabricacao, companhiaAerea, mapaAssento, totalAssento]
   
       let resInsert = await connection.execute(cmdInsert, dados);
     

@@ -108,8 +108,8 @@ try{
     connectString : process.env.ORACLE_DB_CONN_STR
     });
 
-    const cmdInsert = `INSERT INTO COMPANHIAAEREA 
-    (IDCOMPANHIA, NOMECOMPANHIA)
+    const cmdInsert = `INSERT INTO COMPANHIA_AEREA 
+    (ID_COMPANHIA, NOME_COMPANHIA)
     VALUES (ID_COMPANHIA_SEQ.NEXTVAL, :1)`
 
     const dados = [nomeCompanhiaAerea]

@@ -110,8 +110,8 @@ mapaAssentoRouter.post("/inserirMapaAssento", async(req:any, res:any)=>{
         connectString : process.env.ORACLE_DB_CONN_STR
         });
 
-        const cmdInsert = `INSERT INTO MAPAASSENTO 
-        (IDMAPA, NUMFILEIRA, NUMPORFILEIRA)
+        const cmdInsert = `INSERT INTO MAPA_ASSENTO 
+        (ID_MAPA, NUM_DE_FILEIRA, NUM_POR_FILEIRA)
         VALUES (ID_MAPA_SEQ.NEXTVAL, :1, :2)`
 
         const dados = [numDeFileira, numPorFileira]

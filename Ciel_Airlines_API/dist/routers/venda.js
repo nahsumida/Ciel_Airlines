@@ -26,11 +26,11 @@ exports.vendaRouter.get("/listarVenda", (req, res) => __awaiter(void 0, void 0, 
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resultadoConsulta = yield connection.execute("SELECT * FROM VENDA");
+        let resSelect = yield connection.execute("SELECT * FROM VENDA");
         yield connection.close();
         cr.status = "SUCCESS";
         cr.message = "Dados obtidos";
-        cr.payload = resultadoConsulta.rows;
+        cr.payload = resSelect.rows;
     }
     catch (e) {
         if (e instanceof Error) {

@@ -107,7 +107,7 @@ router.delete("/excluirTeste", async(req:any, res:any)=>{
 });
 
 router.post("/inserirTeste", async(req:any, res:any)=>{
-  
+  const idteste =  req.body.idteste as number;
   const nametest = req.body.nametest as string;
 
   let cr: CustomResponse = {
@@ -127,9 +127,9 @@ router.post("/inserirTeste", async(req:any, res:any)=>{
 
     const cmdInsert = `INSERT INTO TEST 
     (TEST_ID, TEST_NAME)
-    VALUES (16, :1)`
+    VALUES (:1, :2)`
 
-    const dados = [nametest]
+    const dados = [idteste,nametest]
 
     let resInsert = await connection.execute(cmdInsert, dados);
   

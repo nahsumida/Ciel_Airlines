@@ -111,7 +111,7 @@ aeroportoRouter.delete("/excluirAeroporto", async(req:any, res:any)=>{
       });
   
       const cmdInsert = `INSERT INTO AEROPORTO 
-      (IDAEROPORTO, IDCIDADE, NOMEAEROPORTO)
+      (ID_AEROPORTO, IDCIDADE, NOME_AEROPORTO)
       VALUES (ID_AEROPORTO_SEQ.NEXTVAL, :1, :2)`
   
       const dados = [idCidade, nomeAeroporto]

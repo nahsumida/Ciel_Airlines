@@ -42,7 +42,7 @@ metodoPagamentoRouter.get("/listarAeronave", async(req:any, res:any)=>{
   
 metodoPagamentoRouter.delete("/excluirMetodoPagamento", async(req:any, res:any)=>{
 
-    const idCompanhiaAerea = req.body.idCompanhiaAerea as number;
+    const idmetodo = req.body.idmetodo as number;
    
     let cr: CustomResponse = {
       status: "ERROR",
@@ -57,7 +57,7 @@ metodoPagamentoRouter.delete("/excluirMetodoPagamento", async(req:any, res:any)=
         connectString : process.env.ORACLE_DB_CONN_STR
       });
   
-      let resDelete = await connection.execute(`DELETE COMPANHIAAEREA WHERE IDCOMPANHIAAEREA = :1`, [idCompanhiaAerea]);
+      let resDelete = await connection.execute(`DELETE METODO_PAGAMENTO WHERE ID_METODO = :1`, [idmetodo]);
       
       await connection.commit();
   
@@ -108,8 +108,8 @@ metodoPagamentoRouter.post("/incluirMetodoPagamento", async(req:any, res:any)=>{
         connectString : process.env.ORACLE_DB_CONN_STR
         });
 
-        const cmdInsert = `INSERT INTO METODOPAGAMENTO 
-        (IDMETODO, NOMEMETODO)
+        const cmdInsert = `INSERT INTO METODO_PAGAMENTO 
+        (ID_METODO, NOME_METODO)
         VALUES (ID_METODO_SEQ.NEXTVAL, :1)`
 
         const dados = [nomeMetodo]
