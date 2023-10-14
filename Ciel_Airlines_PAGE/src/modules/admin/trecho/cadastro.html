@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <link rel="stylesheet" href="aeroporto.css">
+
+        <link rel="icon" href="assents/img/favicon-32x32.png">
+
+        <title>Trecho - Cadastro</title>
+
+        <script>
+
+            function preencheuID(){
+                let resultado = false;
+
+                const IDSelecionado = document.getElementById('IDTrecho').value;
+                if(IDSelecionado.length > 0){
+                    resultado = true;
+                }
+                return resultado;
+            }
+
+            //cidadesaida
+            //cidadechegada
+
+
+            function MessageStatus(msg, error){
+                var pStatus = document.getElementById("status");
+
+                if(error === true){
+                    pStatus.className = " statusError";
+                }
+                else{
+                    pStatus.className = 'statusSucess'
+                }
+                pStatus.textContent = msg;
+            }
+
+            function fetchInserir(body){
+                const requestOptions = {
+                    method: 'PUT', Headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+                };
+
+                return fetch('http://localhost:3000/inserirTrecho', requestOptions).then(T => T.json())
+            }
+
+            function inserirTrecho(){
+                if(preencheuID()){
+                    MessageStatus("Preencha o ID do Trecho!", true);
+                    return
+                }
+                //cidadesaida
+                //cidadechegada
+            }
+
+
+        </script>
+    </head>
+    <body>
+        <main>
+            <h1>Adicionar novo Trecho</h1>
+            <form>
+                <p>
+                    <label for="IDTrecho">ID Trecho:</label><br/>
+                    <input type="text" id="IDTrecho" name="IDTrecho"/>
+                </p>
+
+                <p>
+                    <label for="CidadeSaida">Cidade de Saída:</label><br/>
+                    <select name="CidadeSaida" id="CidadeSaida">
+                    <option value="0" selected>Selecione: </option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="CidadeChegada">Cidade de Chegada:</label><br/>
+                    <select name="CidadeChegada" id="CidadeChegada">
+                    <option value="0" selected>Selecione: </option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    </select>
+                </p>
+
+                <p>
+                    <button type="button" onclick="" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+
+                    <button type="button" id="btnSair" name="btnSair">Sair</button>
+                </p>
+                <p id="status" class="statusError"></p>
+            </form>
+        </main>
+    </body>
+</html>
