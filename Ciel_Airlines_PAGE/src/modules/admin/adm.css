@@ -18,7 +18,7 @@ nav{
     position: fixed;
     display: flex;
     width: 100%;
-    background: #fff;
+    background:#f2ece6;
     justify-content: space-around;
     align-items: center;
 }
@@ -51,6 +51,11 @@ nav ul li a:hover{
     background-color: #A93C88;
     color: #fff;
     border-radius: 5px;
+}
+
+.logo img{
+    width: 100%;
+    cursor: pointer;
 }
 
 .home{
