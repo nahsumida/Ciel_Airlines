@@ -2,7 +2,7 @@ import express from "express";
 import oracledb, { Connection, ConnectionAttributes } from "oracledb";
 import dotenv from "dotenv";
 //const AeronaveController = require('./Ciel_Airlines/src/controllers/AeronaveController.ts');
-const TesteController = require('C:/Users/Cliente/Documents/GitHub/Ciel_Airlines/Ciel_Airlines_API/src/controllers/TesteController.ts');
+//const TesteController = require('C:/Users/Cliente/Documents/GitHub/Ciel_Airlines/Ciel_Airlines_API/src/controllers/TesteController.ts');
 
 export const router = express.Router();
 
