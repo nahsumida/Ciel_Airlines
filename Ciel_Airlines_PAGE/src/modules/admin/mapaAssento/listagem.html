@@ -4,7 +4,7 @@
         <link rel="stylesheet" href="aeroporto.css">
         <link rel="icon" href="assents/img/favicon-32x32.png">
 
-        <title>MAPA ASSENTO - LISTAGEM</title>
+        <title>COMPANHIA - LISTAGEM</title>
 
         <script>
             function MessageStatus(msg, error){
@@ -24,7 +24,7 @@
                     method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };
 
-                return fetch('http://localhost:3000/listarMapaAssentos', requestOptions).then(T => T.json())
+                return fetch('http://localhost:3000/listarMapaAssento', requestOptions).then(T => T.json())
             }
 
             function inserirAeronave(){
@@ -38,17 +38,22 @@
 
                         // Preenche a tabela com os dados da resposta
                         customResponse.payload.forEach(item => {
-                            const numero = item[0];
-                            const texto = item[1];
+                            const idmapa = item[0];
+                            const numdefileira = item[1];
+                            const numporfileira = item[2];
 
                             const row = dataBody.insertRow();
                             const cell1 = row.insertCell(0);
                             const cell2 = row.insertCell(1);
-                            cell1.textContent = numero;
-                            cell2.textContent = texto;
+                            const cell3 = row.insertCell(2);
+                            cell1.textContent = idmapa;
+                            cell2.textContent = numdefileira;
+                            cell3.textContent = numporfileira;
+
+
                         });
                     }else{
-                        MessageStatus("Erro ao listar Mapa...: " + customResponse.message, true);
+                        MessageStatus("Erro ao listar Companhia...: " + customResponse.message, true);
                         console.log(customResponse.message);
                     }
                     })
@@ -61,13 +66,13 @@
     </head>
     <body>
         <main>
-            <h1>Listar Mapa de assentos</h1>
+            <h1>Listar Mapa de Assentos</h1>
             <table id="dataTable">
                 <thead>
                     <tr>
                         <th>ID Mapa</th>
-                        <th>Num-DeFileira</th>
-                        <th>Num-PorFileira</th>
+                        <th>Num de Fileira</th>
+                        <th>Num por Fileira</th>
                     </tr>
                 </thead>
                 <tbody id="dataBody"></tbody>
