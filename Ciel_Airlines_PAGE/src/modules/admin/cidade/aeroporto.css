@@ -67,8 +67,25 @@ main form button{
     background: #A93C88;
     color: white;
     font-size: 1.1rem;
+    display: inline-block;
 }
 
 main form button:hover {
     background: #d76db8;
+}
+
+.statusError {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    color: red;
+}
+
+.button-items {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10px;
+}
+.button-items button{
+    flex:1;
+    margin-right: 15px;
 }

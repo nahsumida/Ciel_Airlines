@@ -89,24 +89,18 @@
     </head>
     <body>
         <main>
-            <h1>Adicionar nova Cidade</h1>
+            <h1>Cadastrar - CIDADE</h1>
             <form>
-                <p>
-                    <label for="IDCidade">ID Cidade:</label><br/>
-                    <input type="text" id="IDCidade" name="IDCidade"/>
-                </p>
-
                 <p>
                     <label for="nomeCidade">Nome Cidade:</label><br/>
                     <input type="text" id="nomeCidade" name="nomeCidade" maxlength="35"/>
                 </p>
-
-                <p>
-                    <button type="button" onclick="inserirCidade();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
-
-                    <button type="button" id="btnSair" name="btnSair">Sair</button>
-                </p>
                 <p id="status" class="statusError"></p>
+        
+                <p class="button-items">
+                    <button type="button" onclick="inserirCidade();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                    <button type="button" id="btnSair" name="btnSair">Sair</button>
+                </p> 
             </form>
         </main>
     </body>
