@@ -47,7 +47,7 @@
                     method: 'PUT', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };
 
-                return fetch('http://localhost:3000/inserirTrecho', requestOptions).then(T => T.json())
+                return fetch('http://localhost:3000/incluirTrecho', requestOptions).then(T => T.json())
             }
 
             function inserirTrecho(){
