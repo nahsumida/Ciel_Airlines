@@ -45,7 +45,7 @@ function inserirAeronave(){
                 dataSelect.appendChild(option);
             });
         }else{
-            MessageStatus("Erro ao listar metodos...: " + customResponse.message, true);
+            MessageStatus("Erro ao listar aeronaves...: " + customResponse.message, true);
             console.log(customResponse.message);
         }
         })
@@ -61,9 +61,9 @@ function excluir(selectedValue){
     })
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
-            MessageStatus("Metodo excluido... ", false);
+            MessageStatus("Aeronave excluido... ", false);
         }else{
-            MessageStatus("Erro ao listar metodos...: " + customResponse.message, true);
+            MessageStatus("Erro ao listar aeronave...: " + customResponse.message, true);
             console.log(customResponse.message);
         }
         })
