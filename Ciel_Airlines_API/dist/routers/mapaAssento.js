@@ -26,7 +26,7 @@ exports.mapaAssentoRouter.get("/listarMapaAssento", (req, res) => __awaiter(void
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resSelect = yield connection.execute("SELECT * FROM MAPAASSENTO");
+        let resSelect = yield connection.execute("SELECT * FROM MAPA_ASSENTO");
         yield connection.close();
         cr.status = "SUCCESS";
         cr.message = "Dados obtidos";
@@ -58,7 +58,7 @@ exports.mapaAssentoRouter.delete("/excluirMapaAssento", (req, res) => __awaiter(
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resDelete = yield connection.execute(`DELETE COMPANHIAAEREA WHERE IDCOMPANHIAAEREA = :1`, [idCompanhiaAerea]);
+        let resDelete = yield connection.execute(`DELETE MAPA_ASSENTO WHERE ID_MAPA = :1`, [idCompanhiaAerea]);
         yield connection.commit();
         yield connection.close();
         const rowsDeleted = resDelete.rowsAffected;
