@@ -22,7 +22,7 @@
             function preencheuNomeCidade(){
                 let resultado = false;
 
-                const NomeSelecionado = document.getElementById('NomeCidade').value;
+                const NomeSelecionado = document.getElementById('nomeCidade').value;
                 if(NomeSelecionado.length > 0){
                     resultado = true;
                 }
@@ -45,7 +45,7 @@
 
             function fetchInserir(body){
                 const requestOptions = {
-                    method: 'PUT', Headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+                    method: 'PUT', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };
 
                 return fetch('http://localhost:3000/inserirCidade', requestOptions).then(T => T.json())
@@ -60,6 +60,28 @@
                     MessageStatus("Preencha ID da cidade!", true);
                     return
                 }
+
+                const IDCidade = document.getElementById("IDCidade").value;
+                const nomeCidade = document.getElementById("nomeCidade").value;
+
+                fetchInserir({
+                    IDCidade: IDCidade, 
+                    nomeCidade: nomeCidade ,
+                    })
+                    .then(customResponse => {
+                    if(customResponse.status === "SUCCESS"){
+                        MessageStatus("Cidade cadastrada... ", false);
+                    }else{
+                        MessageStatus("Erro ao cadastrar cidade...: " + customResponse.message, true);
+                        console.log(customResponse.message);
+                    }
+                    })
+                    .catch((e)=>{
+                        MessageStatus("Erro técnico ao cadastrar... Contate o suporte.", true);
+                        console.log("Falha grave ao cadastrar." + e)
+                    });
+        
+
             }
 
 
@@ -80,7 +102,7 @@
                 </p>
 
                 <p>
-                    <button type="button" onclick="" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                    <button type="button" onclick="inserirCidade();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
 
                     <button type="button" id="btnSair" name="btnSair">Sair</button>
                 </p>
