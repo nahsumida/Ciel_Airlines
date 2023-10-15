@@ -58,7 +58,7 @@ exports.cidadeRouter.delete("/excluirCidade", (req, res) => __awaiter(void 0, vo
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resDelete = yield connection.execute(`DELETE CIDADE WHERE IDAEROPORTO = :1`, [idCidade]);
+        let resDelete = yield connection.execute(`DELETE CIDADE WHERE ID_CIDADE = :1`, [idCidade]);
         yield connection.commit();
         yield connection.close();
         const rowsDeleted = resDelete.rowsAffected;
