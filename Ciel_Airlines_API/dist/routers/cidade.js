@@ -103,7 +103,7 @@ exports.cidadeRouter.post("/inserirCidade", (req, res) => __awaiter(void 0, void
             connectString: process.env.ORACLE_DB_CONN_STR
         });
         const cmdInsert = `INSERT INTO CIDADE 
-      (ID_CIDADE, NOME_AEROPORTO)
+      (ID_CIDADE, NOME_CIDADE)
       VALUES (ID_CIDADE_SEQ.NEXTVAL, :1)`;
         const dados = [nomeCidade];
         let resInsert = yield connection.execute(cmdInsert, dados);
