@@ -4,7 +4,7 @@
         <link rel="stylesheet" href="aeroporto.css">
         <link rel="icon" href="assents/img/favicon-32x32.png">
 
-        <title>Aeronaves - Listagem</title>
+        <title>AERONAVE - LISTAGEM</title>
 
         <script>
             function MessageStatus(msg, error){
@@ -24,81 +24,59 @@
                     method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };
 
-                return fetch('http://localhost:3000/listarTeste', requestOptions).then(T => T.json())
+                return fetch('http://localhost:3000/listarAeronave', requestOptions).then(T => T.json())
             }
 
             function inserirAeronave(){
-               /* if(!preencheuModelo()){
-                    MessageStatus("Preencha modelo!", true);
-                    return;
-                }
-                if(!preencheuNumID()){
-                    MessageStatus("Preencha o Numero de Identificação!", true);
-                    return;
-                }
-                if(!anoValido()){
-                    MessageStatus("Ano invalido!", true);
-                    return;
-                }
-                if(!preencheuFab()){
-                    MessageStatus("Preencha o nome do Fabricante!", true);
-                    return;
-                }
-                if(!totalAssentosValido()){
-                    MessageStatus("Preencha  o total de assentos.", true);
-                    return;
-                }
-
-               
-                
-                // mapa de assento
-                //companhia aerea
-
-                
-                const Modelo = document.getElementById("Modelo").value;
-                const NumIdentificacao = document.getElementById("NumIdentificacao").value;
-                const fabricante = document.getElementById("fabricante").value;
-                const anoFabricacao = document.getElementById("anoFabricacao").value;
-                const mapaAssento = document.getElementById("mapaAssento").value;
-                const Total_assentos = document.getElementById("Total_assentos").value;
-                const CompanhiaAerea = document.getElementById("CompanhiaAerea").value;
-*/
-                //funcao Mateus
+                        const dataBody = document.getElementById('dataBody');
                 fetchListar()
                     .then(customResponse => {
-                    // obteve resposta, vamos simplesmente exibir como mensagem: 
                     if(customResponse.status === "SUCCESS"){
-                        //MessageStatus("Aeronave cadastrada... ", false);
-                        MessageStatus(customResponse.payload)
+                        
+                        // Limpa qualquer conteúdo anterior da tabela
+                        dataBody.innerHTML = '';
+
+                        // Preenche a tabela com os dados da resposta
+                        customResponse.payload.forEach(item => {
+                            const numero = item[0];
+                            const texto = item[1];
+
+                            const row = dataBody.insertRow();
+                            const cell1 = row.insertCell(0);
+                            const cell2 = row.insertCell(1);
+                            cell1.textContent = numero;
+                            cell2.textContent = texto;
+                        });
                     }else{
-                        MessageStatus("Erro ao cadastrar aeronave...: " + customResponse.message, true);
+                        MessageStatus("Erro ao listar Aeronave...: " + customResponse.message, true);
                         console.log(customResponse.message);
                     }
                     })
                     .catch((e)=>{
-                        MessageStatus("Erro técnico ao cadastrar... Contate o suporte.", true);
-                        console.log("Falha grave ao cadastrar." + e)
+                        MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
+                        console.log("Falha grave ao listar." + e)
                     });
-                   // console.log(customResponse.body)
             }
-        
-
-        
         </script>
     </head>
     <body>
         <main>
-            <h1>Adicionar nova Aeronave</h1>
-            <form>
-                
-
-                <p>
-                    <button type="button" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
-
-                    <button type="button" id="btnSair" name="btnSair">Sair</button>
-                </p>
-                <p id="status" class="statusError"></p>
-            </form>
+            <h1>Listar Aeronave</h1>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Identificação</th>
+                        <th>Fabricante</th>
+                        <th>Ano Fabricação</th>
+                        <th>Mapa Assento</th>
+                        <th>Companhia</th>
+                        <th>Total Assentos</th>
+                    </tr>
+                </thead>
+                <tbody id="dataBody"></tbody>
+            </table>
+            <button type="button" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Listar</button>
         </main>
     </body>
 </html>
