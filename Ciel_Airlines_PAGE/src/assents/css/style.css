@@ -23,7 +23,7 @@ nav{
     position: fixed;
     display: flex;
     width: 100%;
-    background: #fff;
+    background: #f2ece6;
     justify-content: space-around;
     align-items: center;
 }
