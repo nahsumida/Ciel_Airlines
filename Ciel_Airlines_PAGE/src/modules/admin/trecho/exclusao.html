@@ -3,97 +3,25 @@
     <head>
         <link rel="stylesheet" href="aeroporto.css">
         <link rel="icon" href="assents/img/favicon-32x32.png">
-
-        <title>TRECHO - EXCLUSÃO</title>
-
-        <script>
-            function MessageStatus(msg, error){
-                var pStatus = document.getElementById("status");
-
-                if(error === true){
-                    pStatus.className = " statusError";
-                }
-                else{
-                    pStatus.className = 'statusSuccess'
-                }
-                pStatus.textContent = msg;
-            }
-
-            function fetchListar(body){
-                const requestOptions = {
-                    method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
-                };
-
-                return fetch('http://localhost:3000/listarTrecho', requestOptions).then(T => T.json())
-            }
-
-            function fetchExcluir(body){
-                const requestOptions = {
-                    method: 'DELETE', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
-                };
-
-                return fetch('http://localhost:3000/excluirTrecho', requestOptions).then(T => T.json())
-            }
-
-            function inserirAeronave(){
-                const dataSelect = document.getElementById('dataSelect');
-                fetchListar()
-                    .then(customResponse => {
-                    if(customResponse.status === "SUCCESS"){
-                        dataSelect.innerHTML = '';
-
-                        // Preenche o combobox com os dados da resposta
-                        customResponse.payload.forEach(item => {
-                            const idmetodo = item[0];
-                            const nome = item[1];
-
-                            const option = document.createElement('option');
-                            option.value = idmetodo; // Valor da opção
-                            option.text = `${nome}`; // Texto visível
-
-                            dataSelect.appendChild(option);
-                        });
-                    }else{
-                        MessageStatus("Erro ao listar trecho...: " + customResponse.message, true);
-                        console.log(customResponse.message);
-                    }
-                    })
-                    .catch((e)=>{
-                        MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-                        console.log("Falha grave ao listar." + e)
-                    });
-            }
-/*
-            function excluir(){
-                const selectElement = document.getElementById("selectBox");
-
-        // Seleciona todos os elementos <option> dentro do elemento <select>
-                const option = selectElement.getElementsByTagName("option").value;
-                MessageStatus(option, false);
-                fetchExcluir({
-                    idmetodo: option, 
-                })
-                    .then(customResponse => {
-                    if(customResponse.status === "SUCCESS"){
-                        MessageStatus("Metodo excluido... ", false);
-                    }else{
-                        MessageStatus("Erro ao listar metodos...: " + customResponse.message, true);
-                        console.log(customResponse.message);
-                    }
-                    })
-                    .catch((e)=>{
-                        MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-                        console.log("Falha grave ao listar." + e)
-                    });
-            }
-       */
-       </script>
+        <script src="exclusao.js"></script>     
+        <title> TRECHO- EXCLUSÃO</title>
     </head>
     <body>
         <main>
-            <h1>Excluir Trecho</h1>
-            <select id="dataSelect" onclick="inserirAeronave()"></select>
-            <button type="button" onclick="excluir();" id="btnCadastrar" name="btnCadastrar">excluir</button>
-        </main>
+            <h1>Listar Trecho</h1>
+            <form>
+                <p>               
+                     <select id="dataSelect"></select>
+                </p>
+                <p>
+                    <script src="exclusao.js"></script>     
+
+                    <button id="btnExcluir">Excluir</button>
+
+                </p>
+                <p id="status" class="statusError"></p>
+
+            </form>
+            </main>
     </body>
 </html>
