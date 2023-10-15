@@ -47,7 +47,7 @@
                     method: 'PUT', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };
 
-                return fetch('http://localhost:3000/inserirMapaAssentos', requestOptions).then(T => T.json())
+                return fetch('http://localhost:3000/inserirMapaAssento', requestOptions).then(T => T.json())
             }
 
             function inserirMapaAssentos(){
