@@ -34,11 +34,11 @@ function inserirAeronave(){
             dataSelect.innerHTML = '';
 
             customResponse.payload.forEach(item => {
-                const idmetodo = item[0];
+                const idVoo = item[0];
                 const nome = item[1]; //colunas db
 
                 const option = document.createElement('option');
-                option.value = idmetodo; // Valor da opção
+                option.value = idVoo; // Valor da opção
                 option.text = `${nome}`; // Texto visível
 
                 dataSelect.appendChild(option);
