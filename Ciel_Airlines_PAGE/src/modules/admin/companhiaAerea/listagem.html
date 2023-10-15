@@ -24,7 +24,7 @@
                     method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };
 
-                return fetch('http://localhost:3000/listarCompanhiaAerea', requestOptions).then(T => T.json())
+                return fetch('http://localhost:3000/listarAeronave', requestOptions).then(T => T.json())
             }
 
             function inserirAeronave(){
