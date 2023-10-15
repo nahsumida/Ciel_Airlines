@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <link rel="stylesheet" href="aeroporto.css">
+        <link rel="icon" href="assents/img/favicon-32x32.png">
+
+        <title>TRECHO - LISTAGEM</title>
+
+        <script>
+            function MessageStatus(msg, error){
+                var pStatus = document.getElementById("status");
+
+                if(error === true){
+                    pStatus.className = " statusError";
+                }
+                else{
+                    pStatus.className = 'statusSuccess'
+                }
+                pStatus.textContent = msg;
+            }
+
+            function fetchListar(body){
+                const requestOptions = {
+                    method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+                };
+
+                return fetch('http://localhost:3000/listarTrecho', requestOptions).then(T => T.json())
+            }
+
+            function inserirAeronave(){
+                        const dataBody = document.getElementById('dataBody');
+                fetchListar()
+                    .then(customResponse => {
+                    if(customResponse.status === "SUCCESS"){
+                        
+                        // Limpa qualquer conteúdo anterior da tabela
+                        dataBody.innerHTML = '';
+
+                        // Preenche a tabela com os dados da resposta
+                        customResponse.payload.forEach(item => {
+                            const numero = item[0];
+                            const texto = item[1];
+
+                            const row = dataBody.insertRow();
+                            const cell1 = row.insertCell(0);
+                            const cell2 = row.insertCell(1);
+                            cell1.textContent = numero;
+                            cell2.textContent = texto;
+                        });
+                    }else{
+                        MessageStatus("Erro ao listar trechos...: " + customResponse.message, true);
+                        console.log(customResponse.message);
+                    }
+                    })
+                    .catch((e)=>{
+                        MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
+                        console.log("Falha grave ao listar." + e)
+                    });
+            }
+        </script>
+    </head>
+    <body>
+        <main>
+            <h1>Listar Trechos</h1>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>ID Trecho</th>
+                        <th>Aero-Saida</th>
+                        <th>Aero-Chegada</th>
+                    </tr>
+                </thead>
+                <tbody id="dataBody"></tbody>
+            </table>
+            <button type="button" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Listar</button>
+        </main>
+    </body>
+</html>
