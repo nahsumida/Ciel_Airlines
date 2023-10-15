@@ -18,6 +18,15 @@
                 return resultado;
             }
 
+            function preencheuNumID(){
+                let resultado = false;
+
+                const NumIDpreenchido = document.getElementById('NumIdentificacao').value;
+                if(NumIDpreenchido.length >0){
+                    resultado = true;
+                }
+                return resultado;
+            }
 
             function anoValido(){
                 var strAno = document.getElementById('anoFabricacao').value;
@@ -79,6 +88,10 @@
                     MessageStatus("Preencha modelo!", true);
                     return
                 }
+                if(!preencheuNumID()){
+                    MessageStatus("Preencha o Numero de Identificação!", true);
+                    return
+                }
                 if(!anoValido()){
                     MessageStatus("Ano invalido!", true);
                     return
@@ -112,17 +125,17 @@
 
                 <p>
                     <label for="NumIdentificacao">Número Identificação:</label><br/>
-                    <select name="NumIdentificacao" id="NumIdentificacao">
+                    <input type="integer" id="NumIdentificacao" name="NumIdentificacao" maxlength="10"/>
+                </p>
+
+                <p>
+                    <label for="fabricante">Fabricante:</label><br/>
+                    <select name="fabricante" id="fabricante"  >
                     <option value="0" selected>Selecione: </option>
                     <option value=""></option>
                     <option value=""></option>
                     <option value=""></option>
                     </select>
-                </p>
-
-                <p>
-                    <label for="fabricante">Fabricante:</label><br/>
-                    <input type="text" id="fabricante" name="fabricante" maxlength="20"/>
                 </p>
 
                 <p>
