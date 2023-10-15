@@ -15,9 +15,7 @@ function fetchListar(body){
         method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
 
-
-    return fetch('http://localhost:3000/listarCompanhiaAerea', requestOptions).then(T => T.json())
-
+    return fetch('http://localhost:3000/listarAeronave', requestOptions).then(T => T.json())
 }
 
 function fetchExcluir(body){
@@ -25,9 +23,7 @@ function fetchExcluir(body){
         method: 'DELETE', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
 
-
-    return fetch('http://localhost:3000/excluirCompanhiaAerea', requestOptions).then(T => T.json())
-
+    return fetch('http://localhost:3000/excluirAeronave', requestOptions).then(T => T.json())
 }
 
 function inserirAeronave(){
@@ -38,20 +34,18 @@ function inserirAeronave(){
             dataSelect.innerHTML = '';
 
             customResponse.payload.forEach(item => {
-
-                const idCompanhia = item[0];
-                const nome = item[1]; //colunas db
-
+                const modelo = item[0];
+                const numid = item[1]; //colunas db
+                
                 const option = document.createElement('option');
-                option.value = idCompanhia; // Valor da opção
-
-                option.text = `${nome}`; // Texto visível
+                option.value = numid; // Valor da opção
+                option.text = `${modelo}`; // Texto visível
+                
 
                 dataSelect.appendChild(option);
             });
         }else{
-            MessageStatus("Erro ao listar companhia...: " + customResponse.message, true);
-
+            MessageStatus("Erro ao listar aeronaves...: " + customResponse.message, true);
             console.log(customResponse.message);
         }
         })
@@ -67,11 +61,9 @@ function excluir(selectedValue){
     })
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
-
-            MessageStatus("Companhia Aerea excluida... ", false);
+            MessageStatus("Aeronave excluido... ", false);
         }else{
-            MessageStatus("Erro ao listar Companhias...: " + customResponse.message, true);
-
+            MessageStatus("Erro ao listar aeronave...: " + customResponse.message, true);
             console.log(customResponse.message);
         }
         })

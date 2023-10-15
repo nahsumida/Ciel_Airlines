@@ -15,9 +15,7 @@ function fetchListar(body){
         method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
 
-
-    return fetch('http://localhost:3000/listarCompanhiaAerea', requestOptions).then(T => T.json())
-
+    return fetch('http://localhost:3000/listarAeroporto', requestOptions).then(T => T.json())
 }
 
 function fetchExcluir(body){
@@ -25,9 +23,7 @@ function fetchExcluir(body){
         method: 'DELETE', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
 
-
-    return fetch('http://localhost:3000/excluirCompanhiaAerea', requestOptions).then(T => T.json())
-
+    return fetch('http://localhost:3000/excluirAeroporto', requestOptions).then(T => T.json())
 }
 
 function inserirAeronave(){
@@ -38,20 +34,17 @@ function inserirAeronave(){
             dataSelect.innerHTML = '';
 
             customResponse.payload.forEach(item => {
-
-                const idCompanhia = item[0];
-                const nome = item[1]; //colunas db
+                const idaeroporto = item[0];
+                const fabricante = item[1]; //colunas db
 
                 const option = document.createElement('option');
-                option.value = idCompanhia; // Valor da opção
-
-                option.text = `${nome}`; // Texto visível
+                option.value = idaeroporto; // Valor da opção
+                option.text = `${fabricante}`; // Texto visível
 
                 dataSelect.appendChild(option);
             });
         }else{
-            MessageStatus("Erro ao listar companhia...: " + customResponse.message, true);
-
+            MessageStatus("Erro ao listar aeroporto...: " + customResponse.message, true);
             console.log(customResponse.message);
         }
         })
@@ -67,11 +60,9 @@ function excluir(selectedValue){
     })
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
-
-            MessageStatus("Companhia Aerea excluida... ", false);
+            MessageStatus("Aeroporto excluido... ", false);
         }else{
-            MessageStatus("Erro ao listar Companhias...: " + customResponse.message, true);
-
+            MessageStatus("Erro ao listar aeroporto...: " + customResponse.message, true);
             console.log(customResponse.message);
         }
         })

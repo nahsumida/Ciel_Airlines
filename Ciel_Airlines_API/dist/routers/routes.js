@@ -17,7 +17,7 @@ const express_1 = __importDefault(require("express"));
 const oracledb_1 = __importDefault(require("oracledb"));
 const dotenv_1 = __importDefault(require("dotenv"));
 //const AeronaveController = require('./Ciel_Airlines/src/controllers/AeronaveController.ts');
-const TesteController = require('C:/Users/Cliente/Documents/GitHub/Ciel_Airlines/Ciel_Airlines_API/src/controllers/TesteController.ts');
+//const TesteController = require('C:/Users/Cliente/Documents/GitHub/Ciel_Airlines/Ciel_Airlines_API/src/controllers/TesteController.ts');
 exports.router = express_1.default.Router();
 dotenv_1.default.config();
 oracledb_1.default.createPool({
