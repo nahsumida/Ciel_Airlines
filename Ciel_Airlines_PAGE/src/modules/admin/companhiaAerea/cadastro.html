@@ -9,15 +9,6 @@
 
         <script>
 
-            function preencheuID(){
-                let resultado = false;
-
-                const IDSelecionado = document.getElementById('IDCompanhia').value;
-                if(IDSelecionado.length > 0){
-                    resultado = true;
-                }
-                return resultado;
-            }
 
             function preencheuNomeCompanhia(){
                 let resultado = false;
@@ -52,13 +43,27 @@
 
             function inserirCompanhiaAerea(){
                 if(!preencheuNomeCompanhia()){
-                    MessageStatus("Preencha o nome da companhia aerea!", true);
+                    MessageStatus("Preencha o nome da Companhia Aérea!", true);
                     return
                 }
-                if(!preencheuID()){
-                    MessageStatus("Preencha ID da companhia aerea!", true);
-                    return
-                }
+
+                const nomeCompanhia = document.getElementById("nomeCompanhia").value;
+
+                fetchInserir({
+                    nomeCompanhia : nomeCompanhia
+                    })
+                    .then(customResponse => {
+                    if(customResponse.status === "SUCCESS"){
+                        MessageStatus("Companhia Aérea cadastrada... ", false);
+                    }else{
+                        MessageStatus("Erro ao cadastrar Companhia...: " + customResponse.message, true);
+                        console.log(customResponse.message);
+                    }
+                    })
+                    .catch((e)=>{
+                        MessageStatus("Erro técnico ao cadastrar... Contate o suporte.", true);
+                        console.log("Falha grave ao cadastrar." + e)
+                    });
             }
 
 
@@ -69,17 +74,12 @@
             <h1>Adicionar nova Companhia Aerea</h1>
             <form>
                 <p>
-                    <label for="IDCompanhia">ID Companhia:</label><br/>
-                    <input type="text" id="IDCompanhia" name="IDCompanhia"/>
-                </p>
-
-                <p>
                     <label for="nomeCompanhia">Nome Companhia:</label><br/>
                     <input type="text" id="nomeCompanhia" name="nomeCompanhia" maxlength="14"/>
                 </p>
 
                 <p>
-                    <button type="button" onclick="" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                    <button type="button" onclick="inserirCompanhiaAerea();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
 
                     <button type="button" id="btnSair" name="btnSair">Sair</button>
                 </p>
