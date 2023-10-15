@@ -8,27 +8,39 @@
 
         <script>
 
-            function preencheuID(){
+            
+
+            //passar para str
+            function selecionouIDCidade(){
                 let resultado = false;
 
-                const IDSelecionado = document.getElementById('IDAeroporto').value;
-                if(IDSelecionado.length > 0){
+                const valIDCidadeSelecionado = document.getElementById('IDCidade').value;
+                // para obter o texto selecionado
+                var text = document.getElementById('IDCidade').options[document.getElementById('IDCidade').selectedIndex].text;
+                if(valIDCidadeSelecionado.length > 0){
                     resultado = true;
                 }
                 return resultado;
             }
-
             function preencheuNomeAeroporto(){
                 let resultado = false;
 
-                const NomeSelecionado = document.getElementById('NomeAeroporto').value;
+                const NomeSelecionado = document.getElementById('nomeAeroporto').value;
                 if(NomeSelecionado.length > 0){
                     resultado = true;
                 }
                 return resultado;
             }
+            function preencheuSigla(){
+                let resultado = false;
 
-            // IDCIDADE
+                const IDAeroSelecionado = document.getElementById('siglaAeroporto').value;
+                if(IDAeroSelecionado.length > 0){
+                    resultado = true;
+                }
+                return resultado;
+            }
+            
 
 
             function MessageStatus(msg, error){
@@ -45,7 +57,7 @@
 
             function fetchInserir(body){
                 const requestOptions = {
-                    method: 'PUT', Headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+                    method: 'PUT', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };
 
                 return fetch('http://localhost:3000/inserirAeroporto', requestOptions).then(T => T.json())
@@ -53,17 +65,39 @@
 
             function inserirAeroporto(){
                 if(!preencheuNomeAeroporto()){
-                    MessageStatus("Preencha o nome do aeroporto!", true);
+                    MessageStatus("Preencha o NOME do aeroporto!", true);
                     return
                 }
-                if(!preencheuID()){
-                    MessageStatus("Preencha ID do aeroporto!", true);
+                if(!selecionouIDCidade()){
+                    MessageStatus("Selecione o ID da cidade!", true);
+                    return
+                }
+                if(!preencheuSigla()){
+                    MessageStatus("Preencha a SIGLA do aeroporto!", true);
                     return
                 }
 
-                // IDCIDADE
+                const IDAeroporto = document.getElementById("IDAeroporto").value;
+                const IDCidade = document.getElementById("IDCidade").value;
+                const nomeAeroporto = document.getElementById("nomeAeroporto").value;
 
-               
+                fetchInserir({
+                    IDCidade: IDCidade ,
+                    nomeAeroporto: nomeAeroporto,
+                    siglaAeroporto: siglaAeroporto
+                    })
+                    .then(customResponse => {
+                    if(customResponse.status === "SUCCESS"){
+                        MessageStatus("Aeroporto cadastrado... ", false);
+                    }else{
+                        MessageStatus("Erro ao cadastrar aeroporto...: " + customResponse.message, true);
+                        console.log(customResponse.message);
+                    }
+                    })
+                    .catch((e)=>{
+                        MessageStatus("Erro técnico ao cadastrar... Contate o suporte.", true);
+                        console.log("Falha grave ao cadastrar." + e)
+                    });
             }
 
 
@@ -74,10 +108,7 @@
             <h1>Adicionar novo Aeroporto</h1>
             <form>
                 
-                    <p>
-                        <label for="IDAeroporto">ID Aeroporto:</label><br/>
-                        <input type="text" id="IDAeroporto" name="IDAeroporto"/>
-                    </p>
+                    
 
                     <p>
                         <label for="IDCidade">ID cidade:</label><br/>
@@ -93,9 +124,12 @@
                         <label for="nomeAeroporto"> Nome Aeroporto:</label><br/>
                         <input type="text" id="nomeAeroporto" name="nomeAeroporto" maxlength="35"/>
                     </p>
-
                     <p>
-                        <button type="button" onclick="" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                        <label for="siglaAeroporto">Sigla Aeroporto:</label><br/>
+                        <input type="text" id="siglaAeroporto" name="siglaAeroporto"/>
+                    </p>
+                    <p>
+                        <button type="button" onclick="inserirAeroporto()" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
 
                         <button type="button" id="btnSair" name="btnSair">Sair</button>
                     </p>
