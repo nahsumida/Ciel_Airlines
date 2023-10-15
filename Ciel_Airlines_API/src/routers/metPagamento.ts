@@ -12,7 +12,7 @@ type CustomResponse = {
     payload: any
 };
 
-metodoPagamentoRouter.get("/listarAeronave", async(req:any, res:any)=>{
+metodoPagamentoRouter.get("/listarMetodoPagamento", async(req:any, res:any)=>{
     let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined,};
   
     try{
@@ -22,7 +22,7 @@ metodoPagamentoRouter.get("/listarAeronave", async(req:any, res:any)=>{
             connectString : process.env.ORACLE_DB_CONN_STR
         });
      
-        let resSelect = await connection.execute("SELECT * FROM AERONAVE");
+        let resSelect = await connection.execute("SELECT * FROM METODO_PAGAMENTO");
     
         await connection.close();
         cr.status = "SUCCESS"; 

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <link rel="stylesheet" href="aeroporto.css">
+        <link rel="icon" href="assents/img/favicon-32x32.png">
+
+        <title>Aeronaves - Cadastro</title>
+
+        <script>
+            function MessageStatus(msg, error){
+                var pStatus = document.getElementById("status");
+
+                if(error === true){
+                    pStatus.className = " statusError";
+                }
+                else{
+                    pStatus.className = 'statusSuccess'
+                }
+                pStatus.textContent = msg;
+            }
+
+            function fetchListar(body){
+                const requestOptions = {
+                    method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+                };
+
+                return fetch('http://localhost:3000/listarTeste', requestOptions).then(T => T.json())
+            }
+
+            function inserirAeronave(){
+                const dataList = document.getElementById('dataList');
+                fetchListar()
+                    .then(customResponse => {
+                    if(customResponse.status === "SUCCESS"){
+                        customResponse.payload.forEach(item => {
+                            const numero = item[0];
+                            const texto = item[1];
+
+                            const listItem = document.createElement('li');
+                            listItem.textContent = `Número: ${numero}, Texto: ${texto}`;
+
+                            dataList.appendChild(listItem);
+                        });
+                       
+                        MessageStatus(customResponse.payload)
+                    }else{
+                        MessageStatus("Erro ao cadastrar aeronave...: " + customResponse.message, true);
+                        console.log(customResponse.message);
+                    }
+                    })
+                    .catch((e)=>{
+                        MessageStatus("Erro técnico ao cadastrar... Contate o suporte.", true);
+                        console.log("Falha grave ao cadastrar." + e)
+                    });
+                   // console.log(customResponse.body)
+            }
+        
+
+        
+        </script>
+    </head>
+    <body>
+        <main>
+            <h1>Adicionar nova Aeronave</h1>
+            <ul id="dataList" name="dataList"></ul>
+
+
+                    <button type="button" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+
+            </form>
+        </main>
+    </body>
+</html>

@@ -4,6 +4,7 @@ create table test(
     PRIMARY KEY(test_id)
 )
 
-select * from test
-
+select *  from test
 insert into test values (1, 'nat')
+
+select * from Metodo_pagamento

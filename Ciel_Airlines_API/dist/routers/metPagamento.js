@@ -18,7 +18,7 @@ const oracledb_1 = __importDefault(require("oracledb"));
 const dotenv_1 = __importDefault(require("dotenv"));
 exports.metodoPagamentoRouter = express_1.default.Router();
 dotenv_1.default.config();
-exports.metodoPagamentoRouter.get("/listarAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.metodoPagamentoRouter.get("/listarMetodoPagamento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined, };
     try {
         const connection = yield oracledb_1.default.getConnection({
@@ -26,7 +26,7 @@ exports.metodoPagamentoRouter.get("/listarAeronave", (req, res) => __awaiter(voi
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resSelect = yield connection.execute("SELECT * FROM AERONAVE");
+        let resSelect = yield connection.execute("SELECT * FROM METODO_PAGAMENTO");
         yield connection.close();
         cr.status = "SUCCESS";
         cr.message = "Dados obtidos";
