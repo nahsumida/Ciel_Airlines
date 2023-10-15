@@ -32,7 +32,7 @@
                     method: 'DELETE', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };
 
-                return fetch('http://localhost:3000/excluirMetodoPagamento', requestOptions).then(T => T.json())
+                return fetch('http://localhost:3000/excluirTeste', requestOptions).then(T => T.json())
             }
 
             function inserirAeronave(){
@@ -63,13 +63,37 @@
                         console.log("Falha grave ao listar." + e)
                     });
             }
-        </script>
+/*
+            function excluir(){
+                const selectElement = document.getElementById("selectBox");
+
+        // Seleciona todos os elementos <option> dentro do elemento <select>
+                const option = selectElement.getElementsByTagName("option").value;
+                MessageStatus(option, false);
+                fetchExcluir({
+                    idmetodo: option, 
+                })
+                    .then(customResponse => {
+                    if(customResponse.status === "SUCCESS"){
+                        MessageStatus("Metodo excluido... ", false);
+                    }else{
+                        MessageStatus("Erro ao listar metodos...: " + customResponse.message, true);
+                        console.log(customResponse.message);
+                    }
+                    })
+                    .catch((e)=>{
+                        MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
+                        console.log("Falha grave ao listar." + e)
+                    });
+            }
+       */
+       </script>
     </head>
     <body>
         <main>
             <h1>Listar Metodos de Pagamento</h1>
             <select id="dataSelect" onclick="inserirAeronave()"></select>
-            <button type="button" onclick="excluir();" id="btnCadastrar" name="btnCadastrar">Listar</button>
+            <button type="button" onclick="excluir();" id="btnCadastrar" name="btnCadastrar">excluir</button>
         </main>
     </body>
 </html>
