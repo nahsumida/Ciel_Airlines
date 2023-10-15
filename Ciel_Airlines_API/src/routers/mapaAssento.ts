@@ -22,7 +22,7 @@ mapaAssentoRouter.get("/listarMapaAssento", async(req:any, res:any)=>{
             connectString : process.env.ORACLE_DB_CONN_STR
         });
      
-        let resSelect = await connection.execute("SELECT * FROM MAPAASSENTO");
+        let resSelect = await connection.execute("SELECT * FROM MAPA_ASSENTO");
     
         await connection.close();
         cr.status = "SUCCESS"; 
@@ -58,7 +58,7 @@ mapaAssentoRouter.delete("/excluirMapaAssento", async(req:any, res:any)=>{
         connectString : process.env.ORACLE_DB_CONN_STR
       });
   
-      let resDelete = await connection.execute(`DELETE COMPANHIAAEREA WHERE IDCOMPANHIAAEREA = :1`, [idCompanhiaAerea]);
+      let resDelete = await connection.execute(`DELETE MAPA_ASSENTO WHERE ID_MAPA = :1`, [idCompanhiaAerea]);
       
       await connection.commit();
   
