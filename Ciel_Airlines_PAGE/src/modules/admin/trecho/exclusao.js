@@ -34,12 +34,12 @@ function inserirAeronave(){
             dataSelect.innerHTML = '';
 
             customResponse.payload.forEach(item => {
-                const idmetodo = item[0];
-                const nome = item[1]; //colunas db
+                const idTrecho = item[0];
+                const aeroSaida = item[1]; //colunas db
 
                 const option = document.createElement('option');
-                option.value = idmetodo; // Valor da opção
-                option.text = `${nome}`; // Texto visível
+                option.value = idTrecho; // Valor da opção
+                option.text = `${aeroSaida}`; // Texto visível
 
                 dataSelect.appendChild(option);
             });
