@@ -57,7 +57,7 @@
 
             function fetchInserir(body){
                 const requestOptions = {
-                    method: 'PUT', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+                    method: 'POST', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };
 
                 return fetch('http://localhost:3000/inserirAeroporto', requestOptions).then(T => T.json())
