@@ -9,15 +9,6 @@
 
         <script>
 
-            function preencheuID(){
-                let resultado = false;
-
-                const IDSelecionado = document.getElementById('IDMapa').value;
-                if(IDSelecionado.length > 0){
-                    resultado = true;
-                }
-                return resultado;
-            }
 
             function preencheuNumDeFileira(){
                 let resultado = false;
@@ -39,8 +30,6 @@
                 return resultado;
             }
 
-
-
             function MessageStatus(msg, error){
                 var pStatus = document.getElementById("status");
 
@@ -55,25 +44,42 @@
 
             function fetchInserir(body){
                 const requestOptions = {
-                    method: 'PUT', Headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+                    method: 'PUT', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };
 
                 return fetch('http://localhost:3000/inserirMapaAssentos', requestOptions).then(T => T.json())
             }
 
             function inserirMapaAssentos(){
-                if(!preencheuID()){
-                    MessageStatus("Preencha o ID do mapa!", true);
-                    return
-                }
                 if(!preencheuNumDeFileira()){
                     MessageStatus("Preencha o número de fileiras!", true);
                     return
                 }
                 if(!preencheuNumPorFileira()){
-                    MessageStatus("Preencha o número por fileiras!", true);
+                    MessageStatus("Preencha o número de assentos por fileiras!", true);
                     return
                 }
+
+                const NumDeFileira = document.getElementById("NumDeFileira").value;
+                const NumPorFileira = document.getElementById("NumPorFileira").value;
+                 
+                fetchInserir({
+                    NumDeFileira: NumDeFileira, 
+                    NumPorFileira: NumPorFileira
+                    })
+                    .then(customResponse => {
+                    if(customResponse.status === "SUCCESS"){
+                        MessageStatus("Mapa de Assentos cadastrado... ", false);
+                    }else{
+                        MessageStatus("Erro ao cadastrar Mapa...: " + customResponse.message, true);
+                        console.log(customResponse.message);
+                    }
+                    })
+                    .catch((e)=>{
+                        MessageStatus("Erro técnico ao cadastrar... Contate o suporte.", true);
+                        console.log("Falha grave ao cadastrar." + e)
+                    });
+
             }
 
 
@@ -81,25 +87,18 @@
     </head>
     <body>
         <main>
-            <h1>Adicionar novo mapa de assentos</h1>
+            <h1>Cadastrar - MAPA DE ASSENTOS</h1>
             <form>
                 <p>
-                    <label for="IDMapa">ID Mapa:</label><br/>
-                    <input type="text" id="IDMapa" name="IDMapa"/>
-                </p>
-
-                <p>
                     <label for="NumDeFileira">Numero de Fileiras:</label><br/>
-                    <input type="number" id="NumDeFileira" name="NumDeFileira"/>
+                    <input type="number" id="NumDeFileira" name="NumDeFileira" min="0"/>
                 </p>
-
                 <p>
-                    <label for="NumPorFileira">Numero por Fileiras:</label><br/>
-                    <input type="number" id="NumPorFileira" name="NumPorFileira"/>
+                    <label for="NumPorFileira">Numero de assentos por Fileira:</label><br/>
+                    <input type="number" id="NumPorFileira" name="NumPorFileira" min="0"/>
                 </p>
-
                 <p>
-                    <button type="button" onclick="" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                    <button type="button" onclick="inserirMapaAssentos();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
 
                     <button type="button" id="btnSair" name="btnSair">Sair</button>
                 </p>
