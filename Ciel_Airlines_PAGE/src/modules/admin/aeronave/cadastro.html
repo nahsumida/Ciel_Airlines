@@ -45,9 +45,8 @@
                 let resultado = false;
 
                 const valfabricanteSelecionado = document.getElementById('fabricante').value;
-                // para obter o texto selecionado
-                var text = document.getElementById('fabricante').options[document.getElementById('fabricante').selectedIndex].text;
-                if(valfabricanteSelecionado.length > 0){
+                
+                if(valfabricanteSelecionado > 0){
                     resultado = true;
                 }
                 return resultado;
@@ -57,7 +56,7 @@
                 let resultado = false;
 
                 const valMapaSelecionado = document.getElementById('mapaAssento').value;
-                if(valfabricanteSelecionado.length > 0){
+                if(valfabricanteSelecionado > 0){
                     resultado = true;
                 }
                 return resultado;
@@ -137,7 +136,8 @@
                 
                 const Modelo = document.getElementById("Modelo").value;
                 const NumIdentificacao = document.getElementById("NumIdentificacao").value;
-                const fabricante = document.getElementById("fabricante").value;
+                // para obter o texto selecionado
+                var text = document.getElementById('fabricante').options[document.getElementById('fabricante').selectedIndex].text;
                 const anoFabricacao = document.getElementById("anoFabricacao").value;
                 const mapaAssento = document.getElementById("mapaAssento").value;
                 const Total_assentos = document.getElementById("Total_assentos").value;
@@ -147,7 +147,7 @@
                 fetchInserir({
                     Modelo: Modelo, 
                     NumIdentificacao: NumIdentificacao ,
-                    fabricante: fabricante,
+                    fabricante: text,
                     Total_assentos: Total_assentos,
                     anoFabricacao: anoFabricacao,
                     mapaAssento: mapaAssento,
