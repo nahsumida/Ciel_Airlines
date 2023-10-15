@@ -58,7 +58,7 @@ cidadeRouter.delete("/excluirCidade", async(req:any, res:any)=>{
         connectString : process.env.ORACLE_DB_CONN_STR
       });
   
-      let resDelete = await connection.execute(`DELETE CIDADE WHERE IDAEROPORTO = :1`, [idCidade]);
+      let resDelete = await connection.execute(`DELETE CIDADE WHERE ID_CIDADE = :1`, [idCidade]);
       
       await connection.commit();
   
