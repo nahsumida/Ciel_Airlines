@@ -4,7 +4,7 @@
         <link rel="stylesheet" href="aeroporto.css">
         <link rel="icon" href="assents/img/favicon-32x32.png">
 
-        <title>Aeronaves - Cadastro</title>
+        <title>AEROPORTO - LISTAGEM</title>
 
         <script>
             function MessageStatus(msg, error){
@@ -24,50 +24,55 @@
                     method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };
 
-                return fetch('http://localhost:3000/listarTeste', requestOptions).then(T => T.json())
+                return fetch('http://localhost:3000/listarAeroporto', requestOptions).then(T => T.json())
             }
 
             function inserirAeronave(){
-                const dataList = document.getElementById('dataList');
+                        const dataBody = document.getElementById('dataBody');
                 fetchListar()
                     .then(customResponse => {
                     if(customResponse.status === "SUCCESS"){
+                        
+                        // Limpa qualquer conteúdo anterior da tabela
+                        dataBody.innerHTML = '';
+
+                        // Preenche a tabela com os dados da resposta
                         customResponse.payload.forEach(item => {
                             const numero = item[0];
                             const texto = item[1];
 
-                            const listItem = document.createElement('li');
-                            listItem.textContent = `Número: ${numero}, Texto: ${texto}`;
-
-                            dataList.appendChild(listItem);
+                            const row = dataBody.insertRow();
+                            const cell1 = row.insertCell(0);
+                            const cell2 = row.insertCell(1);
+                            cell1.textContent = numero;
+                            cell2.textContent = texto;
                         });
-                       
-                        MessageStatus(customResponse.payload)
                     }else{
-                        MessageStatus("Erro ao cadastrar aeronave...: " + customResponse.message, true);
+                        MessageStatus("Erro ao listar Aeroporto...: " + customResponse.message, true);
                         console.log(customResponse.message);
                     }
                     })
                     .catch((e)=>{
-                        MessageStatus("Erro técnico ao cadastrar... Contate o suporte.", true);
-                        console.log("Falha grave ao cadastrar." + e)
+                        MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
+                        console.log("Falha grave ao listar." + e)
                     });
-                   // console.log(customResponse.body)
             }
-        
-
-        
         </script>
     </head>
     <body>
         <main>
-            <h1>Adicionar nova Aeronave</h1>
-            <ul id="dataList" name="dataList"></ul>
-
-
-                    <button type="button" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
-
-            </form>
+            <h1>Listar Aeroportos</h1>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>ID Aeroporto</th>
+                        <th>ID Cidade</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody id="dataBody"></tbody>
+            </table>
+            <button type="button" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Listar</button>
         </main>
     </body>
 </html>
