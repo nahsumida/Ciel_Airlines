@@ -38,14 +38,20 @@
 
                         // Preenche a tabela com os dados da resposta
                         customResponse.payload.forEach(item => {
-                            const numero = item[0];
-                            const texto = item[1];
+                            const idTrecho = item[0];
+                            const saida = item[1];
+                            const chegada = item[2];
+
 
                             const row = dataBody.insertRow();
                             const cell1 = row.insertCell(0);
                             const cell2 = row.insertCell(1);
-                            cell1.textContent = numero;
-                            cell2.textContent = texto;
+                            const cell3 = row.insertCell(2);
+
+                            cell1.textContent = idTrecho;
+                            cell2.textContent = saida;
+                            cell3.textContent = chegada;
+
                         });
                     }else{
                         MessageStatus("Erro ao listar trechos...: " + customResponse.message, true);

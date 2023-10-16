@@ -57,7 +57,7 @@ vooRouter.delete("/excluirVoo", async(req:any, res:any)=>{
         connectString : process.env.ORACLE_DB_CONN_STR
       });
   
-      let resDelete = await connection.execute(`DELETE VOO WHERE IDVOO = :1`, [idVoo]);
+      let resDelete = await connection.execute(`DELETE VOO WHERE ID_VOO = :1`, [idVoo]);
       
       await connection.commit();
   
@@ -89,10 +89,6 @@ vooRouter.post("/incluirVoo", async(req:any, res:any)=>{
     const trecho = req.body.trecho as number;
     const horaPartida = req.body.horaPartida as string;
     const horaChegada = req.body.horaChegada as string;
-
-    const aeroIda = req.body.aeroIda as number;
-    const aeroVolta = req.body.aeroVolta as number;
-
     const aeronave = req.body.aeronave as string;
     const preco = req.body.preco as number;
 
@@ -118,10 +114,10 @@ vooRouter.post("/incluirVoo", async(req:any, res:any)=>{
         });
 
         const cmdInsert = `INSERT INTO VOO 
-        (IDVOO, DATA, TRECHO, HORAPARTIDA, HORACHEGADA, AEROIDA, AEROVOLTA, PRECO, AERONAVE)
-        VALUES (ID_VOO_SEQ.NEXTVAL, :1, :2, :3, :4, :5, :6, :7, :8)`
+        (ID_VOO, DATA, TRECHO, HORA_PARTIDA, HORA_CHEGADA, PRECO, AERONAVE)
+        VALUES (ID_VOO_SEQ.NEXTVAL, :1, :2, :3, :4, :5, :6)`
 
-        const dados = [data, trecho, horaPartida, horaChegada, aeroIda, aeroVolta, preco, aeronave]
+        const dados = [data, trecho, horaPartida, horaChegada, preco, aeronave]
 
         let resInsert = await connection.execute(cmdInsert, dados);
 

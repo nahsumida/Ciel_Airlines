@@ -46,7 +46,7 @@ exports.mapaAssentoRouter.get("/listarMapaAssento", (req, res) => __awaiter(void
     }
 }));
 exports.mapaAssentoRouter.delete("/excluirMapaAssento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const idCompanhiaAerea = req.body.idCompanhiaAerea;
+    const idMapa = req.body.idMapa;
     let cr = {
         status: "ERROR",
         message: "",
@@ -58,7 +58,7 @@ exports.mapaAssentoRouter.delete("/excluirMapaAssento", (req, res) => __awaiter(
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resDelete = yield connection.execute(`DELETE MAPA_ASSENTO WHERE ID_MAPA = :1`, [idCompanhiaAerea]);
+        let resDelete = yield connection.execute(`DELETE MAPA_ASSENTO WHERE ID_MAPA = :1`, [idMapa]);
         yield connection.commit();
         yield connection.close();
         const rowsDeleted = resDelete.rowsAffected;

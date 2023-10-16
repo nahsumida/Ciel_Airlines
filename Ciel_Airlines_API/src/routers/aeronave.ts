@@ -57,7 +57,7 @@ aeronaveRouter.delete("/excluirAeronave", async(req:any, res:any)=>{
         connectString : process.env.ORACLE_DB_CONN_STR
       });
   
-      let resDelete = await connection.execute(`DELETE AERONAVE WHERE IDAERONAVE = :1`, [idAeronave]);
+      let resDelete = await connection.execute(`DELETE AERONAVE WHERE ID_AERONAVE = :1`, [idAeronave]);
       
       await connection.commit();
   

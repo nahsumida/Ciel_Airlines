@@ -58,7 +58,7 @@ exports.aeroportoRouter.delete("/excluirAeroporto", (req, res) => __awaiter(void
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resDelete = yield connection.execute(`DELETE AEROPORTO WHERE IDAEROPORTO = :1`, [idAeroporto]);
+        let resDelete = yield connection.execute(`DELETE AEROPORTO WHERE ID_AEROPORTO = :1`, [idAeroporto]);
         yield connection.commit();
         yield connection.close();
         const rowsDeleted = resDelete.rowsAffected;
@@ -104,7 +104,7 @@ exports.aeroportoRouter.post("/inserirAeroporto", (req, res) => __awaiter(void 0
             connectString: process.env.ORACLE_DB_CONN_STR
         });
         const cmdInsert = `INSERT INTO AEROPORTO 
-      (ID_AEROPORTO, IDCIDADE, NOME_AEROPORTO)
+      (ID_AEROPORTO, ID_CIDADE, NOME_AEROPORTO)
       VALUES (ID_AEROPORTO_SEQ.NEXTVAL, :1, :2)`;
         const dados = [idCidade, nomeAeroporto];
         let resInsert = yield connection.execute(cmdInsert, dados);

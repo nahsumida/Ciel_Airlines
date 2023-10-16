@@ -39,7 +39,6 @@ cidadeRouter.get("/listarCidade", async(req:any, res:any)=>{
         res.send(cr);  
     }
 });
-  
 
 cidadeRouter.delete("/excluirCidade", async(req:any, res:any)=>{
 

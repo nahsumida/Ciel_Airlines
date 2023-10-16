@@ -58,7 +58,7 @@ exports.aeronaveRouter.delete("/excluirAeronave", (req, res) => __awaiter(void 0
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resDelete = yield connection.execute(`DELETE AERONAVE WHERE IDAERONAVE = :1`, [idAeronave]);
+        let resDelete = yield connection.execute(`DELETE AERONAVE WHERE ID_AERONAVE = :1`, [idAeronave]);
         yield connection.commit();
         yield connection.close();
         const rowsDeleted = resDelete.rowsAffected;

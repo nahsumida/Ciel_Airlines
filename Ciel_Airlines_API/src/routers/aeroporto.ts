@@ -40,7 +40,6 @@ aeroportoRouter.get("/listarAeroporto", async(req:any, res:any)=>{
     }
 });
 
-
 aeroportoRouter.delete("/excluirAeroporto", async(req:any, res:any)=>{
 
     const idAeroporto = req.body.idAeroporto as number;
@@ -58,7 +57,7 @@ aeroportoRouter.delete("/excluirAeroporto", async(req:any, res:any)=>{
         connectString : process.env.ORACLE_DB_CONN_STR
       });
   
-      let resDelete = await connection.execute(`DELETE AEROPORTO WHERE IDAEROPORTO = :1`, [idAeroporto]);
+      let resDelete = await connection.execute(`DELETE AEROPORTO WHERE ID_AEROPORTO = :1`, [idAeroporto]);
       
       await connection.commit();
   
@@ -111,7 +110,7 @@ aeroportoRouter.delete("/excluirAeroporto", async(req:any, res:any)=>{
       });
   
       const cmdInsert = `INSERT INTO AEROPORTO 
-      (ID_AEROPORTO, IDCIDADE, NOME_AEROPORTO)
+      (ID_AEROPORTO, ID_CIDADE, NOME_AEROPORTO)
       VALUES (ID_AEROPORTO_SEQ.NEXTVAL, :1, :2)`
   
       const dados = [idCidade, nomeAeroporto]

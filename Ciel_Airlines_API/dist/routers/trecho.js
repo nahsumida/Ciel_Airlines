@@ -58,7 +58,7 @@ exports.trechoRouter.delete("/excluirTrecho", (req, res) => __awaiter(void 0, vo
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resDelete = yield connection.execute(`DELETE TRECHO WHERE IDTRECHO = :1`, [idTrecho]);
+        let resDelete = yield connection.execute(`DELETE TRECHO WHERE ID_TRECHO = :1`, [idTrecho]);
         yield connection.commit();
         yield connection.close();
         const rowsDeleted = resDelete.rowsAffected;
@@ -104,7 +104,7 @@ exports.trechoRouter.post("/incluirTrecho", (req, res) => __awaiter(void 0, void
             connectString: process.env.ORACLE_DB_CONN_STR
         });
         const cmdInsert = `INSERT INTO TRECHO 
-        (IDTRECHO, AEROSAIDA, AEROCHEGADA)
+        (ID_TRECHO, AERO_SAIDA, AERO_CHEGADA)
         VALUES (ID_TRECHO_SEQ.NEXTVAL, :1, :2)`;
         const dados = [aeroSaida, aeroChegada];
         let resInsert = yield connection.execute(cmdInsert, dados);

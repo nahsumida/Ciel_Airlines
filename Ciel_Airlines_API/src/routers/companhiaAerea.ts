@@ -12,7 +12,7 @@ type CustomResponse = {
     payload: any
 };
 
-companhiaAereaRouter.get("/listarAeronave", async(req:any, res:any)=>{
+companhiaAereaRouter.get("/listarCompanhiaAerea", async(req:any, res:any)=>{
     let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined,};
   
     try{
@@ -22,7 +22,7 @@ companhiaAereaRouter.get("/listarAeronave", async(req:any, res:any)=>{
             connectString : process.env.ORACLE_DB_CONN_STR
         });
      
-        let resSelect = await connection.execute("SELECT * FROM COMPANHIAAEREA");
+        let resSelect = await connection.execute("SELECT * FROM COMPANHIA_AEREA");
     
         await connection.close();
         cr.status = "SUCCESS"; 
@@ -57,7 +57,7 @@ companhiaAereaRouter.delete("/excluirCompanhiaAerea", async(req:any, res:any)=>{
         connectString : process.env.ORACLE_DB_CONN_STR
       });
   
-      let resDelete = await connection.execute(`DELETE COMPANHIAAEREA WHERE IDCOMPANHIAAEREA = :1`, [idCompanhiaAerea]);
+      let resDelete = await connection.execute(`DELETE COMPANHIA_AEREA WHERE ID_COMPANHIA = :1`, [idCompanhiaAerea]);
       
       await connection.commit();
   
@@ -81,7 +81,7 @@ companhiaAereaRouter.delete("/excluirCompanhiaAerea", async(req:any, res:any)=>{
     } finally {
       res.send(cr);  
     }
-  });
+});
 
 companhiaAereaRouter.post("/inserirCompanhiaAerea", async(req:any, res:any)=>{
 

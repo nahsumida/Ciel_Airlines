@@ -18,7 +18,7 @@ const oracledb_1 = __importDefault(require("oracledb"));
 const dotenv_1 = __importDefault(require("dotenv"));
 exports.companhiaAereaRouter = express_1.default.Router();
 dotenv_1.default.config();
-exports.companhiaAereaRouter.get("/listarAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.companhiaAereaRouter.get("/listarCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined, };
     try {
         const connection = yield oracledb_1.default.getConnection({
@@ -26,7 +26,7 @@ exports.companhiaAereaRouter.get("/listarAeronave", (req, res) => __awaiter(void
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resSelect = yield connection.execute("SELECT * FROM COMPANHIAAEREA");
+        let resSelect = yield connection.execute("SELECT * FROM COMPANHIA_AEREA");
         yield connection.close();
         cr.status = "SUCCESS";
         cr.message = "Dados obtidos";
@@ -58,7 +58,7 @@ exports.companhiaAereaRouter.delete("/excluirCompanhiaAerea", (req, res) => __aw
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resDelete = yield connection.execute(`DELETE COMPANHIAAEREA WHERE IDCOMPANHIAAEREA = :1`, [idCompanhiaAerea]);
+        let resDelete = yield connection.execute(`DELETE COMPANHIA_AEREA WHERE ID_COMPANHIA = :1`, [idCompanhiaAerea]);
         yield connection.commit();
         yield connection.close();
         const rowsDeleted = resDelete.rowsAffected;
