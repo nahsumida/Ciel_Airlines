@@ -72,3 +72,8 @@ main form button{
 main form button:hover {
     background: #d76db8;
 }
+.statusError {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    color: red;
+}
