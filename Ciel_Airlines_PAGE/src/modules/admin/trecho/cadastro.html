@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <link rel="stylesheet" href="aeroporto.css">
+        <link rel="stylesheet" href="./style/trecho.css">
 
         <link rel="icon" href="assents/img/favicon-32x32.png">
 
@@ -35,10 +35,10 @@
                 return fetch('http://localhost:3000/incluirTrecho', requestOptions).then(T => T.json())
             }
 
-            function inserirTrecho(AeroSaida, AeroChegada){
+            function inserirTrecho(saida, chegada){
                 fetchInserir({
-                    aeroSaida : aeroChegada,
-                    aeroChegada : aeroSaida
+                    aeroSaida : chegada,
+                    aeroChegada : saida
 	            })
                     .then(customResponse => {
                     if(customResponse.status === "SUCCESS"){
@@ -127,9 +127,9 @@
                         var selectedOption = selectSaida.options[selectedIndex]; // Opção selecionada
                         var selectedSaida = selectedOption.value; 
 
-                        var selectedIndex = selectChegada.selectedIndex; // Índice da opção selecionada
-                        var selectedOption = selectChegada.options[selectedIndex]; // Opção selecionada
-                        var selectedChegada = selectedOption.value;
+                        var selectedIndex1 = selectChegada.selectedIndex; // Índice da opção selecionada
+                        var selectedOption1 = selectChegada.options[selectedIndex1]; // Opção selecionada
+                        var selectedChegada = selectedOption1.value;
 
                         console.log("aa" , selectedSaida)
                         console.log("bb" , selectedChegada)
