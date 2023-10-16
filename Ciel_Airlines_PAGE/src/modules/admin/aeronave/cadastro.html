@@ -170,12 +170,12 @@
     </head>
     <body>
         <main>
-            <h1>Adicionar nova Aeronave</h1>
+            <h1>Cadastrar - AERONAVE</h1>
             <form>
-                <p>
+                <div>
                     <label for="Modelo">Modelo Aeronave:</label><br/>
                     <input type="text" id="Modelo" name="Modelo" maxlength="10"/>
-                </p>
+                </div>
 
                 <p>
                     <label for="NumIdentificacao">Número Identificação:</label><br/>
@@ -186,9 +186,9 @@
                     <label for="fabricante">Fabricante:</label><br/>
                     <select name="fabricante" id="fabricante"  >
                     <option value="0" selected>Selecione: </option>
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
+                    <option value="1">Boeing</option>
+                    <option value="2">Airbus</option>
+                    <option value="3">Embraer</option>
                     </select>
                 </p>
 
@@ -221,13 +221,13 @@
                     <option value=""></option>
                     </select>
                 </p>
-
+                <p id="status" class="statusError"></p>
                 <p>
                     <button type="button" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
 
                     <a href="../admin.html"><button type="button" src id="btnSair" name="btnSair">Sair</button></a>
                 </p>
-                <p id="status" class="statusError"></p>
+                
             </form>
         </main>
     </body>
