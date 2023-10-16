@@ -57,6 +57,9 @@
                         console.log("Falha grave ao listar." + e)
                     });
             }
+            document.addEventListener("DOMContentLoaded", function() {
+                inserirAeronave();
+            });
         </script>
     </head>
     <body>
@@ -76,7 +79,7 @@
                 </thead>
                 <tbody id="dataBody"></tbody>
             </table>
-            <button type="button" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Listar</button>
+            <a href="../admin.html"><button type="button" id="btnCadastrar" name="btnCadastrar">Sair</button></a>
         </main>
     </body>
 </html>

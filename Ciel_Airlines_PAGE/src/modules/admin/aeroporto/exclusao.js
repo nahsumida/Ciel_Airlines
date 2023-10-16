@@ -35,11 +35,11 @@ function inserirAeronave(){
 
             customResponse.payload.forEach(item => {
                 const idaeroporto = item[0];
-                const fabricante = item[1]; //colunas db
+                const nome = item[2]; //colunas db
 
                 const option = document.createElement('option');
                 option.value = idaeroporto; // Valor da opção
-                option.text = `${fabricante}`; // Texto visível
+                option.text = `${nome}`; // Texto visível
 
                 dataSelect.appendChild(option);
             });

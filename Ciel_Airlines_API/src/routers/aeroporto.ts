@@ -87,7 +87,8 @@ aeroportoRouter.delete("/excluirAeroporto", async(req:any, res:any)=>{
     
     const idCidade = req.body.idCidade as number;
     const nomeAeroporto = req.body.nomeAeroporto as string;
-   
+    const siglaAeroporto = req.body.nomeAeroporto as string;
+
     // correção: verificar se tudo chegou para prosseguir com o cadastro.
     // verificar se chegaram os parametros
     // VALIDAR se estão bons (de acordo com os critérios - exemplo: 
@@ -110,10 +111,10 @@ aeroportoRouter.delete("/excluirAeroporto", async(req:any, res:any)=>{
       });
   
       const cmdInsert = `INSERT INTO AEROPORTO 
-      (ID_AEROPORTO, ID_CIDADE, NOME_AEROPORTO)
-      VALUES (ID_AEROPORTO_SEQ.NEXTVAL, :1, :2)`
+      (ID_AEROPORTO, ID_CIDADE, NOME_AEROPORTO, SIGLA)
+      VALUES (ID_AEROPORTO_SEQ.NEXTVAL, :1, :2, :3)`
   
-      const dados = [idCidade, nomeAeroporto]
+      const dados = [idCidade, nomeAeroporto, siglaAeroporto]
   
       let resInsert = await connection.execute(cmdInsert, dados);
     

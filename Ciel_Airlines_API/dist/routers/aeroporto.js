@@ -86,6 +86,7 @@ exports.aeroportoRouter.delete("/excluirAeroporto", (req, res) => __awaiter(void
 exports.aeroportoRouter.post("/inserirAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const idCidade = req.body.idCidade;
     const nomeAeroporto = req.body.nomeAeroporto;
+    const siglaAeroporto = req.body.nomeAeroporto;
     // correção: verificar se tudo chegou para prosseguir com o cadastro.
     // verificar se chegaram os parametros
     // VALIDAR se estão bons (de acordo com os critérios - exemplo: 
@@ -104,9 +105,9 @@ exports.aeroportoRouter.post("/inserirAeroporto", (req, res) => __awaiter(void 0
             connectString: process.env.ORACLE_DB_CONN_STR
         });
         const cmdInsert = `INSERT INTO AEROPORTO 
-      (ID_AEROPORTO, ID_CIDADE, NOME_AEROPORTO)
-      VALUES (ID_AEROPORTO_SEQ.NEXTVAL, :1, :2)`;
-        const dados = [idCidade, nomeAeroporto];
+      (ID_AEROPORTO, ID_CIDADE, NOME_AEROPORTO, SIGLA)
+      VALUES (ID_AEROPORTO_SEQ.NEXTVAL, :1, :2, :3)`;
+        const dados = [idCidade, nomeAeroporto, siglaAeroporto];
         let resInsert = yield connection.execute(cmdInsert, dados);
         yield connection.commit();
         const rowsInserted = resInsert.rowsAffected;

@@ -7,9 +7,6 @@
         <title>Aeroporto - Cadastro</title>
 
         <script>
-
-            
-
             //passar para str
             function selecionouIDCidade(){
                 let resultado = false;
@@ -40,8 +37,6 @@
                 }
                 return resultado;
             }
-            
-
 
             function MessageStatus(msg, error){
                 var pStatus = document.getElementById("status");
@@ -77,15 +72,15 @@
                     return
                 }
 
-                const IDAeroporto = document.getElementById("IDAeroporto").value;
                 const IDCidade = document.getElementById("IDCidade").value;
-                const nomeAeroporto = document.getElementById("nomeAeroporto").value;
+                const NomeAeroporto = document.getElementById("nomeAeroporto").value;
+                const SiglaAeroporto = document.getElementById("siglaAeroporto").value;
 
                 fetchInserir({
-                    IDCidade: IDCidade ,
-                    nomeAeroporto: nomeAeroporto,
-                    siglaAeroporto: siglaAeroporto
-                    })
+                    idCidade: IDCidade ,
+                    nomeAeroporto: NomeAeroporto,
+                    siglaAeroporto: SiglaAeroporto
+                })
                     .then(customResponse => {
                     if(customResponse.status === "SUCCESS"){
                         MessageStatus("Aeroporto cadastrado... ", false);
@@ -99,27 +94,16 @@
                         console.log("Falha grave ao cadastrar." + e)
                     });
             }
-
-
         </script>
     </head>
     <body>
         <main>
             <h1>Adicionar novo Aeroporto</h1>
             <form>
-                
-                    
-
                     <p>
                         <label for="IDCidade">ID cidade:</label><br/>
-                        <select name="IDCidade" id="IDCidade">
-                        <option value="0" selected>Selecione: </option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        </select>
+                        <select name="IDCidade" id="IDCidade"></select>
                     </p>
-
                     <p>
                         <label for="nomeAeroporto"> Nome Aeroporto:</label><br/>
                         <input type="text" id="nomeAeroporto" name="nomeAeroporto" maxlength="35"/>
