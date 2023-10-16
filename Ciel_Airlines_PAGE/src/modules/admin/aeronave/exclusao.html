@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <link rel="stylesheet" href="aeroporto.css">
-        <link rel="icon" href="assents/img/favicon-32x32.png">
+        <link rel="stylesheet" href="../../../assents/css/areas.css">
+        <link rel="icon" href="../../../assents/img/favicon-96x96.png">
         <script src="exclusao.js"></script>     
         <title>AERONAVE - EXCLUSÃO</title>
     </head>
     <body>
         <main>
-            <h1>Listar Aeronave</h1>
+            <h1>Excluir - AERONAVE</h1>
             <form>
-                <p>               
-                     <select id="dataSelect"></select>
+                <p> 
+                    <label for="dataSelect">Selecione Modelo:</label><br/>              
+                    <select id="dataSelect"></select>
                 </p>
                 <p>
                     <script src="exclusao.js"></script>     
-
                     <button id="btnExcluir">Excluir</button>
-
+                    <a href="../admin.html"><button type="button" src id="btnSair" name="btnSair">Sair</button></a>
                 </p>
                 <p id="status" class="statusError"></p>
 
