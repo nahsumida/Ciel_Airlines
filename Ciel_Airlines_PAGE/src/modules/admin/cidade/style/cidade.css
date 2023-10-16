@@ -80,6 +80,7 @@ main form button:hover {
     color: red;
 }
 
+/* arrumar botoes depois
 .button-items {
     display: flex;
     justify-content: space-between;
@@ -88,4 +89,4 @@ main form button:hover {
 .button-items button{
     flex:1;
     margin-right: 15px;
-}
+}*/
