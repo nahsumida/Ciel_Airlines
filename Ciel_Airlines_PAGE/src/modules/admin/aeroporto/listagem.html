@@ -38,14 +38,19 @@
 
                         // Preenche a tabela com os dados da resposta
                         customResponse.payload.forEach(item => {
-                            const numero = item[0];
-                            const texto = item[1];
+                            const idaero = item[0];
+                            const idcidade = item[1];
+                            const nome = item[2]
 
                             const row = dataBody.insertRow();
                             const cell1 = row.insertCell(0);
                             const cell2 = row.insertCell(1);
-                            cell1.textContent = numero;
-                            cell2.textContent = texto;
+                            const cell3 = row.insertCell(2);
+
+                            cell1.textContent = idaero;
+                            cell2.textContent = idcidade;
+                            cell3.textContent = nome;
+
                         });
                     }else{
                         MessageStatus("Erro ao listar Aeroporto...: " + customResponse.message, true);
