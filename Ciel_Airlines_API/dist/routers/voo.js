@@ -58,7 +58,7 @@ exports.vooRouter.delete("/excluirVoo", (req, res) => __awaiter(void 0, void 0, 
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resDelete = yield connection.execute(`DELETE VOO WHERE IDVOO = :1`, [idVoo]);
+        let resDelete = yield connection.execute(`DELETE VOO WHERE ID_VOO = :1`, [idVoo]);
         yield connection.commit();
         yield connection.close();
         const rowsDeleted = resDelete.rowsAffected;
@@ -88,8 +88,6 @@ exports.vooRouter.post("/incluirVoo", (req, res) => __awaiter(void 0, void 0, vo
     const trecho = req.body.trecho;
     const horaPartida = req.body.horaPartida;
     const horaChegada = req.body.horaChegada;
-    const aeroIda = req.body.aeroIda;
-    const aeroVolta = req.body.aeroVolta;
     const aeronave = req.body.aeronave;
     const preco = req.body.preco;
     // correção: verificar se tudo chegou para prosseguir com o cadastro.
@@ -110,9 +108,9 @@ exports.vooRouter.post("/incluirVoo", (req, res) => __awaiter(void 0, void 0, vo
             connectString: process.env.ORACLE_DB_CONN_STR
         });
         const cmdInsert = `INSERT INTO VOO 
-        (IDVOO, DATA, TRECHO, HORAPARTIDA, HORACHEGADA, AEROIDA, AEROVOLTA, PRECO, AERONAVE)
-        VALUES (ID_VOO_SEQ.NEXTVAL, :1, :2, :3, :4, :5, :6, :7, :8)`;
-        const dados = [data, trecho, horaPartida, horaChegada, aeroIda, aeroVolta, preco, aeronave];
+        (ID_VOO, DATA, TRECHO, HORA_PARTIDA, HORA_CHEGADA, PRECO, AERONAVE)
+        VALUES (ID_VOO_SEQ.NEXTVAL, :1, :2, :3, :4, :5, :6)`;
+        const dados = [data, trecho, horaPartida, horaChegada, preco, aeronave];
         let resInsert = yield connection.execute(cmdInsert, dados);
         yield connection.commit();
         const rowsInserted = resInsert.rowsAffected;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <link rel="stylesheet" href="aeroporto.css">
+        <link rel="stylesheet" href="./style/metodoPagamento.css">
 
         <link rel="icon" href="assents/img/favicon-32x32.png">
 
@@ -32,6 +32,7 @@
             }
 
             function fetchInserir(body){
+                console.log(body)
                 const requestOptions = {
                     method: 'POST', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };

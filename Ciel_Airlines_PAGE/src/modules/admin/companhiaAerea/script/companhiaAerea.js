@@ -15,7 +15,7 @@ function fetchListar(body){
         method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
 
-    return fetch('http://localhost:3000/listarMetodoPagamento', requestOptions).then(T => T.json())
+    return fetch('http://localhost:3000/listarCompanhiaAerea', requestOptions).then(T => T.json())
 }
 
 function fetchExcluir(body){
@@ -23,7 +23,7 @@ function fetchExcluir(body){
         method: 'DELETE', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
 
-    return fetch('http://localhost:3000/excluirMetodoPagamento', requestOptions).then(T => T.json())
+    return fetch('http://localhost:3000/excluirCompanhiaAerea', requestOptions).then(T => T.json())
 }
 
 function inserirAeronave(){
@@ -56,7 +56,7 @@ function inserirAeronave(){
 
 function excluir(selectedValue){
     fetchExcluir({
-        idmetodo: selectedValue, 
+        idCompanhiaAerea: selectedValue, 
     })
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
@@ -77,13 +77,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById("btnExcluir");
     var selectElement = document.getElementById("dataSelect");
 
-    if (button) {
-        button.addEventListener('click', function() {
-            var selectedIndex = selectElement.selectedIndex; // Índice da opção selecionada
-            var selectedOption = selectElement.options[selectedIndex]; // Opção selecionada
-            var selectedValue = selectedOption.value; 
+    button.addEventListener('click', function() {
+        var selectedIndex = selectElement.selectedIndex; // Índice da opção selecionada
+        var selectedOption = selectElement.options[selectedIndex]; // Opção selecionada
+        var selectedValue = selectedOption.value; 
+
+        excluir(selectedValue);
+    });
     
-            excluir(selectedValue);
-        });
-    }
 });

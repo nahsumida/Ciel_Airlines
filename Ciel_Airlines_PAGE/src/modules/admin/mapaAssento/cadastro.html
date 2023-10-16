@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <link rel="stylesheet" href="aeroporto.css">
+        <link rel="stylesheet" href="./style/mapaAssento.css">
 
         <link rel="icon" href="assents/img/favicon-32x32.png">
 
         <title>Mapa de Assentos - Cadastro</title>
 
         <script>
-
-
             function preencheuNumDeFileira(){
                 let resultado = false;
 
@@ -64,8 +62,8 @@
                 const NumPorFileira = document.getElementById("NumPorFileira").value;
                  
                 fetchInserir({
-                    NumDeFileira: NumDeFileira, 
-                    NumPorFileira: NumPorFileira
+                    numDeFileira: NumDeFileira, 
+                    numPorFileira: NumPorFileira
                     })
                     .then(customResponse => {
                     if(customResponse.status === "SUCCESS"){

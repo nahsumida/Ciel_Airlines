@@ -50,22 +50,10 @@
                 return fetch('http://localhost:3000/incluirTrecho', requestOptions).then(T => T.json())
             }
 
-            function inserirTrecho(){
-                if(!selecionouCddChegada()){
-                    MessageStatus("Preencha a Cidade de Partida do Trecho!", true);
-                    return
-                }
-                if(!selecionouCddSaida()){
-                    MessageStatus("Preencha a Cidade de Destino do Trecho!", true);
-                    return
-                }
-
-                const CidadeSaida = document.getElementById("CidadeSaida").value;
-                const CidadeChegada = document.getElementById("CidadeChegada").value;
-
+            function inserirTrecho(aeroSaida, aeroChegada){
                 fetchInserir({
-                    CidadeSaida: CidadeSaida, 
-                    CidadeChegada: CidadeChegada ,
+                    cidadeSaida: CidadeSaida, 
+                    cidadeChegada: CidadeChegada ,
                     })
                     .then(customResponse => {
                     if(customResponse.status === "SUCCESS"){
@@ -80,8 +68,6 @@
                         console.log("Falha grave ao cadastrar." + e)
                     });
             }
-
-
         </script>
     </head>
     <body>
@@ -90,26 +76,14 @@
             <form>
                 <p>
                     <label for="CidadeSaida">Cidade de Partida:</label><br/>
-                    <select name="CidadeSaida" id="CidadeSaida">
-                    <option value="0" selected>Selecione: </option>
-                    <option value="1">aaaaaa</option>
-                    <option value=""></option>
-                    <option value=""></option>
-                    </select>
+                    <select id="cidadeSaida"></select>
                 </p>
                 <p>
                     <label for="CidadeChegada">Cidade de Destino:</label><br/>
-                    <select name="CidadeChegada" id="CidadeChegada">
-                    <option value="0" selected>Selecione: </option>
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-                    </select>
+                    <select id="cidadeChegada"></select>
                 </p>
-
                 <p>
                     <button type="button" onclick="inserirTrecho();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
-
                     <a href="../admin.html"><button type="button" src id="btnSair" name="btnSair">Sair</button></a>
                 </p>
                 <p id="status" class="statusError"></p>

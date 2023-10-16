@@ -40,7 +40,6 @@ trechoRouter.get("/listarTrecho", async(req:any, res:any)=>{
     }
 });
   
-  
 trechoRouter.delete("/excluirTrecho", async(req:any, res:any)=>{
 
     const idTrecho = req.body.idTrecho as number;
@@ -58,7 +57,7 @@ trechoRouter.delete("/excluirTrecho", async(req:any, res:any)=>{
         connectString : process.env.ORACLE_DB_CONN_STR
       });
   
-      let resDelete = await connection.execute(`DELETE TRECHO WHERE IDTRECHO = :1`, [idTrecho]);
+      let resDelete = await connection.execute(`DELETE TRECHO WHERE ID_TRECHO = :1`, [idTrecho]);
       
       await connection.commit();
   
@@ -111,7 +110,7 @@ trechoRouter.post("/incluirTrecho", async(req:any, res:any)=>{
         });
 
         const cmdInsert = `INSERT INTO TRECHO 
-        (IDTRECHO, AEROSAIDA, AEROCHEGADA)
+        (ID_TRECHO, AERO_SAIDA, AERO_CHEGADA)
         VALUES (ID_TRECHO_SEQ.NEXTVAL, :1, :2)`
 
         const dados = [aeroSaida, aeroChegada]
