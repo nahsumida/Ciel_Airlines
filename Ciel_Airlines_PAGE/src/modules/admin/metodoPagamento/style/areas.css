@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: linear-gradient(45deg, #f0e5da, #a76b95);;
+    color:rgb(0, 0, 0);
+    font-weight: 500;
+    display: flex;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main h1 {
+    color: #ffffff;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+
+main form p{
+    align-items: center;
+    margin-top: 4rem;
+}
+
+main form input {
+    background: #ecd9e6;
+    width: 300px;
+    height: 50px;
+    color: rgb(0, 0, 0);
+    font-size: 1rem;
+    border: 1px solid #a93c887e;
+    border-radius: 8px;
+}
+
+main form select {
+    background: #ecd9e6;
+    width: 300px;
+    height: 50px;
+    color: rgb(0, 0, 0);
+    font-size: 1rem;
+    border: 1px solid #a93c887e;
+    border-radius: 8px;
+}
+
+main form button{
+    cursor: pointer;
+    width: 50%;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 32px;
+    background: #A93C88;
+    color: white;
+    font-size: 1.1rem;
+    display: inline-block;
+}
+
+main form button:hover {
+    background: #d76db8;
+}
+
+.statusError {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    color: red;
+}
+
+/* arrumar botoes depois
+.button-items {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10px;
+}
+.button-items button{
+    flex:1;
+    margin-right: 15px;
+}*/
+
+#idMetodo {
+    width: 100px;
+
+}
+
