@@ -87,7 +87,7 @@ aeroportoRouter.delete("/excluirAeroporto", async(req:any, res:any)=>{
     
     const idCidade = req.body.idCidade as number;
     const nomeAeroporto = req.body.nomeAeroporto as string;
-    const siglaAeroporto = req.body.nomeAeroporto as string;
+    const sigla = req.body.sigla as string;
 
     // correção: verificar se tudo chegou para prosseguir com o cadastro.
     // verificar se chegaram os parametros
@@ -114,7 +114,7 @@ aeroportoRouter.delete("/excluirAeroporto", async(req:any, res:any)=>{
       (ID_AEROPORTO, ID_CIDADE, NOME_AEROPORTO, SIGLA)
       VALUES (ID_AEROPORTO_SEQ.NEXTVAL, :1, :2, :3)`
   
-      const dados = [idCidade, nomeAeroporto, siglaAeroporto]
+      const dados = [idCidade, nomeAeroporto, sigla]
   
       let resInsert = await connection.execute(cmdInsert, dados);
     

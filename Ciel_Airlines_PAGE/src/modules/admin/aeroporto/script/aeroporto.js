@@ -56,7 +56,7 @@ function inserirAeronave(){
 
 function excluir(selectedValue){
     fetchExcluir({
-        idmetodo: selectedValue, 
+        idAeroporto: selectedValue, 
     })
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){

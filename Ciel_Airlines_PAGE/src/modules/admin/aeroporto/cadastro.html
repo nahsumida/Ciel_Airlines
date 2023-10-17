@@ -50,6 +50,43 @@
                 pStatus.textContent = msg;
             }
 
+            function fetchListar(body){
+                const requestOptions = {
+                    method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+                };
+
+                return fetch('http://localhost:3000/listarCidade', requestOptions).then(T => T.json())
+            }
+
+            function listarCidades(){
+                const aeroSaida = document.getElementById('aeroSaida');
+
+                fetchListar()
+                    .then(customResponse => {
+                    if(customResponse.status === "SUCCESS"){
+                        IDCidade.innerHTML = '';
+
+                        customResponse.payload.forEach(item => {
+                            const idcidade = item[0];
+                            const nome = item[1];
+
+                            const option = document.createElement('option');
+                            option.value = idcidade; // Valor da opção
+                            option.text = `${nome}`; // Texto visível
+
+                            IDCidade.appendChild(option);
+                        });
+                    }else{
+                        MessageStatus("Erro ao listar Trecho...: " + customResponse.message, true);
+                        console.log(customResponse.message);
+                    }
+                    })
+                    .catch((e)=>{
+                        MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
+                        console.log("Falha grave ao listar." + e)
+                    });
+            }
+
             function fetchInserir(body){
                 const requestOptions = {
                     method: 'POST', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
@@ -58,7 +95,7 @@
                 return fetch('http://localhost:3000/inserirAeroporto', requestOptions).then(T => T.json())
             }
 
-            function inserirAeroporto(){
+            function inserirAeroporto(IdCidade){
                 if(!preencheuNomeAeroporto()){
                     MessageStatus("Preencha o NOME do aeroporto!", true);
                     return
@@ -72,14 +109,14 @@
                     return
                 }
 
-                const IDCidade = document.getElementById("IDCidade").value;
+                //const IDCidade = idCidade;
                 const NomeAeroporto = document.getElementById("nomeAeroporto").value;
                 const SiglaAeroporto = document.getElementById("siglaAeroporto").value;
 
                 fetchInserir({
-                    idCidade: IDCidade ,
+                    idCidade: IdCidade,
                     nomeAeroporto: NomeAeroporto,
-                    siglaAeroporto: SiglaAeroporto
+                    sigla: SiglaAeroporto
                 })
                     .then(customResponse => {
                     if(customResponse.status === "SUCCESS"){
@@ -94,6 +131,23 @@
                         console.log("Falha grave ao cadastrar." + e)
                     });
             }
+            document.addEventListener("DOMContentLoaded", function() {
+                listarCidades();
+
+                const button = document.getElementById("btnCadastrar");
+                var IDCidade = document.getElementById("IDCidade");
+
+                if (button) {
+                    button.addEventListener('click', function() {
+                        var selectedIndex = IDCidade.selectedIndex; // Índice da opção selecionada
+                        var selectedOption = IDCidade.options[selectedIndex]; // Opção selecionada
+                        var selectedID = selectedOption.value; 
+
+                        console.log(selectedID)
+                        inserirAeroporto(selectedID);
+                    });
+                }
+            });
         </script>
     </head>
     <body>
@@ -101,7 +155,7 @@
             <h1>Adicionar novo Aeroporto</h1>
             <form>
                     <p>
-                        <label for="IDCidade">ID cidade:</label><br/>
+                        <label for="IdCidade">ID cidade:</label><br/>
                         <select name="IDCidade" id="IDCidade"></select>
                     </p>
                     <p>

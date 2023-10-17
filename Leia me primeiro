@@ -1,0 +1,10 @@
+Para iniciar o primeiro passo é conectar-se à VPN da PUC,em seguida siga o guia visual fornecido para realizar o login no banco de dados (Tutorial_Banco.jpeg). Esse passo é crucial para desbloquear as informações que precisará acessar.
+
+Para continuar, acesse o diretório Ciel_Airlines_API através do terminal. Uma vez lá, execute os seguintes comandos na ordem exata:
+
+"npm run env" para baixar todas as dependências necessárias para o funcionamento do serviço.
+"npm run build" para compilar o código TypeScript, preparando-o para a execução.
+Por fim, execute "npm start" para iniciar o servidor, que estará disponível em localhost:3000.
+Agora, vá em frente e abra o arquivo "index.html", que é a página inicial do nosso front-end. Você o encontrará em Ciel_Airlines/src/index.html. No rodapé desta página, encontrará um botão que o levará à área de administração.
+
+Uma observação importante: as credenciais necessárias para acessar a área do administrador estão guardadas com segurança no arquivo .env em Ciel_Airlines_API. Certifique-se de que somente as pessoas autorizadas tenham acesso a essas informações.
