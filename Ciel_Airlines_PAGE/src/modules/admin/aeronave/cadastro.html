@@ -105,6 +105,7 @@
 
             function listarMapa(){
                 const dataSelect = document.getElementById('mapaAssento');
+                console.log("aaaa");
                 fetchListar()
                     .then(customResponse => {
                         if(customResponse.status === "SUCCESS"){
@@ -177,7 +178,7 @@
                 // para obter o texto selecionado
                 var text = document.getElementById('fabricante').options[document.getElementById('fabricante').selectedIndex].text;
                 const anoFabricacao = document.getElementById("anoFabricacao").value;
-                const mapaAssento = document.getElementById("mapaAssento").value;
+                //const mapaAssento = document.getElementById("mapaAssento").value;
                 const Total_assentos = document.getElementById("Total_assentos").value;
                 const CompanhiaAerea = document.getElementById("CompanhiaAerea").value;
 
