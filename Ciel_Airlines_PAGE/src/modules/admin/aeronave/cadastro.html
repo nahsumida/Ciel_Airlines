@@ -95,7 +95,7 @@
                 pStatus.textContent = msg;
             }
 
-            function fetchListar(body){
+            function fetchListarMapa(body){
                 const requestOptions = {
                     method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };
@@ -105,8 +105,8 @@
 
             function listarMapa(){
                 const dataSelect = document.getElementById('mapaAssento');
-                console.log("aaaa");
-                fetchListar()
+                //console.log("aaaa");
+                fetchListarMapa()
                     .then(customResponse => {
                         if(customResponse.status === "SUCCESS"){
                             dataSelect.innerHTML = '';
@@ -134,6 +134,43 @@
                     });
             }
 
+            function fetchListarCompanhia(body){
+                const requestOptions = {
+                    method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+                };
+
+                return fetch('http://localhost:3000/listarCompanhiaAerea', requestOptions).then(T => T.json())
+            }
+
+            function listarCompanhiaAerea(){
+                const dataSelect = document.getElementById('dataSelect');
+                fetchListarCompanhia()
+                    .then(customResponse => {
+                    if(customResponse.status === "SUCCESS"){
+                        dataSelect.innerHTML = '';
+
+                        customResponse.payload.forEach(item => {
+                            const idmetodo = item[0];
+                            const nome = item[1]; //colunas db
+
+                            const option = document.createElement('option');
+                            option.value = idmetodo; // Valor da opção
+                            option.text = `${nome}`; // Texto visível
+
+                            dataSelect.appendChild(option);
+                        });
+                    }else{
+                        MessageStatus("Erro ao listar companhia aérea...: " + customResponse.message, true);
+                        console.log(customResponse.message);
+                    }
+                    })
+                    .catch((e)=>{
+                        MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
+                        console.log("Falha grave ao listar." + e)
+                    });
+            }
+
+
             function fetchInserir(body){
                 const requestOptions = {
                     method: 'POST', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
@@ -142,7 +179,7 @@
                 return fetch('http://localhost:3000/inserirAeronave', requestOptions).then(T => T.json())
             }
 
-            function inserirAeronave(mapaAssento){
+            function inserirAeronave(mapaAssento,CompanhiaAerea){
                 if(!preencheuModelo()){
                     MessageStatus("Preencha modelo!", true);
                     return;
@@ -180,9 +217,8 @@
                 const anoFabricacao = document.getElementById("anoFabricacao").value;
                 //const mapaAssento = document.getElementById("mapaAssento").value;
                 const Total_assentos = document.getElementById("Total_assentos").value;
-                const CompanhiaAerea = document.getElementById("CompanhiaAerea").value;
+                //const CompanhiaAerea = document.getElementById("CompanhiaAerea").value;
 
-                //funcao Mateus
                 fetchInserir({
                     Modelo: Modelo, 
                     NumIdentificacao: NumIdentificacao ,
@@ -208,16 +244,20 @@
 
             document.addEventListener("DOMContentLoaded", function() {
                 listarMapa();
+                listarCompanhiaAerea();
 
                 const button = document.getElementById("btnCadastrar");
                 var mapaAssento = document.getElementById("mapaAssento");
+                var CompanhiaAerea = document.getElementById("CompanhiaAerea");
+
 
                 if (button) {
                     button.addEventListener('click', function() {
                         var selectedMapa = mapaAssento.value; 
+                        var selectedComp = CompanhiaAerea.value;
 
-                        console.log(selectedMapa)
-                        inserirAeronave(selectedMapa);
+                        console.log(selectedMapa, selectedComp)
+                        inserirAeronave(selectedMapa,selectedComp);
                     });
                 }
             });
@@ -264,12 +304,7 @@
 
                 <p>
                     <label for="CompanhiaAerea">Companhia Aerea:</label><br/>
-                    <select name="CompanhiaAerea" id="CompanhiaAerea">
-                    <option value="0" selected>Selecione: </option>
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-                    </select>
+                    <select name="CompanhiaAerea" id="CompanhiaAerea"></select>
                 </p>
                 <p id="status" class="statusError"></p>
                 <p>
