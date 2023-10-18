@@ -85,7 +85,7 @@ aeronaveRouter.delete("/excluirAeronave", async(req:any, res:any)=>{
   
 aeronaveRouter.post("/inserirAeronave", async(req:any, res:any)=>{
     
-    const numIdentificacao =  req.body.modelo as string;
+    const numIdentificacao =  req.body.numIdentificacao as string;
     const modelo = req.body.modelo as string;
     const fabricante = req.body.fabricante as string;
     const anoFabricacao = req.body.anoFabricacao as number;
@@ -113,10 +113,10 @@ aeronaveRouter.post("/inserirAeronave", async(req:any, res:any)=>{
       });
   
       const cmdInsert = `INSERT INTO AERONAVE 
-      (NUM_IDENTIFICACAO, MODELO, FABRICANTE, ANO_FABRICACAO, COMPANHIA_AEREA, MAPA_ASSENTO, TOTAL_ASSENTO)
+      (MODELO, NUM_IDENTIFICACAO,  FABRICANTE, ANOFABRICACAO, MAPA_ASSENTO, COMPANHIA_AEREA, TOTAL_ASSENTOS)
       VALUES (:1, :2, :3, :4, :5, :6, :7)`
 
-      const dados = [numIdentificacao, modelo, fabricante, anoFabricacao, companhiaAerea, mapaAssento, totalAssento]
+      const dados = [modelo,numIdentificacao, fabricante, anoFabricacao,  mapaAssento, companhiaAerea, totalAssento];
   
       let resInsert = await connection.execute(cmdInsert, dados);
     

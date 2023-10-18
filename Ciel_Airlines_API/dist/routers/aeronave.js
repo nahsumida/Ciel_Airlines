@@ -84,7 +84,7 @@ exports.aeronaveRouter.delete("/excluirAeronave", (req, res) => __awaiter(void 0
     }
 }));
 exports.aeronaveRouter.post("/inserirAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const numIdentificacao = req.body.modelo;
+    const numIdentificacao = req.body.numIdentificacao;
     const modelo = req.body.modelo;
     const fabricante = req.body.fabricante;
     const anoFabricacao = req.body.anoFabricacao;
@@ -108,9 +108,9 @@ exports.aeronaveRouter.post("/inserirAeronave", (req, res) => __awaiter(void 0, 
             connectString: process.env.ORACLE_DB_CONN_STR
         });
         const cmdInsert = `INSERT INTO AERONAVE 
-      (NUM_IDENTIFICACAO, MODELO, FABRICANTE, ANO_FABRICACAO, COMPANHIA_AEREA, MAPA_ASSENTO, TOTAL_ASSENTO)
+      (MODELO, NUM_IDENTIFICACAO,  FABRICANTE, ANOFABRICACAO, MAPA_ASSENTO, COMPANHIA_AEREA, TOTAL_ASSENTOS)
       VALUES (:1, :2, :3, :4, :5, :6, :7)`;
-        const dados = [numIdentificacao, modelo, fabricante, anoFabricacao, companhiaAerea, mapaAssento, totalAssento];
+        const dados = [modelo, numIdentificacao, fabricante, anoFabricacao, mapaAssento, companhiaAerea, totalAssento];
         let resInsert = yield connection.execute(cmdInsert, dados);
         yield connection.commit();
         const rowsInserted = resInsert.rowsAffected;
