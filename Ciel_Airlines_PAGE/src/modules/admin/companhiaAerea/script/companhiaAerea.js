@@ -44,7 +44,7 @@ function inserirAeronave(){
                 dataSelect.appendChild(option);
             });
         }else{
-            MessageStatus("Erro ao listar metodos...: " + customResponse.message, true);
+            MessageStatus("Erro ao listar companhia aérea...: " + customResponse.message, true);
             console.log(customResponse.message);
         }
         })
@@ -62,13 +62,13 @@ function excluir(selectedValue){
         if(customResponse.status === "SUCCESS"){
             MessageStatus("Metodo excluido... ", false);
         }else{
-            MessageStatus("Erro ao listar metodos...: " + customResponse.message, true);
+            MessageStatus("Erro ao excluir companhia aérea...: " + customResponse.message, true);
             console.log(customResponse.message);
         }
         })
         .catch((e)=>{
             MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-            console.log("Falha grave ao listar." + e)
+            console.log("Falha grave ao excluir." + e)
         });
 }
 

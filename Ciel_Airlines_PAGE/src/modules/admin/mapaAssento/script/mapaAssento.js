@@ -62,7 +62,7 @@ function excluir(selectedValue){
     })
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
-            MessageStatus("mapa excluido... ", false);
+            MessageStatus("Mapa excluído... ", false);
         }else{
             MessageStatus("Erro ao listar mapa...: " + customResponse.message, true);
             console.log(customResponse.message);

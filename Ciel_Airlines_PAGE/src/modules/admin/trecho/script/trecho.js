@@ -60,7 +60,7 @@ function excluir(selectedValue){
     })
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
-            MessageStatus("trecho excluido... ", false);
+            MessageStatus("[Sucesso]Trecho excluído... ", false);
         }else{
             MessageStatus("Erro ao listar trecho...: " + customResponse.message, true);
             console.log(customResponse.message);

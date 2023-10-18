@@ -61,7 +61,7 @@ function excluir(selectedValue){
     })
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
-            MessageStatus("Aeronave excluido... ", false);
+            MessageStatus("Aeronave excluida... ", false);
         }else{
             MessageStatus("Erro ao listar aeronave...: " + customResponse.message, true);
             console.log(customResponse.message);
