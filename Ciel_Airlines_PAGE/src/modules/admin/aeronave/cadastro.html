@@ -150,11 +150,11 @@
                         dataSelect.innerHTML = '';
 
                         customResponse.payload.forEach(item => {
-                            const idmetodo = item[0];
+                            const idcomp = item[0];
                             const nome = item[1]; //colunas db
 
                             const option = document.createElement('option');
-                            option.value = idmetodo; // Valor da opção
+                            option.value = idcomp; // Valor da opção
                             option.text = `${nome}`; // Texto visível
 
                             dataSelect.appendChild(option);
@@ -220,13 +220,13 @@
                 //const CompanhiaAerea = document.getElementById("CompanhiaAerea").value;
 
                 fetchInserir({
-                    Modelo: Modelo, 
-                    NumIdentificacao: NumIdentificacao ,
+                    modelo: Modelo, 
+                    numIdentificacao: NumIdentificacao ,
                     fabricante: text,
                     anoFabricacao: anoFabricacao,
                     mapaAssento: mapaAssento,
-                    CompanhiaAerea : CompanhiaAerea,
-                    Total_assentos: Total_assentos
+                    companhiaAerea : CompanhiaAerea,
+                    totalAssento: Total_assentos
                     })
                     .then(customResponse => {
                     if(customResponse.status === "SUCCESS"){

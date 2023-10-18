@@ -7,7 +7,7 @@ create table test(
 select *  from trecho
 insert into test values (1, 'nat')
 
-select * from aeroporto
+select * from aeronave
 
 insert into aeroporto (id_aeroporto, id_cidade, nome_aeroporto) values(ID_AEROPORTO_SEQ.NEXTVAL, 7, 'Aeroporto Internacional de Viracopos')
 
