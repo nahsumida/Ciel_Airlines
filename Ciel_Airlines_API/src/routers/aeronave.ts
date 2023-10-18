@@ -114,7 +114,7 @@ aeronaveRouter.post("/inserirAeronave", async(req:any, res:any)=>{
   
       const cmdInsert = `INSERT INTO AERONAVE 
       (NUM_IDENTIFICACAO, MODELO, FABRICANTE, ANO_FABRICACAO, COMPANHIA_AEREA, MAPA_ASSENTO, TOTAL_ASSENTO)
-      VALUES (:1, :2, :3, :4, :5, :6)`
+      VALUES (:1, :2, :3, :4, :5, :6, :7)`
 
       const dados = [numIdentificacao, modelo, fabricante, anoFabricacao, companhiaAerea, mapaAssento, totalAssento]
   

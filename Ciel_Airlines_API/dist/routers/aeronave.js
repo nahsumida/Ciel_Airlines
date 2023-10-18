@@ -109,7 +109,7 @@ exports.aeronaveRouter.post("/inserirAeronave", (req, res) => __awaiter(void 0, 
         });
         const cmdInsert = `INSERT INTO AERONAVE 
       (NUM_IDENTIFICACAO, MODELO, FABRICANTE, ANO_FABRICACAO, COMPANHIA_AEREA, MAPA_ASSENTO, TOTAL_ASSENTO)
-      VALUES (:1, :2, :3, :4, :5, :6)`;
+      VALUES (:1, :2, :3, :4, :5, :6, :7)`;
         const dados = [numIdentificacao, modelo, fabricante, anoFabricacao, companhiaAerea, mapaAssento, totalAssento];
         let resInsert = yield connection.execute(cmdInsert, dados);
         yield connection.commit();
