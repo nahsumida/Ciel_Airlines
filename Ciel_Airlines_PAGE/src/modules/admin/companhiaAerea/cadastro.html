@@ -51,9 +51,9 @@
                 })
                     .then(customResponse => {
                     if(customResponse.status === "SUCCESS"){
-                        MessageStatus("Método de pagamento cadastrado... ", false);
+                        MessageStatus("Companhia Aérea cadastrada... ", false);
                     }else{
-                        MessageStatus("Erro ao cadastrar Método...: " + customResponse.message, true);
+                        MessageStatus("Erro ao cadastrar Companhia...: " + customResponse.message, true);
                         console.log(customResponse.message);
                     }
                     })

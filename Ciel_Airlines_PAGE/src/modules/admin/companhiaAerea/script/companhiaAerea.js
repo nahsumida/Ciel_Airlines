@@ -60,7 +60,7 @@ function excluir(selectedValue){
     })
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
-            MessageStatus("Metodo excluido... ", false);
+            MessageStatus("Companhia aérea excluida... ", false);
         }else{
             MessageStatus("Erro ao excluir companhia aérea...: " + customResponse.message, true);
             console.log(customResponse.message);

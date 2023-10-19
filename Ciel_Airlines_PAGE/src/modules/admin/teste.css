@@ -61,14 +61,19 @@ nav ul li a:hover{
 .home{
     display: flex;
     align-items: center;
+    float: left;
+    width: 30%;
     justify-content: space-between;
-    padding: 50px 10px 10px 20px;
+    padding: 10px;
+    margin-top: 20px;
+
 }
+
+/* tentar deixar todo o texto em uma unica linha*/
 .home-text .text-h4{
     font-size:30px;
     color:#A93C88;
     font-weight: 400;
-    align-items: center;
 }
 .home-text .text-h5{
     font-size:25px;
@@ -77,19 +82,37 @@ nav ul li a:hover{
     align-items: center;
     margin-left: 20px;
 }
-.section{
-    width: 75%;
-    /*display: flex;*/
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 2.5%;
-    
-}
-.divider {
-    border-top: 1px solid #ead9e5;
-    margin-top: 50px; 
+
+
+.teste{
+    float:left;
+    padding: 10px;
 }
 
+
+.coluna{
+    background-color: #811d81;
+    /*padding: 20px;*/
+    flex-direction: column;
+    width:20%;
+    float: left;
+    margin: 10px;
+}
+
+.divider {
+    border-top: 1.3px solid #ead9e5;
+    margin-top: 50px; 
+}
+.section{
+    width: 100%;
+    display: inline-block;
+    vertical-align: top;
+    /*align-items: center;*/
+    justify-content: space-around;
+    /*margin-top: 2.5%;*/
+    margin: 20px;
+    margin-top: 0%;
+}
 .section .text-h4{
     color: #A93C88;
     font-size: 17px;
