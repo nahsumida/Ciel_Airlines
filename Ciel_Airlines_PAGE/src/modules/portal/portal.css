@@ -7,7 +7,7 @@
 }
 
 body{
-    background: #f0e5da;
+    background: #fff;
     font-family: 'poppins', sans-serif;
 }
 
@@ -88,10 +88,13 @@ nav ul li a:hover{
 }*/
 
 .container{
-    padding-top: 60px;
+    padding-top: 40px;
 }
-
-.col-8#dest {
+.section-destination{
+    background-color: #f0e5da;
+    padding:40px;
+}
+.col-10#dest {
     display: flex;
     /*padding-left: 40px;*/
     /*padding-right: 100px;*/
@@ -151,9 +154,13 @@ nav ul li a:hover{
     background-color: #fff;
     padding: 20px;
 }
-#Data {
+/*#Data {
     color: transparent;
-}
+}*/
+
+.invisible {
+    visibility: hidden !important;
+  }
 
 
 @media (max-width:785px) {
