@@ -91,7 +91,7 @@ nav ul li a:hover{
     padding-top: 60px;
 }
 
-.col#dest {
+.col-8#dest {
     display: flex;
     /*padding-left: 40px;*/
     /*padding-right: 100px;*/
@@ -105,9 +105,14 @@ nav ul li a:hover{
     border-radius: 10px;
     font-weight: 700;
     text-decoration: none;
+    align-content: flex-start;
+    flex-direction: column;
+    justify-content: space-between ;
 }
 .destination-btn + .destination-btn{
-    margin-left: 40px;
+    margin-left: 20px;
+    width:100%;
+    justify-content: space-between ;
 }
 .row#dest-input{
     display: flex;
@@ -138,6 +143,19 @@ nav ul li a:hover{
     border: 1px solid #a93c887e;
     border-radius: 8px;
 }
+.row#apenasIda{
+    padding-top:20px;
+}
+.col#apenasIda{
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 20px;
+}
+#Data {
+    color: transparent;
+}
+
+
 @media (max-width:785px) {
     .navigation{
         padding: 18px 20px;
