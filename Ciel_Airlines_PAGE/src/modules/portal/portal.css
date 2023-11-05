@@ -10,10 +10,10 @@ body{
     background: linear-gradient(45deg, #f0e5da,#a76b95, #c459f696);
     font-family: 'poppins', sans-serif;
 }
+/*barra de nav*/
 .nav{
     width:100%;
 }
-
 .nav.nav-tabs{
     display:flex;
 }
@@ -40,7 +40,7 @@ ul li .nav-link:hover{
 a.nav-link.active.custom-nav-link{
     background: linear-gradient(45deg, #f0e5da);
 }
-
+/*card barra nav*/
 .card-header#nav{
     background-color: #f2ece6; 
 }
@@ -76,6 +76,7 @@ a.nav-link.active.custom-nav-link{
     color:#6e6e6e;
     font-size: 13px;
 }
+/* div inserir destinos e data*/
 .container{
     padding-top: 40px;
 }
@@ -88,7 +89,6 @@ a.nav-link.active.custom-nav-link{
     display: flex;
     font-size: 13px;
 }
-
 .destination-btn{
     padding: 7px 30px;
     background:#A93C88;
@@ -110,7 +110,6 @@ a.nav-link.active.custom-nav-link{
     padding-top:20px;
     justify-content: flex-start;
 }
-
 .col#dest-input{
     position: relative;
     background-color: #fff;
@@ -166,7 +165,6 @@ a.nav-link.active.custom-nav-link{
     display: flex;
     font-size: 13px;
 }
-
 .search-btn{
     display: inline-block;
     height: 50%;
@@ -186,7 +184,10 @@ a.nav-link.active.custom-nav-link{
     color: transparent;
     font-size: 14px;
 }
-
+.invisible {
+    visibility: hidden !important;
+}
+/*cards sugestoes de destinos*/
 .row#destinos_{
     margin-top: 70px;
     margin-bottom: 20px;
@@ -196,7 +197,7 @@ a.nav-link.active.custom-nav-link{
     border-radius: 20px;
     height: 400px;
 }
-#destino:hover{
+div.card#destino:hover{
     box-shadow: 40px rgba(0, 0, 0, 0.448);
     transition: box-shadow 0.3s;
 }
@@ -205,12 +206,11 @@ a.nav-link.active.custom-nav-link{
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 }
-
-.invisible {
-    visibility: hidden !important;
-  }
-
-
+.card-title#destino{
+    font-weight: bold;
+    color: #2e2e2e;
+} 
+/*responsividade*/
 @media (max-width:785px) {
     .navigation{
         padding: 18px 20px;
