@@ -10,6 +10,11 @@ body{
     background: linear-gradient(45deg, #f0e5da,#a76b95, #c459f696);
     font-family: 'poppins', sans-serif;
 }
+
+.custom-navbar-bg{
+    background: #f0e5da;
+    margin-bottom: -12px;
+}
 .nav{
     width:100%;
 }
@@ -21,17 +26,12 @@ nav ul{
     display: flex;
     align-items: center;
 }
-ul li{
+nav ul li{
     color: #2e2e2e;
     cursor: pointer;
     text-decoration: none;
     transition: .5s;
     margin-left:10px;
-}
-ul li:hover{
-    color: #fff;
-    background: #bfb4bb;
-    border-radius: 5px;
 }
 .nav-item .nav-link{
     color:#2e2e2e;
@@ -41,17 +41,26 @@ a.nav-link.active.custom-nav-link{
     background: linear-gradient(45deg, #f0e5da);
 }
 
+nav ul li:hover{
+    color: #fff;
+    background: #bfb4bb;
+    border-radius: 0px;
+}
 .card-header{
     background-color: #f2ece6; 
 }
-.card-header-tabs{
-    margin-top: -20px;
+.card{
+    /*margin-left: 70px;
+    margin-right: 70px;*/
+    background-image:url('../../../src/assets/img/maragogi2.jpg');
+    background-size: cover;
+    background-repeat:no-repeat
+    
 }
 .card-body{
-    background-color: linear-gradient(45deg, #f0e5da);
+    background: linear-gradient(45deg, #f0e5da);
 }
 .background-img{
-    margin: -10px;
     padding: 15px;
     background-image:url('../../../src/assets/img/maragogi2.jpg');
     background-size: cover;
@@ -136,7 +145,7 @@ a.nav-link.active.custom-nav-link{
     border-radius: 8px;
 }
 .row#apenasIda{
-
+    
     padding-top:20px;
 }
 .col-4#apenasIda{
@@ -186,7 +195,7 @@ a.nav-link.active.custom-nav-link{
         right: 0;
     }
     .nav-item{
-        margin:  0;
+        margin: 0;
     }
     /*main*/
     .home{

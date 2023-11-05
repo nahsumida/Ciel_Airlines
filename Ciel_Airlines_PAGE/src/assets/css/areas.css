@@ -9,7 +9,7 @@
 }
 
 body {
-    background: linear-gradient(45deg, #f0e5da, #a76b95);;
+    background: linear-gradient(45deg, #f0e5da, #a76b95);
     color:rgb(0, 0, 0);
     font-weight: 500;
     display: flex;
