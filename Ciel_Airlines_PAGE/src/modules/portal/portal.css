@@ -28,7 +28,7 @@ ul li{
     transition: .5s;
     margin-left:10px;
 }
-ul li:hover{
+ul li .nav-link:hover{
     color: #fff;
     background: #bfb4bb;
     border-radius: 5px;
@@ -41,13 +41,13 @@ a.nav-link.active.custom-nav-link{
     background: linear-gradient(45deg, #f0e5da);
 }
 
-.card-header{
+.card-header#nav{
     background-color: #f2ece6; 
 }
 .card-header-tabs{
     margin-top: -20px;
 }
-.card-body{
+.card-body#nav{
     background-color: linear-gradient(45deg, #f0e5da);
 }
 .background-img{
@@ -57,12 +57,12 @@ a.nav-link.active.custom-nav-link{
     background-size: cover;
     background-repeat:no-repeat;
 }
-.card-title{
+.card-title#nav{
     color:#d55fb2;
     font-weight: 800;
     font-size: 30px;
 }
-.card-text{
+.card-text#nav{
     font-weight: 700;
     color:#ffffff
 }
@@ -136,8 +136,9 @@ a.nav-link.active.custom-nav-link{
     border-radius: 8px;
 }
 .row#apenasIda{
-
+    display: flex;
     padding-top:20px;
+    justify-content: space-between
 }
 .col-4#apenasIda{
     font-weight: 700;
@@ -146,8 +147,63 @@ a.nav-link.active.custom-nav-link{
     padding: 10px;
     width: 20%;
 }
+.col-4#IdaeVolta{
+    font-weight: 700;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 10px;
+    width: 20%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between ;
+}
+.col-4#IdaeVolta + .col-4#IdaeVolta{
+    margin-right: 10px;
+    margin-left: 5px;
+    justify-content: space-between ;
+}
+.col#search {
+    display: flex;
+    font-size: 13px;
+}
+
+.search-btn{
+    display: inline-block;
+    height: 50%;
+    padding: 7px 30px;
+    background:#2e2e2e;
+    color:white;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 20px;
+    margin-top: 20px;
+    align-content: flex-start;
+    flex-direction: column;
+    justify-content: space-between ;
+}
 #Data {
     color: transparent;
+    font-size: 14px;
+}
+
+.row#destinos_{
+    margin-top: 70px;
+    margin-bottom: 20px;
+}
+.card#destino{
+    padding:0px;
+    border-radius: 20px;
+    height: 400px;
+}
+#destino:hover{
+    box-shadow: 40px rgba(0, 0, 0, 0.448);
+    transition: box-shadow 0.3s;
+}
+.card-img-top{
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .invisible {
@@ -208,6 +264,35 @@ a.nav-link.active.custom-nav-link{
     }
     .home-img{
         width: 125%;
+    }
+    .col-4#apenasIda{
+        width:50%;
+        margin-right: 25%;
+    }
+    .col-4#IdaeVolta{
+        width:40%;
+        margin-right: 10px;
+    }
+    .col-4#IdaeVolta + .col-4#IdaeVolta{
+        margin-right: 45px;
+        margin-left: 0px;
+        justify-content: space-between ;
+    }
+    #Data {
+        color: transparent;
+        width: 20px;
+    }
+    .search-btn {
+        margin-left:40px;
+        padding: 7px 30px; 
+        font-size: 10px; 
+        width: 300px;
+    }
+    .card#destino{
+        padding:0px;
+        border-radius: 20px;
+        height: 300px;
+        margin-bottom: 10px;
     }
 }
 

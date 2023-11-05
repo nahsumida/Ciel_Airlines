@@ -41,8 +41,8 @@
           <div class="row" id="dest">
             <div class="col-10" id="dest">
               <nav>
-                <a href="#" class="destination-btn">Só ida</a>
-                <a href="../portal/portalIdaeVolta.html" class="destination-btn">Ida e Volta</a>
+                <a href="../portal/portalopt2.html" class="destination-btn">Só ida</a>
+                <a href="#" class="destination-btn">Ida e Volta</a>
               </nav>
             </div>
             <div class="col"></div>
@@ -58,9 +58,13 @@
             </div>
           </div>
           <div class="row" id="apenasIda">
-            <div class="col"></div>
-            <div class="col-4" id="apenasIda">
+            <div class="col" id="vazia"></div>
+            <div class="col-4" id="IdaeVolta">
               <label for="Data">Data de Ida</label><br/>
+              <input type="date" id="Data" name="Data">
+            </div>
+            <div class="col-4" id="IdaeVolta">
+              <label for="Data">Data de Volta</label><br/>
               <input type="date" id="Data" name="Data">
             </div>
             <div class="col" id="search">
@@ -73,7 +77,7 @@
         </div>
         <div class="row" id="destinos_"><div class="col">Destinos</div></div>
         <div class="row">
-          <div class="col" id="destino">
+          <div class="col">
             <div class="card" id="destino" style="width: 16rem;">
               <img src="../../../src/assets/img/maragogi2.jpg" class="card-img-top" alt="...">
               <div class="card-body">
