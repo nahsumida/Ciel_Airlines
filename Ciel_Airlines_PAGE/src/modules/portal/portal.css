@@ -28,6 +28,29 @@ ul li{
     transition: .5s;
     margin-left:10px;
 }
+.navbar-brand{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar-brand img#logo{
+    display: block;
+    margin: 0 auto;
+}
+.nav-item#help{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-link-custom#ajuda{
+    align-items: center;
+    font-size: 13px;
+    color: #2e2e2e;
+    cursor: pointer;
+    text-decoration: none;
+    transition: .5s;
+    margin-left:5px;
+}
 ul li .nav-link:hover{
     color: #fff;
     background: #bfb4bb;
@@ -40,10 +63,12 @@ ul li .nav-link:hover{
 a.nav-link.active.custom-nav-link{
     background: linear-gradient(45deg, #f0e5da);
 }
+
 /*card barra nav*/
 .card-header#nav{
-    background-color: #f2ece6; 
+    background-color: #f2ece6;    
 }
+
 .card-header-tabs{
     margin-top: -20px;
 }
@@ -207,9 +232,15 @@ div.card#destino:hover{
     border-top-right-radius: 20px;
 }
 .card-title#destino{
-    font-weight: bold;
-    color: #2e2e2e;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 550;
+    color: #3b3b3b;
 } 
+/*vantagens Ciel*/
+.row#vantagens{
+    margin-top: 70px;
+    margin-bottom: 20px;
+}
 /*responsividade*/
 @media (max-width:785px) {
     .navigation{
