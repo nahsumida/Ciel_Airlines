@@ -221,11 +221,12 @@ a.nav-link.active.custom-nav-link{
     padding:0px;
     border-radius: 20px;
     height: 400px;
-}
-div.card#destino:hover{
-    box-shadow: 40px rgba(0, 0, 0, 0.448);
+    box-shadow: -1em 0.5em 2em rgba(56, 48, 48, 0.215);
     transition: box-shadow 0.3s;
 }
+div.card#destino:hover{
+    
+}   
 .card-img-top{
     width: 100%;
     border-top-left-radius: 20px;
@@ -236,6 +237,9 @@ div.card#destino:hover{
     font-weight: 550;
     color: #3b3b3b;
 } 
+li.list-group-item{
+    border-radius: 20px;
+}
 /*vantagens Ciel*/
 .row#vantagens{
     margin-top: 70px;
