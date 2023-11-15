@@ -9,6 +9,7 @@
     <link rel="icon" href="../../assets/img/logo.png">
 </head>
 <body>
+  <!--Navbar-->
   <div class="card text-center" id="nav">
     <div class="card-header" id="nav">
       <div class="navbar-brand" href="#">
@@ -38,95 +39,127 @@
       </div>
     </div>
   </div>
-
-
-      <div class="container text-center">
-        <div class="section-destination">
-          <div class="row" id="dest">
-            <div class="col-10" id="dest">
-              <nav>
-                <a href="#" class="destination-btn">Só ida</a>
-                <a href="../portal/portalIdaeVolta.html" class="destination-btn">Ida e Volta</a>
-              </nav>
-            </div>
-            <div class="col"></div>
-          </div>
-          <div class="row" id="dest-input">
-            <div class="col" id="dest-input">
-              <label for="AeroSaida">Origem:</label><br/>
-              <input type="text" id="AeroSaida" name="AeroSaida" placeholder="  Insira a cidade de partida">
-            </div>
-            <div class="col" id="dest-input">
-              <label for="AeroSaida">Destino:</label><br/>
-              <input type="text" id="aeroChegada" name="aeroChegada" placeholder="  Insira a cidade de destino">
-            </div>
-          </div>
-          <div class="row" id="apenasIda">
-            <div class="col"></div>
-            <div class="col-4" id="apenasIda">
-              <label for="Data">Data de Ida</label><br/>
-              <input type="date" id="Data" name="Data">
-            </div>
-            <div class="col" id="search">
-              <a href="#" class="search-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 18 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-              </svg>
-              Buscar voos</a>
-            </div>
-          </div>
+  <!--Área de inserção das cidades origem/destino e datas-->
+  <div class="container text-center">
+    <div class="section-destination">
+      <div class="row" id="dest">
+        <div class="col-10" id="dest">
+          <nav>
+            <a href="#" class="destination-btn">Só ida</a>
+            <a href="../portal/portalIdaeVolta.html" class="destination-btn">Ida e Volta</a>
+          </nav>
         </div>
-        <div class="row" id="destinos_"><div class="col">Destinos</div></div>
-        <div class="row">
-          <div class="col" id="destino">
-            <div class="card" id="destino" style="width: 16rem;">
-              <img src="../../../src/assets/img/maragogi2.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title" id="destino">Maceió</h5>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="customlist-group-item">Data</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card" id="destino" style="width: 16rem;">
-              <img src="../../../src/assets/img/gramado.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title" id="destino">Gramado</h5>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Data</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card" id="destino" style="width: 16rem;">
-              <img src="../../../src/assets/img/riodejaneiro.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title" id="destino">Rio de Janeiro</h5>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Data</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card" id="destino" style="width: 16rem;">
-              <img src="../../../src/assets/img/recife.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title" id="destino">Recife</h5>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Data</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="row" id="vantagens"><div class="col">Por que comprar com a Ciel?</div></div>
-        <div class="row">
-          <div class="col" id="vantagens">1</div>
-          <div class="col" id="vantagens">2</div>
-          <div class="col" id="vantagens">3</div>
+        <div class="col"></div>
       </div>
+      <div class="row" id="dest-input">
+        <div class="col" id="dest-input">
+          <label for="AeroSaida">Origem:</label><br/>
+          <input type="text" id="AeroSaida" name="AeroSaida" placeholder="  Insira a cidade de partida">
+        </div>
+        <div class="col" id="dest-input">
+          <label for="AeroSaida">Destino:</label><br/>
+          <input type="text" id="aeroChegada" name="aeroChegada" placeholder="  Insira a cidade de destino">
+        </div>
+      </div>
+      <div class="row" id="apenasIda">
+        <div class="col"></div>
+        <div class="col-4" id="apenasIda">
+          <label for="Data">Data de Ida</label><br/>
+          <input type="date" id="Data" name="Data">
+        </div>
+        <div class="col" id="search">
+          <a href="#" class="search-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 18 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+          Buscar voos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!--Cards vantagens Ciel-->
+    <div class="row" id="vantagens"><div class="col" id="question-vantagens"> <h5 class="section-title">Por que comprar com a Ciel?</h5></div></div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col" id="vantagens">
+        <div class="card" id="vantagens">
+          <div class="card-body" id="vantagens">
+            <h5 class="card-title" id="vantagens">Compras confiáveis</h5>
+            <p class="card-text" id="vantagens">Entendemos que a confiança é essencial na relação
+              com os nossos clientes. Por isso, estamos comprometidos em oferecer uma experiência de compra segura e confiável</p>
+          </div>
+        </div>
+      </div>
+      <div class="col" id="vantagens">
+        <div class="card" id="vantagens" >
+          <div class="card-body" id="vantagens">
+            <h5 class="card-title" id="vantagens">Variedade de opções</h5>
+            <p class="card-text" id="vantagens"> Oferecemos uma ampla gama de opções de voos com os 
+              melhores preços para os nossos clientes realizarem a viagem de seus sonhos</p>
+          </div>
+        </div>
+      </div>
+      <div class="col" id="vantagens">
+        <div class="card" id="vantagens">
+          <div class="card-body" id="vantagens">
+            <h5 class="card-title" id="vantagens">Interface Intuitiva e Agradável</h5>
+            <p class="card-text" id="vantagens"> Nossa plataforma foi projetada com foco na facilidade de uso. Acreditamos que a compra de Passagens
+              aéreas deve ser uma experiência agradável e fácil para o usuário </p>
+          </div> 
+        </div>
+      </div>
+    </div>
+      <!--Cards sugestões de destino-->
+      <div class="container-destinos">
+        <div class="container text-center">
+          <div class="row text-center" id="destinos_"><div class="col"> <h5 class="section-title"> Destinos que você vai amar </h5></div></div>
+          <div class="row">
+            <div class="col">
+              <div class="card" id="destino" style="width: 16rem;">
+                <img src="../../../src/assets/img/maragogi2.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title" id="destino">Maceió</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Data</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card" id="destino" style="width: 16rem;">
+                <img src="../../../src/assets/img/gramado.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title" id="destino">Gramado</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Data</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card" id="destino" style="width: 16rem;">
+                <img src="../../../src/assets/img/riodejaneiro.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title" id="destino">Rio de Janeiro</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Data</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card" id="destino" style="width: 16rem;">
+                <img src="../../../src/assets/img/recife.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title" id="destino">Recife</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item" >Data</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
 </body>
 </html>

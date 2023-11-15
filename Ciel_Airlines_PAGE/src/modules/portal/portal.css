@@ -118,6 +118,7 @@ a.nav-link.active.custom-nav-link{
     padding: 7px 30px;
     background:#A93C88;
     color:white;
+    border: 1px solid rgb(208, 208, 208);
     border-radius: 10px;
     font-weight: 700;
     text-decoration: none;
@@ -206,7 +207,8 @@ a.nav-link.active.custom-nav-link{
     justify-content: space-between ;
 }
 #Data {
-    color: transparent;
+    border: 1px solid #a93c887e;
+    color: #bfb4bb;
     font-size: 14px;
 }
 .invisible {
@@ -214,14 +216,28 @@ a.nav-link.active.custom-nav-link{
 }
 /*cards sugestoes de destinos*/
 .row#destinos_{
-    margin-top: 70px;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+}
+.container-destinos{
+    margin-top: 100px;
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    width: 100%;
+    /*background: linear-gradient(45deg, #f0e5da, #caa7bd); */
+    padding-top: 0px;
+    padding-bottom: 70px;
+}
+.section-title{
+    color: #fff;
+    font-size: 21px;
+    font-weight: 700;
 }
 .card#destino{
     padding:0px;
     border-radius: 20px;
     height: 400px;
-    box-shadow: -1em 0.5em 2em rgba(56, 48, 48, 0.215);
+    box-shadow: -1em 0.5em 2em rgba(98, 87, 87, 0.253);
     transition: box-shadow 0.3s;
 }
 div.card#destino:hover{
@@ -237,14 +253,47 @@ div.card#destino:hover{
     font-weight: 550;
     color: #3b3b3b;
 } 
+.list-group.list-group-flush{
+    align-items: center;
+}
 li.list-group-item{
     border-radius: 20px;
+    width:fit-content;
 }
+
 /*vantagens Ciel*/
 .row#vantagens{
-    margin-top: 70px;
+    margin-top: 90px;
     margin-bottom: 20px;
+    align-items: center;
+    display: flex;
 }
+.col#vantagens{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+.card#vantagens{
+    width: 18rem;
+    height: 25rem;
+    border-radius: 20px;
+    text-align: left;
+}
+.card-title#vantagens{
+    font-family: 'Trebuchet MS', sans-serif;
+    font-weight: 550;
+    color: #4e4e4e;
+}
+.card-body#vantagens{
+    padding-top: 40px;
+    color: #797878;
+    font-size: 14.5px;
+}
+.card-text#vantagens{
+    margin-top: 28px
+}
+
 /*responsividade*/
 @media (max-width:785px) {
     .navigation{
