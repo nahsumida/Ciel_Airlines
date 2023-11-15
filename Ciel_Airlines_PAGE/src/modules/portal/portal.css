@@ -230,8 +230,12 @@ a.nav-link.active.custom-nav-link{
 }
 .section-title{
     color: #fff;
-    font-size: 25px;
+    font-size: 26px;
     font-weight: 700;
+    /*text-decoration: 1px underline;
+    text-decoration-skip-ink:all;
+    text-underline-offset: 4px; */
+    
 }
 .section-title#vantagens{
     display: flex;
@@ -271,6 +275,7 @@ li.list-group-item{
 }
 
 /*vantagens Ciel*/
+
 /*.container-vantagens{
     margin-top: 100px;
     width: 100%;
