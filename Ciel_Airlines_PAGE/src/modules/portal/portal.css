@@ -230,8 +230,15 @@ a.nav-link.active.custom-nav-link{
 }
 .section-title{
     color: #fff;
-    font-size: 21px;
+    font-size: 25px;
     font-weight: 700;
+}
+.section-title#vantagens{
+    display: flex;
+    justify-content: left;
+}
+.highlight2{
+    color:#be3e97;
 }
 .card#destino{
     padding:0px;
@@ -241,7 +248,7 @@ a.nav-link.active.custom-nav-link{
     transition: box-shadow 0.3s;
 }
 div.card#destino:hover{
-    
+    box-shadow: -1em 0.5em 2em rgba(98, 87, 87, 0.51);
 }   
 .card-img-top{
     width: 100%;
@@ -252,6 +259,8 @@ div.card#destino:hover{
     font-family: 'Trebuchet MS', sans-serif;
     font-weight: 550;
     color: #3b3b3b;
+    display: flex;
+    justify-content: center;
 } 
 .list-group.list-group-flush{
     align-items: center;
@@ -262,6 +271,14 @@ li.list-group-item{
 }
 
 /*vantagens Ciel*/
+/*.container-vantagens{
+    margin-top: 100px;
+    width: 100%;
+    background: linear-gradient(45deg, #f0e5da, #caa7bd); 
+    padding-top: 0px;
+    padding-bottom: 70px;
+}*/
+
 .row#vantagens{
     margin-top: 90px;
     margin-bottom: 20px;
@@ -284,6 +301,16 @@ li.list-group-item{
     font-family: 'Trebuchet MS', sans-serif;
     font-weight: 550;
     color: #4e4e4e;
+    margin-right: 12px;
+    margin-left: 12px
+}
+.card-title#icon{
+    display: flex;
+    flex-direction: row;    
+}
+.card-title#icon{
+    display: flex;
+    flex-direction: row;    
 }
 .card-body#vantagens{
     padding-top: 40px;
