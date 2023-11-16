@@ -1,0 +1,39 @@
+.col#assentos{
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+
+
+button{
+    display: flex;
+    border:none;
+    flex-direction: column;
+    align-content: center;
+    margin-top: 3px;
+    cursor: pointer;
+    background: none;
+    background-image: url(assento.png);
+    width: 65px;
+    height: 65px;
+    background-size: cover;
+    text-align: center;
+    line-height: 50px;
+    padding-right: 30px;
+    font-size: 13px;
+}
+
+button:hover{
+    background-color: #f25ac460;
+}
+
+label{
+    display: flex;
+    border:none;
+    flex-direction: column;
+    align-content: center;
+    margin-top: 30px;
+    margin-bottom: 43px;
+}

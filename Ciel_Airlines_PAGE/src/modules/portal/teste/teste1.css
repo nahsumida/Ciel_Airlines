@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+    box-sizing: border-box;
+    text-decoration: none;
+    padding: 0;
+}
+
+body{
+    background: linear-gradient(100deg, #f0e5da, #a76b95);
+    font-family: 'poppins', sans-serif;
+}
+
+.card-header#nav{
+    background-color: #f2ece6;    
+}
