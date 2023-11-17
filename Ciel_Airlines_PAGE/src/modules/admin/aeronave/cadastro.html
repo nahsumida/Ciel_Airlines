@@ -52,7 +52,7 @@
                 return resultado;
             }
 
-            function selecionouMapa(){
+            /*function selecionouMapa(){
                 let resultado = false;
 
                 const valMapaSelecionado = document.getElementById('mapaAssento').value;
@@ -70,7 +70,7 @@
                     resultado = true;
                 }
                 return resultado;
-            }
+            }*/
 
             function selecionouCompanhia(){
                 let resultado = false;
@@ -95,7 +95,7 @@
                 pStatus.textContent = msg;
             }
 
-            function fetchListarMapa(body){
+            /*function fetchListarMapa(body){
                 const requestOptions = {
                     method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
                 };
@@ -132,7 +132,7 @@
                         MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
                         console.log("Falha grave ao listar." + e)
                     });
-            }
+            }*/
 
             function fetchListarCompanhia(body){
                 const requestOptions = {
@@ -178,8 +178,8 @@
 
                 return fetch('http://localhost:3000/inserirAeronave', requestOptions).then(T => T.json())
             }
-
-            function inserirAeronave(mapaAssento,CompanhiaAerea){
+            //function inserirAeronave(mapaAssento,CompanhiaAerea)
+            function inserirAeronave(CompanhiaAerea){
                 if(!preencheuModelo()){
                     MessageStatus("Preencha modelo!", true);
                     return;
@@ -196,14 +196,14 @@
                     MessageStatus("Selecione o Fabricante!", true);
                     return;
                 }
-                if(!selecionouMapa()){
+                /*if(!selecionouMapa()){
                     MessageStatus("Selecione um Mapa de Assentos!", true);
                     return;
                 }
                 if(!totalAssentosValido()){
                     MessageStatus("Preencha  o total de assentos.", true);
                     return;
-                }
+                }*/
                 if(!selecionouCompanhia()){
                     MessageStatus("Selecione uma Companhia Aérea!", true);
                     return;
@@ -216,7 +216,7 @@
                 var text = document.getElementById('fabricante').options[document.getElementById('fabricante').selectedIndex].text;
                 const anoFabricacao = document.getElementById("anoFabricacao").value;
                 //const mapaAssento = document.getElementById("mapaAssento").value;
-                const Total_assentos = document.getElementById("Total_assentos").value;
+                //const Total_assentos = document.getElementById("Total_assentos").value;
                 //const CompanhiaAerea = document.getElementById("CompanhiaAerea").value;
 
                 fetchInserir({
@@ -224,9 +224,9 @@
                     numIdentificacao: NumIdentificacao ,
                     fabricante: text,
                     anoFabricacao: anoFabricacao,
-                    mapaAssento: mapaAssento,
+                    //mapaAssento: mapaAssento,
                     companhiaAerea : CompanhiaAerea,
-                    totalAssento: Total_assentos
+                    //totalAssento: Total_assentos
                     })
                     .then(customResponse => {
                     if(customResponse.status === "SUCCESS"){
@@ -243,17 +243,17 @@
             }
 
             document.addEventListener("DOMContentLoaded", function() {
-                listarMapa();
+                //listarMapa();
                 listarCompanhiaAerea();
 
                 const button = document.getElementById("btnCadastrar");
-                var mapaAssento = document.getElementById("mapaAssento");
+                //var mapaAssento = document.getElementById("mapaAssento");
                 var CompanhiaAerea = document.getElementById("CompanhiaAerea");
 
 
                 if (button) {
                     button.addEventListener('click', function() {
-                        var selectedMapa = mapaAssento.value; 
+                        //var selectedMapa = mapaAssento.value; 
                         var selectedComp = CompanhiaAerea.value;
 
                         console.log(selectedMapa, selectedComp)
@@ -292,15 +292,6 @@
                     <input type="text" id="anoFabricacao" name="anoFabricacao" maxlength="4" size="5"/>
                 </p>
 
-                <p>
-                    <label for="mapaAssento">Mapa de assentos:</label><br/>
-                    <select name="mapaAssento" id="mapaAssento"></select>
-                </p>
-
-                <p>
-                    <label for="Total_assentos">Total Assentos:</label><br/>
-                    <input type="text" id="Total_assentos" name="Total_assentos">
-                </p>
 
                 <p>
                     <label for="CompanhiaAerea">Companhia Aerea:</label><br/>
