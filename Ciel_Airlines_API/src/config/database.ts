@@ -19,7 +19,7 @@ export const executeDBQuery = async(query:any, action:any) => {
             connectString : process.env.ORACLE_DB_CONN_STR
         });
      
-        let resSelect = await connection.execute(req);
+        let resSelect = await connection.execute(query);
     
         await connection.close();
         cr.status = "SUCCESS"; 

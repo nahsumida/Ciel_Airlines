@@ -16,7 +16,7 @@ type CustomResponse = {
 companhiaAereaRouter.get("/testenat", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined,};
 
-  const esse = executeDBQuery("select * from trecho")
+  const esse = executeDBQuery("select * from trecho", "select")
 
   cr.message = (await esse).message;
   cr.status = (await esse).status;
