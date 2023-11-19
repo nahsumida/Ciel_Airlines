@@ -216,7 +216,8 @@ a.nav-link.active.custom-nav-link{
 }
 /*cards sugestoes de destinos*/
 .row#destinos_{
-    margin-bottom: 50px;
+    /*margin-bottom: 50px;*/
+    margin-bottom: 10px;
 }
 .container-destinos{
     margin-top: 100px;
@@ -230,8 +231,8 @@ a.nav-link.active.custom-nav-link{
 }
 .section-title{
     color: #fff;
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 30px;
+    font-weight: 600;
     /*text-decoration: 1px underline;
     text-decoration-skip-ink:all;
     text-underline-offset: 4px; */
@@ -326,28 +327,65 @@ li.list-group-item{
     margin-top: 28px
 }
 /*carrossel*/
-
+#destinoicon{
+    width:fit-content;
+    margin-top: -5px;
+    padding-right:0;
+}
+#testandoDest{
+    margin-top: 80px;
+}
 #carousel{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: #3b3b3b;
-    
+    border-width: 50px ;
+    padding-top:20px;
+    max-width: max-content;
+    margin:0
 }
-/*.carousel-item{
-    display:flex;
-    flex-direction: column;
-}*/
-#carouselExampleInterval{
-    width: 2000px;
-}
+
 .col#teste{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: #f0e5dacc;
-    border-radius: 20px;
+    /*background-color: ;*/
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0),rgba(63, 11, 47, 0.29));
+    padding-right: 200px;
+    margin-right:200px;
+    margin-left: 250px;
+    padding-left: 0px;
+    border-radius: 10px;
 }
+
+.d-block#aa{
+    margin-left: 0px;
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 1000px;
+    height:500px;
+    opacity: 0.87;;
+}
+
+.carousel-caption#bb{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 10px;
+    width:fit-content;
+    line-height: 800px;
+    font-weight:600;
+    text-shadow:#3b3b3b;
+}
+
+#carousel-desc{
+    font-size: 17px;
+    color:#bfb4bb;
+    font-weight: 500;
+    padding-left: 10px;
+}
+
 /*responsividade*/
 @media (max-width:785px) {
     .navigation{
@@ -430,6 +468,25 @@ li.list-group-item{
         border-radius: 20px;
         height: 300px;
         margin-bottom: 10px;
+    }
+    #carousel-desc{
+        visibility: hidden !important;
+    }
+    .col#teste{
+        width: fit-content;
+        padding-right: 0px;
+        
+    
+    }
+    .d-block#aa{
+        margin-left: -30px;
+        
+        border-radius: 10px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        width: 570px;
+        height:300px;
+        opacity: 0.87;;
     }
 }
 
