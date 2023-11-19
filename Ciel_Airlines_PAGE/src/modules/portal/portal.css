@@ -68,7 +68,6 @@ a.nav-link.active.custom-nav-link{
 .card-header#nav{
     background-color: #f2ece6;    
 }
-
 .card-header-tabs{
     margin-top: -20px;
 }
@@ -339,7 +338,7 @@ li.list-group-item{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    border-width: 50px ;
+    align-items: center;
     padding-top:20px;
     max-width: max-content;
     margin:0
@@ -349,11 +348,11 @@ li.list-group-item{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /*background-color: ;*/
-    background: linear-gradient(45deg, rgba(255, 255, 255, 0),rgba(63, 11, 47, 0.29));
-    padding-right: 200px;
+    background-color: #fff;
+    /*background: linear-gradient(45deg, rgba(255, 255, 255, 0),rgba(63, 11, 47, 0.29));*/
+    padding-right: 0px;
     margin-right:200px;
-    margin-left: 250px;
+    margin-left: 200px;
     padding-left: 0px;
     border-radius: 10px;
 }
@@ -363,7 +362,7 @@ li.list-group-item{
     border-radius: 10px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    width: 1000px;
+    width: 1200px;
     height:500px;
     opacity: 0.87;;
 }
@@ -371,8 +370,8 @@ li.list-group-item{
 .carousel-caption#bb{
     display: flex;
     flex-direction: column;
-    text-align: left;
-    margin-left: 10px;
+    text-align: center;
+    margin-left: 0px;
     width:fit-content;
     line-height: 800px;
     font-weight:600;
@@ -381,7 +380,7 @@ li.list-group-item{
 
 #carousel-desc{
     font-size: 17px;
-    color:#bfb4bb;
+    color:#1d1d1d;
     font-weight: 500;
     padding-left: 10px;
 }
@@ -475,12 +474,9 @@ li.list-group-item{
     .col#teste{
         width: fit-content;
         padding-right: 0px;
-        
-    
     }
     .d-block#aa{
         margin-left: -30px;
-        
         border-radius: 10px;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
