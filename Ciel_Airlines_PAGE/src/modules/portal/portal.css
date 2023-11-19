@@ -325,7 +325,29 @@ li.list-group-item{
 .card-text#vantagens{
     margin-top: 28px
 }
+/*carrossel*/
 
+#carousel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #3b3b3b;
+    
+}
+/*.carousel-item{
+    display:flex;
+    flex-direction: column;
+}*/
+#carouselExampleInterval{
+    width: 2000px;
+}
+.col#teste{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #f0e5dacc;
+    border-radius: 20px;
+}
 /*responsividade*/
 @media (max-width:785px) {
     .navigation{
