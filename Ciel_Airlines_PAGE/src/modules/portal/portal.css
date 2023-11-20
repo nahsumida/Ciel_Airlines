@@ -340,29 +340,28 @@ li.list-group-item{
     justify-content: center;
     align-items: center;
     padding-top:20px;
-    max-width: max-content;
+    max-width: fit-content;
     margin:0
 }
 
 .col#teste{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     background-color: #fff;
-    /*background: linear-gradient(45deg, rgba(255, 255, 255, 0),rgba(63, 11, 47, 0.29));*/
     padding-right: 0px;
-    margin-right:200px;
-    margin-left: 200px;
+    margin-right:50px;
+    margin-left: 50px;
     padding-left: 0px;
     border-radius: 10px;
 }
 
 .d-block#aa{
+    size: cover;
     margin-left: 0px;
     border-radius: 10px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    width: 1200px;
+    width: 1000px;
     height:500px;
     opacity: 0.87;;
 }
@@ -371,7 +370,7 @@ li.list-group-item{
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin-left: 0px;
+    margin-left: -50px;
     width:fit-content;
     line-height: 800px;
     font-weight:600;
@@ -383,6 +382,16 @@ li.list-group-item{
     color:#1d1d1d;
     font-weight: 500;
     padding-left: 10px;
+    padding-right:10px;
+}
+
+.carousel-control-prev{
+    width:fit-content;
+    margin-left: 0;
+}
+.carousel-control-next{
+    margin-right:0;
+    width:fit-content;
 }
 
 /*responsividade*/
@@ -457,32 +466,27 @@ li.list-group-item{
         width: 20px;
     }
     .search-btn {
-        margin-left:40px;
+        margin-left:60px;
         padding: 7px 30px; 
         font-size: 10px; 
         width: 300px;
     }
-    .card#destino{
+    /*.card#destino{
         padding:0px;
         border-radius: 20px;
         height: 300px;
         margin-bottom: 10px;
-    }
-    #carousel-desc{
-        visibility: hidden !important;
+    }*/
+    .carousel{
+        min-width: 500px;
     }
     .col#teste{
-        width: fit-content;
-        padding-right: 0px;
+        min-width: min-content;
     }
     .d-block#aa{
-        margin-left: -30px;
-        border-radius: 10px;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-        width: 570px;
+        width: 300px;
         height:300px;
-        opacity: 0.87;;
     }
+    
 }
 
