@@ -68,7 +68,6 @@ a.nav-link.active.custom-nav-link{
 .card-header#nav{
     background-color: #f2ece6;    
 }
-
 .card-header-tabs{
     margin-top: -20px;
 }
@@ -216,7 +215,8 @@ a.nav-link.active.custom-nav-link{
 }
 /*cards sugestoes de destinos*/
 .row#destinos_{
-    margin-bottom: 50px;
+    /*margin-bottom: 50px;*/
+    margin-bottom: 10px;
 }
 .container-destinos{
     margin-top: 100px;
@@ -230,8 +230,8 @@ a.nav-link.active.custom-nav-link{
 }
 .section-title{
     color: #fff;
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 30px;
+    font-weight: 600;
     /*text-decoration: 1px underline;
     text-decoration-skip-ink:all;
     text-underline-offset: 4px; */
@@ -325,6 +325,74 @@ li.list-group-item{
 .card-text#vantagens{
     margin-top: 28px
 }
+/*carrossel*/
+#destinoicon{
+    width:fit-content;
+    margin-top: -5px;
+    padding-right:0;
+}
+#testandoDest{
+    margin-top: 80px;
+}
+#carousel{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top:20px;
+    max-width: fit-content;
+    margin:0
+}
+
+.col#teste{
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    padding-right: 0px;
+    margin-right:50px;
+    margin-left: 50px;
+    padding-left: 0px;
+    border-radius: 10px;
+}
+
+.d-block#aa{
+    size: cover;
+    margin-left: 0px;
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 1000px;
+    height:500px;
+    opacity: 0.87;;
+}
+
+.carousel-caption#bb{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: -50px;
+    width:fit-content;
+    line-height: 800px;
+    font-weight:600;
+    text-shadow:#3b3b3b;
+}
+
+#carousel-desc{
+    font-size: 17px;
+    color:#1d1d1d;
+    font-weight: 500;
+    padding-left: 10px;
+    padding-right:10px;
+}
+
+.carousel-control-prev{
+    width:fit-content;
+    margin-left: 0;
+}
+.carousel-control-next{
+    margin-right:0;
+    width:fit-content;
+}
 
 /*responsividade*/
 @media (max-width:785px) {
@@ -398,16 +466,27 @@ li.list-group-item{
         width: 20px;
     }
     .search-btn {
-        margin-left:40px;
+        margin-left:60px;
         padding: 7px 30px; 
         font-size: 10px; 
         width: 300px;
     }
-    .card#destino{
+    /*.card#destino{
         padding:0px;
         border-radius: 20px;
         height: 300px;
         margin-bottom: 10px;
+    }*/
+    .carousel{
+        min-width: 500px;
     }
+    .col#teste{
+        min-width: min-content;
+    }
+    .d-block#aa{
+        width: 300px;
+        height:300px;
+    }
+    
 }
 
