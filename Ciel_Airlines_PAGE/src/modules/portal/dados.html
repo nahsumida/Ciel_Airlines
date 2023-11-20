@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css informacoes.css">
+    <link rel="icon" href="../../assets/img/logo.png">
+</head>
+<body>
+    <div class="card text-center" id="nav">
+        <div class="card-header" id="nav">
+          <a class="navbar-brand" href="#">
+            <img src="../../../src/assets/img/logo_nome.png" alt="Logo" width="200" height="70" alt="logo" draggable="false" >
+          </a>
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active custom-nav-link" aria-current="true" href="#">Passagens</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="portalbusca.html">Home</a>
+            </li>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body" id="nav">
+          <div class="background-img">
+            <h5 class="card-title" id="nav">PASSAGENS</h5>
+            <p class="card-text" id="nav">Dados</p>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <h2>Confime seus dados</h2>
+
+        <p>Nome: <span id="nomeConfirmado"></span></p>
+        <p>E-mail: <span id="emailConfirmado"></span></p>
+        <p>CPF: <span id="cpfConfirmado"></span></p>
+        <p>Telefone: <span id="telefoneConfirmado"></span></p>
+        <p>Data Nascimento: <span id="dataConfirmado"></span></p>
+
+        <button onclick="voltar()">Voltar</button>
+        <button onclick="pagamento()">Pagamento</button>
+    </div>
+
+    <script>
+        // Obtenha os dados armazenados em sessionStorage
+        var nomeConfirmado = sessionStorage.getItem('nomeConfirmado');
+        var emailConfirmado = sessionStorage.getItem('emailConfirmado');
+        var cpfConfirmado = sessionStorage.getItem('cpfConfirmado');
+        var telefoneConfirmado = sessionStorage.getItem('telefoneConfirmado');
+        var dataConfirmado = sessionStorage.getItem('dataConfirmado');
+
+        // Exibir os dados na página
+        document.getElementById('nomeConfirmado').innerText = nomeConfirmado;
+        document.getElementById('emailConfirmado').innerText = emailConfirmado;
+        document.getElementById('cpfConfirmado').innerText = cpfConfirmado;
+        document.getElementById('telefoneConfirmado').innerText = telefoneConfirmado;
+        document.getElementById('dataConfirmado').innerText = dataConfirmado;
+
+        function voltar() {
+            window.location.href = 'html informacoes.html';
+        }
+
+        function pagamento() {
+            window.location.href = 'pagamento.html';
+        }
+    </script>
+</body>
+</html>
