@@ -11,7 +11,7 @@ select * from aeronave
 
 insert into aeroporto (id_aeroporto, id_cidade, nome_aeroporto) values(ID_AEROPORTO_SEQ.NEXTVAL, 7, 'Aeroporto Internacional de Viracopos')
 
-select * from trecho
+select * from aeronave
 
 DROP TABLE trecho;
 

@@ -16,15 +16,24 @@ exports.companhiaAereaRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const oracledb_1 = __importDefault(require("oracledb"));
 const dotenv_1 = __importDefault(require("dotenv"));
+//import { executeSelectAll } from "src/config/database";
 const database_1 = require("../config/database");
+//require('../config/database');
 exports.companhiaAereaRouter = express_1.default.Router();
 dotenv_1.default.config();
 exports.companhiaAereaRouter.get("/testenat", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined, };
-    const esse = (0, database_1.executeDBQuery)("select * from trecho");
-    cr.message = (yield esse).message;
-    cr.status = (yield esse).status;
-    cr.payload = (yield esse).payload;
+    let esse = (0, database_1.executeSelectAll)("TRECHO");
+    if (yield esse)
+        [1].values != null;
+    {
+        cr.message = (yield esse).result;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield esse).err;
+    cr.message = "Dados obtidos";
+    cr.status = "SUCCESS";
     res.send(cr);
 }));
 exports.companhiaAereaRouter.get("/listarCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

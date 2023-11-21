@@ -1,7 +1,9 @@
 import express from "express";
 import oracledb, { Connection, ConnectionAttributes } from "oracledb";
 import dotenv from "dotenv";
-import { executeDBQuery } from '../config/database';
+//import { executeSelectAll } from "src/config/database";
+import { executeSelectAll, executeSelectByID } from '../config/database';
+//require('../config/database');
 
 export const companhiaAereaRouter = express.Router();
 
@@ -16,12 +18,18 @@ type CustomResponse = {
 companhiaAereaRouter.get("/testenat", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined,};
 
-  const esse = executeDBQuery("select * from trecho", "select")
+  let esse = executeSelectAll("TRECHO");
 
-  cr.message = (await esse).message;
-  cr.status = (await esse).status;
-  cr.payload = (await esse).payload;
+  if (await esse)[1].values != null;{
+    cr.message = (await esse).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
 
+  cr.payload = (await esse).result;
+  cr.message = "Dados obtidos";
+  cr.status = "SUCCESS"; 
+  
   res.send(cr);
 });
 

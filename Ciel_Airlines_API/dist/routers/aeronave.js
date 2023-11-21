@@ -90,7 +90,7 @@ exports.aeronaveRouter.post("/inserirAeronave", (req, res) => __awaiter(void 0, 
     const anoFabricacao = req.body.anoFabricacao;
     const companhiaAerea = req.body.companhiaAerea;
     const mapaAssento = req.body.mapaAssento;
-    //const totalAssento = req.body.totalAssento;
+    const totalAssento = req.body.totalAssento;
     // correção: verificar se tudo chegou para prosseguir com o cadastro.
     // verificar se chegaram os parametros
     // VALIDAR se estão bons (de acordo com os critérios - exemplo: 
@@ -108,10 +108,9 @@ exports.aeronaveRouter.post("/inserirAeronave", (req, res) => __awaiter(void 0, 
             connectString: process.env.ORACLE_DB_CONN_STR
         });
         const cmdInsert = `INSERT INTO AERONAVE 
-      (MODELO, NUM_IDENTIFICACAO,  FABRICANTE, ANOFABRICACAO, COMPANHIA_AEREA)
-      VALUES (:1, :2, :3, :4, :5)`;
-        //const dados = [modelo, numIdentificacao, fabricante, anoFabricacao, mapaAssento, companhiaAerea, totalAssento];
-        const dados = [modelo, numIdentificacao, fabricante, anoFabricacao,companhiaAerea ];
+      (MODELO, NUM_IDENTIFICACAO,  FABRICANTE, ANOFABRICACAO, MAPA_ASSENTO, COMPANHIA_AEREA, TOTAL_ASSENTOS)
+      VALUES (:1, :2, :3, :4, :5, :6, :7)`;
+        const dados = [modelo, numIdentificacao, fabricante, anoFabricacao, mapaAssento, companhiaAerea, totalAssento];
         let resInsert = yield connection.execute(cmdInsert, dados);
         yield connection.commit();
         const rowsInserted = resInsert.rowsAffected;
