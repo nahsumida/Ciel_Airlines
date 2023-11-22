@@ -17,57 +17,61 @@ const oracledb_1 = __importDefault(require("oracledb"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 let result, err;
-//executa a query de select enviada como parametro na chamada da funcao 
+//seleciona todas as linhas da tabela 
 const executeSelectAll = (table) => __awaiter(void 0, void 0, void 0, function* () {
-    result = null, err = null;
+    let resp = { result: undefined, err: null };
     try {
         const connection = yield oracledb_1.default.getConnection({
             user: process.env.ORACLE_DB_USER,
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resSelect = yield connection.execute("SELECT * FROM :1 ", [table]);
+        let selectString = 'SELECT * FROM ' + table;
+        let resSelect = yield connection.execute(selectString);
         yield connection.close();
-        result = resSelect.rows;
+        resp.result = resSelect.rows;
     }
     catch (e) {
         if (e instanceof Error) {
-            err = e.message;
+            resp.err = e.message;
             console.log(e.message);
         }
         else {
-            err = "Erro ao conectar ao oracle. Sem detalhes";
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
         }
     }
     finally {
-        return { result, err };
+        return resp;
     }
 });
 exports.executeSelectAll = executeSelectAll;
-//executa a query de select enviada como parametro na chamada da funcao 
-const executeSelectByID = (query) => __awaiter(void 0, void 0, void 0, function* () {
-    result = null, err = null;
+//seleciona todos os dados de um id especifico  
+const executeSelectByID = (table, id) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
     try {
         const connection = yield oracledb_1.default.getConnection({
             user: process.env.ORACLE_DB_USER,
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR
         });
-        let resSelect = yield connection.execute(query);
+        //let resDelete = await connection.execute(`DELETE COMPANHIA_AEREA WHERE ID_COMPANHIA = :1`, [idCompanhiaAerea]);
+        let selectString = `SELECT * FROM ` + table + ` WHERE ID_` + table + ` = ` + id;
+        console.log(selectString);
+        let resSelect = yield connection.execute(selectString);
         yield connection.close();
-        result = resSelect.rows;
+        resp.result = resSelect.rows;
     }
     catch (e) {
         if (e instanceof Error) {
-            err = e.message;
+            resp.err = e.message;
             console.log(e.message);
         }
         else {
-            err = "Erro ao conectar ao oracle. Sem detalhes";
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
         }
     }
     finally {
-        return [result, err];
+        return resp;
     }
 });
 exports.executeSelectByID = executeSelectByID;

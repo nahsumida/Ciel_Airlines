@@ -1,26 +1,18 @@
 import express from "express";
 import oracledb, { Connection, ConnectionAttributes } from "oracledb";
 import dotenv from "dotenv";
-//import { executeSelectAll } from "src/config/database";
-import { executeSelectAll, executeSelectByID } from '../config/database';
-//require('../config/database');
-
+import { executeSelectAll, executeSelectByID, executeDeleteByID, executeUpdateCompanhiaAerea} from '../config/database';
+import { CustomResponse } from '../model/customResponse';
 export const companhiaAereaRouter = express.Router();
 
 dotenv.config();
 
-type CustomResponse = {
-    status: string,
-    message: string,
-    payload: any
-};
+companhiaAereaRouter.get("/selectCompanhiaAerea", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
-companhiaAereaRouter.get("/testenat", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined,};
+  let esse = executeSelectAll('aeronave');
 
-  let esse = executeSelectAll("TRECHO");
-
-  if (await esse)[1].values != null;{
+  if ((await esse).err != null){
     cr.message = (await esse).err;
     cr.status = "ERROR";
     res.send(cr);
@@ -33,6 +25,42 @@ companhiaAereaRouter.get("/testenat", async(req:any, res:any)=>{
   res.send(cr);
 });
 
+companhiaAereaRouter.get("/selectCompanhiaAereaByID", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+
+  let esse = executeSelectByID('trecho', '49');
+
+  if ((await esse).err != null){
+    cr.message = (await esse).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await esse).result;
+  cr.message = "Dados obtidos";
+  cr.status = "SUCCESS"; 
+  
+  res.send(cr);
+});
+
+companhiaAereaRouter.get("/deleteCompanhiaAerea", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+
+  let esse = executeDeleteByID('trecho', '49');
+
+  if ((await esse).err != null){
+    cr.message = (await esse).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await esse).result;
+  cr.message = "Dados obtidos";
+  cr.status = "SUCCESS"; 
+  
+  res.send(cr);
+});
+/*
 companhiaAereaRouter.get("/listarCompanhiaAerea", async(req:any, res:any)=>{
     let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined,};
   
@@ -164,3 +192,4 @@ try{
     res.send(cr);  
 }
 });
+*/

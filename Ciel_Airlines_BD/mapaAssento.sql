@@ -14,3 +14,7 @@ create table MAPA_ASSENTO
 
 
 CREATE SEQUENCE ID_MAPA_SEQ START WITH 001 INCREMENT BY 1 MAXVALUE 9999 NOCYCLE NOCACHE;
+
+    select * from TRECHO
+
+Update cidade set nome_cidade = 'teste' where id_cidade = 9
