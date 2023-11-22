@@ -4,8 +4,6 @@ import { DatabaseResponse } from '../model/databaseResponse';
 
 dotenv.config();
 
-let result: any, err: any;
-
 //seleciona todas as linhas da tabela 
 export const executeSelectAll = async(table:any) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
