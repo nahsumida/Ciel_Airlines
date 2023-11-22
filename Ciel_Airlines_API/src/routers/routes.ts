@@ -1,11 +1,7 @@
 import express from "express";
-import oracledb, { Connection, ConnectionAttributes } from "oracledb";
-import dotenv from "dotenv";
 import { executeSelectAll, executeSelectByID, executeDeleteByID, executeUpdateCompanhiaAerea} from '../config/database';
 import { CustomResponse } from '../model/customResponse';
 export const route = express.Router();
-
-dotenv.config();
 
 // COMPANHIA AEREA
 route.get("/selectCompanhiaAerea", async(req:any, res:any)=>{
