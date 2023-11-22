@@ -127,7 +127,8 @@ route.get("/insertCidade", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-// COMPANHIA AEREA
+// COMPANHIA AEREA ////////
+// seleciona todos os dados da tabela de companhia aerea
 route.get("/selectCompanhiaAerea", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
