@@ -4,16 +4,16 @@ import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
-import { router } from './routers/routes';
-import { aeronaveRouter } from './routers/aeronave';
-import { aeroportoRouter } from './routers/aeroporto';
-import { cidadeRouter } from './routers/cidade';
-import { companhiaAereaRouter } from './routers/companhiaAerea';
-import { mapaAssentoRouter } from './routers/mapaAssento';
-import { metodoPagamentoRouter } from './routers/metPagamento';
-import { trechoRouter } from './routers/trecho';
-import { vendaRouter } from './routers/venda';
-import { vooRouter } from './routers/voo';
+import { route } from './router/routes';
+import { aeronaveRouter } from './router/aeronave';
+import { aeroportoRouter } from './router/aeroporto';
+import { cidadeRouter } from './router/cidade';
+import { companhiaAereaRouter } from './router/companhiaAerea';
+import { mapaAssentoRouter } from './router/mapaAssento';
+import { metodoPagamentoRouter } from './router/metPagamento';
+import { trechoRouter } from './router/trecho';
+import { vendaRouter } from './router/venda';
+import { vooRouter } from './router/voo';
 
 dotenv.config();
 
@@ -23,8 +23,8 @@ app.use(morgan('tiny'));
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
-app.use(router);
-app.use(aeronaveRouter);
+app.use(route);
+/*app.use(aeronaveRouter);
 app.use(aeroportoRouter);
 app.use(cidadeRouter);
 app.use(companhiaAereaRouter);
@@ -32,7 +32,7 @@ app.use(mapaAssentoRouter);
 app.use(metodoPagamentoRouter);
 app.use(trechoRouter);
 app.use(vendaRouter);
-app.use(vooRouter);
+app.use(vooRouter);*/
 
 const PORT = parseInt(`${process.env.PORT || 3000}`);
 app.listen(PORT, () => console.log(`Server is running at ${PORT}.`));
