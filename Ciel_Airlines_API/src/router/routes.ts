@@ -1,5 +1,9 @@
 import express from "express";
-import { executeSelectAll, executeSelectByID, executeDeleteByID} from '../adapter/oraclebd/select';
+
+import { executeSelectAll, executeSelectByID} from '../adapter/oraclebd/select';
+import { executeDeleteByID} from '../adapter/oraclebd/delete';
+import { executeInsertCompanhiaAerea } from "../adapter/oraclebd/insert";
+
 import { CustomResponse } from '../model/customResponse';
 export const route = express.Router();
 
@@ -132,15 +136,15 @@ route.get("/insertCidade", async(req:any, res:any)=>{
 route.get("/selectCompanhiaAerea", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
-  let esse = executeSelectAll('COMPANHIA_AEREA');
+  let resp = executeSelectAll('COMPANHIA_AEREA');
 
-  if ((await esse).err != null){
-    cr.message = (await esse).err;
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
     cr.status = "ERROR";
     res.send(cr);
   } 
 
-  cr.payload = (await esse).result;
+  cr.payload = (await resp).result;
   cr.message = "Dados obtidos";
   cr.status = "SUCCESS"; 
   
@@ -150,15 +154,17 @@ route.get("/selectCompanhiaAerea", async(req:any, res:any)=>{
 route.get("/selectCompanhiaAereaByID", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
-  let esse = executeSelectByID('trecho', '49');
+  const id = req.body.idCompanhiaAerea as number;
 
-  if ((await esse).err != null){
-    cr.message = (await esse).err;
+  let resp = executeSelectByID('COMPANHIA_AEREA', id);
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
     cr.status = "ERROR";
     res.send(cr);
   } 
 
-  cr.payload = (await esse).result;
+  cr.payload = (await resp).result;
   cr.message = "Dados obtidos";
   cr.status = "SUCCESS"; 
   
@@ -168,16 +174,18 @@ route.get("/selectCompanhiaAereaByID", async(req:any, res:any)=>{
 route.get("/deleteCompanhiaAerea", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
-  let esse = executeDeleteByID('trecho', '49');
+  const id = req.body.idCompanhiaAerea as number;
 
-  if ((await esse).err != null){
-    cr.message = (await esse).err;
+  let resp = executeDeleteByID('COMPANHIA_AEREA', id);
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
     cr.status = "ERROR";
     res.send(cr);
   } 
 
-  cr.payload = (await esse).result;
-  cr.message = "Dados obtidos";
+  cr.payload = (await resp).result;
+  cr.message = "Dado excluido";
   cr.status = "SUCCESS"; 
   
   res.send(cr);
@@ -191,6 +199,20 @@ route.get("/updateCompanhiaAerea", async(req:any, res:any)=>{
 
 route.get("/insertCompanhiaAerea", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+
+  const nomeCompanhia = req.body.nomeCompanhiaAerea as string;
+
+  let resp = executeInsertCompanhiaAerea(nomeCompanhia);
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await resp).result;
+  cr.message = "Dado inserido";
+  cr.status = "SUCCESS"; 
   
   res.send(cr);
 });

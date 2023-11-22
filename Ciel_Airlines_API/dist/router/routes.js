@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.route = void 0;
 const express_1 = __importDefault(require("express"));
 const select_1 = require("../adapter/oraclebd/select");
+const delete_1 = require("../adapter/oraclebd/delete");
+const insert_1 = require("../adapter/oraclebd/insert");
 exports.route = express_1.default.Router();
 // AERNAVE
 exports.route.get("/selectAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -100,43 +102,46 @@ exports.route.get("/insertCidade", (req, res) => __awaiter(void 0, void 0, void 
     let cr = { status: "ERROR", message: "", payload: undefined };
     res.send(cr);
 }));
-// COMPANHIA AEREA
+// COMPANHIA AEREA ////////
+// seleciona todos os dados da tabela de companhia aerea
 exports.route.get("/selectCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
-    let esse = (0, select_1.executeSelectAll)('CIDADE');
-    if ((yield esse).err != null) {
-        cr.message = (yield esse).err;
+    let resp = (0, select_1.executeSelectAll)('COMPANHIA_AEREA');
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
         cr.status = "ERROR";
         res.send(cr);
     }
-    cr.payload = (yield esse).result;
+    cr.payload = (yield resp).result;
     cr.message = "Dados obtidos";
     cr.status = "SUCCESS";
     res.send(cr);
 }));
 exports.route.get("/selectCompanhiaAereaByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
-    let esse = (0, select_1.executeSelectByID)('trecho', '49');
-    if ((yield esse).err != null) {
-        cr.message = (yield esse).err;
+    const id = req.body.idCompanhiaAerea;
+    let resp = (0, select_1.executeSelectByID)('COMPANHIA_AEREA', id);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
         cr.status = "ERROR";
         res.send(cr);
     }
-    cr.payload = (yield esse).result;
+    cr.payload = (yield resp).result;
     cr.message = "Dados obtidos";
     cr.status = "SUCCESS";
     res.send(cr);
 }));
 exports.route.get("/deleteCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
-    let esse = (0, select_1.executeDeleteByID)('trecho', '49');
-    if ((yield esse).err != null) {
-        cr.message = (yield esse).err;
+    const id = req.body.idCompanhiaAerea;
+    let resp = (0, delete_1.executeDeleteByID)('COMPANHIA_AEREA', id);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
         cr.status = "ERROR";
         res.send(cr);
     }
-    cr.payload = (yield esse).result;
-    cr.message = "Dados obtidos";
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
     cr.status = "SUCCESS";
     res.send(cr);
 }));
@@ -146,6 +151,16 @@ exports.route.get("/updateCompanhiaAerea", (req, res) => __awaiter(void 0, void 
 }));
 exports.route.get("/insertCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
+    const nomeCompanhia = req.body.nomeCompanhiaAerea;
+    let resp = (0, insert_1.executeInsertCompanhiaAerea)(nomeCompanhia);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado inserido";
+    cr.status = "SUCCESS";
     res.send(cr);
 }));
 // METODO PAGAMENTO
