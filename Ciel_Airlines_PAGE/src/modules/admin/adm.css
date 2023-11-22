@@ -58,6 +58,9 @@ nav ul li a:hover{
     cursor: pointer;
 }
 
+main{
+    padding-top: 50px;
+}
 .home{
     display: flex;
     align-items: center;
