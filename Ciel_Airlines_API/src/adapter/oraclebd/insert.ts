@@ -2,7 +2,7 @@ import oracledb from 'oracledb';
 import { DatabaseResponse } from 'src/model/databaseResponse';
 import { oraConnAttribs } from "./config";
 
-//atualiza os dados de uma cidade de id especifico
+//insere um dado de companhia aerea no banco de dados
 export const executeInsertCompanhiaAerea = async(nomeCompanhiaAerea: any) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
     let connection;

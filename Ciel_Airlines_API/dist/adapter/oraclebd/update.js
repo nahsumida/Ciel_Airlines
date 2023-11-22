@@ -12,8 +12,44 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.executeUpdateVenda = exports.executeUpdateVoo = exports.executeUpdateAeroporto = exports.executeUpdateAeronave = exports.executeUpdateTrecho = exports.executeUpdateMapaAssento = exports.executeUpdateCompanhiaAerea = exports.executeUpdateCidade = void 0;
+exports.executeUpdateVenda = exports.executeUpdateVoo = exports.executeUpdateAeroporto = exports.executeUpdateAeronave = exports.executeUpdateTrecho = exports.executeUpdateMapaAssento = exports.executeUpdateCidade = exports.executeUpdateCompanhiaAerea = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
+const config_1 = require("./config");
+//insere um dado de companhia aerea no banco de dados
+const executeUpdateCompanhiaAerea = (id, nomeCompanhiaAerea) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let insertString = `UPDATE COMPANHIA_AEREA SET NOME_COMPANHIA = '` + nomeCompanhiaAerea + `' WHERE ID_COMPANHIA_AEREA =` + id;
+        console.log(insertString);
+        let resInsert = yield connection.execute(insertString);
+        yield connection.commit();
+        const rowsInserted = resInsert.rowsAffected;
+        if (rowsInserted !== undefined && rowsInserted === 1) {
+            resp.result = rowsInserted;
+        }
+        else {
+            resp.err = 'Erro ao inserir dado na tabela';
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        if (connection !== undefined) {
+            yield connection.close();
+        }
+        return resp;
+    }
+});
+exports.executeUpdateCompanhiaAerea = executeUpdateCompanhiaAerea;
 //atualiza os dados de uma cidade de id especifico
 const executeUpdateCidade = (id, nomeCidade) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
@@ -42,34 +78,6 @@ const executeUpdateCidade = (id, nomeCidade) => __awaiter(void 0, void 0, void 0
     }
 });
 exports.executeUpdateCidade = executeUpdateCidade;
-//atualiza os dados de uma companhia aerea de id especifico
-const executeUpdateCompanhiaAerea = (id, nomeCompanhia) => __awaiter(void 0, void 0, void 0, function* () {
-    let resp = { result: undefined, err: null };
-    try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let updateString = `Update companhia_aerea set nome_companhia = ` + nomeCompanhia + ` where id_companhia_aerea = ` + id;
-        let resSelect = yield connection.execute(updateString);
-        yield connection.close();
-        resp.result = resSelect.rows;
-    }
-    catch (e) {
-        if (e instanceof Error) {
-            resp.err = e.message;
-            console.log(e.message);
-        }
-        else {
-            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
-        }
-    }
-    finally {
-        return resp;
-    }
-});
-exports.executeUpdateCompanhiaAerea = executeUpdateCompanhiaAerea;
 //atualiza o status de um assento do mapa
 const executeUpdateMapaAssento = (id, status) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };

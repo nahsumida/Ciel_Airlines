@@ -147,6 +147,17 @@ exports.route.get("/deleteCompanhiaAerea", (req, res) => __awaiter(void 0, void 
 }));
 exports.route.get("/updateCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
+    const id = req.body.idCompanhiaAerea;
+    const nomeCompanhia = req.body.nomeCompanhiaAerea;
+    let resp = (0, insert_1.executeUpdateCompanhiaAerea)(id, nomeCompanhia);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado inserido";
+    cr.status = "SUCCESS";
     res.send(cr);
 }));
 exports.route.get("/insertCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

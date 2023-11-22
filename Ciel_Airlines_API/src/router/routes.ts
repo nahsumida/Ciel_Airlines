@@ -2,7 +2,7 @@ import express from "express";
 
 import { executeSelectAll, executeSelectByID} from '../adapter/oraclebd/select';
 import { executeDeleteByID} from '../adapter/oraclebd/delete';
-import { executeInsertCompanhiaAerea } from "../adapter/oraclebd/insert";
+import { executeInsertCompanhiaAerea, executeUpdateCompanhiaAerea } from "../adapter/oraclebd/insert";
 
 import { CustomResponse } from '../model/customResponse';
 export const route = express.Router();
@@ -193,6 +193,21 @@ route.get("/deleteCompanhiaAerea", async(req:any, res:any)=>{
 
 route.get("/updateCompanhiaAerea", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+  
+  const id = req.body.idCompanhiaAerea as number;
+  const nomeCompanhia = req.body.nomeCompanhiaAerea as string;
+
+  let resp = executeUpdateCompanhiaAerea(id, nomeCompanhia);
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await resp).result;
+  cr.message = "Dado inserido";
+  cr.status = "SUCCESS"; 
   
   res.send(cr);
 });
