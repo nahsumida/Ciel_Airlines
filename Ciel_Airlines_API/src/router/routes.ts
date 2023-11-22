@@ -1,5 +1,5 @@
 import express from "express";
-import { executeSelectAll, executeSelectByID, executeDeleteByID, executeUpdateCompanhiaAerea} from '../config/database';
+import { executeSelectAll, executeSelectByID, executeDeleteByID} from '../adapter/oraclebd/select';
 import { CustomResponse } from '../model/customResponse';
 export const route = express.Router();
 
@@ -131,7 +131,7 @@ route.get("/insertCidade", async(req:any, res:any)=>{
 route.get("/selectCompanhiaAerea", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
-  let esse = executeSelectAll('aeronave');
+  let esse = executeSelectAll('COMPANHIA_AEREA');
 
   if ((await esse).err != null){
     cr.message = (await esse).err;
