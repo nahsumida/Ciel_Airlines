@@ -22,6 +22,7 @@ const executeSelectAll = (table) => __awaiter(void 0, void 0, void 0, function* 
     try {
         connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = 'SELECT * FROM ' + table;
+        console.log(selectString);
         let resSelect = yield connection.execute(selectString);
         resp.result = resSelect.rows;
     }
@@ -49,6 +50,7 @@ const executeSelectByID = (table, id) => __awaiter(void 0, void 0, void 0, funct
     try {
         connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT * FROM ` + table + ` WHERE ID_` + table + ` = ` + id;
+        console.log(selectString);
         let resSelect = yield connection.execute(selectString);
         yield connection.close();
         resp.result = resSelect.rows;

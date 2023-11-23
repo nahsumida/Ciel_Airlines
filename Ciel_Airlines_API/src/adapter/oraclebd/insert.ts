@@ -39,24 +39,29 @@ export const executeInsertCompanhiaAerea = async(nomeCompanhiaAerea: any) => {
         return resp;  
     }
 }
-
-//atualiza os dados de uma companhia aerea de id especifico
-export const executeUpdateCompanhiaAerea = async(id:any, nomeCompanhia:any) => {
+//insere um dado de companhia aerea no banco de dados
+export const executeInsertMetodoPagamento = async(nomeMetodo: any) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
-
+    let connection;
     try{
-        const connection = await oracledb.getConnection({
-            user : process.env.ORACLE_DB_USER, 
-            password : process.env.ORACLE_DB_SECRET,
-            connectString : process.env.ORACLE_DB_CONN_STR
-        });
+        connection = await oracledb.getConnection(oraConnAttribs);
 
-        let updateString = `Update companhia_aerea set nome_companhia = ` + nomeCompanhia + ` where id_companhia_aerea = ` + id
-      
-        let resSelect = await connection.execute(updateString);
+        let insertString = `INSERT INTO METODO_PAGAMENTO 
+        (ID_METODO_PAGAMENTO, NOME_METODO)
+        VALUES (ID_METODO_SEQ.NEXTVAL, '` + nomeMetodo + `')` 
+        console.log(insertString)
 
-        await connection.close();
-        resp.result = resSelect.rows;
+        let resInsert = await connection.execute(insertString);
+
+        await connection.commit();
+
+        const rowsInserted = resInsert.rowsAffected
+       
+        if(rowsInserted !== undefined &&  rowsInserted === 1) {
+            resp.result = rowsInserted
+        } else {
+            resp.err = 'Erro ao inserir dado na tabela'
+        }
     }catch(e){
         if(e instanceof Error){
             resp.err = e.message;
@@ -65,12 +70,16 @@ export const executeUpdateCompanhiaAerea = async(id:any, nomeCompanhia:any) => {
             resp.err = "Erro ao conectar ao oracle. Sem detalhes";
         }
     } finally {
+        if(connection !== undefined){
+            await connection.close();
+        }
         return resp;  
     }
 }
 
+
 //atualiza o status de um assento do mapa
-export const executeUpdateMapaAssento = async(id:any, status:any) => {
+export const executeInsertMapaAssento = async(id:any, status:any) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
 
     try{
@@ -99,7 +108,7 @@ export const executeUpdateMapaAssento = async(id:any, status:any) => {
 }
 
 //atualiza a o aeroporto de ida e de volta de um trecho
-export const executeUpdateTrecho = async(id:any, saida:any, chegada:any) => {
+export const executeInsertTrecho = async(id:any, saida:any, chegada:any) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
 
     try{
@@ -128,7 +137,7 @@ export const executeUpdateTrecho = async(id:any, saida:any, chegada:any) => {
 }
 
 ///////////////////
-export const executeUpdateAeronave = async(table:string, id:any) => {
+export const executeInsertAeronave = async(table:string, id:any) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
 
     try{
@@ -156,7 +165,7 @@ export const executeUpdateAeronave = async(table:string, id:any) => {
     }
 }
 
-export const executeUpdateAeroporto = async(table:string, id:any) => {
+export const executeInsertAeroporto = async(table:string, id:any) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
 
     try{
@@ -185,7 +194,7 @@ export const executeUpdateAeroporto = async(table:string, id:any) => {
 }
 
 
-export const executeUpdateVoo = async(table:string, id:any) => {
+export const executeInsertVoo = async(table:string, id:any) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
 
     try{
@@ -213,7 +222,7 @@ export const executeUpdateVoo = async(table:string, id:any) => {
     }
 }
 
-export const executeUpdateVenda = async(table:string, id:any) => {
+export const executeInsertVenda = async(table:string, id:any) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
 
     try{

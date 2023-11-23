@@ -12,25 +12,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.executeUpdateVenda = exports.executeUpdateVoo = exports.executeUpdateAeroporto = exports.executeUpdateAeronave = exports.executeUpdateTrecho = exports.executeUpdateMapaAssento = exports.executeUpdateCidade = exports.executeUpdateCompanhiaAerea = void 0;
+exports.executeUpdateVenda = exports.executeUpdateVoo = exports.executeUpdateAeroporto = exports.executeUpdateAeronave = exports.executeUpdateTrecho = exports.executeUpdateMapaAssento = exports.executeUpdateCidade = exports.executeUpdateMetodoPagamento = exports.executeUpdateCompanhiaAerea = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
 const config_1 = require("./config");
-//insere um dado de companhia aerea no banco de dados
+//atualiza um dado de companhia aerea no banco de dados
 const executeUpdateCompanhiaAerea = (id, nomeCompanhiaAerea) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
+    const updateString = `UPDATE COMPANHIA_AEREA
+    SET NOME_COMPANHIA = '` + nomeCompanhiaAerea + `'
+    WHERE ID_COMPANHIA_AEREA = ` + id;
     try {
         connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
-        let insertString = `UPDATE COMPANHIA_AEREA SET NOME_COMPANHIA = '` + nomeCompanhiaAerea + `' WHERE ID_COMPANHIA_AEREA =` + id;
-        console.log(insertString);
-        let resInsert = yield connection.execute(insertString);
+        console.log(updateString);
+        const resUpdate = yield connection.execute(updateString);
         yield connection.commit();
-        const rowsInserted = resInsert.rowsAffected;
-        if (rowsInserted !== undefined && rowsInserted === 1) {
-            resp.result = rowsInserted;
+        const rowsAffected = resUpdate.rowsAffected;
+        if (rowsAffected !== undefined && rowsAffected === 1) {
+            resp.result = rowsAffected;
         }
         else {
-            resp.err = 'Erro ao inserir dado na tabela';
+            resp.err = 'Erro ao atualizar dado na tabela';
         }
     }
     catch (e) {
@@ -39,7 +41,7 @@ const executeUpdateCompanhiaAerea = (id, nomeCompanhiaAerea) => __awaiter(void 0
             console.log(e.message);
         }
         else {
-            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+            resp.err = "Erro ao conectar ao Oracle. Sem detalhes";
         }
     }
     finally {
@@ -50,6 +52,43 @@ const executeUpdateCompanhiaAerea = (id, nomeCompanhiaAerea) => __awaiter(void 0
     }
 });
 exports.executeUpdateCompanhiaAerea = executeUpdateCompanhiaAerea;
+//atualiza um dado de metodo pagamento no banco de dados
+const executeUpdateMetodoPagamento = (id, nomeMetodo) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    const updateString = `UPDATE METODO_PAGAMENTO
+    SET NOME_METODO = '` + nomeMetodo + `'
+    WHERE ID_METODO_PAGAMENTO = ` + id;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        console.log(updateString);
+        const resUpdate = yield connection.execute(updateString);
+        yield connection.commit();
+        const rowsAffected = resUpdate.rowsAffected;
+        if (rowsAffected !== undefined && rowsAffected === 1) {
+            resp.result = rowsAffected;
+        }
+        else {
+            resp.err = 'Erro ao atualizar dado na tabela';
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao Oracle. Sem detalhes";
+        }
+    }
+    finally {
+        if (connection !== undefined) {
+            yield connection.close();
+        }
+        return resp;
+    }
+});
+exports.executeUpdateMetodoPagamento = executeUpdateMetodoPagamento;
 //atualiza os dados de uma cidade de id especifico
 const executeUpdateCidade = (id, nomeCidade) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };

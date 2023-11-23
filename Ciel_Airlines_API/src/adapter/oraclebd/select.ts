@@ -11,7 +11,7 @@ export const executeSelectAll = async(table:any) => {
         connection = await oracledb.getConnection(oraConnAttribs);
 
         let selectString = 'SELECT * FROM ' + table;
-     
+        console.log(selectString);
         let resSelect = await connection.execute(selectString);
 
         resp.result = resSelect.rows;
@@ -39,7 +39,7 @@ export const executeSelectByID = async(table:string, id:any) => {
         connection = await oracledb.getConnection(oraConnAttribs);
       
         let selectString = `SELECT * FROM ` + table + ` WHERE ID_` + table + ` = ` + id 
-
+        console.log(selectString);
         let resSelect = await connection.execute(selectString);
 
         await connection.close();
