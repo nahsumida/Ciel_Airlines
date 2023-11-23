@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ciel Arlines | Buscar Voos</title>
+    <title>Ciel Arlines | Admininistrador </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="adm.css">
     <link rel="icon" href="../../assets/img/logo.png">
@@ -19,28 +19,377 @@
     </header>
     <main>
         <div class="container">
+            <!--Section boas-vindas-->
             <section class="home" id="home_">
                 <div class="home-text">
                     <h4 class="text-h4"><br> Bem-Vindo, Administrador!<br></h4>
                 </div>
             </section>
             <div class="row">
+                <!--Section Menu-->
                 <section class="col-3" id="menu">
-                    <h5 class="text" id="menu-title">Menu</h5>
+                    <h5 class="text" id="menu-title"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>Menu</h5>
                     <div class="col" id="botoes">
-                        <button class="btn"> Aeronave</button>
-                        <button class="btn"> Aeroporto </button>
-                        <button class="btn"> Cidade</button>
-                        <button class="btn"> Companhia Aérea</button>
-                        <button class="btn"> Voo</button>
-                        <button class="btn"> Trecho</button>
-                        <button class="btn"> Mapa de Assento</button>
-                        <button class="btn"> Método de Pagamento</button>
+                        <button class="btn"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M340-80v-60l80-60v-220L80-320v-80l340-200v-220q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v220l340 200v80L540-420v220l80 60v60l-140-40-140 40Z"/></svg>
+                            Aeronave</button>
+                        <button class="btn"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-120q-33 0-56.5-23.5T200-200v-440q0-33 23.5-56.5T280-720h80v-100q0-25 17.5-42.5T420-880h120q25 0 42.5 17.5T600-820v100h80q33 0 56.5 23.5T760-640v440q0 33-23.5 56.5T680-120q0 17-11.5 28.5T640-80q-17 0-28.5-11.5T600-120H360q0 17-11.5 28.5T320-80q-17 0-28.5-11.5T280-120Zm0-80h400v-440H280v440Zm40-40h60v-360h-60v360Zm130 0h60v-360h-60v360Zm130 0h60v-360h-60v360ZM480-420Zm-60-300h120v-100H420v100Z"/></svg>                             
+                            Aeroporto 
+                        </button>
+                        <button class="btn"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m600-120-240-84-186 72q-20 8-37-4.5T120-170v-560q0-13 7.5-23t20.5-15l212-72 240 84 186-72q20-8 37 4.5t17 33.5v560q0 13-7.5 23T812-192l-212 72Zm-40-98v-468l-160-56v468l160 56Zm80 0 120-40v-474l-120 46v468Zm-440-10 120-46v-468l-120 40v474Zm440-458v468-468Zm-320-56v468-468Z"/></svg>                            
+                            Cidade
+                        </button>
+                        <button class="btn"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M232-240h462l90-480H562L232-240ZM80-160l440-640h360L760-160H80Zm500-240q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29ZM232-240h462-462Z"/></svg>
+                            Companhia Aérea	
+                        </button>
+                        <button class="btn"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M760-120q-39 0-70-22.5T647-200H440q-66 0-113-47t-47-113q0-66 47-113t113-47h80q33 0 56.5-23.5T600-600q0-33-23.5-56.5T520-680H313q-13 35-43.5 57.5T200-600q-50 0-85-35t-35-85q0-50 35-85t85-35q39 0 69.5 22.5T313-760h207q66 0 113 47t47 113q0 66-47 113t-113 47h-80q-33 0-56.5 23.5T360-360q0 33 23.5 56.5T440-280h207q13-35 43.5-57.5T760-360q50 0 85 35t35 85q0 50-35 85t-85 35ZM200-680q17 0 28.5-11.5T240-720q0-17-11.5-28.5T200-760q-17 0-28.5 11.5T160-720q0 17 11.5 28.5T200-680Z"/></svg>                            Trecho
+                        </button>
+                        <button class="btn"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m354-334 356-94q15-4 22.5-18.5T736-476q-4-15-17.5-22.5T690-502l-98 26-160-150-56 14 96 168-96 24-50-38-38 10 66 114Zm446 174H160q-33 0-56.5-23.5T80-240v-160q33 0 56.5-23.5T160-480q0-33-23.5-56.5T80-560v-160q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160Zm0-80v-480H160v102q37 22 58.5 58.5T240-480q0 43-21.5 79.5T160-342v102h640ZM480-480Z"/></svg>                           
+                             Voo</button>
+                        <button class="btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M560-440q-33 0-56.5-23.5T480-520v-200q0-33 23.5-56.5T560-800h80q33 0 56.5 23.5T720-720v200q0 33-23.5 56.5T640-440h-80Zm0-80h80v-200h-80v200ZM380-240q-27 0-48-15.5T303-297L200-640v-160h80v160l100 320h340v80H380Zm-60 120v-80h400v80H320Zm240-600h80-80Z"/></svg>
+                             Mapa de Assento</button>
+                        <button class="btn"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720Zm-720 80h640v-80H160v80Zm0 160v240h640v-240H160Zm0 240v-480 480Z"/></svg>
+                            Método de Pagamento</button>
+                        <button class="btn"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>Venda
+                        </button>
                     </div>
                 </section>
-                <section class="col-8" id="bloco">PRINCIPAL<br>Subsequent columns continue along the new line. aaaaaaaaaaaaaaaaaaaaaaaaam </section>
-                <section class="col-8" id="bloco-aeroporto">PRINCIPAL<br>Subsequent columns continue along the new line. aaaaaaaaaaaaaaaaaaaaaaaaam </section>
+                <!--Formulários-->
+                <!--Aeronaves-->
+                <section class="col-8" id="aeronaves">
+                    <div class="bloco">
+                        <div class="block-title">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M340-80v-60l80-60v-220L80-320v-80l340-200v-220q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v220l340 200v80L540-420v220l80 60v60l-140-40-140 40Z"/></svg>
+                            AERONAVE</h4>
+                        </div>
+                        <!--Formulario de Cadastro de Aeronave-->
+                        <form>
+                            <h6>Cadastrar</h6>
+                            <div class="row" id="block">
+                                <div class="col">
+                                    <p>
+                                        <label for="Modelo">Modelo Aeronave:</label><br/>
+                                        <input type="text" id="Modelo" name="Modelo" maxlength="10"/>
+                                    </p>
+                                    <p>
+                                        <label for="NumIdentificacao">Número Identificação:</label><br/>
+                                        <input type="integer" id="NumIdentificacao" name="NumIdentificacao" maxlength="10"/>
+                                    </p>
+                                    <p>
+                                        <label for="fabricante">Fabricante:</label><br/>
+                                        <select name="fabricante" id="fabricante"  >
+                                        <option value="0" selected>Selecione: </option>
+                                        <option value="1">Boeing</option>
+                                        <option value="2">Airbus</option>
+                                        <option value="3">Embraer</option>
+                                        </select>
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <p>
+                                        <label for="CompanhiaAerea">Companhia Aerea:</label><br/>
+                                        <select name="CompanhiaAerea" id="CompanhiaAerea"></select>
+                                    </p>
+                                    <p>
+                                        <label for="anoFabricacao">Ano de fabricação:</label><br/>
+                                        <input type="text" id="anoFabricacao" name="anoFabricacao" maxlength="4" size="5"/>
+                                    </p>
+                                </div>
+                            </div>
+                            <p id="status" class="statusError"></p>
+                            <p id="button">
+                                <button type="button" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                            </p>
+                        </form>
+                        <p>
+                            <button type="button" onclick="" id="Excluir" name="btnExcluir"><h6>Excluir  ></h6></button>
+                        </p>
+                        <!--Seção de Excluir uma Aeronave-->
+                        <section id="Excluir">
+                            <form>
+                                <div class="row" id="block">
+                                    <div class="col">
+                                <p> 
+                                    <label for="dataSelect">Selecione Modelo:</label><br/>              
+                                    <select id="dataSelect"></select>
+                                </p>
+                                <p id="button">
+                                    <script src="exclusao.js"></script>     
+                                    <button id="btnExcluir">Excluir</button>
+                                </p>
+                                <p id="status" class="statusError"></p>
+                            </form>
+                        </section>
+                        <p>
+                            <button type="button" onclick="" id="Excluir" name="btnCadastrar"><h6>Alterar  ></h6></button>
+                        </p>
+                        <!--Seção de Alterar uma Aeronave-->
+                        <section id="Alterar">
+                            <form>
+                                <p>               
+                                     <select id="dataSelect"></select>
+                                    <script src=""></script>     
+                                </p>
+                                <p id="status" class="statusError"></p>
+                                <script src="./exclusao.js"></script>
+                                <a href="alterarinfo.html"><button type="button" src id="btnSair" name="btnConfirmar">Confirmar</button></a> 
+                            </form>
+                        </section>
+                        <!--Listar Tabela Aeronaves-->
+                        <section class="selectTable">
+                            <table id="tblAlunos" cellpadding="5" cellspacing="5">
+                                <thead>
+                                    <tr>
+                                    <th class="">ID</th>
+                                    <th class="">Modelo</th>
+                                    <th class="">NumIdentificacao</th>
+                                    <th class="">Fabricante</th>
+                                    <th class="">Companhia Aerea</th>
+                                    <th class="">Ano</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblAlunosDados"></tbody>
+                            </table>
+                        </section>
+                    </div>         
+                </section>
+                <!--Aeroporto-->
+                <section class="col-8" id="aeroporto">
+                    <div class="bloco">
+                        <div class="block-title">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-120q-33 0-56.5-23.5T200-200v-440q0-33 23.5-56.5T280-720h80v-100q0-25 17.5-42.5T420-880h120q25 0 42.5 17.5T600-820v100h80q33 0 56.5 23.5T760-640v440q0 33-23.5 56.5T680-120q0 17-11.5 28.5T640-80q-17 0-28.5-11.5T600-120H360q0 17-11.5 28.5T320-80q-17 0-28.5-11.5T280-120Zm0-80h400v-440H280v440Zm40-40h60v-360h-60v360Zm130 0h60v-360h-60v360Zm130 0h60v-360h-60v360ZM480-420Zm-60-300h120v-100H420v100Z"/></svg>                             
+                                AEROPORTO</h4>
+                        </div>
+                        <form>
+                            <h6>Cadastrar</h6>
+                            <p>
+                                <label for="IdCidade">ID cidade:</label><br/>
+                                <select name="IDCidade" id="IDCidade"></select>
+                            </p>
+                            <p>
+                                <label for="nomeAeroporto"> Nome Aeroporto:</label><br/>
+                                <input type="text" id="nomeAeroporto" name="nomeAeroporto" maxlength="35"/>
+                            </p>
+                            <p>
+                                <label for="siglaAeroporto">Sigla Aeroporto:</label><br/>
+                                <input type="text" id="siglaAeroporto" name="siglaAeroporto"/>
+                            </p>
+                            <p id="status" class="statusError"></p>
+                            <p>
+                                <button type="button" onclick="inserirAeroporto()" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                            </p>
 
+                        </form>
+                    </div>
+                </section>
+                <!--Cidades-->
+                <section class="col-8" id="cidades">
+                    <div class="bloco">
+                        <div class="block-title">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m600-120-240-84-186 72q-20 8-37-4.5T120-170v-560q0-13 7.5-23t20.5-15l212-72 240 84 186-72q20-8 37 4.5t17 33.5v560q0 13-7.5 23T812-192l-212 72Zm-40-98v-468l-160-56v468l160 56Zm80 0 120-40v-474l-120 46v468Zm-440-10 120-46v-468l-120 40v474Zm440-458v468-468Zm-320-56v468-468Z"/></svg>                            
+                                CIDADE</h4>
+                        </div>
+                        <form>
+                            <h6>Cadastrar</h6>
+                            <p>
+                                <label for="nomeCidade">Nome Cidade:</label><br/>
+                                <input type="text" id="nomeCidade" name="nomeCidade" maxlength="35"/>
+                            </p>
+                            <p id="status" class="statusError"></p>
+                    
+                            <p class="button-items">
+                                <button type="button" onclick="inserirCidade();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                            </p> 
+                        </form>
+                </section>
+                <!--Companhia Aérea-->
+                <section class="col-8" id="companhia_aerea">
+                    <div class="bloco">
+                        <div class="block-title">
+                            <h4> <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M232-240h462l90-480H562L232-240ZM80-160l440-640h360L760-160H80Zm500-240q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29ZM232-240h462-462Z"/></svg>
+                                COMPANHIA AÉREA</h4>
+                        </div>
+                        <form>
+                            <h6>Cadastrar</h6>
+                            <p>
+                                <label for="nomeCompanhia">Nome da Companhia:</label><br/>
+                                <input type="text" id="nomeCompanhia" name="nomeCompanhia" maxlength="20"/>
+                            </p>
+                            <p>
+                                <button type="button" onclick="inserirMetodoPagamento();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                            </p>
+                            <p id="status" class="statusError"></p>
+                        </form>
+                    </div>
+                </section>
+                <!--Voo-->
+                <section class="col-8" id="voo">
+                    <div class="bloco">
+                        <div class="block-title">
+                            <h4>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m354-334 356-94q15-4 22.5-18.5T736-476q-4-15-17.5-22.5T690-502l-98 26-160-150-56 14 96 168-96 24-50-38-38 10 66 114Zm446 174H160q-33 0-56.5-23.5T80-240v-160q33 0 56.5-23.5T160-480q0-33-23.5-56.5T80-560v-160q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160Zm0-80v-480H160v102q37 22 58.5 58.5T240-480q0 43-21.5 79.5T160-342v102h640ZM480-480Z"/></svg>                           
+                                VOO</h4>
+                        </div>
+                        <form>
+                            <h6>Cadastrar</h6>
+                            <p>
+                                <label for="Data">Data:</label><br/>
+                                <input type="date" id="Data" name="Data"/>
+                            </p>
+            
+                            <p>
+                                <label for="Trecho">Trecho:</label><br/>
+                                <select name="Trecho" id="Trecho">
+                                <option value="0" selected>Selecione: </option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                </select>
+                            </p>
+            
+                            <p>
+                                <label for="HoraPartida">Hora Partida:</label><br/>
+                                <input type="text" id="HoraPartida" name="HoraPartida" maxlength="5"/>
+                            </p>
+            
+                            <p>
+                                <label for="HoraChegada">Hora Chegada:</label><br/>
+                                <input type="text" id="HoraChegada" name="HoraChegada" maxlength="5"/>
+                            </p>
+            
+            
+                            <p>
+                                <label for="preco">Preço:</label><br/>
+                                <input type="text" id="preco" name="preco" maxlength="10"/>
+                            </p>
+            
+                            <p>
+                                <label for="Aeronave">Aeronave:</label><br/>
+                                <select name="Aeronave" id="Aeronave">
+                                <option value="0" selected>Selecione: </option>
+                                </select>
+                            </p>
+            
+                            <p>
+                                <button type="button" onclick="inserirVoo();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                            </p>
+                            <p id="status" class="statusError"></p>
+                        </form>
+                    </div>
+                </section>
+                <!--Trecho-->
+                <section class="col-8" id="trecho">
+                    <div class="bloco">
+                        <div class="block-title">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-120q-33 0-56.5-23.5T200-200v-440q0-33 23.5-56.5T280-720h80v-100q0-25 17.5-42.5T420-880h120q25 0 42.5 17.5T600-820v100h80q33 0 56.5 23.5T760-640v440q0 33-23.5 56.5T680-120q0 17-11.5 28.5T640-80q-17 0-28.5-11.5T600-120H360q0 17-11.5 28.5T320-80q-17 0-28.5-11.5T280-120Zm0-80h400v-440H280v440Zm40-40h60v-360h-60v360Zm130 0h60v-360h-60v360Zm130 0h60v-360h-60v360ZM480-420Zm-60-300h120v-100H420v100Z"/></svg>                             
+                                TRECHO</h4>
+                        </div>
+                        <form>
+                            <h6>Cadastrar</h6>
+                            <p>
+                                <label for="AeroSaida">Aeroporto de Partida:</label><br/>
+                                <select id="aeroSaida" name="aeroSaida"></select>
+                            </p>
+                            <p>
+                                <label for="AeroChegada">Aeroporto de Destino:</label><br/>
+                                <select id="aeroChegada" name="aeroChegada"></select>
+                            </p>
+                            <p>
+                                <button type="button" onclick="inserirTrecho();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                            </p>
+                            <p id="status" class="statusError"></p>
+                        </form>
+                    </div>
+                </section>
+                <!--Mapa de Assento-->
+                <section class="col-8" id="assento">
+                    <div class="bloco">
+                        <div class="block-title">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-120q-33 0-56.5-23.5T200-200v-440q0-33 23.5-56.5T280-720h80v-100q0-25 17.5-42.5T420-880h120q25 0 42.5 17.5T600-820v100h80q33 0 56.5 23.5T760-640v440q0 33-23.5 56.5T680-120q0 17-11.5 28.5T640-80q-17 0-28.5-11.5T600-120H360q0 17-11.5 28.5T320-80q-17 0-28.5-11.5T280-120Zm0-80h400v-440H280v440Zm40-40h60v-360h-60v360Zm130 0h60v-360h-60v360Zm130 0h60v-360h-60v360ZM480-420Zm-60-300h120v-100H420v100Z"/></svg>                             
+                                ASSENTO</h4>
+                        </div>
+                        <form>
+                            <h6>Cadastrar</h6>
+                            <form>
+                                <p>
+                                    <label for="codigo_assento">Codigo do Assento:</label><br/>
+                                    <input type="text" id="codigo_assento" name="codigo_assento" maxlength="3"/>
+                                </p>
+                                <p>
+                                    <button type="button" onclick="inserirMapaAssentos();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                                </p>
+                                <p id="status" class="statusError"></p>
+                        </form>
+                    </div>
+                </section>
+                <!--Método de Pagamento-->
+                <section class="col-8" id="metodo_pagamento">
+                    <div class="bloco">
+                        <div class="block-title">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-120q-33 0-56.5-23.5T200-200v-440q0-33 23.5-56.5T280-720h80v-100q0-25 17.5-42.5T420-880h120q25 0 42.5 17.5T600-820v100h80q33 0 56.5 23.5T760-640v440q0 33-23.5 56.5T680-120q0 17-11.5 28.5T640-80q-17 0-28.5-11.5T600-120H360q0 17-11.5 28.5T320-80q-17 0-28.5-11.5T280-120Zm0-80h400v-440H280v440Zm40-40h60v-360h-60v360Zm130 0h60v-360h-60v360Zm130 0h60v-360h-60v360ZM480-420Zm-60-300h120v-100H420v100Z"/></svg>                             
+                                MÉTODO DE PAGAMENTO</h4>
+                        </div>
+                        <form>
+                            <h6>Cadastrar</h6>
+                            <p>
+                                <label for="nomeMetodo">Nome do Metodo:</label><br/>
+                                <input type="text" id="nomeMetodo" name="nomeMetodo" maxlength="20"/>
+                            </p>
+                            <p>
+                                <button type="button" onclick="inserirMetodoPagamento();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                            </p>
+                            <p id="status" class="statusError"></p>
+                        </form>
+                    </div>
+                </section>
+                <!--Venda-->
+                <section class="col-8" id="venda">
+                    <div class="bloco">
+                        <div class="block-title">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M340-80v-60l80-60v-220L80-320v-80l340-200v-220q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v220l340 200v80L540-420v220l80 60v60l-140-40-140 40Z"/></svg>
+                            VENDA</h4>
+                        </div>
+                        <form>
+                            <h6>Cadastrar</h6>
+                        <div>
+                            <label for="nomeCliente">Nome do Cliente:</label><br/>
+                            <input type="text" id="" name="nomeCliente" maxlength="10"/>
+                        </div>
+                        <p>
+                            <label for="NumIdentificacao">Número Identificação:</label><br/>
+                            <input type="integer" id="NumIdentificacao" name="NumIdentificacao" maxlength="10"/>
+                        </p>
+                        <p>
+                            <label for="fabricante">Fabricante:</label><br/>
+                            <select name="fabricante" id="fabricante"  >
+                            <option value="0" selected>Selecione: </option>
+                            <option value="1">Boeing</option>
+                            <option value="2">Airbus</option>
+                            <option value="3">Embraer</option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="anoFabricacao">Ano de fabricação:</label><br/>
+                            <input type="text" id="anoFabricacao" name="anoFabricacao" maxlength="4" size="5"/>
+                        </p>
+                        <p>
+                            <label for="CompanhiaAerea">Companhia Aerea:</label><br/>
+                            <select name="CompanhiaAerea" id="CompanhiaAerea"></select>
+                        </p>
+                        <p id="status" class="statusError"></p>
+                        <p>
+                            <button type="button" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                        </p>
+                    </div> 
+                </section>
             </div>
         </div>
     </main>
