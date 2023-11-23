@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="pagamento.css">
+    <title>pagamento</title>
+</head>
+<body>
+    <div class="card text-center" id="nav">
+        <div class="card-header" id="nav">
+          <a class="navbar-brand" href="#">
+            <img src="../../../src/assets/img/logo_nome.png" alt="Logo" width="200" height="70" alt="logo" draggable="false" >
+          </a>
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active custom-nav-link" aria-current="true" href="#">Passagens</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="portalbusca.html">Home</a>
+            </li>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body" id="nav">
+          <div class="background-img">
+            <h5 class="card-title" id="nav">PASSAGENS</h5>
+            <p class="card-text" id="nav">Pagamento</p>
+            <p class="card-text" id="nav">Escolha um método de pagamento</p>
+          </div>
+        </div>
+      </div>
+    <main>
+        <section class="btn">
+            <div class="d-grid gap-2 d-md-block">
+                <button  id="btnPix" class="btn-primary text-black btn-lg" type="button">Pix</button>
+                <button  id="btnCartao" class="btn-primary text-black btn-lg" type="button">Cartão Crédito</button>
+            </div>
+        </section>
+        <section class="pix">
+            <div class="container">
+                <h2>Pagamento</h2>
+                <form action="#" method="post" id="FormPix">
+                        <img src="../../assets/img/qrcode.png">
+                        <label for="Codigo">hdsfhga-sfhjsagfhgahsgfd-g743657249999</label>
+                    <button type="submit">Copiar Codigo</button>
+                </form>
+            </div>
+        </section>
+        <section class="cartao">
+            <div class="container">
+                <h2>Pagamento</h2>
+                <form action="#" method="post" id="contactForm">
+                        <label for="numCartao">Numero do Cartão</label>
+                        <input type="text" id="num" placeholder="Número do cartao" required>
+                
+                        <label for="nomeTitu">Nome Titular:</label>
+                        <input type="text" id="nome" placeholder="Como estáno cartão" required>
+                
+                        <label for="validade">Validade:</label>
+                        <input type="date" id="val" placeholder="mm/aa">
+                
+                        <label for="CV">CVV:</label>
+                        <input type="password" id="CVV" placeholder="cvv" maxlength="3">
+        
+                    <button type="submit">Adicionar</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-dZXEAgZCAuwgj5l5rZI3gYI5OzRMqAIVCWbn8ZTwFtBScbJsANQ2tsXPlBOFkgjO" crossorigin="anonymous"></script>
+</body>
+
+<script>
+    var btnPix = document.querySelector('#btnPix');
+    var Pix = document.querySelector('.pix');
+    var btnCartao = document.querySelector('#btnCartao');
+    var Cartao = document.querySelector('.cartao');
+
+    btnPix.addEventListener('click', function() {
+        Cartao.style.display = 'none';
+        if (window.getComputedStyle(Pix).display === 'none') {
+            Pix.style.display = 'block';
+        } else {
+            Pix.style.display = 'none';
+        }
+    });
+
+    btnCartao.addEventListener('click', function() {
+        Pix.style.display = 'none';
+        if (window.getComputedStyle(Cartao).display === 'none') {
+            Cartao.style.display = 'block';
+        } else {
+            Cartao.style.display = 'none';
+        }
+    });
+</script>
+</html>
