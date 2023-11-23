@@ -170,6 +170,30 @@ svg{
 .block-title h6{
     padding-left: 60px;
 }
+
+/* tabelas */
+section.selectTable{
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 80%;
+    border: 3px solid red;
+}
+.linhaPar {
+    background-color: #f3f3f3;
+}
+.linhaImpar {
+background-color: #c6c6c6;
+}
+
+#tblAlunos{ 
+width: 100%;
+margin-bottom: 30px;
+}
+th{
+    border: 3px solid green
+}
+
+/*formulario*/
 form{
     padding:12px;
 }
@@ -222,9 +246,9 @@ main form button:hover {
     color: red;
 }
 
-button#Excluir{
+button.functionButton{
     padding:12px;
-    background-color: #ffffffdd;
+    background-color: #ffffff00;
     border:0;
 }
 
@@ -235,32 +259,18 @@ section#ExcluirAero{
 /*section#Alterar{
     display:none;
 }*/
-/* tabelas */
-section.selectTable{
-    margin: 0 auto;
-    margin-top: 30px;
-    width: 80%;
-    border: 3px solid red;
-}
-.linhaPar {
-    background-color: #f3f3f3;
-}
-.linhaImpar {
-background-color: #c6c6c6;
-}
-
-#tblAlunos{ 
-width: 100%;
-margin-bottom: 30px;
-}
-th{
-    border: 3px solid green
-}
 
 /*responsividade*/
 @media (max-width:785px) {
     .btn{
         font-size: 13px;
+    }
+    .bloco{
+        width:fit-content;
+    }
+    section.selectTable{
+        width: 100%;
+        font-size: 12px;
     }
 }
 

@@ -71,6 +71,22 @@
                             <h4><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M340-80v-60l80-60v-220L80-320v-80l340-200v-220q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v220l340 200v80L540-420v220l80 60v60l-140-40-140 40Z"/></svg>
                             AERONAVE</h4>
                         </div>
+                        <!--Listar Tabela Aeronaves-->
+                        <section class="selectTable">
+                            <table id="tblAlunos" cellpadding="5" cellspacing="5">
+                                <thead>
+                                    <tr>
+                                    <th class="">ID</th>
+                                    <th class="">Modelo</th>
+                                    <th class="">NumIdentificacao</th>
+                                    <th class="">Fabricante</th>
+                                    <th class="">Companhia Aerea</th>
+                                    <th class="">Ano</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tblAlunosDados"></tbody>
+                            </table>
+                        </section>
                         <!--Formulario de Cadastro de Aeronave-->
                         <form>
                             <h6>Cadastrar</h6>
@@ -112,7 +128,7 @@
                         </form>
                         <!--Seção de Excluir uma Aeronave-->
                         <p>
-                            <button type="button" onclick="btnExcluir();" id="Excluir" name="btnExcluir"><h6>Excluir  ></h6></button>
+                            <button type="button" onclick="btnExcluir();" class="functionButton" id="Excluir" name="btnExcluir"><h6>Excluir  ></h6></button>
                         </p>
                         <section id="ExcluirAero">
                             <form>
@@ -131,7 +147,7 @@
                         </section>
                         <!--Seção de Alterar uma Aeronave-->
                         <p>
-                            <button type="button" onclick="" id="Alterar" name="btnAlterar"><h6>Alterar  ></h6></button>
+                            <button type="button" onclick="" id="Alterar" class="functionButton" name="btnAlterar"><h6>Alterar  ></h6></button>
                         </p>
                         <section id="Alterar">
                             <form>
@@ -144,22 +160,7 @@
                                 <a href="alterarinfo.html"><button type="button" src id="btnSair" name="btnConfirmar">Confirmar</button></a> 
                             </form>
                         </section>
-                        <!--Listar Tabela Aeronaves-->
-                        <section class="selectTable">
-                            <table id="tblAlunos" cellpadding="5" cellspacing="5">
-                                <thead>
-                                    <tr>
-                                    <th class="">ID</th>
-                                    <th class="">Modelo</th>
-                                    <th class="">NumIdentificacao</th>
-                                    <th class="">Fabricante</th>
-                                    <th class="">Companhia Aerea</th>
-                                    <th class="">Ano</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tblAlunosDados"></tbody>
-                            </table>
-                        </section>
+
                     </div>         
                 </section>
                 <!--Aeroporto-->
