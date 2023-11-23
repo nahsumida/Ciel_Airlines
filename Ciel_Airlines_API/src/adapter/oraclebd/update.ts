@@ -2,42 +2,85 @@ import oracledb from 'oracledb';
 import { DatabaseResponse } from 'src/model/databaseResponse';
 import { oraConnAttribs } from "./config";
 
-//insere um dado de companhia aerea no banco de dados
-export const executeUpdateCompanhiaAerea = async(id: any, nomeCompanhiaAerea: string) => {
-    let resp: DatabaseResponse = { result: undefined, err: null};
+//atualiza um dado de companhia aerea no banco de dados
+export const executeUpdateCompanhiaAerea = async (id: number, nomeCompanhiaAerea: any) => {
+    let resp: DatabaseResponse = { result: undefined, err: null };
     let connection;
-    try{
+
+    const updateString = `UPDATE COMPANHIA_AEREA
+    SET NOME_COMPANHIA = '`+nomeCompanhiaAerea+`'
+    WHERE ID_COMPANHIA_AEREA = ` + id;
+
+    try {
         connection = await oracledb.getConnection(oraConnAttribs);
 
-        let insertString = `UPDATE COMPANHIA_AEREA SET NOME_COMPANHIA = `+nomeCompanhiaAerea+` WHERE ID_COMPANHIA_AEREA =` + id
+        console.log(updateString);
 
-        console.log(insertString)
-
-        let resInsert = await connection.execute(insertString);
+        const resUpdate = await connection.execute(updateString);
 
         await connection.commit();
 
-        const rowsInserted = resInsert.rowsAffected
-       
-        if(rowsInserted !== undefined &&  rowsInserted === 1) {
-            resp.result = rowsInserted
+        const rowsAffected = resUpdate.rowsAffected;
+
+        if (rowsAffected !== undefined && rowsAffected === 1) {
+            resp.result = rowsAffected;
         } else {
-            resp.err = 'Erro ao inserir dado na tabela'
+            resp.err = 'Erro ao atualizar dado na tabela';
         }
-    }catch(e){
-        if(e instanceof Error){
+    } catch (e) {
+        if (e instanceof Error) {
             resp.err = e.message;
             console.log(e.message);
-        }else{
-            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        } else {
+            resp.err = "Erro ao conectar ao Oracle. Sem detalhes";
         }
     } finally {
-        if(connection !== undefined){
+        if (connection !== undefined) {
             await connection.close();
         }
-        return resp;  
+        return resp;
     }
-}
+};
+
+//atualiza um dado de metodo pagamento no banco de dados
+export const executeUpdateMetodoPagamento = async (id: number, nomeMetodo: any) => {
+    let resp: DatabaseResponse = { result: undefined, err: null };
+    let connection;
+
+    const updateString = `UPDATE METODO_PAGAMENTO
+    SET NOME_METODO = '`+nomeMetodo+`'
+    WHERE ID_METODO_PAGAMENTO = ` + id;
+
+    try {
+        connection = await oracledb.getConnection(oraConnAttribs);
+
+        console.log(updateString);
+
+        const resUpdate = await connection.execute(updateString);
+
+        await connection.commit();
+
+        const rowsAffected = resUpdate.rowsAffected;
+
+        if (rowsAffected !== undefined && rowsAffected === 1) {
+            resp.result = rowsAffected;
+        } else {
+            resp.err = 'Erro ao atualizar dado na tabela';
+        }
+    } catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        } else {
+            resp.err = "Erro ao conectar ao Oracle. Sem detalhes";
+        }
+    } finally {
+        if (connection !== undefined) {
+            await connection.close();
+        }
+        return resp;
+    }
+};
 //atualiza os dados de uma cidade de id especifico
 export const executeUpdateCidade = async(id:any, nomeCidade: any) => {
     let resp: DatabaseResponse = { result: undefined, err: null};

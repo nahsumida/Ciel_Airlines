@@ -21,4 +21,15 @@ create table VOO
 
 CREATE SEQUENCE ID_VOO_SEQ START WITH 001 INCREMENT BY 1 MAXVALUE 9999 NOCYCLE NOCACHE;
 
-select * from mapa_assento
+select * from assento
+
+SELECT
+    id_trecho,
+    aero_ida,
+    aero_chegada
+FROM
+    trecho
+INNER JOIN aeroporto ON
+    aeroporto.id_aeroporto = trecho.aero_saida
+
+select * from trecho

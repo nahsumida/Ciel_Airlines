@@ -9,6 +9,7 @@
     <link rel="icon" href="../../assets/img/logo.png">
 </head>
 <body>
+  <!--navBar-->
     <div class="card text-center" id="nav">
         <div class="card-header" id="nav">
           <a class="navbar-brand" href="#">
@@ -31,6 +32,7 @@
           </div>
         </div>
       </div>
+      <!--informações que seram pedidas-->
       <div class="container">
         <h2>Confime seus dados</h2>
 
@@ -40,12 +42,17 @@
         <p>Telefone: <span id="telefoneConfirmado"></span></p>
         <p>Data Nascimento: <span id="dataConfirmado"></span></p>
 
-        <button onclick="voltar()">Voltar</button>
-        <button onclick="pagamento()">Pagamento</button>
+        <select class="form-select" aria-label="Default select example">
+          <option selected>selecione metodo de pagamento</option>
+        </select>
+
+        <button onclick="voltar()">Voltar</button> <!--chama função js-->
+        <button onclick="confirma()">Confirma</button> <!--chama função js-->
     </div>
 
     <script>
         // Obtenha os dados armazenados em sessionStorage
+        //'sessionStorege' armazena dados de forma simples e sem expiração, ou seja, ficam lá enquanto não apagarmos por código ou pelo próprio navegado
         var nomeConfirmado = sessionStorage.getItem('nomeConfirmado');
         var emailConfirmado = sessionStorage.getItem('emailConfirmado');
         var cpfConfirmado = sessionStorage.getItem('cpfConfirmado');
@@ -59,13 +66,15 @@
         document.getElementById('telefoneConfirmado').innerText = telefoneConfirmado;
         document.getElementById('dataConfirmado').innerText = dataConfirmado;
 
+        //função para o botão, abre uma pagina html
         function voltar() {
             window.location.href = 'html informacoes.html';
         }
-
-        function pagamento() {
+        //função para o botão, abre uma pagina html
+        function confirma() {
             window.location.href = 'pagamento.html';
         }
     </script>
 </body>
 </html>
+
