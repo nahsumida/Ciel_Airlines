@@ -229,12 +229,12 @@ button#Excluir{
 }
 
 /*sections*/
-section#Excluir{
+section#ExcluirAero{
     display:none;
 }
-section#Alterar{
+/*section#Alterar{
     display:none;
-}
+}*/
 /* tabelas */
 section.selectTable{
     margin: 0 auto;
