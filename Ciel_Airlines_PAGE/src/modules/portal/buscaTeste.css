@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+    box-sizing: border-box;
+    text-decoration: none;
+    padding: 0;
+}
+
+body{
+    background: linear-gradient(100deg, #f0e5da, #a76b95);
+    font-family: 'poppins', sans-serif;
+}
+#voo_container {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.voo-card {
+    display: flex;
+    flex-direction: flex;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.voo-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.voo-details {
+    display: flex;
+    flex-direction: flex;
+    align-items: center;
+    text-align: center;
+    padding-right: 16px;
+}
+
+.voo-details div {
+    padding-left: 40px;
+}
+
+.voo-details p {
+    margin: 0;
+    color:#dc48b0d0;
+}
+
+.voo-details h2
+ {
+    margin: 0;
+    font-size: 25px;
+}
+
+.voo-preco {
+    color: #dc48b0d0;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 100px;
+}
+
+.voo-details img {
+    width: 24px;
+    height: 24px;
+    margin-top: 12px;
+}
