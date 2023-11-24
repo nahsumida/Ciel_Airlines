@@ -78,6 +78,7 @@ main{
 }
 
 /*section menu*/
+
 #menu{
     background-color: rgba(255, 255, 255, 0.9); 
     border: 2px solid #A93C88;
@@ -124,14 +125,20 @@ svg{
     margin-right: 15px;
     margin-left: 3px;
 }
+
+a.link-button {
+    text-decoration: none; /* Remover sublinhado do link */
+    color: inherit; /* Herdar a cor do texto do botão */
+    margin-right: 50px;
+}
 /*section blocos de formularios*/
 
 #aeroporto{
    display: none;
 }
-#cidades{
+/*#cidades{
     display:none;
-}
+}*/
 #companhia_aerea{
     display:none;
 }
@@ -175,7 +182,8 @@ svg{
 section.selectTable{
     margin: 0 auto;
     margin-top: 30px;
-    width: 80%;
+    margin-bottom: 30px;
+    width: 90%;
     border: 3px solid red;
 }
 .linhaPar {
@@ -185,7 +193,7 @@ section.selectTable{
 background-color: #c6c6c6;
 }
 
-#tblAlunos{ 
+table{ 
 width: 100%;
 margin-bottom: 30px;
 }
@@ -204,7 +212,7 @@ form{
     align-items: center;   
 }
 main form input {
-    background: #d5bbcd6d;
+    background: #f1e6ed6d;
     height: 30px;
     color: rgb(51, 51, 51);
     border: 1px solid #a93c887e;
@@ -213,7 +221,7 @@ main form input {
 }
 
 main form select {
-    background: #d5bbcd6d;
+    background: #f1e6ed6d;
     height: 30px;
     width:178px;
     color: rgb(51, 51, 51);
@@ -221,29 +229,40 @@ main form select {
     border-radius: 2px;
 }
 
-p#button{
-    text-align: right;
+main form #Data{
+    width:178px;
 }
 main form button{
     cursor: pointer;
-    width: 25%;
+    width: 150px;
     margin-top: 10px;
     border: none;
     border-radius: 5px;
     background: #ca3fa1;
     color: white;
     display: inline-block;
-    margin-right:12%;
 }
 
 main form button:hover {
     background: #d76db8;
+}
+p button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main form .row#buttons{
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .statusError {
     font-size: 0.8rem;
     margin-top: 1rem;
     color: red;
+    text-align: center;
 }
 
 button.functionButton{
@@ -253,13 +272,24 @@ button.functionButton{
 }
 
 /*sections*/
-section#ExcluirAero{
+.sectionCadastrar{
+    display:block;
+}
+.sectionExcluir{
     display:none;
 }
-/*section#Alterar{
+.sectionAlterar{
     display:none;
-}*/
-
+}
+section#AlterarInfo{
+    display:none;
+}
+.sectionAlterar#assentos{
+    display:block;
+}
+section#AlterarInfo-assentos{
+    display:block;
+}
 /*responsividade*/
 @media (max-width:785px) {
     .btn{
