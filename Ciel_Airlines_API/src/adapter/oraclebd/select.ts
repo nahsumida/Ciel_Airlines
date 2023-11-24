@@ -221,3 +221,37 @@ export const executeSelectAeroporto = async() => {
         return resp;  
     }
 }
+
+//seleciona todos os dados de um aeroporto especifico  
+export const executeSelectAeroportoByID = async(id: number) => {
+    let resp: DatabaseResponse = { result: undefined, err: null};
+    let connection;
+    try{
+        connection = await oracledb.getConnection(oraConnAttribs);
+      
+        let selectString = `SELECT
+                                A.ID_AEROPORTO,
+                                A.NOME_AEROPORTO,   
+                                i.NOME_CIDADE,
+                                A.Sigla
+                            FROM
+                                AEROPORTO A
+                            JOIN
+                                CIDADE I ON I.ID_CIDADE = A.ID_CIDADE
+                            WHERE A.ID_AEROPORTO = `+ id
+        console.log(selectString);
+        let resSelect = await connection.execute(selectString);
+
+        await connection.close();
+        resp.result = resSelect.rows;
+    }catch(e){
+        if(e instanceof Error){
+            resp.err = e.message;
+            console.log(e.message);
+        }else{
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    } finally {
+        return resp;  
+    }
+}

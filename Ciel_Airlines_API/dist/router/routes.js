@@ -19,14 +19,21 @@ const delete_1 = require("../adapter/oraclebd/delete");
 const insert_1 = require("../adapter/oraclebd/insert");
 const update_1 = require("../adapter/oraclebd/update");
 exports.route = express_1.default.Router();
-/*
 // AERNAVE
-route.get("/selectAeronave", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-
-  res.send(cr);
-});
-
+exports.route.get("/selectAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    let resp = (0, select_1.executeSelectAeronave)();
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+/*
 route.get("/selectAeronaveByID", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
@@ -50,20 +57,35 @@ route.get("/insertAeronave", async(req:any, res:any)=>{
   
   res.send(cr);
 });*/
-/*
 // AEROPORTO
-route.get("/selectAeroport", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-
-  res.send(cr);
-});
-
-route.get("/selectAeroportoByID", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
+exports.route.get("/selectAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const id = req.body.idAeroporto;
+    let resp = (0, select_1.executeSelectAeroportoByID)(id);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+exports.route.get("/selectAeroportoByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    let resp = (0, select_1.executeSelectAeroporto)();
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+/*
 route.get("/deleteAeroporto", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
@@ -75,13 +97,33 @@ route.get("/updateAeroporto", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-
-route.get("/insertAeroporto", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
 */
+exports.route.get("/insertAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const idCidade = req.body.idCidade;
+    const nomeAeroporto = req.body.nomeAeroporto;
+    const sigla = req.body.sigla;
+    if (nomeAeroporto === undefined) {
+        cr.message = "nome aeroporto invalido";
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    if (sigla === undefined) {
+        cr.message = "sigla invalida";
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    let resp = (0, insert_1.executeInsertAeroporto)(idCidade, nomeAeroporto, sigla);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado inserido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
 // ASSENTO
 exports.route.get("/selectAssentoByVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };

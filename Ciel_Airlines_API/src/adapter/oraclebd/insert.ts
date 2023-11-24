@@ -128,10 +128,17 @@ export const executeInsertTrecho = async(saida:any, chegada:any) => {
         (ID_TRECHO, AERO_SAIDA, AERO_CHEGADA)
         VALUES (ID_TRECHO_SEQ.NEXTVAL,` + saida +`,`+chegada+`)`
       
-        let resSelect = await connection.execute(updateString);
+        let resInsert = await connection.execute(updateString);
 
-        await connection.close();
-        resp.result = resSelect.rows;
+        await connection.commit();
+
+        const rowsInserted = resInsert.rowsAffected
+       
+        if(rowsInserted !== undefined &&  rowsInserted === 1) {
+            resp.result = rowsInserted
+        } else {
+            resp.err = 'Erro ao inserir dado na tabela'
+        }
     }catch(e){
         if(e instanceof Error){
             resp.err = e.message;
@@ -154,12 +161,19 @@ export const executeInsertAeroporto = async(idCidade: number, nomeAeroporto: any
 
         let updateString = `INSERT INTO AEROPORTO 
         (ID_AEROPORTO, ID_CIDADE, NOME_AEROPORTO, SIGLA)
-        VALUES (ID_AEROPORTO_SEQ.NEXTVAL, `+idCidade+`,`+nomeAeroporto+`,`+sigla+`)`
+        VALUES (ID_AEROPORTO_SEQ.NEXTVAL, `+idCidade+`,'`+nomeAeroporto+`','`+sigla+`')`
       
-        let resSelect = await connection.execute(updateString);
+        let resInsert = await connection.execute(updateString);
 
-        await connection.close();
-        resp.result = resSelect.rows;
+        await connection.commit();
+
+        const rowsInserted = resInsert.rowsAffected
+       
+        if(rowsInserted !== undefined &&  rowsInserted === 1) {
+            resp.result = rowsInserted
+        } else {
+            resp.err = 'Erro ao inserir dado na tabela'
+        }
     }catch(e){
         if(e instanceof Error){
             resp.err = e.message;

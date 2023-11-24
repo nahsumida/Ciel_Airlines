@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.executeSelectTrechoByID = exports.executeSelectTrecho = exports.executeSelectAssentoByVoo = exports.executeSelectByID = exports.executeSelectAll = void 0;
+exports.executeSelectAeroportoByID = exports.executeSelectAeroporto = exports.executeSelectAeronave = exports.executeSelectTrechoByID = exports.executeSelectTrecho = exports.executeSelectAssentoByVoo = exports.executeSelectByID = exports.executeSelectAll = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
 const config_1 = require("./config");
 //seleciona todas as linhas da tabela 
@@ -170,3 +170,108 @@ const executeSelectTrechoByID = (id) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 exports.executeSelectTrechoByID = executeSelectTrechoByID;
+//seleciona todos os dados de um aeronave especifico  
+const executeSelectAeronave = () => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let selectString = `SELECT
+                                A.ID_AERONAVE,
+                                C.NOME_COMPANHIA,
+                                A.MODELO,
+                                A.ANO_FABRICACAO,
+                                A.FABRICANTE,
+                                A.NUM_IDENTIFICACAO,
+                                A.ANO_FABRICACAO
+                            FROM
+                                AERONAVE A
+                            JOIN
+                                COMPANHIA_AEREA C ON C.ID_COMPANHIA_AEREA = A.COMPANHIA_AEREA`;
+        console.log(selectString);
+        let resSelect = yield connection.execute(selectString);
+        yield connection.close();
+        resp.result = resSelect.rows;
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        return resp;
+    }
+});
+exports.executeSelectAeronave = executeSelectAeronave;
+//seleciona todos os dados de um aeroporto especifico  
+const executeSelectAeroporto = () => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let selectString = `SELECT
+                                A.ID_AEROPORTO,
+                                i.NOME_CIDADE,
+                                A.Sigla
+                            FROM
+                                AEROPORTO A
+                            JOIN
+                                CIDADE I ON I.ID_CIDADE = A.ID_CIDADE`;
+        console.log(selectString);
+        let resSelect = yield connection.execute(selectString);
+        yield connection.close();
+        resp.result = resSelect.rows;
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        return resp;
+    }
+});
+exports.executeSelectAeroporto = executeSelectAeroporto;
+//seleciona todos os dados de um aeroporto especifico  
+const executeSelectAeroportoByID = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let selectString = `SELECT
+                                A.ID_AEROPORTO,
+                                A.NOME_AEROPORTO,   
+                                i.NOME_CIDADE,
+                                A.Sigla
+                            FROM
+                                AEROPORTO A
+                            JOIN
+                                CIDADE I ON I.ID_CIDADE = A.ID_CIDADE
+                            WHERE A.ID_AEROPORTO = ` + id;
+        console.log(selectString);
+        let resSelect = yield connection.execute(selectString);
+        yield connection.close();
+        resp.result = resSelect.rows;
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        return resp;
+    }
+});
+exports.executeSelectAeroportoByID = executeSelectAeroportoByID;

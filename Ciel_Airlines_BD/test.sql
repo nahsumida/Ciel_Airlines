@@ -51,6 +51,9 @@ JOIN
     CIDADE I ON I.ID_CIDADE = A.ID_CIDADE
 
 select * from aeroporto;
+INSERT INTO AEROPORTO
+        (ID_AEROPORTO, ID_CIDADE, NOME_AEROPORTO, SIGLA)
+        VALUES (ID_AEROPORTO_SEQ.NEXTVAL, '',`+nomeAeroporto+`,`+sigla+`)`
 
 SELECT
     A.ID_AERONAVE,
@@ -71,7 +74,7 @@ UPDATE COMPANHIA_AEREA SET NOME_COMPANHIA = 'aaaaa' WHERE ID_COMPANHIA_AEREA = 2
 
 select * from COMPANHIA_AEREA
 
-select * from aeronave
+select * from aeroporto
 
 INSERT INTO AERONAVE (ID_AERONAVE, MODELO, NUM_IDENTIFICACAO, FABRICANTE, ANO_FABRICACAO, COMPANHIA_AEREA) VALUES (ID_AERONAVE_SEQ.nextval, 'AIRBUS 380', '1234', 'AIRBUS', 2010, 20)
 
@@ -80,4 +83,14 @@ select * from voo;
 select * from assento
 update assento set status='VENDIDO' where id_assento=37;
 
+alter table aeroporto modify  nome_aeroporto varchar2(150)
+SELECT
+                                A.ID_AEROPORTO,
+                                i.NOME_CIDADE,
+                                A.Sigla
+                            FROM
+                                AEROPORTO A
+                            JOIN
+                                CIDADE I ON I.ID_CIDADE = A.ID_CIDADE
+                            WHERE A.ID_AEROPORTO =
 insert into voo (ID_VOO, TRECHO, AERONAVE, DATA, HORA_PARTIDA, HORA_CHEGADA, PRECO) VALUES (id_voo_seq.nextval, 49, 1, TO_DATE('2023/12/03', 'yyyy/mm/dd'), '8:00', '10:00', 120.0)
