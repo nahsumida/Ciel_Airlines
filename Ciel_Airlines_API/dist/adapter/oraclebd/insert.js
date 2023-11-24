@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.executeInsertVenda = exports.executeInsertVoo = exports.executeInsertAeroporto = exports.executeInsertAeronave = exports.executeInsertTrecho = exports.executeInsertMapaAssento = exports.executeInsertMetodoPagamento = exports.executeInsertCompanhiaAerea = void 0;
+exports.executeInsertAeroporto = exports.executeInsertTrecho = exports.executeInsertCidade = exports.executeInsertMetodoPagamento = exports.executeInsertCompanhiaAerea = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
 const config_1 = require("./config");
 //insere um dado de companhia aerea no banco de dados
@@ -89,19 +89,25 @@ const executeInsertMetodoPagamento = (nomeMetodo) => __awaiter(void 0, void 0, v
     }
 });
 exports.executeInsertMetodoPagamento = executeInsertMetodoPagamento;
-//atualiza o status de um assento do mapa
-const executeInsertMapaAssento = (id, status) => __awaiter(void 0, void 0, void 0, function* () {
+// insere um dado de cidade no banco de dados 
+const executeInsertCidade = (nomeCidade) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
+    let connection;
     try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let updateString = `Update mapa_assento set status = '` + status + `' where id_mapa_assento = ` + id;
-        let resSelect = yield connection.execute(updateString);
-        yield connection.close();
-        resp.result = resSelect.rows;
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let insertString = `INSERT INTO CIDADE
+        (ID_CIDADE, NOME_CIDADE)
+        VALUES (ID_CIDADE_SEQ.NEXTVAL, '` + nomeCidade + `')`;
+        console.log(insertString);
+        let resInsert = yield connection.execute(insertString);
+        yield connection.commit();
+        const rowsInserted = resInsert.rowsAffected;
+        if (rowsInserted !== undefined && rowsInserted === 1) {
+            resp.result = rowsInserted;
+        }
+        else {
+            resp.err = 'Erro ao inserir dado na tabela';
+        }
     }
     catch (e) {
         if (e instanceof Error) {
@@ -113,23 +119,31 @@ const executeInsertMapaAssento = (id, status) => __awaiter(void 0, void 0, void 
         }
     }
     finally {
+        if (connection !== undefined) {
+            yield connection.close();
+        }
         return resp;
     }
 });
-exports.executeInsertMapaAssento = executeInsertMapaAssento;
+exports.executeInsertCidade = executeInsertCidade;
 //atualiza a o aeroporto de ida e de volta de um trecho
-const executeInsertTrecho = (id, saida, chegada) => __awaiter(void 0, void 0, void 0, function* () {
+const executeInsertTrecho = (saida, chegada) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
+    let connection;
     try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let updateString = `Update trecho set aero_saida = ` + saida + `, aero_chegada = ` + chegada + ` where id_trecho = ` + id;
-        let resSelect = yield connection.execute(updateString);
-        yield connection.close();
-        resp.result = resSelect.rows;
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let updateString = `INSERT INTO TRECHO 
+        (ID_TRECHO, AERO_SAIDA, AERO_CHEGADA)
+        VALUES (ID_TRECHO_SEQ.NEXTVAL,` + saida + `,` + chegada + `)`;
+        let resInsert = yield connection.execute(updateString);
+        yield connection.commit();
+        const rowsInserted = resInsert.rowsAffected;
+        if (rowsInserted !== undefined && rowsInserted === 1) {
+            resp.result = rowsInserted;
+        }
+        else {
+            resp.err = 'Erro ao inserir dado na tabela';
+        }
     }
     catch (e) {
         if (e instanceof Error) {
@@ -145,46 +159,24 @@ const executeInsertTrecho = (id, saida, chegada) => __awaiter(void 0, void 0, vo
     }
 });
 exports.executeInsertTrecho = executeInsertTrecho;
-///////////////////
-const executeInsertAeronave = (table, id) => __awaiter(void 0, void 0, void 0, function* () {
+//atualiza a o aeroporto de ida e de volta de um trecho
+const executeInsertAeroporto = (idCidade, nomeAeroporto, sigla) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
+    let connection;
     try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let updateString = `DELETE ` + table + ` WHERE ID_` + table + ` = ` + id;
-        let resSelect = yield connection.execute(updateString);
-        yield connection.close();
-        resp.result = resSelect.rows;
-    }
-    catch (e) {
-        if (e instanceof Error) {
-            resp.err = e.message;
-            console.log(e.message);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let updateString = `INSERT INTO AEROPORTO 
+        (ID_AEROPORTO, ID_CIDADE, NOME_AEROPORTO, SIGLA)
+        VALUES (ID_AEROPORTO_SEQ.NEXTVAL, ` + idCidade + `,'` + nomeAeroporto + `','` + sigla + `')`;
+        let resInsert = yield connection.execute(updateString);
+        yield connection.commit();
+        const rowsInserted = resInsert.rowsAffected;
+        if (rowsInserted !== undefined && rowsInserted === 1) {
+            resp.result = rowsInserted;
         }
         else {
-            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+            resp.err = 'Erro ao inserir dado na tabela';
         }
-    }
-    finally {
-        return resp;
-    }
-});
-exports.executeInsertAeronave = executeInsertAeronave;
-const executeInsertAeroporto = (table, id) => __awaiter(void 0, void 0, void 0, function* () {
-    let resp = { result: undefined, err: null };
-    try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let deleteString = `DELETE ` + table + ` WHERE ID_` + table + ` = ` + id;
-        let resSelect = yield connection.execute(deleteString);
-        yield connection.close();
-        resp.result = resSelect.rows;
     }
     catch (e) {
         if (e instanceof Error) {
@@ -200,57 +192,3 @@ const executeInsertAeroporto = (table, id) => __awaiter(void 0, void 0, void 0, 
     }
 });
 exports.executeInsertAeroporto = executeInsertAeroporto;
-const executeInsertVoo = (table, id) => __awaiter(void 0, void 0, void 0, function* () {
-    let resp = { result: undefined, err: null };
-    try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let deleteString = `DELETE ` + table + ` WHERE ID_` + table + ` = ` + id;
-        let resSelect = yield connection.execute(deleteString);
-        yield connection.close();
-        resp.result = resSelect.rows;
-    }
-    catch (e) {
-        if (e instanceof Error) {
-            resp.err = e.message;
-            console.log(e.message);
-        }
-        else {
-            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
-        }
-    }
-    finally {
-        return resp;
-    }
-});
-exports.executeInsertVoo = executeInsertVoo;
-const executeInsertVenda = (table, id) => __awaiter(void 0, void 0, void 0, function* () {
-    let resp = { result: undefined, err: null };
-    try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let deleteString = `DELETE ` + table + ` WHERE ID_` + table + ` = ` + id;
-        let resSelect = yield connection.execute(deleteString);
-        yield connection.close();
-        resp.result = resSelect.rows;
-    }
-    catch (e) {
-        if (e instanceof Error) {
-            resp.err = e.message;
-            console.log(e.message);
-        }
-        else {
-            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
-        }
-    }
-    finally {
-        return resp;
-    }
-});
-exports.executeInsertVenda = executeInsertVenda;

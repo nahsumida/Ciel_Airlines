@@ -19,14 +19,21 @@ const delete_1 = require("../adapter/oraclebd/delete");
 const insert_1 = require("../adapter/oraclebd/insert");
 const update_1 = require("../adapter/oraclebd/update");
 exports.route = express_1.default.Router();
-/*
 // AERNAVE
-route.get("/selectAeronave", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-
-  res.send(cr);
-});
-
+exports.route.get("/selectAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    let resp = (0, select_1.executeSelectAeronave)();
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+/*
 route.get("/selectAeronaveByID", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
@@ -50,20 +57,35 @@ route.get("/insertAeronave", async(req:any, res:any)=>{
   
   res.send(cr);
 });*/
-/*
 // AEROPORTO
-route.get("/selectAeroport", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-
-  res.send(cr);
-});
-
-route.get("/selectAeroportoByID", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
+exports.route.get("/selectAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const id = req.body.idAeroporto;
+    let resp = (0, select_1.executeSelectAeroportoByID)(id);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+exports.route.get("/selectAeroportoByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    let resp = (0, select_1.executeSelectAeroporto)();
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+/*
 route.get("/deleteAeroporto", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
@@ -75,45 +97,77 @@ route.get("/updateAeroporto", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-
-route.get("/insertAeroporto", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
 */
-/*
+exports.route.get("/insertAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const idCidade = req.body.idCidade;
+    const nomeAeroporto = req.body.nomeAeroporto;
+    const sigla = req.body.sigla;
+    if (nomeAeroporto === undefined) {
+        cr.message = "nome aeroporto invalido";
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    if (sigla === undefined) {
+        cr.message = "sigla invalida";
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    let resp = (0, insert_1.executeInsertAeroporto)(idCidade, nomeAeroporto, sigla);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado inserido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
 // ASSENTO
-route.get("/selectAssento", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-
-  res.send(cr);
-});
-
-route.get("/selectAssentoByID", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-route.get("/deleteAssento", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-route.get("/updateAssento", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-route.get("/insertAssento", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-*/
+exports.route.get("/selectAssentoByVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const idVoo = req.body.idVoo;
+    let resp = (0, select_1.executeSelectAssentoByVoo)('ASSENTO', idVoo);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dados obtidos";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+exports.route.get("/selectAssentoByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const id = req.body.idAssento;
+    let resp = (0, select_1.executeSelectByID)('ASSENTO', id);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dados obtidos";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+exports.route.get("/updateAssento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const id = req.body.idAssento;
+    const status = req.body.status;
+    let resp = (0, update_1.executeUpdateAssento)(id, status);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado alterado";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
 // CIDADE 
 exports.route.get("/selectCidade", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
@@ -158,14 +212,39 @@ exports.route.get("/deleteCidade", (req, res) => __awaiter(void 0, void 0, void 
 }));
 exports.route.get("/updateCidade", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
+    const id = req.body.idCidade;
+    const nomeCompanhia = req.body.nomeCidade;
+    let resp = (0, update_1.executeUpdateCidade)(id, nomeCompanhia);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado alterado";
+    cr.status = "SUCCESS";
     res.send(cr);
 }));
 exports.route.get("/insertCidade", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
+    const nomeCidade = req.body.nomeCidade;
+    if (nomeCidade === undefined) {
+        cr.message = "valor invalido";
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    let resp = (0, insert_1.executeInsertCidade)(nomeCidade);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado inserido";
+    cr.status = "SUCCESS";
     res.send(cr);
 }));
 // COMPANHIA AEREA ////////
-// seleciona todos os dados da tabela de companhia aerea
 exports.route.get("/selectCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     let resp = (0, select_1.executeSelectAll)('Companhia_aerea');
@@ -313,26 +392,49 @@ exports.route.get("/insertMetodoPagamento", (req, res) => __awaiter(void 0, void
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-/*
 // TRECHO
-route.get("/selectTrecho", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-
-  res.send(cr);
-});
-
-route.get("/selectTrechoByID", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-route.get("/deleteTrecho", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
+exports.route.get("/selectTrecho", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    let resp = (0, select_1.executeSelectTrecho)();
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dados obtidos";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+exports.route.get("/selectTrechoByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const id = req.body.idTrecho;
+    let resp = (0, select_1.executeSelectTrechoByID)(id);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dados obtidos";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+exports.route.get("/deleteTrecho", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const id = req.body.idTrecho;
+    let resp = (0, delete_1.executeDeleteByID)('TRECHO', id);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+/*
 route.get("/updateTrecho", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
