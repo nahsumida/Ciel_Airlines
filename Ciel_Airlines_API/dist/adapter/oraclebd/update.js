@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.executeUpdateVenda = exports.executeUpdateVoo = exports.executeUpdateAeroporto = exports.executeUpdateAeronave = exports.executeUpdateTrecho = exports.executeUpdateMapaAssento = exports.executeUpdateCidade = exports.executeUpdateMetodoPagamento = exports.executeUpdateCompanhiaAerea = void 0;
+exports.executeUpdateAssento = exports.executeUpdateCidade = exports.executeUpdateMetodoPagamento = exports.executeUpdateCompanhiaAerea = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
 const config_1 = require("./config");
 //atualiza um dado de companhia aerea no banco de dados
@@ -92,16 +92,20 @@ exports.executeUpdateMetodoPagamento = executeUpdateMetodoPagamento;
 //atualiza os dados de uma cidade de id especifico
 const executeUpdateCidade = (id, nomeCidade) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
+    let connection;
     try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let updateString = `Update cidade set nome_cidade = ` + nomeCidade + ` where id_cidade = ` + id;
-        let resSelect = yield connection.execute(updateString);
-        yield connection.close();
-        resp.result = resSelect.rows;
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let updateString = `Update cidade set nome_cidade = '` + nomeCidade + `' where id_cidade = ` + id;
+        console.log(updateString);
+        let resUpdate = yield connection.execute(updateString);
+        yield connection.commit();
+        const rowsAffected = resUpdate.rowsAffected;
+        if (rowsAffected !== undefined && rowsAffected === 1) {
+            resp.result = rowsAffected;
+        }
+        else {
+            resp.err = 'Erro ao atualizar dado na tabela';
+        }
     }
     catch (e) {
         if (e instanceof Error) {
@@ -117,19 +121,23 @@ const executeUpdateCidade = (id, nomeCidade) => __awaiter(void 0, void 0, void 0
     }
 });
 exports.executeUpdateCidade = executeUpdateCidade;
-//atualiza o status de um assento do mapa
-const executeUpdateMapaAssento = (id, status) => __awaiter(void 0, void 0, void 0, function* () {
+//atualiza os dados de um assento de id especifico
+const executeUpdateAssento = (id, status) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
+    let connection;
     try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let updateString = `Update mapa_assento set status = '` + status + `' where id_mapa_assento = ` + id;
-        let resSelect = yield connection.execute(updateString);
-        yield connection.close();
-        resp.result = resSelect.rows;
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let updateString = `Update assento set status = '` + status + `' where id_assento = ` + id;
+        console.log(updateString);
+        let resUpdate = yield connection.execute(updateString);
+        yield connection.commit();
+        const rowsAffected = resUpdate.rowsAffected;
+        if (rowsAffected !== undefined && rowsAffected === 1) {
+            resp.result = rowsAffected;
+        }
+        else {
+            resp.err = 'Erro ao atualizar dado na tabela';
+        }
     }
     catch (e) {
         if (e instanceof Error) {
@@ -144,141 +152,4 @@ const executeUpdateMapaAssento = (id, status) => __awaiter(void 0, void 0, void 
         return resp;
     }
 });
-exports.executeUpdateMapaAssento = executeUpdateMapaAssento;
-//atualiza a o aeroporto de ida e de volta de um trecho
-const executeUpdateTrecho = (id, saida, chegada) => __awaiter(void 0, void 0, void 0, function* () {
-    let resp = { result: undefined, err: null };
-    try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let updateString = `Update trecho set aero_saida = ` + saida + `, aero_chegada = ` + chegada + ` where id_trecho = ` + id;
-        let resSelect = yield connection.execute(updateString);
-        yield connection.close();
-        resp.result = resSelect.rows;
-    }
-    catch (e) {
-        if (e instanceof Error) {
-            resp.err = e.message;
-            console.log(e.message);
-        }
-        else {
-            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
-        }
-    }
-    finally {
-        return resp;
-    }
-});
-exports.executeUpdateTrecho = executeUpdateTrecho;
-///////////////////
-const executeUpdateAeronave = (table, id) => __awaiter(void 0, void 0, void 0, function* () {
-    let resp = { result: undefined, err: null };
-    try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let updateString = `DELETE ` + table + ` WHERE ID_` + table + ` = ` + id;
-        let resSelect = yield connection.execute(updateString);
-        yield connection.close();
-        resp.result = resSelect.rows;
-    }
-    catch (e) {
-        if (e instanceof Error) {
-            resp.err = e.message;
-            console.log(e.message);
-        }
-        else {
-            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
-        }
-    }
-    finally {
-        return resp;
-    }
-});
-exports.executeUpdateAeronave = executeUpdateAeronave;
-const executeUpdateAeroporto = (table, id) => __awaiter(void 0, void 0, void 0, function* () {
-    let resp = { result: undefined, err: null };
-    try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let deleteString = `DELETE ` + table + ` WHERE ID_` + table + ` = ` + id;
-        let resSelect = yield connection.execute(deleteString);
-        yield connection.close();
-        resp.result = resSelect.rows;
-    }
-    catch (e) {
-        if (e instanceof Error) {
-            resp.err = e.message;
-            console.log(e.message);
-        }
-        else {
-            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
-        }
-    }
-    finally {
-        return resp;
-    }
-});
-exports.executeUpdateAeroporto = executeUpdateAeroporto;
-const executeUpdateVoo = (table, id) => __awaiter(void 0, void 0, void 0, function* () {
-    let resp = { result: undefined, err: null };
-    try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let deleteString = `DELETE ` + table + ` WHERE ID_` + table + ` = ` + id;
-        let resSelect = yield connection.execute(deleteString);
-        yield connection.close();
-        resp.result = resSelect.rows;
-    }
-    catch (e) {
-        if (e instanceof Error) {
-            resp.err = e.message;
-            console.log(e.message);
-        }
-        else {
-            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
-        }
-    }
-    finally {
-        return resp;
-    }
-});
-exports.executeUpdateVoo = executeUpdateVoo;
-const executeUpdateVenda = (table, id) => __awaiter(void 0, void 0, void 0, function* () {
-    let resp = { result: undefined, err: null };
-    try {
-        const connection = yield oracledb_1.default.getConnection({
-            user: process.env.ORACLE_DB_USER,
-            password: process.env.ORACLE_DB_SECRET,
-            connectString: process.env.ORACLE_DB_CONN_STR
-        });
-        let deleteString = `DELETE ` + table + ` WHERE ID_` + table + ` = ` + id;
-        let resSelect = yield connection.execute(deleteString);
-        yield connection.close();
-        resp.result = resSelect.rows;
-    }
-    catch (e) {
-        if (e instanceof Error) {
-            resp.err = e.message;
-            console.log(e.message);
-        }
-        else {
-            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
-        }
-    }
-    finally {
-        return resp;
-    }
-});
-exports.executeUpdateVenda = executeUpdateVenda;
+exports.executeUpdateAssento = executeUpdateAssento;

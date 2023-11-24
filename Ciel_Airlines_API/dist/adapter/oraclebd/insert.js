@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.executeInsertVenda = exports.executeInsertVoo = exports.executeInsertAeroporto = exports.executeInsertAeronave = exports.executeInsertTrecho = exports.executeInsertMapaAssento = exports.executeInsertMetodoPagamento = exports.executeInsertCompanhiaAerea = void 0;
+exports.executeInsertVenda = exports.executeInsertVoo = exports.executeInsertAeroporto = exports.executeInsertAeronave = exports.executeInsertTrecho = exports.executeInsertMapaAssento = exports.executeInsertCidade = exports.executeInsertMetodoPagamento = exports.executeInsertCompanhiaAerea = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
 const config_1 = require("./config");
 //insere um dado de companhia aerea no banco de dados
@@ -89,6 +89,43 @@ const executeInsertMetodoPagamento = (nomeMetodo) => __awaiter(void 0, void 0, v
     }
 });
 exports.executeInsertMetodoPagamento = executeInsertMetodoPagamento;
+// insere um dado de cidade no banco de dados 
+const executeInsertCidade = (nomeCidade) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let insertString = `INSERT INTO CIDADE
+        (ID_CIDADE, NOME_CIDADE)
+        VALUES (ID_CIDADE_SEQ.NEXTVAL, '` + nomeCidade + `')`;
+        console.log(insertString);
+        let resInsert = yield connection.execute(insertString);
+        yield connection.commit();
+        const rowsInserted = resInsert.rowsAffected;
+        if (rowsInserted !== undefined && rowsInserted === 1) {
+            resp.result = rowsInserted;
+        }
+        else {
+            resp.err = 'Erro ao inserir dado na tabela';
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        if (connection !== undefined) {
+            yield connection.close();
+        }
+        return resp;
+    }
+});
+exports.executeInsertCidade = executeInsertCidade;
 //atualiza o status de um assento do mapa
 const executeInsertMapaAssento = (id, status) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
