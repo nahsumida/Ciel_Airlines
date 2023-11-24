@@ -50,7 +50,7 @@ FROM
 JOIN
     CIDADE I ON I.ID_CIDADE = A.ID_CIDADE
 
-select * from aeroporto;
+select * from aeronave;
 INSERT INTO AEROPORTO
         (ID_AEROPORTO, ID_CIDADE, NOME_AEROPORTO, SIGLA)
         VALUES (ID_AEROPORTO_SEQ.NEXTVAL, '',`+nomeAeroporto+`,`+sigla+`)`

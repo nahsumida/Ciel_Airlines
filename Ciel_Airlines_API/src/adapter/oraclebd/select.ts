@@ -167,12 +167,45 @@ export const executeSelectAeronave = async() => {
                                 A.MODELO,
                                 A.ANO_FABRICACAO,
                                 A.FABRICANTE,
-                                A.NUM_IDENTIFICACAO,
-                                A.ANO_FABRICACAO
+                                A.NUM_IDENTIFICACAO
                             FROM
                                 AERONAVE A
                             JOIN
                                 COMPANHIA_AEREA C ON C.ID_COMPANHIA_AEREA = A.COMPANHIA_AEREA`
+        console.log(selectString);
+        let resSelect = await connection.execute(selectString);
+
+        await connection.close();
+        resp.result = resSelect.rows;
+    }catch(e){
+        if(e instanceof Error){
+            resp.err = e.message;
+            console.log(e.message);
+        }else{
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    } finally {
+        return resp;  
+    }
+}
+export const executeSelectAeronaveByID = async(id:number) => {
+    let resp: DatabaseResponse = { result: undefined, err: null};
+    let connection;
+    try{
+        connection = await oracledb.getConnection(oraConnAttribs);
+      
+        let selectString = `SELECT
+                                A.ID_AERONAVE,
+                                C.NOME_COMPANHIA,
+                                A.MODELO,
+                                A.ANO_FABRICACAO,
+                                A.FABRICANTE,
+                                A.NUM_IDENTIFICACAO
+                            FROM
+                                AERONAVE A
+                            JOIN
+                                COMPANHIA_AEREA C ON C.ID_COMPANHIA_AEREA = A.COMPANHIA_AEREA
+                            WHERE A.ID_AERONAVE = ` + id
         console.log(selectString);
         let resSelect = await connection.execute(selectString);
 

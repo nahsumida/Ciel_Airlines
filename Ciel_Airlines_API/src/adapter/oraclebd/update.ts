@@ -147,3 +147,36 @@ export const executeUpdateAssento = async(id:any, status: any) => {
         return resp;  
     }
 }
+
+//atualiza os dados de um assento de id especifico
+export const executeUpdateTrecho = async(id:number,aeroSaida:number, aeroChegada:number) => {
+    let resp: DatabaseResponse = { result: undefined, err: null};
+    let connection;
+
+    try{
+        connection = await oracledb.getConnection(oraConnAttribs);
+
+        let updateString = `Update trecho set aero_saida = ` + aeroSaida + `, aero_chegada = ` + aeroChegada + ` where id_trecho = ` + id
+        console.log(updateString)
+        let resUpdate = await connection.execute(updateString);
+
+        await connection.commit();
+
+        const rowsAffected = resUpdate.rowsAffected;
+
+        if (rowsAffected !== undefined && rowsAffected === 1) {
+            resp.result = rowsAffected;
+        } else {
+            resp.err = 'Erro ao atualizar dado na tabela';
+        }
+    }catch(e){
+        if(e instanceof Error){
+            resp.err = e.message;
+            console.log(e.message);
+        }else{
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    } finally {
+        return resp;  
+    }
+}
