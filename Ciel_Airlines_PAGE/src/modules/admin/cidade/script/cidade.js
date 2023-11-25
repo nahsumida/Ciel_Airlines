@@ -218,9 +218,12 @@ function Alterar() {
 }
 /*CHAMADA DAS FUNÇÕES NO CARREGAMENTO DA PAGINA*/
 document.addEventListener("DOMContentLoaded", function () {
-ListarCidade();
-ListarCidadeComboBox(); if (btnAlterar) {
-    btnAlterar.addEventListener('click',function(){
+    ListarCidade();
+    ListarCidadeComboBox();
+    const btnAlterar = document.getElementById("btnAlterar");
+
+    if (btnAlterar) {
+        btnAlterar.addEventListener('click',function(){
         Alterar(selectedValue, nomeCidade); // chama funcao para alterar 
     })
 }});

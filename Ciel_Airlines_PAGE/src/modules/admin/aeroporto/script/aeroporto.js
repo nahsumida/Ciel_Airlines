@@ -22,7 +22,7 @@ function fetchListar(body){
     return fetch('http://localhost:3000/selectAeroporto', requestOptions).then(T => T.json())
 }
 
-/*
+
 function listarCidades(){
     const aeroSaida = document.getElementById('aeroSaida');
 
@@ -50,7 +50,8 @@ function listarCidades(){
             MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
             console.log("Falha grave ao listar." + e)
         });
-}*/
+}
+
 function ListarAeroporto(){
     const dataBody = document.getElementById('dataBody');
     fetchListar()
@@ -95,7 +96,7 @@ function ListarAeroporto(){
 
 function fetchInserir(body){
     const requestOptions = {
-        method: 'POST', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+        method: 'PUT', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
 
     return fetch('http://localhost:3000/insertAeroporto', requestOptions).then(T => T.json())
@@ -138,10 +139,10 @@ function inserirAeroporto(IdCidade){
         MessageStatus("Preencha o NOME do aeroporto!", true);
         return
     }
-    if(!selecionouIDCidade()){
+    /*if(!selecionouIDCidade()){
         MessageStatus("Selecione o ID da cidade!", true);
         return
-    }
+    }*/
     if(!preencheuSigla()){
         MessageStatus("Preencha a SIGLA do aeroporto!", true);
         return
@@ -176,47 +177,77 @@ function inserirAeroporto(IdCidade){
 
 //EXCLUIR
 
-function ListarAeroportoComboBox(){
-    const dataSelect = document.getElementById('dataSelectDelete');
+//Funcao para lista as opções com os dados da tabela dentro de uma caixa de selecao
+function ListarAeroportoComboBox() {
+    const dataSelectDelete = document.getElementById('dataSelectDelete');
+    const dataSelectUpdate = document.getElementById('dataSelectUpdate');
+
     fetchListar()
         .then(customResponse => {
-        if(customResponse.status === "SUCCESS"){
-            dataSelect.innerHTML = '';
-
-            customResponse.payload.forEach(item => {
-                const idaeroporto = item[0];
-                const nome = item[2]; //colunas db
-
-                const option = document.createElement('option');
-                option.value = idaeroporto; // Valor da opção
-                option.text = `${nome}`; // Texto visível
-
-                dataSelect.appendChild(option);
-            });
-        }else{
-            MessageStatus("Erro ao listar aeroporto...: " + customResponse.message, true);
-            console.log(customResponse.message);
-        }
+            if (customResponse.status === "SUCCESS") {
+                // Limpa qualquer conteúdo anterior da tabela
+                dataSelectDelete.innerHTML = '';
+                customResponse.payload.forEach(item => {
+                    const idaeroporto = item[0];
+                    const nome = item[1]; //colunas db
+                    const option = document.createElement('option');
+                    option.value = idaeroporto; // Valor da opção
+                    option.text = `${nome}`; // Texto visível
+                    dataSelectDelete.appendChild(option);
+                });
+            } else {
+                MessageStatus("Erro ao listar aeroportos...: " + customResponse.message, true);
+                console.log(customResponse.message);
+            }
         })
-        .catch((e)=>{
+        .catch((e) => {
+            MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
+            console.log("Falha grave ao listar." + e)
+        });
+
+    fetchListar()
+        .then(customResponse => {
+            if (customResponse.status === "SUCCESS") {
+                // Limpa qualquer conteúdo anterior da tabela
+                dataSelectUpdate.innerHTML = '';
+                customResponse.payload.forEach(item => {
+                    const idaeroporto = item[0];
+                    const nome = item[1]; //colunas db
+                    const option = document.createElement('option');
+                    option.value = idaeroporto; // Valor da opção
+                    option.text = `${nome}`; // Texto visível
+                    dataSelectUpdate.appendChild(option);
+                });
+            } else {
+                MessageStatus("Erro ao listar aeroportos...: " + customResponse.message, true);
+                console.log(customResponse.message);
+            }
+        })
+        .catch((e) => {
             MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
             console.log("Falha grave ao listar." + e)
         });
 }
 
-function excluir(selectedValue){
+function Excluir() {
+    var selectElementDelete = document.getElementById("dataSelectDelete"); //caixa de select
+    var selectedIndex = selectElementDelete.selectedIndex; // Índice da opção selecionada
+    var selectedOption = selectElementDelete.options[selectedIndex]; // Opção selecionada
+    var selectedValue = selectedOption.value; //valor da opcao a ser excluída
+
+
     fetchExcluir({
-        idAeroporto: selectedValue, 
+        idAeroporto: selectedValue,
     })
         .then(customResponse => {
-        if(customResponse.status === "SUCCESS"){
-            MessageStatus("Aeroporto excluido... ", false);
-        }else{
-            MessageStatus("Erro ao listar aeroporto...: " + customResponse.message, true);
-            console.log(customResponse.message);
-        }
+            if (customResponse.status === "SUCCESS") {
+                MessageStatus("Aeroporto excluido... ", false);
+            } else {
+                MessageStatus("Erro ao listar cidades...: " + customResponse.message, true);
+                console.log(customResponse.message);
+            }
         })
-        .catch((e)=>{
+        .catch((e) => {
             MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
             console.log("Falha grave ao listar." + e)
         });
@@ -224,7 +255,7 @@ function excluir(selectedValue){
 
 document.addEventListener("DOMContentLoaded", function() {
     ListarAeroporto();
-
+    ListarAeroportoComboBox();
     listarCidades();
 
     //cadastrar
@@ -242,17 +273,4 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    //excluir
-    const button = document.getElementById("btnExcluir");
-    var selectElement = document.getElementById("dataSelectDelete");
-
-    if (button) {
-        button.addEventListener('click', function() {
-            var selectedIndex = selectElement.selectedIndex; // Índice da opção selecionada
-            var selectedOption = selectElement.options[selectedIndex]; // Opção selecionada
-            var selectedValue = selectedOption.value; 
-    
-            excluir(selectedValue);
-        });
-    }
 });
