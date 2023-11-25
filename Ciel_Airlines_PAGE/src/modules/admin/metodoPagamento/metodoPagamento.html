@@ -6,7 +6,7 @@
     <title>Ciel Arlines | Admininistrador </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../adm.css">
-    <link rel="icon" href="../../assets/img/logo.png">
+    <link rel="icon" href="../../../assets/img/logo.png">
 
 </head>
 <body>
@@ -115,7 +115,7 @@
                                 <div class="row" id="block">
                                     <div class="col">
                                         <p>               
-                                            <select id="dataSelect"></select>
+                                            <select id="dataSelectDelete"></select>
                                        </p>
                                        <p id="status" class="statusError"></p>
                                        <p id="button">
@@ -129,15 +129,13 @@
                         <p>
                             <button type="button" onclick="btnAlterar();" id="btn-s-alterar" class="functionButton" name="btnAlterar"><h6>Alterar  ></h6></button>
                         </p>
-                        <section class="sectionAlterar">
+                        <section class="sectionExcluir">
                             <form>
                                 <div class="row" id="block">
                                     <div class="col">
-                                    <p>     
-                                        <label for="dataSelect">Selecione o ID:</label><br/>          
-                                        <select id="dataSelect"></select>
-                                        <script src=""></script>     
-                                    </p>
+                                        <p>               
+                                            <select id="dataSelectUpdate
+"></select>
                                     <button type="button" onclick="btnAlterarInfo();" id="btnConfirmarAltInfo" name="btnConfirmar">Confirmar</button>
                                     </div>
                                 </div>
@@ -159,9 +157,7 @@
                                     <script src=""> </script>
                                     <div class="col"><button id="btnAlterar">Alterar</button></div>     
                                 </div>
-                                <div class="row" id="buttons">
-                                    <div class="col"><button type="button" src id="btnSair" name="btnVoltar">Voltar</button> </div>
-                                </div>
+
                                 <p id="status" class="statusError"></p>
                             </form>
                         </section>
@@ -171,7 +167,7 @@
         </div>
     </main>
     <!--referenciando os .js-->
-    <script src="./display.js"></script>
+    <script src="../display.js"></script>
     <script src="./aeronave.js"></script>
 </body>
 </html>

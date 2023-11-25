@@ -3,7 +3,7 @@ import express from "express";
 import { executeSelectAll, executeSelectByID, executeSelectAssentoByVoo,
          executeSelectTrechoByID, executeSelectTrecho, executeSelectAeronave,
          executeSelectAeroporto, executeSelectAeroportoByID, 
-         executeSelectAeronaveByID, executeSelectVoo, executeSelectVooByID, executeSelectTrechoBusca,
+         executeSelectAeronaveByID, executeSelectVoo, executeSelectVooByID,
         } from '../adapter/oraclebd/select';
 import { executeDeleteByID} from '../adapter/oraclebd/delete';
 import { executeInsertCompanhiaAerea, executeInsertMetodoPagamento, 
@@ -97,7 +97,7 @@ route.get("/selectVooByID", async(req:any, res:any)=>{
   } 
 
   cr.payload = (await resp).result;
-  cr.message = "Dado encontrado";
+  cr.message = "Dado excluido";
   cr.status = "SUCCESS"; 
   
   res.send(cr);
@@ -107,24 +107,6 @@ route.get("/selectVooByID", async(req:any, res:any)=>{
 // dia x trecho y( trecho vem pelo req)
 route.get("/selectSearch", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  const id = req.body.idTrecho as number;
-
-  const idSaida = req.body.idSaida as number;
-  const idChegada = req.body.idChegada as number;
-
-  console.log(id)
-  let resp = executeSelectTrechoBusca(idSaida, idChegada);
-
-  if ((await resp).err != null){
-    cr.message = (await resp).err;
-    cr.status = "ERROR";
-    res.send(cr);
-  } 
-
-  cr.payload = (await resp).result;
-  cr.message = "Dado encontrado";
-  cr.status = "SUCCESS"; 
   
   res.send(cr);
 });
