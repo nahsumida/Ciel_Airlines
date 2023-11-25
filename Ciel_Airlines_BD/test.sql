@@ -98,4 +98,4 @@ update AEROPORTO set id_cidade= 9 ,nome_aeroporto='bb', sigla='JES' where ID_AER
 
 select * from AEROPORTO
 
-                                  insert into voo (ID_VOO, TRECHO, AERONAVE, DATA, HORA_PARTIDA, HORA_CHEGADA, PRECO) VALUES (id_voo_seq.nextval, 49, 1, TO_DATE('2023/12/03', 'yyyy/mm/dd'), '8:00', '10:00', 120.0)
+insert into voo (ID_VOO, TRECHO, AERONAVE, DATA, HORA_PARTIDA, HORA_CHEGADA, PRECO) VALUES (id_voo_seq.nextval, 49, 1, TO_DATE('2023/12/03', 'yyyy/mm/dd'), '8:00', '10:00', 120.0)

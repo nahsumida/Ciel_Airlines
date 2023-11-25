@@ -135,7 +135,7 @@ route.get("/selectAeronave", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/selectAeronaveByID", async(req:any, res:any)=>{
+route.post("/selectAeronaveByID", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idAeronave as number;
@@ -155,7 +155,7 @@ route.get("/selectAeronaveByID", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/deleteAeronave", async(req:any, res:any)=>{
+route.delete("/deleteAeronave", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idAeronave as number;
@@ -208,7 +208,7 @@ route.get("/selectAeroportoByID", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/selectAeroporto", async(req:any, res:any)=>{
+route.post("/selectAeroporto", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   let resp = executeSelectAeroporto();
@@ -226,7 +226,7 @@ route.get("/selectAeroporto", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/deleteAeroporto", async(req:any, res:any)=>{
+route.delete("/deleteAeroporto", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idAeroporto as number;
@@ -246,7 +246,7 @@ route.get("/deleteAeroporto", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/updateAeroporto", async(req:any, res:any)=>{
+route.post("/updateAeroporto", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   let id = req.body.idAeroporto as number;
@@ -270,7 +270,7 @@ route.get("/updateAeroporto", async(req:any, res:any)=>{
 
 });
 
-route.get("/insertAeroporto", async(req:any, res:any)=>{
+route.put("/insertAeroporto", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const idCidade = req.body.idCidade as number;
@@ -325,7 +325,7 @@ route.get("/selectAssentoByVoo", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/selectAssentoByID", async(req:any, res:any)=>{
+route.post("/selectAssentoByID", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idAssento as number;
@@ -345,7 +345,7 @@ route.get("/selectAssentoByID", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/updateAssento", async(req:any, res:any)=>{
+route.post("/updateAssento", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   const id = req.body.idAssento as number;
@@ -385,7 +385,7 @@ route.get("/selectCidade", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/selectCidadeByID", async(req:any, res:any)=>{
+route.post("/selectCidadeByID", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idCidade as number;
@@ -425,7 +425,7 @@ route.delete("/deleteCidade", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/updateCidade", async(req:any, res:any)=>{
+route.post("/updateCidade", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   const id = req.body.idCidade as number;
@@ -446,7 +446,7 @@ route.get("/updateCidade", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/insertCidade", async(req:any, res:any)=>{
+route.put("/insertCidade", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const nomeCidade = req.body.nomeCidade as string;
@@ -491,7 +491,7 @@ route.get("/selectCompanhiaAerea", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/selectCompanhiaAereaByID", async(req:any, res:any)=>{
+route.post("/selectCompanhiaAereaByID", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idCompanhiaAerea as number;
@@ -511,7 +511,7 @@ route.get("/selectCompanhiaAereaByID", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/deleteCompanhiaAerea", async(req:any, res:any)=>{
+route.delete("/deleteCompanhiaAerea", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idCompanhiaAerea as number;
@@ -531,7 +531,7 @@ route.get("/deleteCompanhiaAerea", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/updateCompanhiaAerea", async(req:any, res:any)=>{
+route.post("/updateCompanhiaAerea", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   const id = req.body.idCompanhiaAerea as number;
@@ -552,7 +552,7 @@ route.get("/updateCompanhiaAerea", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/insertCompanhiaAerea", async(req:any, res:any)=>{
+route.put("/insertCompanhiaAerea", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const nomeCompanhia = req.body.nomeCompanhiaAerea as string;
@@ -597,7 +597,7 @@ route.get("/selectMetodoPagamento", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/selectMetodoPagamentoByID", async(req:any, res:any)=>{
+route.post("/selectMetodoPagamentoByID", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idMetodoPagamento as number;
@@ -617,7 +617,7 @@ route.get("/selectMetodoPagamentoByID", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/deleteMetodoPagamento", async(req:any, res:any)=>{
+route.delete("/deleteMetodoPagamento", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idMetodoPagamento as number;
@@ -637,7 +637,7 @@ route.get("/deleteMetodoPagamento", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/updateMetodoPagamento", async(req:any, res:any)=>{
+route.post("/updateMetodoPagamento", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   const id = req.body.idMetodoPagamento as number;
@@ -658,7 +658,7 @@ route.get("/updateMetodoPagamento", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/insertMetodoPagamento", async(req:any, res:any)=>{
+route.put("/insertMetodoPagamento", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   const id = req.body.idMetodoPagamento as number;
@@ -698,7 +698,7 @@ route.get("/selectTrecho", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/selectTrechoByID", async(req:any, res:any)=>{
+route.post("/selectTrechoByID", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idTrecho as number;
@@ -718,7 +718,7 @@ route.get("/selectTrechoByID", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/deleteTrecho", async(req:any, res:any)=>{
+route.delete("/deleteTrecho", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idTrecho as number;
@@ -738,7 +738,7 @@ route.get("/deleteTrecho", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/updateTrecho", async(req:any, res:any)=>{
+route.post("/updateTrecho", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   const id = req.body.idTrecho as number;
@@ -761,7 +761,7 @@ route.get("/updateTrecho", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/insertTrecho", async(req:any, res:any)=>{
+route.put("/insertTrecho", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   const aeroSaida = req.body.aeroSaida as number;

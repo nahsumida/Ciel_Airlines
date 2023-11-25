@@ -365,7 +365,7 @@ exports.route.get("/updateCidade", (req, res) => __awaiter(void 0, void 0, void 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/insertCidade", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.put("/insertCidade", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const nomeCidade = req.body.nomeCidade;
     if (nomeCidade === undefined) {
