@@ -339,6 +339,7 @@ exports.route.post("/selectCidadeByID", (req, res) => __awaiter(void 0, void 0, 
 exports.route.delete("/deleteCidade", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idCidade;
+    console.log(id);
     let resp = (0, delete_1.executeDeleteByID)('CIDADE', id);
     if ((yield resp).err != null) {
         cr.message = (yield resp).err;
