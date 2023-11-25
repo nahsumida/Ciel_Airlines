@@ -33,7 +33,7 @@ function listarCidades(){
 
             customResponse.payload.forEach(item => {
                 const idcidade = item[0];
-                const nome = item[1];
+                const nome = item[2];
 
                 const option = document.createElement('option');
                 option.value = idcidade; // Valor da opção
@@ -64,8 +64,8 @@ function ListarAeroporto(){
         // Preenche a tabela com os dados da resposta
         customResponse.payload.forEach(item => {
             const idaero = item[0];
-            const idcidade = item[1];
-            const nome = item[2]
+            const idcidade = item[2];
+            const nome = item[1]
             const sigla = item[3]
 
             const row = dataBody.insertRow();
@@ -188,10 +188,10 @@ function ListarAeroportoComboBox() {
                 // Limpa qualquer conteúdo anterior da tabela
                 dataSelectDelete.innerHTML = '';
                 customResponse.payload.forEach(item => {
-                    const idaeroporto = item[0];
+                    const idAeroporto = item[0];
                     const nome = item[1]; //colunas db
                     const option = document.createElement('option');
-                    option.value = idaeroporto; // Valor da opção
+                    option.value = idAeroporto; // Valor da opção
                     option.text = `${nome}`; // Texto visível
                     dataSelectDelete.appendChild(option);
                 });
@@ -229,6 +229,13 @@ function ListarAeroportoComboBox() {
         });
 }
 
+//Funcao envia request para o endpoint para deletar Cidades
+function fetchExcluir(body) {
+    const requestOptions = {
+        method: 'DELETE', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
+    };
+    return fetch('http://localhost:3000/deleteAeroporto', requestOptions).then(T => T.json())
+}
 function Excluir() {
     var selectElementDelete = document.getElementById("dataSelectDelete"); //caixa de select
     var selectedIndex = selectElementDelete.selectedIndex; // Índice da opção selecionada
