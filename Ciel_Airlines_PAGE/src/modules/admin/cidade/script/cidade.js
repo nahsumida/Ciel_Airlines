@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const btnAlterar = document.getElementById("btnAlterar");
     var selectElementUpdate = document.getElementById("dataSelectUpdate");
-    var newInput = document.getElementById("nomeCidade");
+    var newInput = document.getElementById("newnomeCidade");
     
     //caso o botao de excluir seja clicado -> exclui opcao desejada da tabela
     if (btnAlterar) {
