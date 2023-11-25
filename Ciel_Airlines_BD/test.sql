@@ -106,7 +106,9 @@ select * from trecho
 
 insert into voo (ID_VOO, TRECHO, AERONAVE, DATA, HORA_PARTIDA, HORA_CHEGADA, PRECO) VALUES (id_voo_seq.nextval, 51, 1,TO_DATE('03/12/2023', 'dd/mm/yyyy'), '8:00', '10:00', 120.0)
 
-select * from voo;
+
+
+
 SELECT
     v.ID_VOO,
     v.data,

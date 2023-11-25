@@ -35,7 +35,6 @@ function ListarCidadeComboBox() {
             if (customResponse.status === "SUCCESS") {
                 // Limpa qualquer conteúdo anterior da tabela
                 dataSelectDelete.innerHTML = '';
-                dataSelectUpdate.innerHTML = '';
 
                 customResponse.payload.forEach(item => {
                     const idCidade = item[0];
@@ -46,6 +45,32 @@ function ListarCidadeComboBox() {
                     option.text = `${nome}`; // Texto visível
 
                     dataSelectDelete.appendChild(option);
+
+                });
+            } else {
+                MessageStatus("Erro ao listar cidades...: " + customResponse.message, true);
+                console.log(customResponse.message);
+            }
+        })
+        .catch((e) => {
+            MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
+            console.log("Falha grave ao listar." + e)
+        });
+
+        fetchListar()
+        .then(customResponse => {
+            if (customResponse.status === "SUCCESS") {
+                // Limpa qualquer conteúdo anterior da tabela
+                dataSelectUpdate.innerHTML = '';
+
+                customResponse.payload.forEach(item => {
+                    const idCidade = item[0];
+                    const nome = item[1]; //colunas db
+
+                    const option = document.createElement('option');
+                    option.value = idCidade; // Valor da opção
+                    option.text = `${nome}`; // Texto visível
+
                     dataSelectUpdate.appendChild(option);
 
                 });
