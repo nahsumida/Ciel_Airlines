@@ -13,7 +13,7 @@ function MessageStatus(msg, error) {
 LISTAR
 */
 //Funcao envia request para o endpoint para listar Cidades
-function fetchListar(body) {
+export function fetchListarCidade(body) {
     const requestOptions = {
         method: 'GET', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
     };
@@ -23,7 +23,7 @@ function fetchListar(body) {
 function ListarCidadeComboBox() {
     const dataSelectDelete = document.getElementById('dataSelectDelete');
     const dataSelectUpdate = document.getElementById('dataSelectUpdate');
-    fetchListar()
+    fetchListarCidade()
         .then(customResponse => {
             if (customResponse.status === "SUCCESS") {
                 // Limpa qualquer conteúdo anterior da tabela
@@ -45,7 +45,7 @@ function ListarCidadeComboBox() {
             MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
             console.log("Falha grave ao listar." + e)
         });
-        fetchListar()
+        fetchListarCidade()
         .then(customResponse => {
             if (customResponse.status === "SUCCESS") {
                 // Limpa qualquer conteúdo anterior da tabela
@@ -70,7 +70,7 @@ function ListarCidadeComboBox() {
 }
 function ListarCidade() {
     const dataBody = document.getElementById('dataBody');
-    fetchListar()
+    fetchListarCidade()
         .then(customResponse => {
             if (customResponse.status === "SUCCESS") {
                 // Limpa qualquer conteúdo anterior da tabela

@@ -233,6 +233,7 @@ export const executeSelectAeroporto = async() => {
         let selectString = `SELECT
                                 A.ID_AEROPORTO,
                                 A.NOME_AEROPORTO,
+                                A.id_CIDADE,
                                 i.NOME_CIDADE,
                                 A.Sigla
                             FROM

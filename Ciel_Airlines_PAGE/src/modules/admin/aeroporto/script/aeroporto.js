@@ -10,8 +10,6 @@ function MessageStatus(msg, error){
     pStatus.textContent = msg;
 }
 
-
-
 //LISTAR 
 
 function fetchListar(body){
@@ -22,18 +20,15 @@ function fetchListar(body){
     return fetch('http://localhost:3000/selectAeroporto', requestOptions).then(T => T.json())
 }
 
-
 function listarCidades(){
-    const aeroSaida = document.getElementById('aeroSaida');
-
     fetchListar()
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
             IDCidade.innerHTML = '';
 
             customResponse.payload.forEach(item => {
-                const idcidade = item[0];
-                const nome = item[2];
+                const idcidade = item[2];
+                const nome = item[3];
 
                 const option = document.createElement('option');
                 option.value = idcidade; // Valor da opção
@@ -64,9 +59,9 @@ function ListarAeroporto(){
         // Preenche a tabela com os dados da resposta
         customResponse.payload.forEach(item => {
             const idaero = item[0];
-            const idcidade = item[2];
+            const idcidade = item[3];
             const nome = item[1]
-            const sigla = item[3]
+            const sigla = item[4]
 
             const row = dataBody.insertRow();
             const cell1 = row.insertCell(0);
@@ -91,7 +86,6 @@ function ListarAeroporto(){
 }
 
 
-
 //INSERIR
 
 function fetchInserir(body){
@@ -114,6 +108,7 @@ function selecionouIDCidade(){
     }
     return resultado;
 }
+
 function preencheuNomeAeroporto(){
     let resultado = false;
 
@@ -123,6 +118,7 @@ function preencheuNomeAeroporto(){
     }
     return resultado;
 }
+
 function preencheuSigla(){
     let resultado = false;
 
@@ -134,7 +130,8 @@ function preencheuSigla(){
 }
 
 
-function inserirAeroporto(IdCidade){
+function inserirAeroporto(idCidade){
+    console.log("id cidaadeeee " + idCidade)
     if(!preencheuNomeAeroporto()){
         MessageStatus("Preencha o NOME do aeroporto!", true);
         return
@@ -153,7 +150,7 @@ function inserirAeroporto(IdCidade){
     const SiglaAeroporto = document.getElementById("siglaAeroporto").value;
 
     fetchInserir({
-        idCidade: IdCidade,
+        idCidade: idCidade,
         nomeAeroporto: NomeAeroporto,
         sigla: SiglaAeroporto
     })
@@ -260,24 +257,13 @@ function Excluir() {
         });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    ListarAeroporto();
-    ListarAeroportoComboBox();
-    listarCidades();
-
-    //cadastrar
-    const btnCadastrar = document.getElementById("btnCadastrar");
-    var IDCidade = document.getElementById("IDCidade");
-
-    if (btnCadastrar) {
-        btnCadastrar.addEventListener('click', function() {
-            var selectedIndex = IDCidade.selectedIndex; // Índice da opção selecionada
-            var selectedOption = IDCidade.options[selectedIndex]; // Opção selecionada
-            var selectedID = selectedOption.value; 
-
-            console.log(selectedID)
-            inserirAeroporto(selectedID);
+document.addEventListener("DOMContentLoaded", function () {
+    // Adiciona um ouvinte de evento para o botão
+    const btnReload = document.getElementById("btnReload");
+    if (btnReload) {
+        btnReload.addEventListener("click", function () {
+            // Recarrega a página
+            location.reload();
         });
     }
-
 });
