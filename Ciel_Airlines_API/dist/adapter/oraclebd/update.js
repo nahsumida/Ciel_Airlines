@@ -185,14 +185,13 @@ const executeUpdateTrecho = (id, aeroSaida, aeroChegada) => __awaiter(void 0, vo
     }
 });
 exports.executeUpdateTrecho = executeUpdateTrecho;
-//let updateString = `update AEROPORTO set id_cidade=` + idCidade +` ,nome_aeroporto='` + nomeAeroporto + `', sigla='` + sigla + `' where ID_AEROPORTO = ` + id
 //atualiza os dados de um assento de id especifico
 const executeUpdateAeroporto = (id, idCidade, nomeAeroporto, sigla) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
     try {
         connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
-        let updateString = `update AEROPORTO set sigla='` + sigla + `' where ID_AEROPORTO = ` + id;
+        let updateString = `update AEROPORTO set id_cidade=` + idCidade + ` ,nome_aeroporto='` + nomeAeroporto + `', sigla='` + sigla + `' where ID_AEROPORTO = ` + id;
         console.log(updateString);
         let resUpdate = yield connection.execute(updateString);
         console.log(resUpdate);
