@@ -143,9 +143,12 @@
                             <form>
                                 <div class="row" id="block">
                                     <div class="col">
-                                        <p>               
+                                        <p>     
+                                            <label for="dataSelectUpdate">Selecione o ID:</label><br/>          
                                             <select id="dataSelectUpdate"></select>
-                                    <button type="button" onclick="btnAlterarInfo();" id="btnConfirmarAltInfo" name="btnConfirmar">Confirmar</button>
+                                            <script src=""></script>     
+                                        </p>
+                                        <button type="button" onclick="btnAlterarInfo();" id="btnConfirmarAltInfo" name="btnConfirmar">Confirmar</button>
                                     </div>
                                 </div>
                                 <p id="status" class="statusError"></p>
@@ -183,7 +186,7 @@
             </div>
         </div>
     </main>
-    <script src="../display.js"></script>
     <script src="./script/aeroporto.js"></script>
+    <script src="../display.js"></script>
 </body>
 </html>

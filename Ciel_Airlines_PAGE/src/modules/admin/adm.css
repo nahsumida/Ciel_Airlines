@@ -133,30 +133,6 @@ a.link-button {
 }
 /*section blocos de formularios*/
 
-#aeroporto{
-   display: none;
-}
-/*#cidades{
-    display:none;
-}*/
-#companhia_aerea{
-    display:none;
-}
-#voo{
-    display:none;
-}
-#trecho{
-    display:none;
-}
-#assento{
-    display:none;
-}
-#metodo_pagamento{
-    display:none;
-}
-#venda{
-    display:none;
-}
 
 .bloco{
     /*border: 3px solid green;*/
@@ -281,6 +257,7 @@ button.functionButton{
 .sectionCadastrar{
     display:block;
 }
+
 .sectionExcluir{
     display:none;
 }

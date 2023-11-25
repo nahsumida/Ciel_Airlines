@@ -94,47 +94,47 @@
                             <button type="button" onclick="btnCadastrar();" id="btn-s-cadastrar" class="functionButton" name=""><h6>Cadastrar  ></h6></button>
                         </p>
                         <section class="sectionCadastrar">
-                        <form>
-                            <div class="row" id="block">
-                                <div class="col">
-                                    <p>
-                                        <label for="Modelo">Modelo Aeronave:</label><br/>
-                                        <input type="text" id="Modelo" name="Modelo" maxlength="10"/>
-                                    </p>
-                                    <p>
-                                        <label for="NumIdentificacao">Número Identificação:</label><br/>
-                                        <input type="integer" id="NumIdentificacao" name="NumIdentificacao" maxlength="10"/>
-                                    </p>
-                                    <p>
-                                        <label for="fabricante">Fabricante:</label><br/>
-                                        <select name="fabricante" id="fabricante"  >
-                                        <option value="0" selected>Selecione: </option>
-                                        <option value="1">Boeing</option>
-                                        <option value="2">Airbus</option>
-                                        <option value="3">Embraer</option>
-                                        </select>
-                                    </p>
+                            <form>
+                                <div class="row" id="block">
+                                    <div class="col">
+                                        <p>
+                                            <label for="Modelo">Modelo Aeronave:</label><br/>
+                                            <input type="text" id="Modelo" name="Modelo" maxlength="10"/>
+                                        </p>
+                                        <p>
+                                            <label for="NumIdentificacao">Número Identificação:</label><br/>
+                                            <input type="integer" id="NumIdentificacao" name="NumIdentificacao" maxlength="10"/>
+                                        </p>
+                                        <p>
+                                            <label for="fabricante">Fabricante:</label><br/>
+                                            <select name="fabricante" id="fabricante"  >
+                                            <option value="0" selected>Selecione: </option>
+                                            <option value="1">Boeing</option>
+                                            <option value="2">Airbus</option>
+                                            <option value="3">Embraer</option>
+                                            </select>
+                                        </p>
+                                    </div>
+                                    <div class="col">
+                                        <p>
+                                            <label for="CompanhiaAerea">Companhia Aerea:</label><br/>
+                                            <select name="CompanhiaAerea" id="CompanhiaAerea"></select>
+                                        </p>
+                                        <p>
+                                            <label for="anoFabricacao">Ano de fabricação:</label><br/>
+                                            <input type="text" id="anoFabricacao" name="anoFabricacao" maxlength="4" size="5"/>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <p>
-                                        <label for="CompanhiaAerea">Companhia Aerea:</label><br/>
-                                        <select name="CompanhiaAerea" id="CompanhiaAerea"></select>
+                                <div class="row" id="block">
+                                    <div class="col">
+                                    <p id="buttonCadastrar">
+                                        <button type="button" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
                                     </p>
-                                    <p>
-                                        <label for="anoFabricacao">Ano de fabricação:</label><br/>
-                                        <input type="text" id="anoFabricacao" name="anoFabricacao" maxlength="4" size="5"/>
-                                    </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row" id="block">
-                                <div class="col">
-                                <p id="buttonCadastrar">
-                                    <button type="button" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
-                                </p>
-                                </div>
-                            </div>
-                            <p id="status" class="statusError"></p>
-                        </form>
+                                <p id="status" class="statusError"></p>
+                            </form>
                         </section>
                         <!--Seção de Excluir uma Aeronave-->
                         <p>
@@ -165,9 +165,13 @@
                             <form>
                                 <div class="row" id="block">
                                     <div class="col">
-                                        <p>               
+                                        <p>     
+                                            <label for="dataSelectUpdate">Selecione o ID:</label><br/>          
                                             <select id="dataSelectUpdate"></select>
-                                    <button type="button" onclick="btnAlterarInfo();" id="btnConfirmarAltInfo" name="btnConfirmar">Confirmar</button>
+                                            <script src=""></script>     
+                                        </p>
+                                        <button type="button" onclick="btnAlterarInfo();" id="btnConfirmarAltInfo" name="btnConfirmar">Confirmar</button>
+                                        
                                     </div>
                                 </div>
                                 <p id="status" class="statusError"></p>
@@ -218,7 +222,6 @@
             </div>
         </div>
     </main>
-    <script src=".../display.js"></script>
-    <script src="./aeronave.js"></script>
+    <script src="../display.js"></script>
 </body>
 </html>
