@@ -336,7 +336,7 @@ exports.route.get("/selectCidadeByID", (req, res) => __awaiter(void 0, void 0, v
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/deleteCidade", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.delete("/deleteCidade", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idCidade;
     let resp = (0, delete_1.executeDeleteByID)('CIDADE', id);

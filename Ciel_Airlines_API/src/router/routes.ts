@@ -405,7 +405,7 @@ route.get("/selectCidadeByID", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/deleteCidade", async(req:any, res:any)=>{
+route.delete("/deleteCidade", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idCidade as number;

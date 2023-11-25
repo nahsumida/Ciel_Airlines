@@ -23,7 +23,7 @@ function fetchListar(body){
 //Funcao envia request para o endpoint para deletar Cidades
 function fetchExcluir(body){
     const requestOptions = {
-        method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+        method: 'DELETE', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
 
     return fetch('http://localhost:3000/deleteCidade', requestOptions).then(T => T.json())
