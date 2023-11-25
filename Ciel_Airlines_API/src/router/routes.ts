@@ -7,10 +7,114 @@ import { executeDeleteByID} from '../adapter/oraclebd/delete';
 import { executeInsertCompanhiaAerea, executeInsertMetodoPagamento, 
          executeInsertCidade, executeInsertAeroporto, executeInsertTrecho } from "../adapter/oraclebd/insert";
 import { executeUpdateCompanhiaAerea, executeUpdateMetodoPagamento, 
-         executeUpdateCidade, executeUpdateAssento, executeUpdateTrecho } from "../adapter/oraclebd/update";
+         executeUpdateCidade, executeUpdateAssento, executeUpdateTrecho,
+         executeUpdateAeroporto } from "../adapter/oraclebd/update";
 
 import { CustomResponse } from '../model/customResponse';
 export const route = express.Router();
+
+/*
+// VENDA
+route.get("/selectVenda", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+
+  res.send(cr);
+});
+
+route.get("/selectVendaByID", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+  
+  res.send(cr);
+});
+
+route.get("/deleteVenda", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+
+  const id = req.body.idVenda as number;
+
+  // mudaro a funcao de venda para atualizar o assento do voo 
+  let resp = executeDeleteByID('AERONAVE', id);
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await resp).result;
+  cr.message = "Dado excluido";
+  cr.status = "SUCCESS"; 
+  
+  res.send(cr);
+});
+
+route.get("/updateVenda", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+  
+  res.send(cr);
+});
+
+route.get("/insertVenda", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+  
+  res.send(cr);
+});
+*/
+
+/*
+// VOO
+route.get("/selectVoo", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+
+  res.send(cr);
+});
+
+route.get("/selectVooByID", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+  
+  res.send(cr);
+});
+
+//pesquisa de voos de um trecho especifico filtrado por data
+// dia x trecho y( trecho vem pelo req)
+route.get("/selectVooByDate", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+  
+  res.send(cr);
+});
+
+route.get("/deleteVoo", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+
+  const id = req.body.idVoo as number;
+
+  let resp = executeDeleteByID('VOO', id);
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await resp).result;
+  cr.message = "Dado excluido";
+  cr.status = "SUCCESS"; 
+  
+  res.send(cr);
+});
+
+route.get("/updateVoo", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+  
+  res.send(cr);
+});
+
+route.get("/insertVoo", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+  
+  res.send(cr);
+});
+*/
 
 // AERNAVE
 route.get("/selectAeronave", async(req:any, res:any)=>{
@@ -50,13 +154,27 @@ route.get("/selectAeronaveByID", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-/*
+
 route.get("/deleteAeronave", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+
+  const id = req.body.idAeronave as number;
+
+  let resp = executeDeleteByID('AERONAVE', id);
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await resp).result;
+  cr.message = "Dado excluido";
+  cr.status = "SUCCESS"; 
   
   res.send(cr);
 });
-
+/*
 route.get("/updateAeronave", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
@@ -107,25 +225,57 @@ route.get("/selectAeroporto", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-/*
+
 route.get("/deleteAeroporto", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+
+  const id = req.body.idAeroporto as number;
+
+  let resp = executeDeleteByID('AEROPORTO', id);
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await resp).result;
+  cr.message = "Dado excluido";
+  cr.status = "SUCCESS"; 
   
   res.send(cr);
 });
 
 route.get("/updateAeroporto", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
+
+  let id = req.body.idAeroporto as number;
+  const idCidade = req.body.idCidade as number;
+  const nomeAeroporto = req.body.nomeAeroporto as string;
+  const sigla = req.body.sigla as string;
+
+  let resp = executeUpdateAeroporto(id, idCidade, nomeAeroporto, sigla);
+  console.log(resp)
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } else {
+    cr.payload = (await resp).result;
+    cr.message = "Dado inserido";
+    cr.status = "SUCCESS"; 
+    
   res.send(cr);
+  }
+
 });
-*/
+
 route.get("/insertAeroporto", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const idCidade = req.body.idCidade as number;
-  const nomeAeroporto = req.body.nomeAeroporto as number;
-  const sigla = req.body.sigla as number;
+  const nomeAeroporto = req.body.nomeAeroporto as string;
+  const sigla = req.body.sigla as string;
 
   if (nomeAeroporto === undefined){
     cr.message = "nome aeroporto invalido";
@@ -631,77 +781,3 @@ route.get("/insertTrecho", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-
-
-/*
-// VENDA
-route.get("/selectVenda", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-
-  res.send(cr);
-});
-
-route.get("/selectVendaByID", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-route.get("/deleteVenda", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-route.get("/updateVenda", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-route.get("/insertVenda", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-*/
-/*
-// VOO
-route.get("/selectVoo", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-
-  res.send(cr);
-});
-
-route.get("/selectVooByID", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-//pesquisa de voos de um trecho especifico filtrado por data
-// dia x trecho y( trecho vem pelo req)
-route.get("/selectVooByDate", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-route.get("/deleteVoo", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-route.get("/updateVoo", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-route.get("/insertVoo", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-*/

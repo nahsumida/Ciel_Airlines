@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.executeUpdateTrecho = exports.executeUpdateAssento = exports.executeUpdateCidade = exports.executeUpdateMetodoPagamento = exports.executeUpdateCompanhiaAerea = void 0;
+exports.executeUpdateAeroporto = exports.executeUpdateTrecho = exports.executeUpdateAssento = exports.executeUpdateCidade = exports.executeUpdateMetodoPagamento = exports.executeUpdateCompanhiaAerea = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
 const config_1 = require("./config");
 //atualiza um dado de companhia aerea no banco de dados
@@ -185,3 +185,37 @@ const executeUpdateTrecho = (id, aeroSaida, aeroChegada) => __awaiter(void 0, vo
     }
 });
 exports.executeUpdateTrecho = executeUpdateTrecho;
+//let updateString = `update AEROPORTO set id_cidade=` + idCidade +` ,nome_aeroporto='` + nomeAeroporto + `', sigla='` + sigla + `' where ID_AEROPORTO = ` + id
+//atualiza os dados de um assento de id especifico
+const executeUpdateAeroporto = (id, idCidade, nomeAeroporto, sigla) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let updateString = `update AEROPORTO set sigla='` + sigla + `' where ID_AEROPORTO = ` + id;
+        console.log(updateString);
+        let resUpdate = yield connection.execute(updateString);
+        console.log(resUpdate);
+        yield connection.commit();
+        const rowsAffected = resUpdate.rowsAffected;
+        if (rowsAffected !== undefined && rowsAffected === 1) {
+            resp.result = rowsAffected;
+        }
+        else {
+            resp.err = 'Erro ao atualizar dado na tabela';
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        return resp;
+    }
+});
+exports.executeUpdateAeroporto = executeUpdateAeroporto;

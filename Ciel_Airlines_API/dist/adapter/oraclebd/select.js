@@ -250,6 +250,7 @@ const executeSelectAeroporto = () => __awaiter(void 0, void 0, void 0, function*
         connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT
                                 A.ID_AEROPORTO,
+                                A.NOME_AEROPORTO,
                                 i.NOME_CIDADE,
                                 A.Sigla
                             FROM
