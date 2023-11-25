@@ -40,11 +40,11 @@ function preencherTabela(data) {
         const cell6 = row.insertCell(5);
 
         
-        cell1.textContent = item.ID;
+        cell1.value = item.ID;
         cell2.textContent = item.Modelo;
         cell3.textContent = item.NumIdentificacao;
         cell4.textContent = item.Fabricante;
-        cell5.textContent = item['Companhia Aerea']; // Colchetes usados para acessar chave com espaço
+        cell5.textContent = item['Companhia Aerea']; 
         cell6.textContent = item.Ano;
     });
 }

@@ -184,7 +184,7 @@ section.selectTable{
     margin-top: 30px;
     margin-bottom: 30px;
     width: 90%;
-    border: 3px solid red;
+
 }
 .linhaPar {
     background-color: #f3f3f3;
@@ -196,9 +196,13 @@ background-color: #c6c6c6;
 table{ 
 width: 100%;
 margin-bottom: 30px;
+background-color: #f0e5da;
+border-left: 2px solid #f0e5da;
+
 }
 th{
-    border: 3px solid green
+    border-right: 2px solid #f0e5da;
+    background-color: #df8cc6;
 }
 
 /*formulario*/
