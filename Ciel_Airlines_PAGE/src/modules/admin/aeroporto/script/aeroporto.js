@@ -257,8 +257,27 @@ function Excluir() {
         });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Adiciona um ouvinte de evento para o botão
+document.addEventListener("DOMContentLoaded", function() {
+    ListarAeroporto();
+    ListarAeroportoComboBox();
+    listarCidades();
+
+    //cadastrar
+    const btnCadastrar = document.getElementById("btnCadastrar");
+    var IDCidade = document.getElementById("IDCidade");
+
+    if (btnCadastrar) {
+        btnCadastrar.addEventListener('click', function() {
+            var selectedIndex = IDCidade.selectedIndex; // Índice da opção selecionada
+            var selectedOption = IDCidade.options[selectedIndex]; // Opção selecionada
+            var selectedID = selectedOption.value; 
+            console.log("id cidaadeeee aqqqaqsa " + selectedID)
+
+            console.log(selectedID)
+            inserirAeroporto(selectedID);
+        });
+    }
+
     const btnReload = document.getElementById("btnReload");
     if (btnReload) {
         btnReload.addEventListener("click", function () {
@@ -266,4 +285,5 @@ document.addEventListener("DOMContentLoaded", function () {
             location.reload();
         });
     }
+
 });
