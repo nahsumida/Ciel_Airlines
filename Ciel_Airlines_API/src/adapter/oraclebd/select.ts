@@ -289,3 +289,164 @@ export const executeSelectAeroportoByID = async(id: number) => {
         return resp;  
     }
 }
+
+//seleciona todos os dados de um aeroporto especifico  
+export const executeSelectVooByID = async(id: number) => {
+    let resp: DatabaseResponse = { result: undefined, err: null};
+    let connection;
+    try{
+        connection = await oracledb.getConnection(oraConnAttribs);
+      
+        let selectString = `SELECT
+        v.ID_VOO,
+        v.data,
+        v.HORA_PARTIDA,
+        v.HORA_CHEGADA,
+        v.PRECO,
+        a.NUM_IDENTIFICACAO,
+        chegada.NOME_AEROPORTO,
+        saida.NOME_AEROPORTO
+    FROM
+        VOO V
+    JOIN
+        trecho T on t.ID_TRECHO = v.TRECHO
+    Join
+        aeronave A on a.ID_AERONAVE = v.AERONAVE
+    join
+        AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_saida
+    join
+        AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_chegada
+    where 
+        v.id_voo = `+ id
+
+        console.log(selectString);
+        let resSelect = await connection.execute(selectString);
+
+        await connection.close();
+        resp.result = resSelect.rows;
+    }catch(e){
+        if(e instanceof Error){
+            resp.err = e.message;
+            console.log(e.message);
+        }else{
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    } finally {
+        return resp;  
+    }
+}
+
+//seleciona todos os dados de um aeroporto especifico  
+export const executeSelectVoo = async() => {
+    let resp: DatabaseResponse = { result: undefined, err: null};
+    let connection;
+    try{
+        connection = await oracledb.getConnection(oraConnAttribs);
+      
+        let selectString = `SELECT
+        v.ID_VOO,
+        v.data,
+        v.HORA_PARTIDA,
+        v.HORA_CHEGADA,
+        v.PRECO,
+        a.NUM_IDENTIFICACAO,
+        chegada.NOME_AEROPORTO,
+        saida.NOME_AEROPORTO
+    FROM
+        VOO V
+    JOIN
+        trecho T on t.ID_TRECHO = v.TRECHO
+    Join
+        aeronave A on a.ID_AERONAVE = v.AERONAVE
+    join
+        AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_saida
+    join
+        AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_chegada`
+        
+        console.log(selectString);
+        let resSelect = await connection.execute(selectString);
+
+        await connection.close();
+        resp.result = resSelect.rows;
+    }catch(e){
+        if(e instanceof Error){
+            resp.err = e.message;
+            console.log(e.message);
+        }else{
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    } finally {
+        return resp;  
+    }
+}
+
+//seleciona todos os dados de um aeroporto especifico  
+export const executeSelectVooBusca = async(idTrecho: number, dataVoo: any) => {
+    let resp: DatabaseResponse = { result: undefined, err: null};
+    let connection;
+    try{
+        connection = await oracledb.getConnection(oraConnAttribs);
+      
+        let selectString = `SELECT
+        v.ID_VOO,
+        v.data,
+        v.HORA_PARTIDA,
+        v.HORA_CHEGADA,
+        v.PRECO,
+        a.NUM_IDENTIFICACAO,
+        chegada.NOME_AEROPORTO,
+        saida.NOME_AEROPORTO
+    FROM
+        VOO V
+    JOIN
+        trecho T on t.ID_TRECHO = v.TRECHO
+    Join
+        aeronave A on a.ID_AERONAVE = v.AERONAVE
+    join
+        AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_saida
+    join
+        AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_chegada
+    where v.data = TO_DATE('` + dataVoo + `', 'dd/mm/yyyy') and v.TRECHO =`+ idTrecho
+
+        console.log(selectString);
+        let resSelect = await connection.execute(selectString);
+
+        await connection.close();
+        resp.result = resSelect.rows;
+    }catch(e){
+        if(e instanceof Error){
+            resp.err = e.message;
+            console.log(e.message);
+        }else{
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    } finally {
+        return resp;  
+    }
+}
+
+//seleciona todos os dados de um aeroporto especifico  
+export const executeSelectTrechoBusca = async(aeroSaida: number, aeroChegada: number) => {
+    let resp: DatabaseResponse = { result: undefined, err: null};
+    let connection;
+    try{
+        connection = await oracledb.getConnection(oraConnAttribs);
+      
+        let selectString = `select id_trecho from trecho where AERO_SAIDA = `+aeroSaida + ` and aero_chegada = `+ aeroChegada
+
+        console.log(selectString);
+        let resSelect = await connection.execute(selectString);
+
+        await connection.close();
+        resp.result = resSelect.rows;
+    }catch(e){
+        if(e instanceof Error){
+            resp.err = e.message;
+            console.log(e.message);
+        }else{
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    } finally {
+        return resp;  
+    }
+}

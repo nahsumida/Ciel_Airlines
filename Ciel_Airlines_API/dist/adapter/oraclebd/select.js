@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.executeSelectAeroportoByID = exports.executeSelectAeroporto = exports.executeSelectAeronaveByID = exports.executeSelectAeronave = exports.executeSelectTrechoByID = exports.executeSelectTrecho = exports.executeSelectAssentoByVoo = exports.executeSelectByID = exports.executeSelectAll = void 0;
+exports.executeSelectTrechoBusca = exports.executeSelectVooBusca = exports.executeSelectVoo = exports.executeSelectVooByID = exports.executeSelectAeroportoByID = exports.executeSelectAeroporto = exports.executeSelectAeronaveByID = exports.executeSelectAeronave = exports.executeSelectTrechoByID = exports.executeSelectTrecho = exports.executeSelectAssentoByVoo = exports.executeSelectByID = exports.executeSelectAll = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
 const config_1 = require("./config");
 //seleciona todas as linhas da tabela 
@@ -311,3 +311,164 @@ const executeSelectAeroportoByID = (id) => __awaiter(void 0, void 0, void 0, fun
     }
 });
 exports.executeSelectAeroportoByID = executeSelectAeroportoByID;
+//seleciona todos os dados de um aeroporto especifico  
+const executeSelectVooByID = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let selectString = `SELECT
+        v.ID_VOO,
+        v.data,
+        v.HORA_PARTIDA,
+        v.HORA_CHEGADA,
+        v.PRECO,
+        a.NUM_IDENTIFICACAO,
+        chegada.NOME_AEROPORTO,
+        saida.NOME_AEROPORTO
+    FROM
+        VOO V
+    JOIN
+        trecho T on t.ID_TRECHO = v.TRECHO
+    Join
+        aeronave A on a.ID_AERONAVE = v.AERONAVE
+    join
+        AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_saida
+    join
+        AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_chegada
+    where 
+        v.id_voo = ` + id;
+        console.log(selectString);
+        let resSelect = yield connection.execute(selectString);
+        yield connection.close();
+        resp.result = resSelect.rows;
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        return resp;
+    }
+});
+exports.executeSelectVooByID = executeSelectVooByID;
+//seleciona todos os dados de um aeroporto especifico  
+const executeSelectVoo = () => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let selectString = `SELECT
+        v.ID_VOO,
+        v.data,
+        v.HORA_PARTIDA,
+        v.HORA_CHEGADA,
+        v.PRECO,
+        a.NUM_IDENTIFICACAO,
+        chegada.NOME_AEROPORTO,
+        saida.NOME_AEROPORTO
+    FROM
+        VOO V
+    JOIN
+        trecho T on t.ID_TRECHO = v.TRECHO
+    Join
+        aeronave A on a.ID_AERONAVE = v.AERONAVE
+    join
+        AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_saida
+    join
+        AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_chegada`;
+        console.log(selectString);
+        let resSelect = yield connection.execute(selectString);
+        yield connection.close();
+        resp.result = resSelect.rows;
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        return resp;
+    }
+});
+exports.executeSelectVoo = executeSelectVoo;
+//seleciona todos os dados de um aeroporto especifico  
+const executeSelectVooBusca = (idTrecho, dataVoo) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let selectString = `SELECT
+        v.ID_VOO,
+        v.data,
+        v.HORA_PARTIDA,
+        v.HORA_CHEGADA,
+        v.PRECO,
+        a.NUM_IDENTIFICACAO,
+        chegada.NOME_AEROPORTO,
+        saida.NOME_AEROPORTO
+    FROM
+        VOO V
+    JOIN
+        trecho T on t.ID_TRECHO = v.TRECHO
+    Join
+        aeronave A on a.ID_AERONAVE = v.AERONAVE
+    join
+        AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_saida
+    join
+        AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_chegada
+    where v.data = TO_DATE('` + dataVoo + `', 'dd/mm/yyyy') and v.TRECHO =` + idTrecho;
+        console.log(selectString);
+        let resSelect = yield connection.execute(selectString);
+        yield connection.close();
+        resp.result = resSelect.rows;
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        return resp;
+    }
+});
+exports.executeSelectVooBusca = executeSelectVooBusca;
+//seleciona todos os dados de um aeroporto especifico  
+const executeSelectTrechoBusca = (aeroSaida, aeroChegada) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let selectString = `select id_trecho from trecho where AERO_SAIDA = ` + aeroSaida + ` and aero_chegada = ` + aeroChegada;
+        console.log(selectString);
+        let resSelect = yield connection.execute(selectString);
+        yield connection.close();
+        resp.result = resSelect.rows;
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        return resp;
+    }
+});
+exports.executeSelectTrechoBusca = executeSelectTrechoBusca;

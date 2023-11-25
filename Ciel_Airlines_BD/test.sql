@@ -98,4 +98,35 @@ update AEROPORTO set id_cidade= 9 ,nome_aeroporto='bb', sigla='JES' where ID_AER
 
 select * from AEROPORTO
 
-insert into voo (ID_VOO, TRECHO, AERONAVE, DATA, HORA_PARTIDA, HORA_CHEGADA, PRECO) VALUES (id_voo_seq.nextval, 49, 1, TO_DATE('2023/12/03', 'yyyy/mm/dd'), '8:00', '10:00', 120.0)
+
+select * from assento
+
+
+select * from trecho
+
+insert into voo (ID_VOO, TRECHO, AERONAVE, DATA, HORA_PARTIDA, HORA_CHEGADA, PRECO) VALUES (id_voo_seq.nextval, 51, 1,TO_DATE('03/12/2023', 'dd/mm/yyyy'), '8:00', '10:00', 120.0)
+
+select * from voo;
+SELECT
+    v.ID_VOO,
+    v.data,
+    v.HORA_PARTIDA,
+    v.HORA_CHEGADA,
+    v.PRECO,
+    a.NUM_IDENTIFICACAO,
+    chegada.NOME_AEROPORTO,
+    saida.NOME_AEROPORTO
+FROM
+    VOO V
+JOIN
+    trecho T on t.ID_TRECHO = v.TRECHO
+Join
+    aeronave A on a.ID_AERONAVE = v.AERONAVE
+join
+    AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_saida
+join
+    AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_chegada
+where v.data = TO_DATE('03/12/2023', 'dd/mm/yyyy') and v.TRECHO = 51
+
+select * from trecho
+select id_trecho from trecho where AERO_SAIDA = 20 and aero_chegada = 17

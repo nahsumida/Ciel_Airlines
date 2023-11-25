@@ -66,48 +66,56 @@ route.get("/insertVenda", async(req:any, res:any)=>{
   res.send(cr);
 });
 */
-/*
 // VOO
-route.get("/selectVoo", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-
-  res.send(cr);
-});
-
-route.get("/selectVooByID", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
+exports.route.get("/selectVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    let resp = (0, select_1.executeSelectVoo)();
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+exports.route.get("/selectVooByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const id = req.body.idVoo;
+    console.log(id);
+    let resp = (0, select_1.executeSelectVooByID)(id);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
 //pesquisa de voos de um trecho especifico filtrado por data
 // dia x trecho y( trecho vem pelo req)
-route.get("/selectVooByDate", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-route.get("/deleteVoo", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-
-  const id = req.body.idVoo as number;
-
-  let resp = executeDeleteByID('VOO', id);
-
-  if ((await resp).err != null){
-    cr.message = (await resp).err;
-    cr.status = "ERROR";
+exports.route.get("/selectSearch", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
     res.send(cr);
-  }
-
-  cr.payload = (await resp).result;
-  cr.message = "Dado excluido";
-  cr.status = "SUCCESS";
-  
-  res.send(cr);
-});
-
+}));
+exports.route.get("/deleteVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const id = req.body.idVoo;
+    let resp = (0, delete_1.executeDeleteByID)('VOO', id);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+/*
 route.get("/updateVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   

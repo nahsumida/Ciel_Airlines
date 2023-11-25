@@ -2,7 +2,9 @@ import express from "express";
 
 import { executeSelectAll, executeSelectByID, executeSelectAssentoByVoo,
          executeSelectTrechoByID, executeSelectTrecho, executeSelectAeronave,
-         executeSelectAeroporto, executeSelectAeroportoByID, executeSelectAeronaveByID} from '../adapter/oraclebd/select';
+         executeSelectAeroporto, executeSelectAeroportoByID, 
+         executeSelectAeronaveByID, executeSelectVoo, executeSelectVooByID,
+        } from '../adapter/oraclebd/select';
 import { executeDeleteByID} from '../adapter/oraclebd/delete';
 import { executeInsertCompanhiaAerea, executeInsertMetodoPagamento, 
          executeInsertCidade, executeInsertAeroporto, executeInsertTrecho } from "../adapter/oraclebd/insert";
@@ -61,23 +63,49 @@ route.get("/insertVenda", async(req:any, res:any)=>{
 });
 */
 
-/*
+
 // VOO
 route.get("/selectVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
+  let resp = executeSelectVoo();
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await resp).result;
+  cr.message = "Dado excluido";
+  cr.status = "SUCCESS"; 
+  
   res.send(cr);
 });
 
 route.get("/selectVooByID", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+
+  const id = req.body.idVoo as number;
+  console.log(id)
+  let resp = executeSelectVooByID(id);
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await resp).result;
+  cr.message = "Dado excluido";
+  cr.status = "SUCCESS"; 
   
   res.send(cr);
 });
 
 //pesquisa de voos de um trecho especifico filtrado por data
 // dia x trecho y( trecho vem pelo req)
-route.get("/selectVooByDate", async(req:any, res:any)=>{
+route.get("/selectSearch", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   res.send(cr);
@@ -102,7 +130,7 @@ route.get("/deleteVoo", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-
+/*
 route.get("/updateVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
