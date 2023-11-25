@@ -11,9 +11,10 @@
 <body>
     <header id="header">
         <nav>
-            <div class="logo"><img src="../../../src/assets/img/logo_nome.png" width="80" height="80" alt="logo" draggable="false"></div>
+                        <div class="logo"><img src="../../../../src/assets/img/logo_nome.png" width="80" height="80" alt="logo" draggable="false"></div>
+
             <ul>
-                <li><a id="login" href="././../../index.html">Home</a></li>
+                <li><a id="login" href="././../../../index.html">Home</a></li>
             </ul>
         </nav>
     </header>
@@ -113,7 +114,7 @@
                                 <div class="row" id="block">
                                     <div class="col">
                                         <p>               
-                                            <select id="dataSelect"></select>
+                                            <select id="dataSelectDelete"></select>
                                        </p>
                                        <p id="status" class="statusError"></p>
                                        <p id="button"> 
@@ -131,15 +132,14 @@
                                 <div class="row" id="block">
                                     <div class="col">
                                     <p>     
-                                        <label for="dataSelect">Selecione o ID:</label><br/>          
-                                        <select id="dataSelect"></select>
+                                        <label for="dataSelectUpdate">Selecione o ID:</label><br/>          
+                                        <select id="dataSelectUpdate"></select>
                                         <script src=""></script>     
                                     </p>
                                     <button type="button" onclick="btnAlterarInfo();" id="btnConfirmarAltInfo" name="btnConfirmar">Confirmar</button>
                                     </div>
                                 </div>
                                 <p id="status" class="statusError"></p>
-                                
                             </form>
                         </section>
                         <section id="AlterarInfo">
@@ -163,8 +163,6 @@
                             </form>
                         </section>
                     </div>         
-                </section>
-                    </div>
                 </section>
             </div>
         </div>

@@ -196,15 +196,17 @@ background-color: #c6c6c6;
 table{ 
 width: 100%;
 margin-bottom: 30px;
-background-color: #f0e5da;
-border-left: 2px solid #f0e5da;
-
 }
 th{
-    border-right: 2px solid #f0e5da;
+    border-right: 2px solid #ffffffdd;;
     background-color: #df8cc6;
 }
+tbody{
+    background-color: rgba(255, 241, 201, 0.691);
+    border-left: 2px solid #ffffffdd;
+    border-right: 2px solid #ffffffdd;
 
+}
 /*formulario*/
 form{
     padding:12px;
