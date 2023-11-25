@@ -19,9 +19,11 @@ const config_1 = require("./config");
 const executeDeleteByID = (table, id) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
+    console.log("cheguei aqui");
     try {
         connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let deleteString = `DELETE ` + table + ` WHERE ID_` + table + ` = ` + id;
+        console.log(deleteString);
         let resDelete = yield connection.execute(deleteString);
         yield connection.commit();
         yield connection.close();

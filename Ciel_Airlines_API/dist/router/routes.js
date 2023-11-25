@@ -134,7 +134,7 @@ exports.route.get("/selectAeronave", (req, res) => __awaiter(void 0, void 0, voi
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/selectAeronaveByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/selectAeronaveByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idAeronave;
     console.log(id);
@@ -149,7 +149,7 @@ exports.route.get("/selectAeronaveByID", (req, res) => __awaiter(void 0, void 0,
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/deleteAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.delete("/deleteAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idAeronave;
     let resp = (0, delete_1.executeDeleteByID)('AERONAVE', id);
@@ -191,7 +191,7 @@ exports.route.get("/selectAeroportoByID", (req, res) => __awaiter(void 0, void 0
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/selectAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/selectAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     let resp = (0, select_1.executeSelectAeroporto)();
     if ((yield resp).err != null) {
@@ -204,7 +204,7 @@ exports.route.get("/selectAeroporto", (req, res) => __awaiter(void 0, void 0, vo
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/deleteAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.delete("/deleteAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idAeroporto;
     let resp = (0, delete_1.executeDeleteByID)('AEROPORTO', id);
@@ -218,7 +218,7 @@ exports.route.get("/deleteAeroporto", (req, res) => __awaiter(void 0, void 0, vo
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/updateAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/updateAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     let id = req.body.idAeroporto;
     const idCidade = req.body.idCidade;
@@ -238,7 +238,7 @@ exports.route.get("/updateAeroporto", (req, res) => __awaiter(void 0, void 0, vo
         res.send(cr);
     }
 }));
-exports.route.get("/insertAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.put("/insertAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const idCidade = req.body.idCidade;
     const nomeAeroporto = req.body.nomeAeroporto;
@@ -279,7 +279,7 @@ exports.route.get("/selectAssentoByVoo", (req, res) => __awaiter(void 0, void 0,
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/selectAssentoByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/selectAssentoByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idAssento;
     let resp = (0, select_1.executeSelectByID)('ASSENTO', id);
@@ -293,7 +293,7 @@ exports.route.get("/selectAssentoByID", (req, res) => __awaiter(void 0, void 0, 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/updateAssento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/updateAssento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idAssento;
     const status = req.body.status;
@@ -322,7 +322,7 @@ exports.route.get("/selectCidade", (req, res) => __awaiter(void 0, void 0, void 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/selectCidadeByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/selectCidadeByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idCidade;
     let resp = (0, select_1.executeSelectByID)('CIDADE', id);
@@ -350,7 +350,7 @@ exports.route.delete("/deleteCidade", (req, res) => __awaiter(void 0, void 0, vo
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/updateCidade", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/updateCidade", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idCidade;
     const nomeCompanhia = req.body.nomeCidade;
@@ -398,7 +398,7 @@ exports.route.get("/selectCompanhiaAerea", (req, res) => __awaiter(void 0, void 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/selectCompanhiaAereaByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/selectCompanhiaAereaByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idCompanhiaAerea;
     let resp = (0, select_1.executeSelectByID)('COMPANHIA_AEREA', id);
@@ -412,7 +412,7 @@ exports.route.get("/selectCompanhiaAereaByID", (req, res) => __awaiter(void 0, v
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/deleteCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.delete("/deleteCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idCompanhiaAerea;
     let resp = (0, delete_1.executeDeleteByID)('COMPANHIA_AEREA', id);
@@ -426,7 +426,7 @@ exports.route.get("/deleteCompanhiaAerea", (req, res) => __awaiter(void 0, void 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/updateCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/updateCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idCompanhiaAerea;
     const nomeCompanhia = req.body.nomeCompanhiaAerea;
@@ -441,7 +441,7 @@ exports.route.get("/updateCompanhiaAerea", (req, res) => __awaiter(void 0, void 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/insertCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.put("/insertCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const nomeCompanhia = req.body.nomeCompanhiaAerea;
     if (nomeCompanhia === undefined) {
@@ -474,7 +474,7 @@ exports.route.get("/selectMetodoPagamento", (req, res) => __awaiter(void 0, void
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/selectMetodoPagamentoByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/selectMetodoPagamentoByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idMetodoPagamento;
     let resp = (0, select_1.executeSelectByID)('METODO_PAGAMENTO', id);
@@ -488,7 +488,7 @@ exports.route.get("/selectMetodoPagamentoByID", (req, res) => __awaiter(void 0, 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/deleteMetodoPagamento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.delete("/deleteMetodoPagamento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idMetodoPagamento;
     let resp = (0, delete_1.executeDeleteByID)('METODO_PAGAMENTO', id);
@@ -502,7 +502,7 @@ exports.route.get("/deleteMetodoPagamento", (req, res) => __awaiter(void 0, void
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/updateMetodoPagamento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/updateMetodoPagamento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idMetodoPagamento;
     const nomeMetodo = req.body.nomeMetodoPagamento;
@@ -517,7 +517,7 @@ exports.route.get("/updateMetodoPagamento", (req, res) => __awaiter(void 0, void
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/insertMetodoPagamento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.put("/insertMetodoPagamento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idMetodoPagamento;
     const nomeMetodo = req.body.nomeMetodoPagamento;
@@ -546,7 +546,7 @@ exports.route.get("/selectTrecho", (req, res) => __awaiter(void 0, void 0, void 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/selectTrechoByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/selectTrechoByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idTrecho;
     let resp = (0, select_1.executeSelectTrechoByID)(id);
@@ -560,7 +560,7 @@ exports.route.get("/selectTrechoByID", (req, res) => __awaiter(void 0, void 0, v
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/deleteTrecho", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.delete("/deleteTrecho", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idTrecho;
     let resp = (0, delete_1.executeDeleteByID)('TRECHO', id);
@@ -574,7 +574,7 @@ exports.route.get("/deleteTrecho", (req, res) => __awaiter(void 0, void 0, void 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/updateTrecho", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/updateTrecho", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idTrecho;
     const aeroSaida = req.body.aeroSaida;
@@ -590,7 +590,7 @@ exports.route.get("/updateTrecho", (req, res) => __awaiter(void 0, void 0, void 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/insertTrecho", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.put("/insertTrecho", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const aeroSaida = req.body.aeroSaida;
     const aeroChegada = req.body.aeroChegada;

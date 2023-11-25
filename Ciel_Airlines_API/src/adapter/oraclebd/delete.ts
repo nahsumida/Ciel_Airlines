@@ -6,12 +6,12 @@ import { oraConnAttribs } from "./config";
 export const executeDeleteByID = async(table:string, id:any) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
     let connection;
-
+console.log("cheguei aqui")
     try{
         connection = await oracledb.getConnection(oraConnAttribs);
 
         let deleteString = `DELETE ` +  table + ` WHERE ID_` + table + ` = ` + id
-      
+      console.log(deleteString)
         let resDelete = await connection.execute(deleteString);
         
         await connection.commit();
