@@ -216,7 +216,7 @@ route.get("/insertAeronave", async(req:any, res:any)=>{
 });*/
 
 // AEROPORTO
-route.get("/selectAeroportoByID", async(req:any, res:any)=>{
+route.post("/selectAeroportoByID", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idAeroporto as number;
@@ -236,7 +236,7 @@ route.get("/selectAeroportoByID", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.post("/selectAeroporto", async(req:any, res:any)=>{
+route.get("/selectAeroporto", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   let resp = executeSelectAeroporto();

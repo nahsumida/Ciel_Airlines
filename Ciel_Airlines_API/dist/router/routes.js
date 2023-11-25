@@ -184,7 +184,7 @@ route.get("/insertAeronave", async(req:any, res:any)=>{
   res.send(cr);
 });*/
 // AEROPORTO
-exports.route.get("/selectAeroportoByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/selectAeroportoByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idAeroporto;
     console.log(id);
@@ -199,7 +199,7 @@ exports.route.get("/selectAeroportoByID", (req, res) => __awaiter(void 0, void 0
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.post("/selectAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.get("/selectAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     let resp = (0, select_1.executeSelectAeroporto)();
     if ((yield resp).err != null) {

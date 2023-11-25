@@ -35,32 +35,6 @@ function ListarCidadeComboBox() {
             if (customResponse.status === "SUCCESS") {
                 // Limpa qualquer conteúdo anterior da tabela
                 dataSelectDelete.innerHTML = '';
-
-                customResponse.payload.forEach(item => {
-                    const idCidade = item[0];
-                    const nome = item[1]; //colunas db
-
-                    const option = document.createElement('option');
-                    option.value = idCidade; // Valor da opção
-                    option.text = `${nome}`; // Texto visível
-
-                    dataSelectDelete.appendChild(option);
-
-                });
-            } else {
-                MessageStatus("Erro ao listar cidades...: " + customResponse.message, true);
-                console.log(customResponse.message);
-            }
-        })
-        .catch((e) => {
-            MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-            console.log("Falha grave ao listar." + e)
-        });
-
-        fetchListar()
-        .then(customResponse => {
-            if (customResponse.status === "SUCCESS") {
-                // Limpa qualquer conteúdo anterior da tabela
                 dataSelectUpdate.innerHTML = '';
 
                 customResponse.payload.forEach(item => {
@@ -71,6 +45,7 @@ function ListarCidadeComboBox() {
                     option.value = idCidade; // Valor da opção
                     option.text = `${nome}`; // Texto visível
 
+                    dataSelectDelete.appendChild(option);
                     dataSelectUpdate.appendChild(option);
 
                 });
@@ -191,13 +166,7 @@ function fetchExcluir(body) {
 }
 
 //Funcao para excluir o valor selecionado
-function Excluir() {
-    var selectElementDelete = document.getElementById("dataSelectDelete"); //caixa de select
-    var selectedIndex = selectElementDelete.selectedIndex; // Índice da opção selecionada
-    var selectedOption = selectElementDelete.options[selectedIndex]; // Opção selecionada
-    var selectedValue = selectedOption.value; //valor da opcao a ser excluída
-
-    
+function Excluir(selectedValue) {
     fetchExcluir({
         idCidade: selectedValue,
     })
@@ -226,24 +195,16 @@ function fetchAlterar(body) {
     return fetch('http://localhost:3000/updateCidade', requestOptions).then(T => T.json())
 }
 //Funcao para excluir o valor selecionado
-function Alterar() {
-    var selectElementUpdate = document.getElementById("dataSelectUpdate"); // caixa de seleçao do id
-    var selectedIndex = selectElementUpdate.selectedIndex; // Índice da opção selecionada
-    var selectedOption = selectElementUpdate.options[selectedIndex]; // Opção selecionada
-    var selectedValue = selectedOption.value; // //valor da opcao a ser selecionada
-
-    var newInput = document.getElementById("newnomeCidade"); // caixa de input
-    const nomeCidade = newInput.value; // pega valor inserido pela pessoa
-    console.log(nomeCidade); // verificar o valor
+function Alterar(selectedValue, alteredField) {
     fetchAlterar({
         idCidade: selectedValue,
-        nomeCidade: nomeCidade
+        nomeCidade: alteredField
     })
         .then(customResponse => {
             if (customResponse.status === "SUCCESS") {
                 MessageStatus("Cidade alterada... ", false);
             } else {
-                MessageStatus("Erro ao alterar cidades...: " + customResponse.message, true);
+                MessageStatus("Erro ao listar cidades...: " + customResponse.message, true);
                 console.log(customResponse.message);
             }
         })
@@ -258,26 +219,35 @@ function Alterar() {
 document.addEventListener("DOMContentLoaded", function () {
     ListarCidade();
     ListarCidadeComboBox();
+    const btnExcluir = document.getElementById("btnExcluir");
+    var selectElementDelete = document.getElementById("dataSelectDelete");
 
+    //caso o botao de excluir seja clicado -> exclui opcao desejada da tabela
+    if (btnExcluir) {
+        btnExcluir.addEventListener('click', function () {
+            var selectedIndex = selectElementDelete.selectedIndex; // Índice da opção selecionada
+            var selectedOption = selectElementDelete.options[selectedIndex]; // Opção selecionada
+            var selectedValue = selectedOption.value;
 
+            Excluir(selectedValue);
+        });
+    }
+
+    const btnAlterar = document.getElementById("btnAlterar");
+    var selectElementUpdate = document.getElementById("dataSelectUpdate");
+    var newInput = document.getElementById("newnomeCidade");
     
     //caso o botao de excluir seja clicado -> exclui opcao desejada da tabela
     if (btnAlterar) {
         btnAlterar.addEventListener('click',function(){
+            var selectedIndex = selectElementUpdate.selectedIndex; // Índice da opção selecionada
+            var selectedOption = selectElementUpdate.options[selectedIndex];
+            var selectedValue = selectedOption.value; // Opção selecionada
 
+            const nomeCidade = newInput.value; // pega valor inserido pela pessoa
+            console.log(nomeCidade); // verificar o valor
 
             Alterar(selectedValue, nomeCidade); // chama funcao para alterar 
         })
-    }
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Adiciona um ouvinte de evento para o botão
-    const btnReload = document.getElementById("btnReload");
-    if (btnReload) {
-        btnReload.addEventListener("click", function () {
-            // Recarrega a página
-            location.reload();
-        });
     }
 });
