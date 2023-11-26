@@ -139,6 +139,7 @@ a.link-button {
     background-color: #ffffffdd;
     font-size: 14px;
     padding: 0;
+    padding-bottom: 20px;
     height: fit-content;
     box-shadow: -1em 0.5em 2em rgba(98, 87, 87, 0.253);
     transition: box-shadow 0.3s;

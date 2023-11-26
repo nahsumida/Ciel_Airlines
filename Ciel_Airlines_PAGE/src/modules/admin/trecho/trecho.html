@@ -85,7 +85,7 @@
                                     <th class="">Sigla</th>
                                     </tr>
                                 </thead>
-                                <tbody id="dataBody"></tbody>
+                                <tbody id="dataBodyAero"></tbody>
                             </table>
                         </section>
                         <section class="selectTable">
@@ -100,6 +100,7 @@
                                 </thead>
                                 <tbody id="dataBody"></tbody>
                             </table>
+                            <button id="btnReload">Atualizar Tabela</button>
                         </section>
                         <!--Seção de Cadastro de Trecho-->
                         <p>
@@ -117,6 +118,9 @@
                                             <label for="AeroChegada">Aeroporto de Destino:</label><br/>
                                             <select id="aeroChegada" name="aeroChegada"></select>
                                         </p>
+                                        <p id="buttonCadastrar">
+                                            <button type="button" onclick="inserirTrecho();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
+                                        </p> 
                                     </div>
                                 </div>
                                 <p id="status" class="statusError"></p>
@@ -135,8 +139,7 @@
                                        </p>
                                        <p id="status" class="statusError"></p>
                                        <p id="button">
-                                           <script src="./script/companhiaAerea.js"></script>     
-                                           <button id="btnExcluir">Confirmar</button>
+                                           <button id="btnExcluir" onclick="Excluir();">Confirmar</button>
                                         </p>
                                     </div></div>
                             </form>
@@ -168,17 +171,17 @@
                                     <div class="col">
                                         <p>  
                                             <label for="aeroSaida">Aeroporto Partida:</label><br/>
-                                            <input type="text" id="aeroSaida" name="aeroSaida" maxlength="20"/>
+                                            <select id="newaeroSaida" name="aeroSaida"></select>
                                         </p>
                                         <p>  
                                             <label for="aeroChegada">Aeroporto Destino:</label><br/>
-                                            <input type="text" id="aeroChegada" name="aeroChegada" maxlength="20"/>
+                                            <select id="newaeroChegada" name="aeroChegada"></select>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row" id="buttons">
                                     <script src=""> </script>
-                                    <div class="col"><button id="btnAlterar">Alterar</button></div>     
+                                    <div class="col"><button id="btnAlterar" onclick="AlterarTrecho();">Alterar</button></div>     
                                 </div>
 
                                 <p id="status" class="statusError"></p>

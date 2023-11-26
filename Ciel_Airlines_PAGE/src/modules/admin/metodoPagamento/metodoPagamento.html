@@ -67,103 +67,24 @@
                 <!--
                 *** Formulários ***
                 -->
-                <!--Companhia Aérea-->
+                <!--METODO DE PAGAMENTO-->
                 <section class="col-8" id="cidades">
                     <div class="bloco">
                         <div class="block-title">
-                            <h4> <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M232-240h462l90-480H562L232-240ZM80-160l440-640h360L760-160H80Zm500-240q42 0 71-29t29-71q0-42-29-71t-71-29q-42 0-71 29t-29 71q0 42 29 71t71 29ZM232-240h462-462Z"/></svg>
-                                COMPANHIA AÉREA</h4>
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720Zm-720 80h640v-80H160v80Zm0 160v240h640v-240H160Zm0 240v-480 480Z"/></svg>                               
+                             METODO DE PAGAMENTO</h4>
                         </div>
-                        <!--Listar Tabela Companhia-->
+                        <!--Listar Tabela METODO DE PAGAMENTO-->
                         <section class="selectTable">
                             <table id="tblCompanhia" cellpadding="5" cellspacing="5">
                                 <thead>
                                     <tr>
                                     <th class="">ID</th>
-                                    <th class="">Nome_Companhia</th>
+                                    <th class="">Nome do Metodo</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tblCompanhiaDados"></tbody>
+                                <tbody id="dataBody"></tbody>
                             </table>
-                        </section>
-                        <!--Seção de Cadastro de Companhia-->
-                        <p>
-                            <button type="button" onclick="btnCadastrar();" id="btn-s-cadastrar" class="functionButton" name=""><h6>Cadastrar  ></h6></button>
-                        </p>
-                        <section class="sectionCadastrar">
-                            <form>
-                                <div class="row" id="block">
-                                    <div class="col">
-                                        <p>
-                                            <label for="nomeCompanhia">Nome da Companhia:</label><br/>
-                                            <input type="text" id="nomeCompanhia" name="nomeCompanhia" maxlength="20"/>
-                                        </p>
-                                        <p id="buttonCadastrar">
-                                            <button type="button" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Cadastrar</button>
-                                        </p> 
-                                    </div>
-                                </div>
-                                <p id="status" class="statusError"></p>
-                            </form>    
-                        </section>
-                        <!--Seção de Excluir uma Companhia-->
-                        <p>
-                            <button type="button" onclick="btnExcluir();" class="functionButton" id="btn-s-excluir" name="btnExcluir"><h6>Excluir  ></h6></button>
-                        </p>
-                        <section class="sectionExcluir">
-                            <form>
-                                <div class="row" id="block">
-                                    <div class="col">
-                                        <p>               
-                                            <select id="dataSelectDelete"></select>
-                                       </p>
-                                       <p id="status" class="statusError"></p>
-                                       <p id="button">
-                                           <script src="./script/companhiaAerea.js"></script>     
-                                           <button id="btnExcluir">Confirmar</button>
-                                        </p>
-                                    </div></div>
-                            </form>
-                        </section>
-                        <!--Seção de Alterar uma Companhia-->
-                        <p>
-                            <button type="button" onclick="btnAlterar();" id="btn-s-alterar" class="functionButton" name="btnAlterar"><h6>Alterar  ></h6></button>
-                        </p>
-                        <section class="sectionAlterar">
-                            <form>
-                                <div class="row" id="block">
-                                    <div class="col">
-                                        <p>               
-                                            <p>     
-                                                <label for="dataSelectUpdate">Selecione o ID:</label><br/>          
-                                                <select id="dataSelectUpdate"></select>
-                                                <script src=""></script>     
-                                            </p>
-                                            <button type="button" onclick="btnAlterarInfo();" id="btnConfirmarAltInfo" name="btnConfirmar">Confirmar</button>
-                                            </div>
-                                    </div>
-                                </div>
-                                <p id="status" class="statusError"></p>
-                                
-                            </form>
-                        </section>
-                        <section id="AlterarInfo">
-                            <form>
-                                <div class="row" id="block">
-                                    <div class="col">
-                                        <p>
-                                            <label for="nomeCompanhia">Nome da Companhia:</label><br/>
-                                            <input type="text" id="nomeCompanhia" name="nomeCompanhia" maxlength="20"/>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row" id="buttons">
-                                    <script src=""> </script>
-                                    <div class="col"><button id="btnAlterar">Alterar</button></div>     
-                                </div>
-
-                                <p id="status" class="statusError"></p>
-                            </form>
                         </section>
                     </div>         
                 </section>
@@ -172,6 +93,6 @@
     </main>
     <!--referenciando os .js-->
     <script src="../display.js"></script>
-    <script src="./aeronave.js"></script>
+    <script src="./script/metodoPagamento.js"></script>
 </body>
 </html>

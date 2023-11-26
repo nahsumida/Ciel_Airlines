@@ -10,38 +10,36 @@ function MessageStatus(msg, error){
     pStatus.textContent = msg;
 }
 
+//LISTAR
+
+// Função para realizar a requisição de listagem
 function fetchListar(body){
     const requestOptions = {
         method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
 
-    return fetch('http://localhost:3000/listarMetodoPagamento', requestOptions).then(T => T.json())
+    return fetch('http://localhost:3000/selectMetodoPagamento', requestOptions).then(T => T.json())
 }
 
-function fetchExcluir(body){
-    const requestOptions = {
-        method: 'DELETE', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
-    };
-
-    return fetch('http://localhost:3000/excluirMetodoPagamento', requestOptions).then(T => T.json())
-}
-
-function inserirAeronave(){
-    const dataSelect = document.getElementById('dataSelect');
+function ListarMetodo(){
+    const dataBody = document.getElementById('dataBody');
     fetchListar()
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
-            dataSelect.innerHTML = '';
+            
+            // Limpa qualquer conteúdo anterior da tabela
+            dataBody.innerHTML = '';
 
+            // Preenche a tabela com os dados da resposta
             customResponse.payload.forEach(item => {
-                const idmetodo = item[0];
-                const nome = item[1]; //colunas db
+                const numero = item[0];
+                const texto = item[1];
 
-                const option = document.createElement('option');
-                option.value = idmetodo; // Valor da opção
-                option.text = `${nome}`; // Texto visível
-
-                dataSelect.appendChild(option);
+                const row = dataBody.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                cell1.textContent = numero;
+                cell2.textContent = texto;
             });
         }else{
             MessageStatus("Erro ao listar metodos...: " + customResponse.message, true);
@@ -54,35 +52,7 @@ function inserirAeronave(){
         });
 }
 
-function excluir(selectedValue){
-    fetchExcluir({
-        idmetodo: selectedValue, 
-    })
-        .then(customResponse => {
-        if(customResponse.status === "SUCCESS"){
-            MessageStatus("Metodo excluido... ", false);
-        }else{
-            MessageStatus("Erro ao listar metodos...: " + customResponse.message, true);
-            console.log(customResponse.message);
-        }
-        })
-        .catch((e)=>{
-            MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-            console.log("Falha grave ao listar." + e)
-        });
-}
 
 document.addEventListener("DOMContentLoaded", function() {
-    inserirAeronave();
-    const button = document.getElementById("btnExcluir");
-    var selectElement = document.getElementById("dataSelect");
-
-    button.addEventListener('click', function() {
-        var selectedIndex = selectElement.selectedIndex; // Índice da opção selecionada
-        var selectedOption = selectElement.options[selectedIndex]; // Opção selecionada
-        var selectedValue = selectedOption.value; 
-
-        excluir(selectedValue);
-    });
-    
+    ListarMetodo();
 });

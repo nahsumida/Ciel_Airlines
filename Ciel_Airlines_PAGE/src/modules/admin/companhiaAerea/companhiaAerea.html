@@ -85,6 +85,7 @@
                                 </thead>
                                 <tbody id="dataBody"></tbody>
                             </table>
+                            <button id="btnReload">Atualizar Tabela</button>
                         </section>
                         <!--Seção de Cadastro de Companhia-->
                         <p>
@@ -118,9 +119,8 @@
                                             <select id="dataSelectDelete"></select>
                                        </p>
                                        <p id="status" class="statusError"></p>
-                                       <p id="button">
-                                           <script src="./script/companhiaAerea.js"></script>     
-                                           <button id="btnExcluir">Confirmar</button>
+                                       <p id="button">    
+                                           <button id="btnExcluir" onclick="Excluir();">Confirmar</button>
                                         </p>
                                     </div></div>
                             </form>
@@ -151,14 +151,14 @@
                                 <div class="row" id="block">
                                     <div class="col">
                                         <p>
-                                            <label for="nomeCompanhia">Nome da Companhia:</label><br/>
-                                            <input type="text" id="nomeCompanhia" name="nomeCompanhia" maxlength="20"/>
+                                            <label for="newnomeCompanhia">Nome da Companhia:</label><br/>
+                                            <input type="text" id="newnomeCompanhia" name="nomeCompanhia" maxlength="20"/>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row" id="buttons">
                                     <script src=""> </script>
-                                    <div class="col"><button id="btnAlterar">Alterar</button></div>     
+                                    <div class="col"><button id="btnAlterar" onclick="Alterar();">Alterar</button></div>     
                                 </div>
 
                                 <p id="status" class="statusError"></p>
@@ -171,6 +171,6 @@
     </main>
     <!--referenciando os .js-->
     <script src="../display.js"></script>
-    <script src="./aeronave.js"></script>
+    <script src="./script/companhiaAerea.js"></script>
 </body>
 </html>

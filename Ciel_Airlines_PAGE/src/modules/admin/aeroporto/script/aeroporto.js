@@ -12,16 +12,23 @@ function MessageStatus(msg, error){
 
 //LISTAR 
 
-function fetchListar(body){
+function fetchListarAero(body){
     const requestOptions = {
         method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
 
     return fetch('http://localhost:3000/selectAeroporto', requestOptions).then(T => T.json())
 }
+function fetchListarCidade(body) {
+    const requestOptions = {
+        method: 'GET', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
+    };
+    return fetch('http://localhost:3000/selectCidade', requestOptions).then(T => T.json())
+}
 
+/*
 function listarCidades(){
-    fetchListar()
+    fetchListarCidade()
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
             IDCidade.innerHTML = '';
@@ -45,11 +52,11 @@ function listarCidades(){
             MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
             console.log("Falha grave ao listar." + e)
         });
-}
+}*/
 
 function ListarAeroporto(){
     const dataBody = document.getElementById('dataBody');
-    fetchListar()
+    fetchListarAero()
     .then(customResponse => {
     if(customResponse.status === "SUCCESS"){
         
@@ -59,8 +66,8 @@ function ListarAeroporto(){
         // Preenche a tabela com os dados da resposta
         customResponse.payload.forEach(item => {
             const idaero = item[0];
-            const idcidade = item[3];
             const nome = item[1]
+            const idcidade = item[3];
             const sigla = item[4]
 
             const row = dataBody.insertRow();
@@ -175,54 +182,30 @@ function inserirAeroporto(idCidade){
 //EXCLUIR
 
 //Funcao para lista as opções com os dados da tabela dentro de uma caixa de selecao
-function ListarAeroportoComboBox() {
-    const dataSelectDelete = document.getElementById('dataSelectDelete');
-    const dataSelectUpdate = document.getElementById('dataSelectUpdate');
-
+function ListarAeroportoComboBox(element) {
     fetchListar()
         .then(customResponse => {
             if (customResponse.status === "SUCCESS") {
-                // Limpa qualquer conteúdo anterior da tabela
-                dataSelectDelete.innerHTML = '';
+                element.innerHTML = '';
+
                 customResponse.payload.forEach(item => {
                     const idAeroporto = item[0];
-                    const nome = item[1]; //colunas db
+                    const nomeAeroporto = item[1];
+
                     const option = document.createElement('option');
                     option.value = idAeroporto; // Valor da opção
-                    option.text = `${nome}`; // Texto visível
-                    dataSelectDelete.appendChild(option);
-                });
-            } else {
-                MessageStatus("Erro ao listar aeroportos...: " + customResponse.message, true);
-                console.log(customResponse.message);
-            }
-        })
-        .catch((e) => {
-            MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-            console.log("Falha grave ao listar." + e)
-        });
+                    option.text = `${nomeAeroporto}`; // Texto visível
 
-    fetchListar()
-        .then(customResponse => {
-            if (customResponse.status === "SUCCESS") {
-                // Limpa qualquer conteúdo anterior da tabela
-                dataSelectUpdate.innerHTML = '';
-                customResponse.payload.forEach(item => {
-                    const idaeroporto = item[0];
-                    const nome = item[1]; //colunas db
-                    const option = document.createElement('option');
-                    option.value = idaeroporto; // Valor da opção
-                    option.text = `${nome}`; // Texto visível
-                    dataSelectUpdate.appendChild(option);
+                    element.appendChild(option);
                 });
             } else {
-                MessageStatus("Erro ao listar aeroportos...: " + customResponse.message, true);
+                MessageStatus("Erro ao listar Trecho...: " + customResponse.message, true);
                 console.log(customResponse.message);
             }
         })
         .catch((e) => {
             MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-            console.log("Falha grave ao listar." + e)
+            console.log("Falha grave ao listar." + e);
         });
 }
 
@@ -258,9 +241,19 @@ function Excluir() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    //chamada da funcao para listar na tabela
     ListarAeroporto();
-    ListarAeroportoComboBox();
-    listarCidades();
+
+    // chama a funcao para listar cidades dentro da caixa select de ID Cidade
+    const dataSelectCidade = document.getElementById('IDCidade');
+    listarComboBox( dataSelectCidade, fetchListarCidade)
+
+    // chama a funcao para listar aeroportos dentro da caixa select delete e update
+    const dataSelectDelete = document.getElementById('dataSelectDelete');
+    listarComboBox(dataSelectDelete, fetchListarAero);
+    const dataSelectUpdate = document.getElementById('dataSelectUpdate');
+    listarComboBox(dataSelectUpdate, fetchListarAero);
+    
 
     //cadastrar
     const btnCadastrar = document.getElementById("btnCadastrar");
@@ -271,18 +264,8 @@ document.addEventListener("DOMContentLoaded", function() {
             var selectedIndex = IDCidade.selectedIndex; // Índice da opção selecionada
             var selectedOption = IDCidade.options[selectedIndex]; // Opção selecionada
             var selectedID = selectedOption.value; 
-            console.log("id cidaadeeee aqqqaqsa " + selectedID)
-
             console.log(selectedID)
             inserirAeroporto(selectedID);
-        });
-    }
-
-    const btnReload = document.getElementById("btnReload");
-    if (btnReload) {
-        btnReload.addEventListener("click", function () {
-            // Recarrega a página
-            location.reload();
         });
     }
 

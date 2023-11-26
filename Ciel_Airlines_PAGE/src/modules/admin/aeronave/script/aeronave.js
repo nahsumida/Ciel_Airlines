@@ -18,55 +18,53 @@ function fetchListar(body){
 
 return fetch('http://localhost:3000/selectAeronave', requestOptions).then(T => T.json())
 }
-
-
-//funcao para preencher a tabela HTML com os dados obtidos
-function preencherTabela(data) {
-    const tblAeronaveDados = document.getElementById('tblAeronaveDados');
-
-    // Limpa qualquer conteúdo anterior da tabela
-    tblAeronaveDados.innerHTML = '';
-
-    // Itera sobre os dados e preenche a tabela
-    data.forEach((item) => {
-        // Cria a linha HTML com os dados do item (de cada iteração)
-        const row = tblAeronaveDados.insertRow();
-
-        const cell1 = row.insertCell(0);
-        const cell2 = row.insertCell(1);
-        const cell3 = row.insertCell(2);
-        const cell4 = row.insertCell(3);
-        const cell5 = row.insertCell(4);
-        const cell6 = row.insertCell(5);
-
-        
-        cell1.value = item.ID;
-        cell2.textContent = item.Modelo;
-        cell3.textContent = item.NumIdentificacao;
-        cell4.textContent = item.Fabricante;
-        cell5.textContent = item['Companhia Aerea']; 
-        cell6.textContent = item.Ano;
-    });
-}
-
 function ListarAeronave() {
     const dataBody = document.getElementById('dataBody');
-
     fetchListar()
-        .then((customResponse) => {
-            if (customResponse.status === 'SUCCESS') {
-                // Chama a função para preencher a tabela 
-                preencherTabela(customResponse.payload);
+        .then(customResponse => {
+            console.log("Resposta da API:", customResponse);
+
+            if (customResponse.status === "SUCCESS") {
+                // Limpa qualquer conteúdo anterior da tabela
+                dataBody.innerHTML = '';
+
+                // Preenche a tabela com os dados da resposta
+                customResponse.payload.forEach(item => {
+                    const id = item.ID_AERONAVE;
+                    const modelo = item.MODELO;
+                    const numIdentificacao = item.NUM_IDENTIFICACAO;
+                    const fabricante = item.FABRICANTE;
+                    const ano = item.ANO_FABRICACAO;
+                    const companhiaAerea = item.COMPANHIA_AEREA;
+
+                    const row = dataBody.insertRow();
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    const cell3 = row.insertCell(2);
+                    const cell4 = row.insertCell(3);
+                    const cell5 = row.insertCell(4);
+                    const cell6 = row.insertCell(5);
+
+                    cell1.textContent = id;
+                    cell2.textContent = modelo;
+                    cell3.textContent = numIdentificacao;
+                    cell4.textContent = fabricante;
+                    cell5.textContent = ano;
+                    cell6.textContent = companhiaAerea;
+                });
             } else {
-                MessageStatus('Erro ao listar Aeronave...: ' + customResponse.message, true);
+                MessageStatus("Erro ao listar aeronaves: " + customResponse.message, true);
                 console.log(customResponse.message);
             }
         })
         .catch((e) => {
-            MessageStatus('Erro técnico ao listar... Contate o suporte.', true);
-            console.log('Falha grave ao listar.' + e);
+            MessageStatus("Erro técnico ao listar aeronaves. Contate o suporte.", true);
+            console.error("Falha grave ao listar aeronaves.", e);
         });
 }
+
+
+
 // INSERIR
 
 function fetchInserir(body){

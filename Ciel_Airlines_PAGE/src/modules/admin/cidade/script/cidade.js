@@ -13,61 +13,14 @@ function MessageStatus(msg, error) {
 LISTAR
 */
 //Funcao envia request para o endpoint para listar Cidades
-export function fetchListarCidade(body) {
+function fetchListarCidade(body) {
     const requestOptions = {
         method: 'GET', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
     };
     return fetch('http://localhost:3000/selectCidade', requestOptions).then(T => T.json())
 }
-//Funcao para lista as opções com os dados da tabela dentro de uma caixa de selecao
-function ListarCidadeComboBox() {
-    const dataSelectDelete = document.getElementById('dataSelectDelete');
-    const dataSelectUpdate = document.getElementById('dataSelectUpdate');
-    fetchListarCidade()
-        .then(customResponse => {
-            if (customResponse.status === "SUCCESS") {
-                // Limpa qualquer conteúdo anterior da tabela
-                dataSelectDelete.innerHTML = '';
-                customResponse.payload.forEach(item => {
-                    const idCidade = item[0];
-                    const nome = item[1]; //colunas db
-                    const option = document.createElement('option');
-                    option.value = idCidade; // Valor da opção
-                    option.text = `${nome}`; // Texto visível
-                    dataSelectDelete.appendChild(option);
-                });
-            } else {
-                MessageStatus("Erro ao listar cidades...: " + customResponse.message, true);
-                console.log(customResponse.message);
-            }
-        })
-        .catch((e) => {
-            MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-            console.log("Falha grave ao listar." + e)
-        });
-        fetchListarCidade()
-        .then(customResponse => {
-            if (customResponse.status === "SUCCESS") {
-                // Limpa qualquer conteúdo anterior da tabela
-                dataSelectUpdate.innerHTML = '';
-                customResponse.payload.forEach(item => {
-                    const idCidade = item[0];
-                    const nome = item[1]; //colunas db
-                    const option = document.createElement('option');
-                    option.value = idCidade; // Valor da opção
-                    option.text = `${nome}`; // Texto visível
-                    dataSelectUpdate.appendChild(option);
-                });
-            } else {
-                MessageStatus("Erro ao listar cidades...: " + customResponse.message, true);
-                console.log(customResponse.message);
-            }
-        })
-        .catch((e) => {
-            MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-            console.log("Falha grave ao listar." + e)
-        });
-}
+
+
 function ListarCidade() {
     const dataBody = document.getElementById('dataBody');
     fetchListarCidade()
@@ -219,7 +172,12 @@ function Alterar() {
 /*CHAMADA DAS FUNÇÕES NO CARREGAMENTO DA PAGINA*/
 document.addEventListener("DOMContentLoaded", function () {
     ListarCidade();
-    ListarCidadeComboBox();
+    const dataSelectDelete = document.getElementById('dataSelectDelete');
+    const dataSelectUpdate = document.getElementById('dataSelectUpdate');
+    listarComboBox(dataSelectDelete, fetchListarCidade);
+    listarComboBox(dataSelectUpdate, fetchListarCidade);
+    
+
     const btnAlterar = document.getElementById("btnAlterar");
 
     if (btnAlterar) {
@@ -228,13 +186,3 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 }});
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Adiciona um ouvinte de evento para o botão
-    const btnReload = document.getElementById("btnReload");
-    if (btnReload) {
-        btnReload.addEventListener("click", function () {
-            // Recarrega a página
-            location.reload();
-        });
-    }
-});
