@@ -31,36 +31,59 @@
       </div>
 <!--criação dos voos-->
       <div id="voo_container"></div>
-
 <script>
-    // Função para criar um card de voo dinamicamente
-    function createVooCard(origem, destino, data, preco) {
-        const VooContainer = document.getElementById('voo_container');
 
-        // Criar o elemento do card de voo
-        const VooCard = document.createElement('div');
-        VooCard.className = 'voo-card';
 
-        // Preencher o card com informações
-        VooCard.innerHTML = `
-            <div class="voo-details">
-                <div><p>Origem</p><h2>${origem}</h2></div>
-                 <div><img src="../../../src/assets/img/aviaoIcon.png"></div>
-                <div><p>Destino</p><h2>${destino}</h2></div>
-                <div><h2>${data}</h2></div>
-            </div>
+
+
+// Função para criar um card de voo dinamicamente
+function createVooCard( origem, destino, data, preco, idVoo) {
+    const VooContainer = document.getElementById('voo_container');
+
+    // Criar o elemento do card de voo
+    const VooCard = document.createElement('div');
+    VooCard.className = 'voo-card';
+
+    // Criar o botao de selecionar
+    const btnSelecionar = document.createElement('button');
+    btnSelecionar.textContent = 'Selecionar';
+
+    // atribuir id do Voo para o botao
+    btnSelecionar.setAttribute('data-voo-id', idVoo);
+
+     //adiciona o evento que reconhece o clique do botao 'Selecionar' e chama a funcao
+     // selecionarVoo passando o id do botão como parametro
+    btnSelecionar.addEventListener('click', function() {
+      selecionarVoo(idVoo);   
+    });
+    // Preencher o card com informações
+    VooCard.innerHTML = `
+        <div class="voo-details">
+            <div><p>Origem</p><h2>${origem}</h2></div>
+            <div><img src="../../../src/assets/img/aviaoIcon.png"></div>
+            <div><p>Destino</p><h2>${destino}</h2></div>
+            <div><h2>${data}</h2></div>
             <div class="voo-preco">R$${preco}</div>
-        `;
+        </div>  
+    `;
+    
+    // Adicionar o card ao container de voos
+    VooCard.appendChild(btnSelecionar);
 
-        // Adicionar o card ao container de voos
-        VooContainer.appendChild(VooCard);
-    }
+    VooContainer.appendChild(VooCard);
+}
 
+// Função chamada ao clicar no botão 'Selecionar'
+function selecionarVoo(idVoo) {
+  console.log(`voo selecionado com ID: ${idVoo}`); // verificacao no console
+
+    // Redirecionar para a prox página com o ID do voo na URL
+    window.location.href = `../admin/testehoje.html?idVoo=${idVoo}`;
+}
     // Exemplo de uso da função
-    createVooCard('Cidade1', 'Cidade2', '2023-12-01', 200);
-    createVooCard('Cidade1', 'Cidade2', '2023-12-01', 200);
-    createVooCard('Cidade1', 'Cidade2', '2023-12-01', 200);
+    createVooCard("São Paulo", "Rio de Janeiro", "2023-11-30", 500.00, 1);
+    createVooCard('Cidade1', 'Cidade2', '2023-12-01', 200,4);
+    createVooCard('Cidade1', 'Cidade2', '2023-12-01', 200, 3);
 </script>
-
 </body>
 </html>

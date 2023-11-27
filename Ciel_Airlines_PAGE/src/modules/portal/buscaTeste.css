@@ -13,11 +13,12 @@ body{
 #voo_container {
     max-width: 800px;
     margin: 20px auto;
+    width:fit-content
 }
 
 .voo-card {
     display: flex;
-    flex-direction: flex;
+    flex-direction: row;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 16px;
@@ -25,6 +26,7 @@ body{
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s;
+    width:fit-content;
 }
 
 .voo-card:hover {
@@ -58,7 +60,6 @@ body{
     color: #dc48b0d0;
     font-size: 20px;
     font-weight: bold;
-    margin-left: 100px;
 }
 
 .voo-details img {
