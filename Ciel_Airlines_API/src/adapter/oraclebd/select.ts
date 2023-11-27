@@ -440,7 +440,13 @@ export const searchTrecho = async(aeroSaida: number, aeroChegada: number) => {
         let resSelect = await connection.execute(selectString);
 
         await connection.close();
-        resp.result = (resSelect.rows)?.length;
+
+        if ((resSelect.rows)?.length != undefined && (resSelect.rows)?.length < 1){
+            resp.result = 0;
+        }else{
+            resp.result = resSelect.rows;
+        }
+        
     }catch(e){
         if(e instanceof Error){
             resp.err = e.message;

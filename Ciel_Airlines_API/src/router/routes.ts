@@ -29,8 +29,6 @@ route.get("/searchVoo", async(req:any, res:any)=>{
 
   let respTrecho = searchTrecho(aeroSaida, aeroChegada);
 
-  console.log((await respTrecho).result)
-  console.log((await respTrecho).result[0][0])
   if ((await respTrecho).err != null){
     cr.message = (await respTrecho).err;
     cr.status = "ERROR";
@@ -40,7 +38,7 @@ route.get("/searchVoo", async(req:any, res:any)=>{
     cr.message = "ZERO RESULTADOS";
     res.send(cr);
   } else {
-    let respVoo = searchVoo((await respTrecho).result[0][0], dataVoo);
+    let respVoo = searchVoo((await respTrecho).result[0], dataVoo);
 
     if ((await respVoo).err != null){
       cr.message = (await respVoo).err;

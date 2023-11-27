@@ -29,8 +29,6 @@ exports.route.get("/searchVoo", (req, res) => __awaiter(void 0, void 0, void 0, 
     const dataVoo = req.body.dataVoo;
     console.log(aeroSaida, aeroChegada, dataVoo);
     let respTrecho = (0, select_1.searchTrecho)(aeroSaida, aeroChegada);
-    console.log((yield respTrecho).result);
-    console.log((yield respTrecho).result[0][0]);
     if ((yield respTrecho).err != null) {
         cr.message = (yield respTrecho).err;
         cr.status = "ERROR";
@@ -42,7 +40,7 @@ exports.route.get("/searchVoo", (req, res) => __awaiter(void 0, void 0, void 0, 
         res.send(cr);
     }
     else {
-        let respVoo = (0, select_1.searchVoo)((yield respTrecho).result[0][0], dataVoo);
+        let respVoo = (0, select_1.searchVoo)((yield respTrecho).result[0], dataVoo);
         if ((yield respVoo).err != null) {
             cr.message = (yield respVoo).err;
             cr.status = "ERROR";

@@ -449,7 +449,7 @@ const searchVoo = (idTrecho, dataVoo) => __awaiter(void 0, void 0, void 0, funct
 exports.searchVoo = searchVoo;
 //seleciona todos os dados de um aeroporto especifico  
 const searchTrecho = (aeroSaida, aeroChegada) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b;
     let resp = { result: undefined, err: null };
     let connection;
     try {
@@ -458,7 +458,12 @@ const searchTrecho = (aeroSaida, aeroChegada) => __awaiter(void 0, void 0, void 
         console.log(selectString);
         let resSelect = yield connection.execute(selectString);
         yield connection.close();
-        resp.result = (_a = (resSelect.rows)) === null || _a === void 0 ? void 0 : _a.length;
+        if (((_a = (resSelect.rows)) === null || _a === void 0 ? void 0 : _a.length) != undefined && ((_b = (resSelect.rows)) === null || _b === void 0 ? void 0 : _b.length) < 1) {
+            resp.result = 0;
+        }
+        else {
+            resp.result = resSelect.rows;
+        }
     }
     catch (e) {
         if (e instanceof Error) {
