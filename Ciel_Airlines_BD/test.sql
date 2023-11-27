@@ -132,3 +132,8 @@ where v.data = TO_DATE('03/12/2023', 'dd/mm/yyyy') and v.TRECHO = 51
 
 select * from trecho
 select id_trecho from trecho where AERO_SAIDA = 20 and aero_chegada = 17
+
+select * from venda;
+
+insert into venda (id_venda, nome_passageiro, EMAIL_PASSAGEIRO, ASSENTO, id_voo, pagamento) values (ID_VENDA_SEQ.nextval, 'jessica linda', 'jessiquinha@gmail.com', 146, 4, 1)
+update assento set status='INDISPONIVEL' where ID_ASSENTO = 154

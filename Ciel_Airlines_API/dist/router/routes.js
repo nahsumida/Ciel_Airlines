@@ -91,14 +91,35 @@ route.get("/updateVenda", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   res.send(cr);
-});
-
-route.get("/insertVenda", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-*/
+});*/
+exports.route.put("/insertVenda", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const nome = req.body.nome;
+    const email = req.body.email;
+    const idAssento = req.body.idAssento;
+    const idVoo = req.body.idVoo;
+    const pagamento = req.body.idMetodo;
+    if (nome === undefined) {
+        cr.message = "valor invalido";
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    if (email === undefined) {
+        cr.message = "valor invalido";
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    let resp = (0, insert_1.executeInsertVenda)(nome, email, idAssento, idVoo, pagamento);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado inserido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
 // VOO
 exports.route.get("/selectVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };

@@ -7,7 +7,8 @@ import { executeSelectAll, executeSelectByID, executeSelectAssentoByVoo,
         } from '../adapter/oraclebd/select';
 import { executeDeleteByID} from '../adapter/oraclebd/delete';
 import { executeInsertCompanhiaAerea, executeInsertMetodoPagamento, 
-         executeInsertCidade, executeInsertAeroporto, executeInsertTrecho } from "../adapter/oraclebd/insert";
+         executeInsertCidade, executeInsertAeroporto, executeInsertTrecho, 
+         executeInsertVenda } from "../adapter/oraclebd/insert";
 import { executeUpdateCompanhiaAerea, executeUpdateMetodoPagamento, 
          executeUpdateCidade, executeUpdateAssento, executeUpdateTrecho,
          executeUpdateAeroporto } from "../adapter/oraclebd/update";
@@ -93,14 +94,44 @@ route.get("/updateVenda", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   res.send(cr);
-});
+});*/
 
-route.get("/insertVenda", async(req:any, res:any)=>{
+route.put("/insertVenda", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+
+  const nome = req.body.nome as string;
+  const email = req.body.email as string;
+  const idAssento = req.body.idAssento as number;
+  const idVoo = req.body.idVoo as number;
+  const pagamento = req.body.idMetodo as number;
+
+  if (nome === undefined){
+    cr.message = "valor invalido";
+    cr.status = "ERROR";
+    res.send(cr);
+  }
+  
+  if (email === undefined){
+    cr.message = "valor invalido";
+    cr.status = "ERROR";
+    res.send(cr);
+  }
+  
+  let resp = executeInsertVenda(nome, email, idAssento, idVoo, pagamento);
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await resp).result;
+  cr.message = "Dado inserido";
+  cr.status = "SUCCESS"; 
   
   res.send(cr);
 });
-*/
+
 
 
 // VOO
@@ -141,8 +172,6 @@ route.get("/selectVooByID", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-
-
 
 route.get("/deleteVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
@@ -363,7 +392,6 @@ route.put("/insertAeroporto", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-
 
 // ASSENTO
 route.post("/selectAssentoByVoo", async(req:any, res:any)=>{
