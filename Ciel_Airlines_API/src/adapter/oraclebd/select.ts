@@ -93,7 +93,9 @@ export const executeSelectTrecho = async() => {
                                 T.AERO_SAIDA,
                                 T.AERO_CHEGADA,
                                 SAIDA.NOME_AEROPORTO AS AEROPORTO_SAIDA,
-                                CHEGADA.NOME_AEROPORTO AS AEROPORTO_CHEGADA
+SAIDA.SIGLA,
+                                CHEGADA.NOME_AEROPORTO AS AEROPORTO_CHEGADA,
+CHEGADA.SIGLA
                             FROM
                                 TRECHO T
                             JOIN
