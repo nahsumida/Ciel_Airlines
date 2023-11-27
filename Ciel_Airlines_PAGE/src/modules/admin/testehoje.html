@@ -19,6 +19,8 @@
                 <tbody id="dataBody"></tbody>
             </table>
             <p id="status" class="statusError"></p>
+
+            <button id="btnConfirmar">Confirmar</button>
         </main>
     </body>
     <script>
@@ -34,6 +36,33 @@
             pStatus.textContent = msg;
         }
 
+        /*ALTERAR STATUS*/
+        function fetchAlterar(body) {
+        const requestOptions = {
+            method: 'POST', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
+        };
+        return fetch('http://localhost:3000/updateAssento', requestOptions).then(T => T.json())
+        }
+
+        function UpdateStatus(idAssento, status) {
+            fetchAlterar({
+                idAssento: idAssento,
+                status: status
+            })
+                .then(customResponse => {
+                    if (customResponse.status === "SUCCESS") {
+                        MessageStatus("status do assento alterado... ", false);
+                    } else {MessageStatus("Erro ao alterar assento...: " + customResponse.message, true);
+                    console.log(customResponse.message);
+                }
+            })
+            .catch((e) => {
+                MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
+                console.log("Falha grave ao listar." + e)
+            });
+        }
+        
+        /* LISTAR */
         function fetchListarAssento(body){
             console.log("cheguei no aqui")
             const requestOptions = {
@@ -44,7 +73,7 @@
         }
 
 // Função para listar assentos de um voo específico
-function ListarAssentos(idVoo) {
+    function ListarAssentos(idVoo) {
     const dataBody = document.getElementById('dataBody');
 
     // Chama a função de requisição para listar os assentos do voo com o ID fornecido
@@ -56,9 +85,10 @@ function ListarAssentos(idVoo) {
                 // Limpa qualquer conteúdo anterior da tabela
                 dataBody.innerHTML = '';
 
-                let esse = customResponse.payload;
-                console.log(esse);
-                let tam = esse.length;
+                //payload que recebe de resposta da req, contendo um array de arrays
+                let payload = customResponse.payload;
+                console.log(payload);
+                let tam = payload.length;
                 console.log(tam);
 
                 let estilobtn = "assentoLivre";
@@ -68,19 +98,29 @@ function ListarAssentos(idVoo) {
                     let item = customResponse.payload[i];
                     let item2 = customResponse.payload[i + 1];
 
+                    //assento "A"
                     const idassento1 = item[0];
                     const codigo1 = item[2];
-                    const status1 = item[3];
+                    let status1 = item[3];
 
+                    //assento "B"
                     const idassento2 = item2[0];
                     const codigo2 = item2[2];
-                    const status2 = item2[3];
+                    let status2 = item2[3];
 
                     // Criação de botões para os assentos, funcao js
                     const button1 = document.createElement('button');
                     button1.textContent = codigo1;
                     button1.setAttribute('idAssento', idassento1);
 
+
+
+                    const button2 = document.createElement('button');
+                    button2.textContent = codigo2;
+                    button2.setAttribute('idAssento', idassento2);
+
+
+                    // verificar se o status do assento está como "DISPONIVEL"
                     //definir estilo css para o botao, atribuindo a classe
                     if (status1 === "DISPONIVEL"){
                         estilobtn = "assentoLivre";
@@ -88,22 +128,7 @@ function ListarAssentos(idVoo) {
                         estilobtn = "assentoOcupado";
                     }
                     button1.className = estilobtn;
-
-
-                    button1.addEventListener('click', function() {
-                        // Lógica para lidar com o clique do botão
-                        console.log(`Assento selecionado com ID: ${idassento1} ${status1}`);
-                    });
-
-                    const button2 = document.createElement('button');
-                    button2.textContent = codigo2;
-                    button2.setAttribute('idAssento', idassento2);
-                    button2.addEventListener('click', function() {
-                        // Lógica para lidar com o clique do botão
-                        console.log(`Assento selecionado com ID: ${idassento2} ${status2}`);
-                    });
-
-                    //definir estilo css para o botao, atribuindo a classe
+                    
                     if (status2 === "DISPONIVEL"){
                         estilobtn = "assentoLivre";
                     } else {
@@ -116,6 +141,57 @@ function ListarAssentos(idVoo) {
                     // Adiciona um espaço entre os botões
                     dataBody.appendChild(button2);
                     dataBody.appendChild(document.createElement('br')); // Adiciona uma quebra de linha entre os pares de botões
+
+                    // CLIQUE NO BOTAO
+                    button1.addEventListener('click', function() {
+                        let selecionou = 0;
+                        // Lógica para lidar com o clique do botão
+                        console.log(`Assento selecionado com ID: ${idassento1} ${status1}`);
+                        if (status1 === "DISPONIVEL"){
+                            status1 = "INDISPONIVEL";
+                            //UpdateStatus(idassento1, status1);                           
+                            console.log(`estou indisponivel - Status: ${status1}` )
+                            // mudar estilo do botao
+                            button1.classList.remove('assentoLivre'); // Remove a classe anterior
+                            button1.classList.add('assentoEscolhido');
+                            selecionou = 1;
+                        } else {
+                            // Se o status for INDISPONIVEL, altera para DISPONIVEL
+                                status1 = "DISPONIVEL";
+                                //UpdateStatus(idassento1, status1);
+
+                                console.log(`Estou disponível - Status: ${status1}`);
+                                // mudar estilo do botao
+                                button1.classList.remove('assentoEscolhido'); // Remove a classe anterior
+                                button1.classList.add('assentoLivre');
+                            }   
+
+                    });
+
+                    button2.addEventListener('click', function() {
+                        // Lógica para lidar com o clique do botão
+                        console.log(`Assento selecionado com ID: ${idassento1} ${status1}`);
+                        if (status2 === "DISPONIVEL"){
+                            status2 = "INDISPONIVEL";
+                            //UpdateStatus(idassento1, status1);                           
+                            console.log(`estou indisponivel - Status: ${status2}` )
+
+                            // mudar estilo do botao
+                            button2.classList.remove('assentoLivre'); // Remove a classe anterior
+                            button2.classList.add('assentoEscolhido');
+                            
+                        } else {
+                            // Se o status for INDISPONIVEL, altera para DISPONIVEL
+                                status2 = "DISPONIVEL";
+                                //UpdateStatus(idassento1, status1);
+
+                                console.log(`Estou disponível - Status: ${status2}`);
+                                // mudar estilo do botao
+                                button2.classList.remove('assentoEscolhido'); // Remove a classe anterior
+                                button2.classList.add('assentoLivre');
+                            }   
+
+                    });
                 }
             } else {
                 MessageStatus("Erro ao listar assentos: " + customResponse.message, true);
@@ -134,8 +210,6 @@ function obterParametroUrl(nome) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(nome);
 }
-
-
 
 // CHAMADA DAS FUNCOES no carregamento da página
 document.addEventListener("DOMContentLoaded", function() {

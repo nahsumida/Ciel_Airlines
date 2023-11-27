@@ -22,3 +22,7 @@
     background-color: rgb(157, 46, 46);
     pointer-events: none;
 }
+
+.assentoEscolhido{
+    background-color: grey;
+}
