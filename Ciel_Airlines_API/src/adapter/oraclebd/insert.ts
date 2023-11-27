@@ -185,3 +185,38 @@ export const executeInsertAeroporto = async(idCidade: number, nomeAeroporto: any
         return resp;  
     }
 }
+
+
+//atualiza a o aeroporto de ida e de volta de um trecho
+export const executeInsertVenda = async(nome: any, email: any, idAssento: number, idVoo: number, pagamento: number) => {
+    let resp: DatabaseResponse = { result: undefined, err: null};
+    let connection;
+
+    try{
+        connection = await oracledb.getConnection(oraConnAttribs);
+
+        let updateString = `insert into venda (id_venda, nome_passageiro, EMAIL_PASSAGEIRO, ASSENTO, id_voo, pagamento) values (ID_VENDA_SEQ.nextval, '` + nome + `', '`+email+`', ` + idAssento + `,` + idVoo + `,` +  pagamento +`)`
+        
+      
+        let resInsert = await connection.execute(updateString);
+
+        await connection.commit();
+
+        const rowsInserted = resInsert.rowsAffected
+       
+        if(rowsInserted !== undefined &&  rowsInserted === 1) {
+            resp.result = rowsInserted
+        } else {
+            resp.err = 'Erro ao inserir dado na tabela'
+        }
+    }catch(e){
+        if(e instanceof Error){
+            resp.err = e.message;
+            console.log(e.message);
+        }else{
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    } finally {
+        return resp;  
+    }
+}
