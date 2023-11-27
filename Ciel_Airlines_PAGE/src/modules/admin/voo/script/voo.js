@@ -11,21 +11,21 @@ function MessageStatus(msg, error){
     pStatus.textContent = msg;
 }
 
-// LISTAR
+/* LISTAR */
 
-// Função para realizar a requisição de listagem de aeroportos
-function fetchListarAero(body){
+// Função para realizar a requisição de listagem de voos
+function fetchListarVoo(body){
     const requestOptions = {
         method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
 
-    return fetch('http://localhost:3000/selectAeroporto', requestOptions).then(T => T.json())
+    return fetch('http://localhost:3000/selectVoo', requestOptions).then(T => T.json())
 }
 
 // Função para listar aeroportos na tabela HTML
-function ListarAeroporto(){
-    const dataBody = document.getElementById('dataBodyAero');
-    fetchListarAero()
+function ListarVoo(){
+    const dataBody = document.getElementById('dataBody');
+    fetchListarVoo()
     .then(customResponse => {
     if(customResponse.status === "SUCCESS"){
         
@@ -34,24 +34,33 @@ function ListarAeroporto(){
 
         // Preenche a tabela com os dados da resposta
         customResponse.payload.forEach(item => {
-            const idaero = item[0];
-            const nome = item[1]
-            const idcidade = item[3];
-            const sigla = item[4]
+            const idvoo = item[0];
+            const data = item[1];
+            const horapart = item[2];
+            const horacheg  = item[3];
+            const preco = item[4];
+            const aeronave = item[5];
+            const trecho = item[6];
 
             const row = dataBody.insertRow();
             const cell1 = row.insertCell(0);
             const cell2 = row.insertCell(1);
             const cell3 = row.insertCell(2);
             const cell4 = row.insertCell(3);
+            const cell5 = row.insertCell(4);
+            const cell6 = row.insertCell(5);
+            const cell7 = row.insertCell(6);
 
-            cell1.textContent = idaero;
-            cell2.textContent = idcidade;
-            cell3.textContent = nome;
-            cell4.textContent = sigla;
+            cell1.textContent = idvoo;
+            cell2.textContent = data;
+            cell3.textContent = trecho;
+            cell4.textContent = horapart;
+            cell5.textContent = horacheg;
+            cell6.textContent = preco;
+            cell7.textContent = aeronave;
         });
     }else{
-        MessageStatus("Erro ao listar Aeroporto...: " + customResponse.message, true);
+        MessageStatus("Erro ao listar voo...: " + customResponse.message, true);
         console.log(customResponse.message);
     }
     })
@@ -61,49 +70,9 @@ function ListarAeroporto(){
     });
 }
 
-// Função para realizar a requisição de listagem de trechos
-function fetchListarTrecho(body){
-    const requestOptions = {
-        method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
-    };
 
-    return fetch('http://localhost:3000/selectTrecho', requestOptions).then(T => T.json())
-}
-
-// Função para listar trechos na tabela HTML
-function ListarTrecho(){
-    const dataBody = document.getElementById('dataBody');
-    fetchListarTrecho()
-    .then(customResponse => {
-    if(customResponse.status === "SUCCESS"){
-        
-        // Limpa qualquer conteúdo anterior da tabela
-        dataBody.innerHTML = '';
-
-        // Preenche a tabela com os dados da resposta
-        customResponse.payload.forEach(item => {
-            const idTrecho = item[0];
-            const saida = item[3];
-            const chegada = item[4];
-
-
-            const row = dataBody.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            const cell3 = row.insertCell(2);
-
-            cell1.textContent = idTrecho;
-            cell2.textContent = saida;
-            cell3.textContent = chegada;
-
-        });
-    }else{
-        MessageStatus("Erro ao listar trechos...: " + customResponse.message, true);
-        console.log(customResponse.message);
-    }
-    })
-    .catch((e)=>{
-        MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-        console.log("Falha grave ao listar." + e)
-    });
-}
+/*CHAMADA DAS FUNÇÕES NO CARREGAMENTO DA PAGINA*/
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("eu carreguei")
+    ListarVoo();
+});

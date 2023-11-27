@@ -33,12 +33,12 @@ function ListarAeronave() {
                 // Preenche a tabela com os dados da resposta
                 customResponse.payload.forEach(item => {
                     console.log(item)
-                    const id = item.ID_AERONAVE;
-                    const modelo = item.MODELO;
-                    const numIdentificacao = item.NUM_IDENTIFICACAO;
-                    const fabricante = item.FABRICANTE;
-                    const ano = item.ANO_FABRICACAO;
-                    const companhiaAerea = item.COMPANHIA_AEREA;
+                    const id  = item[0];
+                    const companhiaAerea = item[1];
+                    const  modelo = item[2];
+                    const ano = item[3];
+                    const fabricante = item[4];
+                    const numIdentificacao  = item[5];
 
                     const row = dataBody.insertRow();
                     const cell1 = row.insertCell(0);
@@ -52,8 +52,8 @@ function ListarAeronave() {
                     cell2.textContent = modelo;
                     cell3.textContent = numIdentificacao;
                     cell4.textContent = fabricante;
-                    cell5.textContent = ano;
-                    cell6.textContent = companhiaAerea;
+                    cell5.textContent = companhiaAerea;
+                    cell6.textContent = ano;
                 });
             } else {
                 MessageStatus("Erro ao listar aeronaves: " + customResponse.message, true);
