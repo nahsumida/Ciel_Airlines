@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.executeSelectTrechoBusca = exports.executeSelectVooBusca = exports.executeSelectVoo = exports.executeSelectVooByID = exports.executeSelectAeroportoByID = exports.executeSelectAeroporto = exports.executeSelectAeronaveByID = exports.executeSelectAeronave = exports.executeSelectTrechoByID = exports.executeSelectTrecho = exports.executeSelectAssentoByVoo = exports.executeSelectByID = exports.executeSelectAll = void 0;
+exports.executeSelectTrechoBusca = exports.executeSearch = exports.executeSelectVoo = exports.executeSelectVooByID = exports.executeSelectAeroportoByID = exports.executeSelectAeroporto = exports.executeSelectAeronaveByID = exports.executeSelectAeronave = exports.executeSelectTrechoByID = exports.executeSelectTrecho = exports.executeSelectAssentoByVoo = exports.executeSelectByID = exports.executeSelectAll = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
 const config_1 = require("./config");
 //seleciona todas as linhas da tabela 
@@ -403,7 +403,7 @@ const executeSelectVoo = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.executeSelectVoo = executeSelectVoo;
 //seleciona todos os dados de um aeroporto especifico  
-const executeSelectVooBusca = (idTrecho, dataVoo) => __awaiter(void 0, void 0, void 0, function* () {
+const executeSearch = (idTrecho, dataVoo) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
     try {
@@ -446,7 +446,7 @@ const executeSelectVooBusca = (idTrecho, dataVoo) => __awaiter(void 0, void 0, v
         return resp;
     }
 });
-exports.executeSelectVooBusca = executeSelectVooBusca;
+exports.executeSearch = executeSearch;
 //seleciona todos os dados de um aeroporto especifico  
 const executeSelectTrechoBusca = (aeroSaida, aeroChegada) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };

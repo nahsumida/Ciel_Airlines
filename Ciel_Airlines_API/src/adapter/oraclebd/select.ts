@@ -382,7 +382,7 @@ export const executeSelectVoo = async() => {
 }
 
 //seleciona todos os dados de um aeroporto especifico  
-export const executeSelectVooBusca = async(idTrecho: number, dataVoo: any) => {
+export const executeSearch = async(idTrecho: number, dataVoo: any) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
     let connection;
     try{

@@ -19,6 +19,13 @@ const delete_1 = require("../adapter/oraclebd/delete");
 const insert_1 = require("../adapter/oraclebd/insert");
 const update_1 = require("../adapter/oraclebd/update");
 exports.route = express_1.default.Router();
+// SEARCH 
+//pesquisa de voos de um trecho especifico filtrado por data
+// dia x trecho y( trecho vem pelo req)
+exports.route.get("/searchVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    res.send(cr);
+}));
 /*
 // VENDA
 route.get("/selectVenda", async(req:any, res:any)=>{
@@ -93,12 +100,6 @@ exports.route.get("/selectVooByID", (req, res) => __awaiter(void 0, void 0, void
     cr.payload = (yield resp).result;
     cr.message = "Dado excluido";
     cr.status = "SUCCESS";
-    res.send(cr);
-}));
-//pesquisa de voos de um trecho especifico filtrado por data
-// dia x trecho y( trecho vem pelo req)
-exports.route.get("/selectSearch", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let cr = { status: "ERROR", message: "", payload: undefined };
     res.send(cr);
 }));
 exports.route.get("/deleteVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

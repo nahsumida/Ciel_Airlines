@@ -15,6 +15,15 @@ import { executeUpdateCompanhiaAerea, executeUpdateMetodoPagamento,
 import { CustomResponse } from '../model/customResponse';
 export const route = express.Router();
 
+// SEARCH 
+//pesquisa de voos de um trecho especifico filtrado por data
+// dia x trecho y( trecho vem pelo req)
+route.get("/searchVoo", async(req:any, res:any)=>{
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+  
+  res.send(cr);
+});
+
 /*
 // VENDA
 route.get("/selectVenda", async(req:any, res:any)=>{
@@ -103,13 +112,7 @@ route.get("/selectVooByID", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-//pesquisa de voos de um trecho especifico filtrado por data
-// dia x trecho y( trecho vem pelo req)
-route.get("/selectSearch", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
+
 
 route.get("/deleteVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};

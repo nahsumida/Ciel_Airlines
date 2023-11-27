@@ -12,6 +12,7 @@ function MessageStatus(msg, error){
 
 //Funcao envia request para o endpoint
 function fetchListar(body){
+    console.log("cheguei no fim")
     const requestOptions = {
         method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
@@ -19,6 +20,7 @@ function fetchListar(body){
 return fetch('http://localhost:3000/selectAeronave', requestOptions).then(T => T.json())
 }
 function ListarAeronave() {
+    console.log("carreguei de novo")
     const dataBody = document.getElementById('dataBody');
     fetchListar()
         .then(customResponse => {
@@ -30,6 +32,7 @@ function ListarAeronave() {
 
                 // Preenche a tabela com os dados da resposta
                 customResponse.payload.forEach(item => {
+                    console.log(item)
                     const id = item.ID_AERONAVE;
                     const modelo = item.MODELO;
                     const numIdentificacao = item.NUM_IDENTIFICACAO;
@@ -171,7 +174,7 @@ function inserirAeronave(CompanhiaAerea){
     var text = document.getElementById('fabricante').options[document.getElementById('fabricante').selectedIndex].text;
     const anoFabricacao = document.getElementById("anoFabricacao").value;
     //const Total_assentos = document.getElementById("Total_assentos").value;
-    const CompanhiaAerea = document.getElementById("CompanhiaAerea").value;
+    CompanhiaAerea = document.getElementById("CompanhiaAerea").value;
 
     fetchInserir({
         modelo: Modelo, 
@@ -198,5 +201,6 @@ function inserirAeronave(CompanhiaAerea){
 
 /*CHAMADA DAS FUNÇÕES NO CARREGAMENTO DA PAGINA*/
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("eu carreguei")
     ListarAeronave();
 });
