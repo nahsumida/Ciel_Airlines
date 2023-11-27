@@ -13,7 +13,7 @@ body{
 #voo_container {
     max-width: 800px;
     margin: 20px auto;
-    width:fit-content
+    width:fit-content;
 }
 
 .voo-card {
@@ -67,3 +67,21 @@ body{
     height: 24px;
     margin-top: 12px;
 }
+
+button{
+    padding: 2px 15px;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #dc48b0d0;
+    color: #dc48b0d0;
+    background-color: #ffffff;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+    background-color: #de91c7d0;
+    color: #ffffff; 
+ }
