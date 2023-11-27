@@ -104,7 +104,7 @@ select * from assento
 
 select * from trecho
 
-insert into voo (ID_VOO, TRECHO, AERONAVE, DATA, HORA_PARTIDA, HORA_CHEGADA, PRECO) VALUES (id_voo_seq.nextval, 51, 1,TO_DATE('03/12/2023', 'dd/mm/yyyy'), '8:00', '10:00', 120.0)
+insert into voo (ID_VOO, TRECHO, AERONAVE, DATA, HORA_PARTIDA, HORA_CHEGADA, PRECO) VALUES (id_voo_seq.nextval, 47, 1,TO_DATE('03/12/2023', 'dd/mm/yyyy'), '8:00', '10:00', 120.0)
 
 
 
@@ -116,8 +116,8 @@ SELECT
     v.HORA_CHEGADA,
     v.PRECO,
     a.NUM_IDENTIFICACAO,
-    chegada.NOME_AEROPORTO,
-    saida.NOME_AEROPORTO
+    chegada.SIGLA,
+    saida.SIGLA
 FROM
     VOO V
 JOIN

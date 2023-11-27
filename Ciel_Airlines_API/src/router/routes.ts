@@ -3,7 +3,7 @@ import express from "express";
 import { executeSelectAll, executeSelectByID, executeSelectAssentoByVoo,
          executeSelectTrechoByID, executeSelectTrecho, executeSelectAeronave,
          executeSelectAeroporto, executeSelectAeroportoByID, 
-         executeSelectAeronaveByID, executeSelectVoo, executeSelectVooByID,
+         executeSelectAeronaveByID, executeSelectVoo, executeSelectVooByID, searchTrecho, searchVoo,
         } from '../adapter/oraclebd/select';
 import { executeDeleteByID} from '../adapter/oraclebd/delete';
 import { executeInsertCompanhiaAerea, executeInsertMetodoPagamento, 
@@ -20,8 +20,40 @@ export const route = express.Router();
 // dia x trecho y( trecho vem pelo req)
 route.get("/searchVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
+
+  const aeroSaida = req.body.aeroSaida as number;
+  const aeroChegada = req.body.aeroChegada as number;
+  const dataVoo  = req.body.dataVoo as number;
+
+  console.log(aeroSaida, aeroChegada, dataVoo)
+
+  let respTrecho = searchTrecho(aeroSaida, aeroChegada);
+
+  console.log((await respTrecho).result)
+  console.log((await respTrecho).result[0][0])
+  if ((await respTrecho).err != null){
+    cr.message = (await respTrecho).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } else if ((await respTrecho).result === 0){
+    cr.status = "ERROR";
+    cr.message = "ZERO RESULTADOS";
+    res.send(cr);
+  } else {
+    let respVoo = searchVoo((await respTrecho).result[0][0], dataVoo);
+
+    if ((await respVoo).err != null){
+      cr.message = (await respVoo).err;
+      cr.status = "ERROR";
+      res.send(cr);
+    } 
+
+    cr.payload = (await respVoo).result;
+    cr.message = "Dado encontrado";
+    cr.status = "SUCCESS"; 
+
+    res.send(cr);
+  }
 });
 
 /*

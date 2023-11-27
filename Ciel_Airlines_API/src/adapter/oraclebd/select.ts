@@ -188,6 +188,7 @@ export const executeSelectAeronave = async() => {
         return resp;  
     }
 }
+
 export const executeSelectAeronaveByID = async(id:number) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
     let connection;
@@ -351,8 +352,8 @@ export const executeSelectVoo = async() => {
         v.HORA_CHEGADA,
         v.PRECO,
         a.NUM_IDENTIFICACAO,
-        chegada.NOME_AEROPORTO,
-        saida.NOME_AEROPORTO
+        saida.SIGLA,
+    chegada.SIGLA
     FROM
         VOO V
     JOIN
@@ -382,7 +383,7 @@ export const executeSelectVoo = async() => {
 }
 
 //seleciona todos os dados de um aeroporto especifico  
-export const executeSearch = async(idTrecho: number, dataVoo: any) => {
+export const searchVoo = async(idTrecho: number, dataVoo: any) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
     let connection;
     try{
@@ -427,7 +428,7 @@ export const executeSearch = async(idTrecho: number, dataVoo: any) => {
 }
 
 //seleciona todos os dados de um aeroporto especifico  
-export const executeSelectTrechoBusca = async(aeroSaida: number, aeroChegada: number) => {
+export const searchTrecho = async(aeroSaida: number, aeroChegada: number) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
     let connection;
     try{
@@ -439,7 +440,7 @@ export const executeSelectTrechoBusca = async(aeroSaida: number, aeroChegada: nu
         let resSelect = await connection.execute(selectString);
 
         await connection.close();
-        resp.result = resSelect.rows;
+        resp.result = (resSelect.rows)?.length;
     }catch(e){
         if(e instanceof Error){
             resp.err = e.message;

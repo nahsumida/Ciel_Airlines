@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.executeSelectTrechoBusca = exports.executeSearch = exports.executeSelectVoo = exports.executeSelectVooByID = exports.executeSelectAeroportoByID = exports.executeSelectAeroporto = exports.executeSelectAeronaveByID = exports.executeSelectAeronave = exports.executeSelectTrechoByID = exports.executeSelectTrecho = exports.executeSelectAssentoByVoo = exports.executeSelectByID = exports.executeSelectAll = void 0;
+exports.searchTrecho = exports.searchVoo = exports.executeSelectVoo = exports.executeSelectVooByID = exports.executeSelectAeroportoByID = exports.executeSelectAeroporto = exports.executeSelectAeronaveByID = exports.executeSelectAeronave = exports.executeSelectTrechoByID = exports.executeSelectTrecho = exports.executeSelectAssentoByVoo = exports.executeSelectByID = exports.executeSelectAll = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
 const config_1 = require("./config");
 //seleciona todas as linhas da tabela 
@@ -371,8 +371,8 @@ const executeSelectVoo = () => __awaiter(void 0, void 0, void 0, function* () {
         v.HORA_CHEGADA,
         v.PRECO,
         a.NUM_IDENTIFICACAO,
-        chegada.NOME_AEROPORTO,
-        saida.NOME_AEROPORTO
+        saida.SIGLA,
+    chegada.SIGLA
     FROM
         VOO V
     JOIN
@@ -403,7 +403,7 @@ const executeSelectVoo = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.executeSelectVoo = executeSelectVoo;
 //seleciona todos os dados de um aeroporto especifico  
-const executeSearch = (idTrecho, dataVoo) => __awaiter(void 0, void 0, void 0, function* () {
+const searchVoo = (idTrecho, dataVoo) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
     try {
@@ -446,9 +446,10 @@ const executeSearch = (idTrecho, dataVoo) => __awaiter(void 0, void 0, void 0, f
         return resp;
     }
 });
-exports.executeSearch = executeSearch;
+exports.searchVoo = searchVoo;
 //seleciona todos os dados de um aeroporto especifico  
-const executeSelectTrechoBusca = (aeroSaida, aeroChegada) => __awaiter(void 0, void 0, void 0, function* () {
+const searchTrecho = (aeroSaida, aeroChegada) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     let resp = { result: undefined, err: null };
     let connection;
     try {
@@ -457,7 +458,7 @@ const executeSelectTrechoBusca = (aeroSaida, aeroChegada) => __awaiter(void 0, v
         console.log(selectString);
         let resSelect = yield connection.execute(selectString);
         yield connection.close();
-        resp.result = resSelect.rows;
+        resp.result = (_a = (resSelect.rows)) === null || _a === void 0 ? void 0 : _a.length;
     }
     catch (e) {
         if (e instanceof Error) {
@@ -472,4 +473,4 @@ const executeSelectTrechoBusca = (aeroSaida, aeroChegada) => __awaiter(void 0, v
         return resp;
     }
 });
-exports.executeSelectTrechoBusca = executeSelectTrechoBusca;
+exports.searchTrecho = searchTrecho;

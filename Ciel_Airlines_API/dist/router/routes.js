@@ -24,7 +24,35 @@ exports.route = express_1.default.Router();
 // dia x trecho y( trecho vem pelo req)
 exports.route.get("/searchVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
-    res.send(cr);
+    const aeroSaida = req.body.aeroSaida;
+    const aeroChegada = req.body.aeroChegada;
+    const dataVoo = req.body.dataVoo;
+    console.log(aeroSaida, aeroChegada, dataVoo);
+    let respTrecho = (0, select_1.searchTrecho)(aeroSaida, aeroChegada);
+    console.log((yield respTrecho).result);
+    console.log((yield respTrecho).result[0][0]);
+    if ((yield respTrecho).err != null) {
+        cr.message = (yield respTrecho).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    else if ((yield respTrecho).result === 0) {
+        cr.status = "ERROR";
+        cr.message = "ZERO RESULTADOS";
+        res.send(cr);
+    }
+    else {
+        let respVoo = (0, select_1.searchVoo)((yield respTrecho).result[0][0], dataVoo);
+        if ((yield respVoo).err != null) {
+            cr.message = (yield respVoo).err;
+            cr.status = "ERROR";
+            res.send(cr);
+        }
+        cr.payload = (yield respVoo).result;
+        cr.message = "Dado encontrado";
+        cr.status = "SUCCESS";
+        res.send(cr);
+    }
 }));
 /*
 // VENDA
