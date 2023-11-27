@@ -3,8 +3,8 @@ import express from "express";
 import { executeSelectAll, executeSelectByID, executeSelectAssentoByVoo,
          executeSelectTrechoByID, executeSelectTrecho, executeSelectAeronave,
          executeSelectAeroporto, executeSelectAeroportoByID, 
-         executeSelectAeronaveByID, executeSelectVoo, executeSelectVooByID, searchTrecho, searchVoo,
-        } from '../adapter/oraclebd/select';
+         executeSelectAeronaveByID, executeSelectVoo, executeSelectVooByID, 
+         searchTrecho, searchVoo, executeSelectVenda } from '../adapter/oraclebd/select';
 import { executeDeleteByID} from '../adapter/oraclebd/delete';
 import { executeInsertCompanhiaAerea, executeInsertMetodoPagamento, 
          executeInsertCidade, executeInsertAeroporto, executeInsertTrecho, 
@@ -55,14 +55,26 @@ route.get("/searchVoo", async(req:any, res:any)=>{
   }
 });
 
-/*
+
 // VENDA
 route.get("/selectVenda", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
+  let resp = executeSelectVenda();
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await resp).result;
+  cr.message = "Dado excluido";
+  cr.status = "SUCCESS"; 
+  
   res.send(cr);
 });
-
+/*
 route.get("/selectVendaByID", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
@@ -116,7 +128,7 @@ route.put("/insertVenda", async(req:any, res:any)=>{
     cr.status = "ERROR";
     res.send(cr);
   }
-  
+
   let resp = executeInsertVenda(nome, email, idAssento, idVoo, pagamento);
 
   if ((await resp).err != null){
@@ -131,8 +143,6 @@ route.put("/insertVenda", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-
-
 
 // VOO
 route.get("/selectVoo", async(req:any, res:any)=>{

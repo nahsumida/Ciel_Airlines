@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchTrecho = exports.searchVoo = exports.executeSelectVoo = exports.executeSelectVooByID = exports.executeSelectAeroportoByID = exports.executeSelectAeroporto = exports.executeSelectAeronaveByID = exports.executeSelectAeronave = exports.executeSelectTrechoByID = exports.executeSelectTrecho = exports.executeSelectAssentoByVoo = exports.executeSelectByID = exports.executeSelectAll = void 0;
+exports.executeSelectVenda = exports.searchTrecho = exports.searchVoo = exports.executeSelectVoo = exports.executeSelectVooByID = exports.executeSelectAeroportoByID = exports.executeSelectAeroporto = exports.executeSelectAeronaveByID = exports.executeSelectAeronave = exports.executeSelectTrechoByID = exports.executeSelectTrecho = exports.executeSelectAssentoByVoo = exports.executeSelectByID = exports.executeSelectAll = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
 const config_1 = require("./config");
 //seleciona todas as linhas da tabela 
@@ -481,3 +481,55 @@ const searchTrecho = (aeroSaida, aeroChegada) => __awaiter(void 0, void 0, void 
     }
 });
 exports.searchTrecho = searchTrecho;
+//seleciona todas as linhas da tabela 
+const executeSelectVenda = () => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let selectString = `SELECT
+        v.ID_VENDA,
+        v.NOME_PASSAGEIRO,
+        v.EMAIL_PASSAGEIRO,
+        A.CODIGO,
+        M.NOME_METODO,
+        ve.HORA_PARTIDA,
+        ve.HORA_CHEGADA,
+        ve.DATA,
+        saida.NOME_AEROPORTO,
+        chegada.NOME_AEROPORTO
+    FROM
+        VENDA V
+    JOIN
+        ASSENTO A ON A.ID_ASSENTO = V.ASSENTO
+    Join
+        METODO_PAGAMENTO M ON M.ID_METODO_PAGAMENTO = V.PAGAMENTO
+    join
+        voo ve on ve.ID_VOO = v.ID_VOO
+    JOIN
+        trecho T on t.ID_TRECHO = ve.TRECHO
+    join
+        AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_SAIDA
+    join
+        AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_CHEGADA`;
+        console.log(selectString);
+        let resSelect = yield connection.execute(selectString);
+        resp.result = resSelect.rows;
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        if (connection !== undefined) {
+            yield connection.close();
+        }
+        return resp;
+    }
+});
+exports.executeSelectVenda = executeSelectVenda;

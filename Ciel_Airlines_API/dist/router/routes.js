@@ -52,14 +52,21 @@ exports.route.get("/searchVoo", (req, res) => __awaiter(void 0, void 0, void 0, 
         res.send(cr);
     }
 }));
-/*
 // VENDA
-route.get("/selectVenda", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-
-  res.send(cr);
-});
-
+exports.route.get("/selectVenda", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    let resp = (0, select_1.executeSelectVenda)();
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
+/*
 route.get("/selectVendaByID", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
