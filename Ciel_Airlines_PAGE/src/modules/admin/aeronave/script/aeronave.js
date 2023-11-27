@@ -11,7 +11,7 @@ function MessageStatus(msg, error){
 }
 
 //Funcao envia request para o endpoint
-function fetchListar(body){
+function fetchListarAeronave(body){
     console.log("cheguei no fim")
     const requestOptions = {
         method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
@@ -22,7 +22,7 @@ return fetch('http://localhost:3000/selectAeronave', requestOptions).then(T => T
 function ListarAeronave() {
     console.log("carreguei de novo")
     const dataBody = document.getElementById('dataBody');
-    fetchListar()
+    fetchListarAeronave()
         .then(customResponse => {
             console.log("Resposta da API:", customResponse);
 
@@ -214,9 +214,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const CompanhiaAerea = document.getElementById('CompanhiaAerea');
     listarComboBox(CompanhiaAerea,fetchListarCompanhia);
 
+    //alterar
     // chama a funcao para listar trechos dentro da caixa select delete e update
     const dataSelectDelete = document.getElementById('dataSelectDelete');
-    listarComboBoxTrecho(dataSelectDelete);
+    listarComboBoxporID(dataSelectDelete,fetchListarAeronave)
     const dataSelectUpdate = document.getElementById('dataSelectUpdate');
-    listarComboBoxTrecho(dataSelectUpdate);
+    listarComboBoxporID(dataSelectUpdate,fetchListarAeronave)
+
 });

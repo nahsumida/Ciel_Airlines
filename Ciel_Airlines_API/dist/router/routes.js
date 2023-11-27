@@ -300,7 +300,7 @@ exports.route.put("/insertAeroporto", (req, res) => __awaiter(void 0, void 0, vo
     res.send(cr);
 }));
 // ASSENTO
-exports.route.get("/selectAssentoByVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/selectAssentoByVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const idVoo = req.body.idVoo;
     let resp = (0, select_1.executeSelectAssentoByVoo)('ASSENTO', idVoo);

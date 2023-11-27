@@ -63,7 +63,7 @@ export const executeSelectAssentoByVoo = async(table:string, idVoo:any) => {
     try{
         connection = await oracledb.getConnection(oraConnAttribs);
       
-        let selectString = `SELECT * FROM ` + table + ` WHERE ID_VOO = ` + idVoo 
+        let selectString = `SELECT * FROM ` + table + ` WHERE ID_VOO = ` + idVoo + ` order by ID_Assento`
         console.log(selectString);
         let resSelect = await connection.execute(selectString);
 

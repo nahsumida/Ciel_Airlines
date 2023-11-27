@@ -83,3 +83,31 @@ function listarComboBox(element, fetchFunction) {
             console.log("Falha grave ao listar." + e);
         });
 }
+
+//Funcao geral para listar as opções com o id da linha dentro de uma caixa de selecao
+function listarComboBoxporID(element, fetchFunction) {
+    fetchFunction()
+        .then(customResponse => {
+            if (customResponse.status === "SUCCESS") {
+                element.innerHTML = '';
+
+                customResponse.payload.forEach(item => {
+                    const id = item[0];
+                    const nome = item[1];
+
+                    const option = document.createElement('option');
+                    option.value = id; // Valor da opção
+                    option.text = `${id}`; // Texto visível
+
+                    element.appendChild(option);
+                });
+            } else {
+                MessageStatus("Erro ao listar elementos...: " + customResponse.message, true);
+                console.log(customResponse.message);
+            }
+        })
+        .catch((e) => {
+            MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
+            console.log("Falha grave ao listar." + e);
+        });
+}

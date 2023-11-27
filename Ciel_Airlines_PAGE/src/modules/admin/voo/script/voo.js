@@ -116,8 +116,8 @@ function ListarTrechoComboBox() {
                 dataSelectDelete.innerHTML = '';
                 customResponse.payload.forEach(item => {
                     const idTrecho = item[0];
-                    const nome1 = item[1]; //colunas db
-                    const nome2 = item[2];
+                    const nome1 = item[3]; //colunas db
+                    const nome2 = item[5];
                     const option = document.createElement('option');
                     option.value = idTrecho; // Valor da opção
                     option.text = `${nome1} - ${nome2}`; // Texto visível

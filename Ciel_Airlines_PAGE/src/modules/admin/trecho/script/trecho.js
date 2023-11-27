@@ -85,7 +85,7 @@ function ListarTrecho(){
         customResponse.payload.forEach(item => {
             const idTrecho = item[0];
             const saida = item[3];
-            const chegada = item[4];
+            const chegada = item[5];
 
 
             const row = dataBody.insertRow();

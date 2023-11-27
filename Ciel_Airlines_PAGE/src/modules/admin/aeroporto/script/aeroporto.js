@@ -258,6 +258,9 @@ document.addEventListener("DOMContentLoaded", function() {
     //cadastrar
     const btnCadastrar = document.getElementById("btnCadastrar");
     var IDCidade = document.getElementById("IDCidade");
+   
+    const newCidade = document.getElementById('newIDCidade');
+    listarComboBox(newCidade,fetchListarCidade);
 
     if (btnCadastrar) {
         btnCadastrar.addEventListener('click', function() {
@@ -266,7 +269,13 @@ document.addEventListener("DOMContentLoaded", function() {
             var selectedID = selectedOption.value; 
             console.log(selectedID)
             inserirAeroporto(selectedID);
+
+            const nome = document.getElementById("nomeAeroporto");
+            const sigla = document.getElementById("siglaAeroporto");
+            nome.value = "";
+            sigla.value = "";
         });
     }
 
+ 
 });

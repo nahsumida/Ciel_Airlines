@@ -366,7 +366,7 @@ route.put("/insertAeroporto", async(req:any, res:any)=>{
 
 
 // ASSENTO
-route.get("/selectAssentoByVoo", async(req:any, res:any)=>{
+route.post("/selectAssentoByVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const idVoo = req.body.idVoo as number;

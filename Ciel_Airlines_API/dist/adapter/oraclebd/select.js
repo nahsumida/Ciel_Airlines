@@ -75,7 +75,7 @@ const executeSelectAssentoByVoo = (table, idVoo) => __awaiter(void 0, void 0, vo
     let connection;
     try {
         connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
-        let selectString = `SELECT * FROM ` + table + ` WHERE ID_VOO = ` + idVoo;
+        let selectString = `SELECT * FROM ` + table + ` WHERE ID_VOO = ` + idVoo + ` order by ID_Assento`;
         console.log(selectString);
         let resSelect = yield connection.execute(selectString);
         yield connection.close();
@@ -106,7 +106,9 @@ const executeSelectTrecho = () => __awaiter(void 0, void 0, void 0, function* ()
                                 T.AERO_SAIDA,
                                 T.AERO_CHEGADA,
                                 SAIDA.NOME_AEROPORTO AS AEROPORTO_SAIDA,
-                                CHEGADA.NOME_AEROPORTO AS AEROPORTO_CHEGADA
+SAIDA.SIGLA,
+                                CHEGADA.NOME_AEROPORTO AS AEROPORTO_CHEGADA,
+CHEGADA.SIGLA
                             FROM
                                 TRECHO T
                             JOIN
