@@ -69,6 +69,13 @@ function ListarAeronave() {
 
 
 // INSERIR
+function fetchListarCompanhia(body){
+    const requestOptions = {
+        method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+    };
+
+    return fetch('http://localhost:3000/selectCompanhiaAerea', requestOptions).then(T => T.json())
+}
 
 function fetchInserir(body){
     const requestOptions = {
@@ -203,4 +210,13 @@ function inserirAeronave(CompanhiaAerea){
 document.addEventListener("DOMContentLoaded", function () {
     console.log("eu carreguei")
     ListarAeronave();
+
+    const CompanhiaAerea = document.getElementById('CompanhiaAerea');
+    listarComboBox(CompanhiaAerea,fetchListarCompanhia);
+
+    // chama a funcao para listar trechos dentro da caixa select delete e update
+    const dataSelectDelete = document.getElementById('dataSelectDelete');
+    listarComboBoxTrecho(dataSelectDelete);
+    const dataSelectUpdate = document.getElementById('dataSelectUpdate');
+    listarComboBoxTrecho(dataSelectUpdate);
 });
