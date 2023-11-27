@@ -10,13 +10,6 @@ function MessageStatus(msg, error){
     pStatus.textContent = msg;
 }
 
-function fetchListar(body){
-    const requestOptions = {
-        method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
-    };
-
-    return fetch('http://localhost:3000/listarAeronave', requestOptions).then(T => T.json())
-}
 
 function fetchExcluir(body){
     const requestOptions = {

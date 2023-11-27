@@ -196,6 +196,7 @@ function inserirAeronave(CompanhiaAerea){
 }
 
 
-document.addEventListener('DOMContentLoaded', function () {
+/*CHAMADA DAS FUNÇÕES NO CARREGAMENTO DA PAGINA*/
+document.addEventListener("DOMContentLoaded", function () {
     ListarAeronave();
 });
