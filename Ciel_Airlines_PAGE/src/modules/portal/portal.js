@@ -1,3 +1,15 @@
+function MessageStatus(msg, error){
+    var pStatus = document.getElementById("status");
+
+    if(error === true){
+        pStatus.className = " statusError";
+    }
+    else{
+        pStatus.className = 'statusSuccess';
+    }
+    pStatus.textContent = msg;
+}
+
 // Função para criar um card de voo dinamicamente
 function createVooCard( origem, destino, data, preco, idVoo) {
     const VooContainer = document.getElementById('voo_container');
@@ -35,22 +47,23 @@ function createVooCard( origem, destino, data, preco, idVoo) {
     VooContainer.appendChild(VooCard);
 }
 
-function fetchListarVoo(body){
+function fetchBuscarVoo(body){
     const requestOptions = {
         method: 'POST', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
-
+    console.log("cheguei no fetch");
     return fetch('http://localhost:3000/searchVoo', requestOptions).then(T => T.json())
 }
 
-function ListarVoo(aeroSaida, aeroChegada, dataVoo){
-    fetchListarVoo({
+function BuscarVoo(aeroSaida, aeroChegada, dataVoo){
+    fetchBuscarVoo({
         "dataVoo": dataVoo,
         "aeroSaida": aeroSaida,
         "aeroChegada": aeroChegada
     })
     .then(customResponse => {
     if(customResponse.status === "SUCCESS"){
+        console.log("cheguei na funcao");
         // Preenche a tabela com os dados da resposta
         customResponse.payload.forEach(item => {
             const idVoo = item[0];
@@ -84,18 +97,22 @@ document.addEventListener("DOMContentLoaded", function() {
     const dataSelectChegada = document.getElementById('aeroChegadaSelect');
     listarComboBox(dataSelectChegada, fetchListarAero);
 
-    //armazenar metodo de pagamento escolhido
+    //armazenar aeroporto escolhido
     var selectbox1 = document.getElementById("aeroSaidaSelect"); // caixa de seleção com id "pagamentoSelect"
-    selectbox.addEventListener("change",function(){
+    selectbox1.addEventListener("change",function(){
       var selectedIndex1 = selectbox1.selectedIndex; // Índice da opção selecionada
       var selectedOption1 = selectbox1.options[selectedIndex1]; // Opção selecionada
       var selectedValue1 = selectedOption1.value; // Valor da opção selecionada
+      console.log('Aero1:', selectedValue1);
+
     });
       var selectbox2 = document.getElementById("aeroChegadaSelect"); // caixa de seleção com id "pagamentoSelect"
-        selectbox.addEventListener("change",function(){
+        selectbox2.addEventListener("change",function(){
       var selectedIndex2 = selectbox2.selectedIndex; // Índice da opção selecionada
       var selectedOption2 = selectbox2.options[selectedIndex2]; // Opção selecionada
       var selectedValue2 = selectedOption2.value; // Valor da opção selecionada
+      console.log('Aero2:', selectedValue2);
+
     });
 
     console.log(aeroSaida);

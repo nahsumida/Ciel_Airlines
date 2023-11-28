@@ -153,7 +153,7 @@ a.nav-link.active.custom-nav-link{
     text-align: left;
     margin-bottom: -10px;
 }
-#dest-input input{
+#dest-input select{
     width: 90%;
     height: 50px;
     border: 1px solid #a93c887e;
@@ -215,7 +215,6 @@ a.nav-link.active.custom-nav-link{
 }
 /*cards sugestoes de destinos*/
 .row#destinos_{
-    /*margin-bottom: 50px;*/
     margin-bottom: 10px;
 }
 .container-destinos{
@@ -224,7 +223,6 @@ a.nav-link.active.custom-nav-link{
     flex-direction:row;
     align-items: center;
     width: 100%;
-    /*background: linear-gradient(45deg, #f0e5da, #caa7bd); */
     padding-top: 0px;
     padding-bottom: 70px;
 }
@@ -232,9 +230,6 @@ a.nav-link.active.custom-nav-link{
     color: #fff;
     font-size: 30px;
     font-weight: 600;
-    /*text-decoration: 1px underline;
-    text-decoration-skip-ink:all;
-    text-underline-offset: 4px; */
     
 }
 .section-title#vantagens{
@@ -276,13 +271,6 @@ li.list-group-item{
 
 /*vantagens Ciel*/
 
-/*.container-vantagens{
-    margin-top: 100px;
-    width: 100%;
-    background: linear-gradient(45deg, #f0e5da, #caa7bd); 
-    padding-top: 0px;
-    padding-bottom: 70px;
-}*/
 
 .row#vantagens{
     margin-top: 90px;
@@ -341,7 +329,8 @@ li.list-group-item{
     align-items: center;
     padding-top:20px;
     max-width: fit-content;
-    margin:0
+    margin:0;
+    margin-bottom:60px;
 }
 
 .col#teste{
@@ -378,11 +367,12 @@ li.list-group-item{
 }
 
 #carousel-desc{
-    font-size: 17px;
+    font-size: 15px;
     color:#1d1d1d;
     font-weight: 500;
     padding-left: 10px;
     padding-right:10px;
+    text-align: justify;
 }
 
 .carousel-control-prev{

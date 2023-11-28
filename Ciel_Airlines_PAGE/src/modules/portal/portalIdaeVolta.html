@@ -51,14 +51,13 @@
           </div>
           <div class="row" id="dest-input">
             <div class="col" id="dest-input">
-              <label for="AeroSaida">Origem:</label><br/>
-              <input type="text" id="AeroSaida" name="AeroSaida" placeholder="  Insira a cidade de partida">
+              <label for="aeroSaida">Origem:</label><br/>
+              <select name="aeroSaida" id="aeroSaidaSelect" laceholder="  Selecione a cidade de partida"></select>
             </div>
             <div class="col" id="dest-input">
-              <label for="AeroSaida">Destino:</label><br/>
-              <input type="text" id="aeroChegada" name="aeroChegada" placeholder="  Insira a cidade de destino">
+              <label for="aeroChegada">Destino:</label><br/>
+              <select name="aeroChegada" id="aeroChegadaSelect"></select>
             </div>
-          </div>
           <div class="row" id="apenasIda">
             <div class="col" id="vazia"></div>
             <div class="col-4" id="IdaeVolta">
@@ -70,7 +69,7 @@
               <input type="date" id="Data" name="Data">
             </div>
             <div class="col" id="search">
-              <a href="buscaTeste.html" class="search-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 18 16">
+              <a href="buscaVoo.html" class="search-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 18 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
               </svg>
               Buscar voos</a>
@@ -126,58 +125,6 @@
         </div>
       </div>
     </div>
-    <!--Cards sugestões de destino-->
-    <!--<div class="container-destinos">
-      <div class="container">
-        <div class="row" id="destinos_"><div class="col"> <h5 class="section-title"> Destinos que você vai <span class="highlight2"> AMAR</span> </h5></div></div>
-        <div class="row">
-          <div class="col">
-            <div class="card" id="destino" style="width: 16rem;">
-              <img src="../../../src/assets/img/maragogi2.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title" id="destino">Maceió</h5>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Data</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card" id="destino" style="width: 16rem;">
-              <img src="../../../src/assets/img/gramado.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title" id="destino">Gramado</h5>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Data</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card" id="destino" style="width: 16rem;">
-              <img src="../../../src/assets/img/riodejaneiro.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title" id="destino">Rio de Janeiro</h5>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Data</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card" id="destino" style="width: 16rem;">
-              <img src="../../../src/assets/img/recife.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title" id="destino">Recife</h5>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item" >Data</li>
-              </ul>
-            </div>
-          </div>-->
-        </div>
-      </div>
-    </div>
   <!--Carrossel Destinos-->
   <div class="container" id="testandoDest">
     <div class="row" id="destinos_">
@@ -197,7 +144,10 @@
                 <h2>Maragogi</h2>
                 <h6>Alagoas</h6>
               </div>
-              <p class="justify-text" id="carousel-desc">  <br><br><br>blablabla nao sei o que sei que la blablabla blabla bla</p>
+              <p class="justify-text" id="carousel-desc">  <br><br><br><br>
+                Maragogi(AL) é um paraíso tropical com praias de areias brancas e águas cristalinas. A região é famosa por suas piscinas naturais, onde os recifes formam aquários naturais repletos de vida marinha colorida.
+                <br><br> Desfrute de atividades como mergulho e passeios de barco para explorar a beleza submarina. 
+              </p>
             </div>
           </div>
           <div class="carousel-item" data-bs-interval="2000">
@@ -207,7 +157,9 @@
                 <h3>Rio de Janeiro</h3>
                 <h6>Rio de Janeiro</h6>
               </div>
-              <p class="justify-text" id="carousel-desc">  <br><br><br>blablabla nao sei o que sei que la blablabla blabla bla</p>
+              <p class="justify-text" id="carousel-desc">  <br><br><br>
+                O Rio de Janeiro, conhecido como a "Cidade Maravilhosa", é um ícone turístico global. Com sua deslumbrante paisagem montanhosa, praias famosas como Copacabana e Ipanema, e o imponente Cristo Redentor, a cidade oferece uma combinação única de natureza e cultura. 
+                <br><br>Explore o animado bairro de Santa Teresa, mergulhe na energia do Carnaval carioca e aprecie a vista panorâmica do Pão de Açúcar. Com uma mistura vibrante de samba, futebol e beleza natural, o Rio de Janeiro é um destino que cativa e inspira.</p>
             </div>
           </div>
           <div class="carousel-item">
@@ -217,7 +169,8 @@
                 <h3>Gramado</h3>
                 <h6>Rio Grande do Sul</h6>
               </div>
-              <p class="justify-text" id="carousel-desc">  <br><br><br>blablabla nao sei o que sei que la blablabla blabla bla</p>
+              <p class="justify-text" id="carousel-desc">  <br><br><br><br>Gramado, no sul do Brasil, é uma cidade encantadora cercada por paisagens deslumbrantes. O clima ameno e as ruas floridas encantam os visitantes.
+                <br><br> Explore o Lago Negro, divirta-se no Mini Mundo e desfrute de deliciosos chocolates suíços. Com festivais sazonais e hospitalidade calorosa, Gramado é um destino cativante durante todo o ano.</p>
             </div>
           </div>
           <div class="carousel-item">    
@@ -227,7 +180,9 @@
                   <h3>Recife</h3>
                   <h6>Pernambuco</h6>
                 </div>
-                <p class="justify-text" id="carousel-desc">  <br><br><br>blablabla nao sei o que sei que la blablabla blabla bla</p>
+                <p class="justify-text" id="carousel-desc">  <br><br><br><br> Recife (PE) encanta visitantes com suas praias deslumbrantes, cultura vibrante e rica história. <br><br>Conhecida como a "Veneza Brasileira" devido aos seus canais, a cidade oferece uma mistura única de arquitetura colonial, festivais de rua animados e uma culinária deliciosa.<br><br>
+                   Com sua energia pulsante e tradições únicas, Recife é um destino turístico imperdível no nordeste do Brasil.
+                </p>
             </div>
           </div>
         </div>
@@ -240,8 +195,9 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-    </div>  
-  </div>
+    <script src="./portal.js"></script>
+    <script src="../admin/display.js"></script>
+    <script src="../admin/aeroporto/script/aeroporto.js"></script>
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
