@@ -163,3 +163,8 @@ join
     AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_SAIDA
 join
     AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_CHEGADA
+
+select * from aeronave
+ALTER TABLE aeronave modify numAssentos number not null;
+update aeronave set NUMASSENTOS = 36 where ID_AERONAVE=3;
+

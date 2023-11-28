@@ -19,6 +19,7 @@ function fetchListarAero(body){
 
     return fetch('http://localhost:3000/selectAeroporto', requestOptions).then(T => T.json())
 }
+
 function fetchListarCidade(body) {
     const requestOptions = {
         method: 'GET', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
