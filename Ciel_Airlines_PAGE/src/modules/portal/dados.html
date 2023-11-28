@@ -42,8 +42,11 @@
         <p>Telefone: <span id="telefoneConfirmado"></span></p>
         <p>Data Nascimento: <span id="dataConfirmado"></span></p>
 
-        <select class="form-select" aria-label="Default select example">
-          <option selected>selecione metodo de pagamento</option>
+        <label for name="pagamento">Selecione o Método de Pagamento</label>
+        <select class="form-select" name="pagamento" id="pagamentoSelect">
+          <option selected disabled></option>
+          <option value="1" id="pix">PIX</option>
+          <option value="2" id="cartao">Cartão de Crédito</option>
         </select>
 
         <button onclick="voltar()">Voltar</button> <!--chama função js-->
@@ -66,14 +69,41 @@
         document.getElementById('telefoneConfirmado').innerText = telefoneConfirmado;
         document.getElementById('dataConfirmado').innerText = dataConfirmado;
 
+        //armazenar metodo de pagamento escolhido
+        var selectbox = document.getElementById("pagamentoSelect"); // caixa de seleção com id "pagamentoSelect"
+        selectbox.addEventListener("change",function(){
+          var selectedIndex = selectbox.selectedIndex; // Índice da opção selecionada
+          var selectedOption = selectbox.options[selectedIndex]; // Opção selecionada
+          var selectedValue = selectedOption.value; // Valor da opção selecionada
+
+          console.log('Método de Pagamento Selecionado:', selectedValue);
+          metodoPag= sessionStorage.setItem('metodoPagamento', selectedValue); // armazena em session storage
+        });
+
+
+        const idVoo = obterParametroUrl('idVoo');
+
         //função para o botão, abre uma pagina html
         function voltar() {
-            window.location.href = 'html informacoes.html';
+          window.location.href = `informacoes.html?idVoo=${idVoo}`;
         }
         //função para o botão, abre uma pagina html
         function confirma() {
-            window.location.href = 'pagamento.html';
+
+          var metodoPag = sessionStorage.getItem('metodoPagamento');
+          if (metodoPag === "1"){
+            window.location.href = `pagamento_pix.html?idVoo=${idVoo}`;
+          } else if (metodoPag === "2"){
+            window.location.href = `pagamento_cartao.html?idVoo=${idVoo}`;
+          }
         }
+
+        function obterParametroUrl(nome) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(nome);
+        }
+
+
     </script>
 </body>
 </html>
