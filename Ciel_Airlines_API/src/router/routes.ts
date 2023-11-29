@@ -19,7 +19,7 @@ export const route = express.Router();
 // SEARCH 
 //pesquisa de voos de um trecho especifico filtrado por data
 // dia x trecho y( trecho vem pelo req)
-route.get("/searchVoo", async(req:any, res:any)=>{
+route.post("/searchVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const aeroSaida = req.body.aeroSaida as number;
