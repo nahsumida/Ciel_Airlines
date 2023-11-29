@@ -10,6 +10,18 @@ body{
     background: linear-gradient(100deg, #f0e5da, #a76b95);
     font-family: 'poppins', sans-serif;
 }
+.card-header#nav{
+    background-color: #f2ece6;    
+}
+ul li .nav-link:hover{
+    color: #fff;
+    background: #bfb4bb;
+    border-radius: 5px;
+}
+.nav-item .nav-link{
+    color:#2e2e2e;
+
+}
 #voo_container {
     max-width: 800px;
     margin: 20px auto;

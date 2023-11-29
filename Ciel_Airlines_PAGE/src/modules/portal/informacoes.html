@@ -36,8 +36,6 @@
     <div class="container">
         <h2>Informações</h2>
         <form action="#" method="post" id="info">
-
-            
                 <label for="name">Nome:</label>
                 <input type="text" id="name" name="name" placeholder="Seu Nome" required>
           
@@ -58,13 +56,14 @@
 
         </form>
     </div>
+    <script src="portal.js"></script>
     <script>
-      function obterParametroUrl(nome) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(nome);
-      }
+
+      //chama funcao para obter os parametros idVoo e idAssento que foram passados na url
       const idVoo = obterParametroUrl('idVoo');
       const idAssento = obterParametroUrl('idAssento');
+
+      // funcao para guardar os valores listados na tela do usuário caso ele confirme no botão
       function confirmarDados() {
           // Obter os valores dos campos
           var nome = document.getElementById('name').value;

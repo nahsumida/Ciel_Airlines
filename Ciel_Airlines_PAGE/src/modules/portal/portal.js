@@ -1,3 +1,4 @@
+
 function MessageStatus(msg, error){
     var pStatus = document.getElementById("status");
 
@@ -9,6 +10,12 @@ function MessageStatus(msg, error){
     }
     pStatus.textContent = msg;
 }
+
+// funcao para obter parametros passados na url
+function obterParametroUrl(nome) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(nome);
+  }
 
 // Função para criar um card de voo dinamicamente
 function createVooCard( origem, destino, data, preco, idVoo) {
@@ -22,7 +29,8 @@ function createVooCard( origem, destino, data, preco, idVoo) {
     const btnSelecionar = document.createElement('button');
     btnSelecionar.textContent = 'Selecionar';
 
-    // atribuir id do Voo para o botao
+    // atribuir id do Voo para o botao selecionar, assim quando o usuario escolher
+    //aquele card, passa o id do voo para listar os assentos na proxima página
     btnSelecionar.setAttribute('data-voo-id', idVoo);
 
      //adiciona o evento que reconhece o clique do botao 'Selecionar' e chama a funcao
@@ -40,13 +48,13 @@ function createVooCard( origem, destino, data, preco, idVoo) {
             <div class="voo-preco">R$${preco}</div>
         </div>  
     `;
-    
-    // Adicionar o card ao container de voos
+    //adiciona o botao 
     VooCard.appendChild(btnSelecionar);
-
+    // Adicionar o card ao container de voos
     VooContainer.appendChild(VooCard);
 }
 
+//Funcao envia request para o endpoint para buscar voo com o id 
 function fetchBuscarVoo(body){
     const requestOptions = {
         method: 'POST', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
@@ -55,6 +63,7 @@ function fetchBuscarVoo(body){
     return fetch('http://localhost:3000/searchVoo', requestOptions).then(T => T.json())
 }
 
+//funcao para listar voo da busca
 function BuscarVoo(aeroSaida, aeroChegada, dataVoo){
     fetchBuscarVoo({
         "dataVoo": dataVoo,
@@ -89,8 +98,11 @@ function BuscarVoo(aeroSaida, aeroChegada, dataVoo){
     });
 }
 
+//chamada das funcoes no carregamento da pagina
 document.addEventListener("DOMContentLoaded", function() {
     console.log("cheguei aqui")
+
+    // armazenas as comboBox nas variaveis e chamar a funcao para listá-las
     const dataSelectSaida = document.getElementById('aeroSaidaSelect');
     listarComboBox(dataSelectSaida, fetchListarAero);
 

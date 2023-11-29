@@ -52,7 +52,7 @@
         <button onclick="voltar()">Voltar</button> <!--chama função js-->
         <button onclick="confirma()">Confirma</button> <!--chama função js-->
     </div>
-
+    <script src="portal.js"></script>
     <script>
         // Obtenha os dados armazenados em sessionStorage
         //'sessionStorege' armazena dados de forma simples e sem expiração, ou seja, ficam lá enquanto não apagarmos por código ou pelo próprio navegado
@@ -97,13 +97,6 @@
             window.location.href = `pagamento_cartao.html?idVoo=${idVoo}`;
           }
         }
-
-        function obterParametroUrl(nome) {
-          const urlParams = new URLSearchParams(window.location.search);
-          return urlParams.get(nome);
-        }
-
-
     </script>
 </body>
 </html>

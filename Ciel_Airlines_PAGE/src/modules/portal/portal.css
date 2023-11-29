@@ -461,12 +461,6 @@ li.list-group-item{
         font-size: 10px; 
         width: 300px;
     }
-    /*.card#destino{
-        padding:0px;
-        border-radius: 20px;
-        height: 300px;
-        margin-bottom: 10px;
-    }*/
     .carousel{
         min-width: 500px;
     }
@@ -474,8 +468,18 @@ li.list-group-item{
         min-width: min-content;
     }
     .d-block#aa{
-        width: 300px;
+        width: 400px;
         height:300px;
+        border-radius: 10px;
+    }
+
+    .col#teste{
+        width: max-content;
+        display: flex;
+        flex-direction: row;
+    }
+    #carousel-desc{
+        display: none;
     }
     
 }
