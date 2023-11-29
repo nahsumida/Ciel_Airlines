@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "env": "npm init && npm i express cors dotenv helmet morgan express-async-errors && npm i -D typescript ts-node @types/express @types/cors @types/helmet @types/dotenv @types/morgan",
+    "env": "npm init && npm i express cors dotenv helmet morgan express-async-errors && npm i -D typescript ts-node @types/express @types/cors @types/helmet @types/dotenv @types/morgan && npm i oracledb",
     "dev": "npx nodemon src/server.ts --watch 'src/' -e ts",
     "build": "npx tsc",
     "start": "node ./dist/server.js"

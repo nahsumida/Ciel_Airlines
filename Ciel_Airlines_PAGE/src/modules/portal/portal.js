@@ -17,6 +17,13 @@ function obterParametroUrl(nome) {
     return urlParams.get(nome);
   }
 
+// Função chamada ao clicar no botão 'Selecionar'
+function selecionarVoo(idVoo) {
+    console.log(`voo selecionado com ID: ${idVoo}`); // verificacao no console
+      // Redirecionar para a prox página com o ID do voo na URL
+      window.location.href = `newMapa.html?idVoo=${idVoo}`;
+  }
+
 // Função para criar um card de voo dinamicamente
 function createVooCard( origem, destino, data, preco, idVoo) {
     const VooContainer = document.getElementById('voo_container');
@@ -98,9 +105,26 @@ function BuscarVoo(aeroSaida, aeroChegada, dataVoo){
     });
 }
 
+//exemplos para adicionar voos
+const listaDeVoos = [
+    { origem: 'Cidade A', destino: 'Cidade B', data: '2023-12-01', preco: 500, idVoo: 1 },
+    { origem: 'Cidade C', destino: 'Cidade D', data: '2023-12-02', preco: 600, idVoo: 2 },
+    { origem: 'Cidade E', destino: 'Cidade F', data: '2023-12-03', preco: 700, idVoo: 3 },
+    { origem: 'Cidade G', destino: 'Cidade H', data: '2023-12-04', preco: 800, idVoo: 4 }
+];
+  // Função para adicionar os voos à página
+function adicionarVoos() {
+    // Loop através da lista de voos e chama a função createVooCard para cada um
+    for (const voo of listaDeVoos) {
+        createVooCard(voo.origem, voo.destino, voo.data, voo.preco, voo.idVoo);
+    }
+}
+
+
+
+
 //chamada das funcoes no carregamento da pagina
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("cheguei aqui")
 
     // armazenas as comboBox nas variaveis e chamar a funcao para listá-las
     const dataSelectSaida = document.getElementById('aeroSaidaSelect');
@@ -109,27 +133,37 @@ document.addEventListener("DOMContentLoaded", function() {
     const dataSelectChegada = document.getElementById('aeroChegadaSelect');
     listarComboBox(dataSelectChegada, fetchListarAero);
 
-    //armazenar aeroporto escolhido
+
+    //armazenar aeroportos escolhidos
     var selectbox1 = document.getElementById("aeroSaidaSelect"); // caixa de seleção com id "pagamentoSelect"
     selectbox1.addEventListener("change",function(){
-      var selectedIndex1 = selectbox1.selectedIndex; // Índice da opção selecionada
-      var selectedOption1 = selectbox1.options[selectedIndex1]; // Opção selecionada
-      var selectedValue1 = selectedOption1.value; // Valor da opção selecionada
-      console.log('Aero1:', selectedValue1);
-
+        var selectedIndex1 = selectbox1.selectedIndex; // Índice da opção selecionada
+        var selectedOption1 = selectbox1.options[selectedIndex1]; // Opção selecionada
+        var selectedValue1 = selectedOption1.value; // Valor da opção selecionada
+        console.log('Aero1:', selectedValue1);
+        sessionStorage.setItem('aeroSaida', selectedValue1); //objeto js para armazenar informaçoes durante uma sessão
     });
-      var selectbox2 = document.getElementById("aeroChegadaSelect"); // caixa de seleção com id "pagamentoSelect"
+
+    var selectbox2 = document.getElementById("aeroChegadaSelect"); // caixa de seleção com id "pagamentoSelect"
         selectbox2.addEventListener("change",function(){
-      var selectedIndex2 = selectbox2.selectedIndex; // Índice da opção selecionada
-      var selectedOption2 = selectbox2.options[selectedIndex2]; // Opção selecionada
-      var selectedValue2 = selectedOption2.value; // Valor da opção selecionada
-      console.log('Aero2:', selectedValue2);
+        var selectedIndex2 = selectbox2.selectedIndex; // Índice da opção selecionada
+        var selectedOption2 = selectbox2.options[selectedIndex2]; // Opção selecionada
+        var selectedValue2 = selectedOption2.value; // Valor da opção selecionada
+        console.log('Aero2:', selectedValue2);
+        sessionStorage.setItem('aeroChegada', selectedValue2); 
 
     });
 
-    console.log(aeroSaida);
-    console.log(aeroChegada);
-    var dataVoo = document.getElementById("data");
-    console.log(dataVoo)
-    ListarVoo(selectedValue1, selectedValue2, dataVoo);
+    //armazenar data escolhida
+    Data.addEventListener("change",function(){
+        var dataVoo = document.getElementById("Data").value;
+        console.log("data: ",dataVoo);
+        sessionStorage.setItem('dataVoo', dataVoo); 
+
+    });
+
+    var search = document.getElementsByClassName("search-btn");
+    search-btn.addEventListener("click", function(){
+    })
+
 });

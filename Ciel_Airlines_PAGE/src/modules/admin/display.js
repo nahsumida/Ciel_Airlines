@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //Funcao geral para listar as opções com os dados da tabela dentro de uma caixa de selecao
 function listarComboBox(element, fetchFunction) {
-    console.log("cheguei aqui")
+    console.log("estou listando comboBox")
     fetchFunction()
         .then(customResponse => {
             if (customResponse.status === "SUCCESS") {

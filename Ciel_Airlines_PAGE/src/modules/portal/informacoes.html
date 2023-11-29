@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="css informacoes.css">
-    <link rel="stylesheet" href="css informacoes.css">
+    <link rel="stylesheet" href="informacoes.css">
     <title>Informações</title>
 </head>
 <body>
@@ -35,7 +34,7 @@
 <!--tabela para inserir dados-->
     <div class="container">
         <h2>Informações</h2>
-        <form action="#" method="post" id="info">
+        <form onsubmit="return confirmarDados()" method="post" id="info">
                 <label for="name">Nome:</label>
                 <input type="text" id="name" name="name" placeholder="Seu Nome" required>
           
@@ -50,15 +49,15 @@
            
                 <label for="Data de Nascimento">Data de Nascimento:</label>
                 <input type="date" id="data" name="Data de Nascimento" placeholder="Sua Data de Nascimento" required>
+                <p id="status" class="statusError"></p>
 
-                <button type="button" onclick="confirmarDados()">Confirmar</button>
+                <button type="submit" onclick="confirmarDados()">Confirmar</button>
                 <button onclick="voltar()">Voltar</button> <!--chama função js-->
 
         </form>
     </div>
     <script src="portal.js"></script>
     <script>
-
       //chama funcao para obter os parametros idVoo e idAssento que foram passados na url
       const idVoo = obterParametroUrl('idVoo');
       const idAssento = obterParametroUrl('idAssento');
@@ -70,8 +69,15 @@
           var email = document.getElementById('email').value;
           var cpf = document.getElementById('cpf').value;
           var telefone = document.getElementById('telefone').value;
-          var data = document.getElementById('data').value;
+          var data = document.getElementById("data").value;
 
+          /*Verificação se a data de nascimento é válida*/
+          // caso o ano inserido seja maior do que 2005, mostra mensagem
+          // caso ok, guarda as infos e passa para a próxima pág
+          if (anoSelecionado > 2005 ){
+            MessageStatus("Aviso! Você precisa ter mais de 18 anos para comprar uma passagem", true);
+            return false;
+          }else{
           // Armazenar os dados 
           // 'sessionStorege' armazena dados de forma simples e sem expiração, ou seja, ficam lá enquanto não apagarmos por código ou pelo próprio navegado
           sessionStorage.setItem('nomeConfirmado', nome);
@@ -83,13 +89,27 @@
           sessionStorage.setItem('idAssento', idAssento);
           // Abre a pagina HTML
           window.location.href = `dados.html?idVoo=${idVoo}`;
+          return false;
+          }
+          
       }
 
       //função para o botão, abre uma pagina html
       function voltar() {
-        
         window.location.href = `newMapa.html?idVoo=${idVoo}`;
       }
+
+      document.addEventListener("DOMContentLoaded", function() {
+        //armazenar data escolhida
+        data.addEventListener("change",function(){
+            var data = document.getElementById("data").value;
+            console.log("data: ",data);
+            //verificação para a inserção da data
+            var dataSelecionada = new Date(data);
+            anoSelecionado = dataSelecionada.getFullYear();
+            console.log("ano: ",anoSelecionado);
+        });
+      });
   </script>
 </body>
 </html>

@@ -1,0 +1,109 @@
+.statusError {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    color: red;
+    text-align: center;
+}
+
+.card-body {
+    background-color: rgba(243, 228, 239, 0.661);
+}
+.nav-item .nav-link{
+    color:#2e2e2e;
+    margin-top: 25px;
+}
+
+.container-fundo{
+    padding-top: 30px;
+    background-image: url('../../assets/img/aviaoFundo.png'); 
+    background-repeat: no-repeat;
+    background-size: 150% 150%;
+    background-position: center;
+    /*padding-left: 130px;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:0;
+    
+
+}
+thead{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+}
+th{
+    width:280px;
+}
+
+#dataBody{
+    width:fit-content;
+    text-align: center;
+}
+
+
+#bStyle{
+
+    width: 50%;
+
+}
+button{
+    border: none;
+    border-radius: 5px;
+    margin-top: 3px;
+    cursor: pointer;
+    background: none;
+    background-image: url('../../assets/img/assento.png');
+    background-size: 160%;
+    background-position: center;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 13px;
+    color:azure
+}
+button+button{
+    margin-left: 100px;
+    margin-bottom: 10px;
+}
+
+.assentoLivre{
+    background-color: rgba(0, 128, 0, 0.564);
+}
+
+/*quando clicar no botao*/
+.assentoLivre:active {
+    background-color: #458ea0; 
+}
+.assentoOcupado{
+    background-color: rgba(213, 53, 53, 0.821);
+    pointer-events: none;
+}
+
+.assentoEscolhido{
+    background-color: rgba(128, 128, 128, 0.833);
+}
+
+button#btnConfirmar{
+    justify-content: center;
+    background-image: none;
+    background-color: #a93c88d0;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    width: 40%;
+    text-align: center;
+    line-height: normal;
+    font-weight:600;
+}

@@ -39,11 +39,13 @@ form {
 input {
     padding: 10px;
     margin-bottom: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #a93c887e;
     border-radius: 4px;
     
 }
-
+::placeholder{
+color: rgb(143, 143, 143)
+}
 label {
     margin-bottom: 8px;
     color: #333;
