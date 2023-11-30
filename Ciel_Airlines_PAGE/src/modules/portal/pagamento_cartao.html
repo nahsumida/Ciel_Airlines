@@ -38,9 +38,9 @@
         <form id="checkoutForm">
 
             <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" placeholder="Nome que está no cartão" required>
+            <input type="text" id="name" name="name" placeholder="Nome que esta no cartão" required>
 
-            <label for="numerocart">Número do Cartão:</label>
+            <label for="numerocart">Numero do Cartão:</label>
             <input type="text" id="numero" name="numerocart" oninput="this.value=this.value.replace(/[^0-9]/g,'').substring(0, 16)" placeholder="Numero do seu Cartão" >
 
             <label for="CVV">CVV:</label>
@@ -49,15 +49,15 @@
             <label for="vencimento">Data de Validade:</label>
             <input type="date" id="Validade" name="Data de Validade" placeholder="Data de Validade" required>
 
-            <button onclick="voltar()">Voltar</button> <!--chama função js-->
             <button onclick="confirmar()">Confirmar</button> <!--chama função js-->
+            <button onclick="voltar()">Voltar</button> <!--chama função js-->
             <p id="status" class="statusError"></p>
 
         </form>
 
         <div id="mensagem"></div>
     </div>
-
+    <script src="portal.js"></script>
     <script>
         // Obtenha os dados armazenados em sessionStorage
         //'sessionStorege' armazena dados de forma simples e sem expiração, ou seja, ficam lá enquanto não apagarmos por código ou pelo próprio navegado
@@ -84,7 +84,7 @@
         })
             .then(customResponse => {
                 if (customResponse.status === "SUCCESS") {
-                    MessageStatus("Cidade cadastrada... ", false);
+                    MessageStatus("Venda cadastrada... ", false);
                 } else {
                     MessageStatus("Erro ao cadastrar cidade...: " + customResponse.message, true);
                     console.log(customResponse.message);

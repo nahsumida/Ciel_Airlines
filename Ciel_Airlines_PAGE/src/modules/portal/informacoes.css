@@ -23,6 +23,12 @@ h2 {
     color: #333;
    
 }
+.statusError {
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    color: red;
+    text-align: center;
+}
 
 form {
     display: flex;
