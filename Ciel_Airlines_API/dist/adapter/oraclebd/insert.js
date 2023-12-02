@@ -1,4 +1,4 @@
-"use strict"; // Ativa o modo estrito no JavaScript, tornando o código mais seguro e evitando certos tipos de erros.
+"use strict"; 
 
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
