@@ -22,7 +22,7 @@ exports.route = express_1.default.Router();
 // SEARCH 
 //pesquisa de voos de um trecho especifico filtrado por data
 // dia x trecho y( trecho vem pelo req)
-exports.route.get("/searchVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/searchVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const aeroSaida = req.body.aeroSaida;
     const aeroChegada = req.body.aeroChegada;

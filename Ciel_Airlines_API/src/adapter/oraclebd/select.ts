@@ -385,7 +385,7 @@ export const executeSelectVoo = async() => {
 }
 
 //seleciona todos os dados de um aeroporto especifico  
-export const searchVoo = async(idTrecho: number, dataVoo: any) => {
+export const searchVoo = async(idTrecho: number, dataVoo: string) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
     let connection;
     try{
@@ -410,7 +410,7 @@ export const searchVoo = async(idTrecho: number, dataVoo: any) => {
         AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_saida
     join
         AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_chegada
-    where v.data = TO_DATE('` + dataVoo + `', 'dd/mm/yyyy') and v.TRECHO =`+ idTrecho
+    where v.data = TO_DATE('` + dataVoo  + `', 'yyyy-mm-dd') and v.TRECHO =`+ idTrecho
 
         console.log(selectString);
         let resSelect = await connection.execute(selectString);

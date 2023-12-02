@@ -429,7 +429,7 @@ const searchVoo = (idTrecho, dataVoo) => __awaiter(void 0, void 0, void 0, funct
         AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_saida
     join
         AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_chegada
-    where v.data = TO_DATE('` + dataVoo + `', 'dd/mm/yyyy') and v.TRECHO =` + idTrecho;
+    where v.data = TO_DATE('` + dataVoo + `', 'yyyy-mm-dd') and v.TRECHO =` + idTrecho;
         console.log(selectString);
         let resSelect = yield connection.execute(selectString);
         yield connection.close();

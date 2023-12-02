@@ -92,7 +92,8 @@ function BuscarVoo(aeroSaida, aeroChegada, dataVoo){
             const aeroChegada = item[7];
 
             // Exemplo de uso da função
-            createVooCard(aeroSaida, aeroChegada, dataV, preco, 1);
+            createVooCard(aeroSaida, aeroChegada, dataV, preco, idVoo);
+            //createVooCard(voo.origem, voo.destino, voo.data, voo.preco, voo.idVoo)
         });
     }else{
         MessageStatus("Erro ao listar Aeroporto...: " + customResponse.message, true);
@@ -106,7 +107,7 @@ function BuscarVoo(aeroSaida, aeroChegada, dataVoo){
 }
 
 //exemplos para adicionar voos
-const listaDeVoos = [
+/*const listaDeVoos = [
     { origem: 'Cidade A', destino: 'Cidade B', data: '2023-12-01', preco: 500, idVoo: 1 },
     { origem: 'Cidade C', destino: 'Cidade D', data: '2023-12-02', preco: 600, idVoo: 2 },
     { origem: 'Cidade E', destino: 'Cidade F', data: '2023-12-03', preco: 700, idVoo: 3 },
@@ -118,10 +119,7 @@ function adicionarVoos() {
     for (const voo of listaDeVoos) {
         createVooCard(voo.origem, voo.destino, voo.data, voo.preco, voo.idVoo);
     }
-}
-
-
-
+}*/
 
 //chamada das funcoes no carregamento da pagina
 document.addEventListener("DOMContentLoaded", function() {
@@ -151,7 +149,6 @@ document.addEventListener("DOMContentLoaded", function() {
         var selectedValue2 = selectedOption2.value; // Valor da opção selecionada
         console.log('Aero2:', selectedValue2);
         sessionStorage.setItem('aeroChegada', selectedValue2); 
-
     });
 
     //armazenar data escolhida
@@ -159,11 +156,12 @@ document.addEventListener("DOMContentLoaded", function() {
         var dataVoo = document.getElementById("Data").value;
         console.log("data: ",dataVoo);
         sessionStorage.setItem('dataVoo', dataVoo); 
-
     });
-
-    var search = document.getElementsByClassName("search-btn");
-    search-btn.addEventListener("click", function(){
-    })
-
+   /*
+    var search = document.getElementById("search");
+        
+    search.addEventListener("click", function(){
+        //console.log(selectedValue1, selectedValue2, dataVoo);
+        window.location.href = `buscaVoo.html`;
+    })*/
 });

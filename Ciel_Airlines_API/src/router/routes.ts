@@ -24,7 +24,7 @@ route.post("/searchVoo", async(req:any, res:any)=>{
 
   const aeroSaida = req.body.aeroSaida as number;
   const aeroChegada = req.body.aeroChegada as number;
-  const dataVoo  = req.body.dataVoo as number;
+  const dataVoo  = req.body.dataVoo as string;
 
   console.log(aeroSaida, aeroChegada, dataVoo)
 

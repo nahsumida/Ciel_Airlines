@@ -128,12 +128,12 @@ join
     AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_saida
 join
     AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_chegada
-where v.data = TO_DATE('03/12/2023', 'dd/mm/yyyy') and v.TRECHO = 51
+where v.data = TO_DATE('2023-12-03', 'yyyy-mm-dd') and v.TRECHO = 47
 
 select * from trecho
 select id_trecho from trecho where AERO_SAIDA = 20 and aero_chegada = 17
 
-select * from venda;
+select * from voo;
 
 insert into venda (id_venda, nome_passageiro, EMAIL_PASSAGEIRO, ASSENTO, id_voo, pagamento) values (ID_VENDA_SEQ.nextval, 'jessica linda', 'jessiquinha@gmail.com', 146, 4, 1)
 update assento set status='INDISPONIVEL' where ID_ASSENTO = 154
