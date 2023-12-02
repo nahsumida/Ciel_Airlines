@@ -184,7 +184,8 @@ const executeSelectAeronave = () => __awaiter(void 0, void 0, void 0, function* 
                                 A.MODELO,
                                 A.ANO_FABRICACAO,
                                 A.FABRICANTE,
-                                A.NUM_IDENTIFICACAO
+                                A.NUM_IDENTIFICACAO,
+                                A.NUMASSENTOS
                             FROM
                                 AERONAVE A
                             JOIN
@@ -219,7 +220,8 @@ const executeSelectAeronaveByID = (id) => __awaiter(void 0, void 0, void 0, func
                                 A.MODELO,
                                 A.ANO_FABRICACAO,
                                 A.FABRICANTE,
-                                A.NUM_IDENTIFICACAO
+                                A.NUM_IDENTIFICACAO,
+                                A.NUMASSENTOS
                             FROM
                                 AERONAVE A
                             JOIN

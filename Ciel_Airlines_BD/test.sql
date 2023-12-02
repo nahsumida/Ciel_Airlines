@@ -74,9 +74,9 @@ UPDATE COMPANHIA_AEREA SET NOME_COMPANHIA = 'aaaaa' WHERE ID_COMPANHIA_AEREA = 2
 
 select * from COMPANHIA_AEREA
 
-select * from aeroporto
+select * from companhia_Aerea
 
-INSERT INTO AERONAVE (ID_AERONAVE, MODELO, NUM_IDENTIFICACAO, FABRICANTE, ANO_FABRICACAO, COMPANHIA_AEREA) VALUES (ID_AERONAVE_SEQ.nextval, 'AIRBUS 380', '1234', 'AIRBUS', 2010, 20)
+INSERT INTO AERONAVE (ID_AERONAVE, MODELO, NUM_IDENTIFICACAO, FABRICANTE, ANO_FABRICACAO, COMPANHIA_AEREA, NUMASSENTOS) VALUES (ID_AERONAVE_SEQ.nextval, 'AIRBUS 380', '1234', 'AIRBUS', 2010, 19, 36)
 
 select * from voo;
 
@@ -99,7 +99,7 @@ update AEROPORTO set id_cidade= 9 ,nome_aeroporto='bb', sigla='JES' where ID_AER
 select * from AEROPORTO
 
 
-select * from assento
+select * from aeronave
 
 
 select * from trecho
@@ -107,6 +107,7 @@ select * from trecho
 insert into voo (ID_VOO, TRECHO, AERONAVE, DATA, HORA_PARTIDA, HORA_CHEGADA, PRECO) VALUES (id_voo_seq.nextval, 47, 1,TO_DATE('03/12/2023', 'dd/mm/yyyy'), '8:00', '10:00', 120.0)
 
 
+select * from venda
 
 
 SELECT
@@ -133,7 +134,7 @@ where v.data = TO_DATE('2023-12-03', 'yyyy-mm-dd') and v.TRECHO = 47
 select * from trecho
 select id_trecho from trecho where AERO_SAIDA = 20 and aero_chegada = 17
 
-select * from voo;
+select * from aeronave;
 
 insert into venda (id_venda, nome_passageiro, EMAIL_PASSAGEIRO, ASSENTO, id_voo, pagamento) values (ID_VENDA_SEQ.nextval, 'jessica linda', 'jessiquinha@gmail.com', 146, 4, 1)
 update assento set status='INDISPONIVEL' where ID_ASSENTO = 154

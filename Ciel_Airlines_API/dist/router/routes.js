@@ -170,19 +170,29 @@ exports.route.get("/deleteVoo", (req, res) => __awaiter(void 0, void 0, void 0, 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-/*
-route.get("/updateVoo", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-route.get("/insertVoo", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-*/
+exports.route.get("/updateVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    res.send(cr);
+}));
+exports.route.put("/insertVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const trecho = req.body.trecho;
+    const aeronave = req.body.aeronave;
+    const dataVoo = req.body.dataVoo;
+    const horaPartida = req.body.horaPartida;
+    const horaChegada = req.body.horaChegada;
+    const preco = req.body.preco;
+    let resp = (0, insert_1.executeInsertVoo)(trecho, aeronave, dataVoo, horaPartida, horaChegada, preco);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado inserido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
 // AERNAVE
 exports.route.get("/selectAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
@@ -226,18 +236,29 @@ exports.route.delete("/deleteAeronave", (req, res) => __awaiter(void 0, void 0, 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-/*
-route.get("/updateAeronave", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-
-route.get("/insertAeronave", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});*/
+exports.route.get("/updateAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    res.send(cr);
+}));
+exports.route.put("/insertAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const modelo = req.body.modelo;
+    const numIdentificacao = req.body.numIdentificacao;
+    const fabricante = req.body.fabricante;
+    const anoFabricacao = req.body.anoFabricacao;
+    const compahiaAerea = req.body.compahiaAerea;
+    const numAssento = req.body.numAssento;
+    let resp = (0, insert_1.executeInsertAeronave)(modelo, numIdentificacao, fabricante, anoFabricacao, compahiaAerea, numAssento);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado inserido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
 // AEROPORTO
 exports.route.post("/selectAeroportoByID", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };

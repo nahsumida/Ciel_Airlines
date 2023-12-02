@@ -11,23 +11,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true }); // Esta linha é gerada automaticamente pelo TypeScript para indicar que o arquivo é um módulo TypeScript.
-exports.executeDeleteByID = void 0;  //deleta todos os dados de um id especifico
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.executeDeleteByID = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
 const config_1 = require("./config");
-const executeDeleteByID = (table, id) => __awaiter(void 0, void 0, void 0, function* () { // Essa função é projetada para excluir registros de uma tabela Oracle com base no ID fornecido //  - `table`: Nome da tabela de onde os dados serão excluídos,`id`: Valor do ID usado para determinar qual registro será excluído.
-
-    let resp = { result: undefined, err: null }; // Declara um objeto chamado `resp` que será usado para armazenar o resultado da operação de exclusão. `result` será o número de registros excluídos, e `err` será uma mensagem de erro, se houver
+//deleta todos os dados de um id especifico
+const executeDeleteByID = (table, id) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
     let connection;
     console.log("cheguei aqui");
     try {
-        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs); //Estabelece uma conexão com o banco de dados Oracle.
-        let deleteString = `DELETE ` + table + ` WHERE ID_` + table + ` = ` + id; // Cria uma string SQL para a operação de exclusão com base no nome da tabela e no ID fornecido.
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let deleteString = `DELETE ` + table + ` WHERE ID_` + table + ` = ` + id;
         console.log(deleteString);
-        let resDelete = yield connection.execute(deleteString); // Executa a operação de exclusão no banco de dados.
-        yield connection.commit(); // Confirma as alterações feitas na transação.
-        yield connection.close(); // Fecha a conexão com o banco de dados.
-        const rowsDeleted = resDelete.rowsAffected; // Obtém o número de registros afetados pela operação de exclusão.
+        let resDelete = yield connection.execute(deleteString);
+        yield connection.commit();
+        yield connection.close();
+        const rowsDeleted = resDelete.rowsAffected;
         if (rowsDeleted !== undefined && rowsDeleted === 1) {
             resp.result = rowsDeleted;
         }
@@ -49,6 +49,3 @@ const executeDeleteByID = (table, id) => __awaiter(void 0, void 0, void 0, funct
     }
 });
 exports.executeDeleteByID = executeDeleteByID;
-
-
-        

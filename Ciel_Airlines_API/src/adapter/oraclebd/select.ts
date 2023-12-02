@@ -169,7 +169,8 @@ export const executeSelectAeronave = async() => {
                                 A.MODELO,
                                 A.ANO_FABRICACAO,
                                 A.FABRICANTE,
-                                A.NUM_IDENTIFICACAO
+                                A.NUM_IDENTIFICACAO,
+                                A.NUMASSENTOS
                             FROM
                                 AERONAVE A
                             JOIN
@@ -203,7 +204,8 @@ export const executeSelectAeronaveByID = async(id:number) => {
                                 A.MODELO,
                                 A.ANO_FABRICACAO,
                                 A.FABRICANTE,
-                                A.NUM_IDENTIFICACAO
+                                A.NUM_IDENTIFICACAO,
+                                A.NUMASSENTOS
                             FROM
                                 AERONAVE A
                             JOIN

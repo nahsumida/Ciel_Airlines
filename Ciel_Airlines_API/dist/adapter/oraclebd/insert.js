@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.executeInsertVenda = exports.executeInsertAeroporto = exports.executeInsertTrecho = exports.executeInsertCidade = exports.executeInsertMetodoPagamento = exports.executeInsertCompanhiaAerea = void 0;
+exports.executeInsertAeronave = exports.executeInsertVoo = exports.executeInsertVenda = exports.executeInsertAeroporto = exports.executeInsertTrecho = exports.executeInsertCidade = exports.executeInsertMetodoPagamento = exports.executeInsertCompanhiaAerea = void 0;
 const oracledb_1 = __importDefault(require("oracledb"));
 const config_1 = require("./config");
 //insere um dado de companhia aerea no banco de dados
@@ -223,3 +223,69 @@ const executeInsertVenda = (nome, email, idAssento, idVoo, pagamento) => __await
     }
 });
 exports.executeInsertVenda = executeInsertVenda;
+//atualiza a o aeroporto de ida e de volta de um trecho
+const executeInsertVoo = (trecho, aeronave, dataVoo, hora_partida, hora_chegada, preco) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let updateString = `insert into voo 
+        (ID_VOO, TRECHO, AERONAVE, DATA, HORA_PARTIDA, HORA_CHEGADA, PRECO) 
+        VALUES (id_voo_seq.nextval, ` + trecho + `,` + aeronave + `, TO_DATE('` + dataVoo + `', 'yyyy-mm-dd'), '` + hora_partida + `', '` + hora_chegada + `', ` + preco + `)`;
+        let resInsert = yield connection.execute(updateString);
+        yield connection.commit();
+        const rowsInserted = resInsert.rowsAffected;
+        if (rowsInserted !== undefined && rowsInserted === 1) {
+            resp.result = rowsInserted;
+        }
+        else {
+            resp.err = 'Erro ao inserir dado na tabela';
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        return resp;
+    }
+});
+exports.executeInsertVoo = executeInsertVoo;
+//atualiza a o aeroporto de ida e de volta de um trecho
+const executeInsertAeronave = (modelo, identificacao, fabricante, anoFabricacao, compahiaAerea, numAssento) => __awaiter(void 0, void 0, void 0, function* () {
+    let resp = { result: undefined, err: null };
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        let updateString = `INSERT INTO AERONAVE 
+        (ID_AERONAVE, MODELO, NUM_IDENTIFICACAO, FABRICANTE, ANO_FABRICACAO, COMPANHIA_AEREA, NUMASSENTOS) 
+        VALUES (ID_AERONAVE_SEQ.nextval, '` + modelo + `', '` + identificacao + `', '` + fabricante + `', ` + anoFabricacao + `,` + compahiaAerea + `, ` + numAssento + `)`;
+        let resInsert = yield connection.execute(updateString);
+        yield connection.commit();
+        const rowsInserted = resInsert.rowsAffected;
+        if (rowsInserted !== undefined && rowsInserted === 1) {
+            resp.result = rowsInserted;
+        }
+        else {
+            resp.err = 'Erro ao inserir dado na tabela';
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            resp.err = e.message;
+            console.log(e.message);
+        }
+        else {
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        return resp;
+    }
+});
+exports.executeInsertAeronave = executeInsertAeronave;

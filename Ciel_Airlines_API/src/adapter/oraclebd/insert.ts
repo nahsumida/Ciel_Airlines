@@ -186,7 +186,6 @@ export const executeInsertAeroporto = async(idCidade: number, nomeAeroporto: any
     }
 }
 
-
 //atualiza a o aeroporto de ida e de volta de um trecho
 export const executeInsertVenda = async(nome: any, email: any, idAssento: number, idVoo: number, pagamento: number) => {
     let resp: DatabaseResponse = { result: undefined, err: null};
@@ -197,6 +196,76 @@ export const executeInsertVenda = async(nome: any, email: any, idAssento: number
 
         let updateString = `insert into venda (id_venda, nome_passageiro, EMAIL_PASSAGEIRO, ASSENTO, id_voo, pagamento) values (ID_VENDA_SEQ.nextval, '` + nome + `', '`+email+`', ` + idAssento + `,` + idVoo + `,` +  pagamento +`)`
         
+      
+        let resInsert = await connection.execute(updateString);
+
+        await connection.commit();
+
+        const rowsInserted = resInsert.rowsAffected
+       
+        if(rowsInserted !== undefined &&  rowsInserted === 1) {
+            resp.result = rowsInserted
+        } else {
+            resp.err = 'Erro ao inserir dado na tabela'
+        }
+    }catch(e){
+        if(e instanceof Error){
+            resp.err = e.message;
+            console.log(e.message);
+        }else{
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    } finally {
+        return resp;  
+    }
+}
+
+//atualiza a o aeroporto de ida e de volta de um trecho
+export const executeInsertVoo = async(trecho: number, aeronave: number, dataVoo: string, hora_partida: string, hora_chegada: string, preco: number) => {
+    let resp: DatabaseResponse = { result: undefined, err: null};
+    let connection;
+
+    try{
+        connection = await oracledb.getConnection(oraConnAttribs);
+
+        let updateString = `insert into voo 
+        (ID_VOO, TRECHO, AERONAVE, DATA, HORA_PARTIDA, HORA_CHEGADA, PRECO) 
+        VALUES (id_voo_seq.nextval, ` + trecho + `,` +  aeronave + `, TO_DATE('` + dataVoo  + `', 'yyyy-mm-dd'), '` + hora_partida + `', '` + hora_chegada + `', ` + preco + `)`
+      
+        let resInsert = await connection.execute(updateString);
+
+        await connection.commit();
+
+        const rowsInserted = resInsert.rowsAffected
+       
+        if(rowsInserted !== undefined &&  rowsInserted === 1) {
+            resp.result = rowsInserted
+        } else {
+            resp.err = 'Erro ao inserir dado na tabela'
+        }
+    }catch(e){
+        if(e instanceof Error){
+            resp.err = e.message;
+            console.log(e.message);
+        }else{
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    } finally {
+        return resp;  
+    }
+}
+
+//atualiza a o aeroporto de ida e de volta de um trecho
+export const executeInsertAeronave = async(modelo: string, identificacao: any, fabricante: any, anoFabricacao: number, compahiaAerea: number, numAssento: number) => {
+    let resp: DatabaseResponse = { result: undefined, err: null};
+    let connection;
+
+    try{
+        connection = await oracledb.getConnection(oraConnAttribs);
+
+        let updateString = `INSERT INTO AERONAVE 
+        (ID_AERONAVE, MODELO, NUM_IDENTIFICACAO, FABRICANTE, ANO_FABRICACAO, COMPANHIA_AEREA, NUMASSENTOS) 
+        VALUES (ID_AERONAVE_SEQ.nextval, '` + modelo + `', '` + identificacao + `', '` + fabricante + `', ` + anoFabricacao + `,`  + compahiaAerea + `, ` + numAssento + `)`
       
         let resInsert = await connection.execute(updateString);
 

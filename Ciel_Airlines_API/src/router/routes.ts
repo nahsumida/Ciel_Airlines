@@ -8,7 +8,9 @@ import { executeSelectAll, executeSelectByID, executeSelectAssentoByVoo,
 import { executeDeleteByID} from '../adapter/oraclebd/delete';
 import { executeInsertCompanhiaAerea, executeInsertMetodoPagamento, 
          executeInsertCidade, executeInsertAeroporto, executeInsertTrecho, 
-         executeInsertVenda } from "../adapter/oraclebd/insert";
+         executeInsertVenda, 
+         executeInsertVoo,
+         executeInsertAeronave} from "../adapter/oraclebd/insert";
 import { executeUpdateCompanhiaAerea, executeUpdateMetodoPagamento, 
          executeUpdateCidade, executeUpdateAssento, executeUpdateTrecho,
          executeUpdateAeroporto } from "../adapter/oraclebd/update";
@@ -202,19 +204,37 @@ route.get("/deleteVoo", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-/*
+
 route.get("/updateVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   res.send(cr);
 });
 
-route.get("/insertVoo", async(req:any, res:any)=>{
+route.put("/insertVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+  
+  const trecho = req.body.trecho as number;
+  const aeronave = req.body.aeronave as number;
+  const dataVoo = req.body.dataVoo as string;
+  const horaPartida = req.body.horaPartida as string;
+  const horaChegada = req.body.horaChegada as string;
+  const preco = req.body.preco as number;
+
+  let resp = executeInsertVoo(trecho, aeronave, dataVoo, horaPartida, horaChegada, preco);
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await resp).result;
+  cr.message = "Dado inserido";
+  cr.status = "SUCCESS"; 
   
   res.send(cr);
 });
-*/
 
 // AERNAVE
 route.get("/selectAeronave", async(req:any, res:any)=>{
@@ -274,18 +294,38 @@ route.delete("/deleteAeronave", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-/*
+
 route.get("/updateAeronave", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   res.send(cr);
 });
 
-route.get("/insertAeronave", async(req:any, res:any)=>{
+route.put("/insertAeronave", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+
+  const modelo = req.body.modelo as string;
+  const numIdentificacao = req.body.numIdentificacao as string;
+  const fabricante = req.body.fabricante as string;
+  const anoFabricacao = req.body.anoFabricacao as number;
+  const compahiaAerea = req.body.compahiaAerea as number;
+  const numAssento = req.body.numAssento as number;
+
+
+  let resp = executeInsertAeronave(modelo, numIdentificacao, fabricante, anoFabricacao, compahiaAerea, numAssento);
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await resp).result;
+  cr.message = "Dado inserido";
+  cr.status = "SUCCESS"; 
   
   res.send(cr);
-});*/
+});
 
 // AEROPORTO
 route.post("/selectAeroportoByID", async(req:any, res:any)=>{
