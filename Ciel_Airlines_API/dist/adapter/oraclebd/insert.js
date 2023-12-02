@@ -1,5 +1,4 @@
-"use strict"; 
-
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -9,52 +8,43 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.executeInsertAeronave = exports.executeInsertVoo = exports.executeInsertVenda = exports.executeInsertAeroporto = exports.executeInsertTrecho = exports.executeInsertCidade = exports.executeInsertMetodoPagamento = exports.executeInsertCompanhiaAerea = void 0;
-
-exports.executeInsertVenda = exports.executeInsertAeroporto = exports.executeInsertTrecho = exports.executeInsertCidade = exports.executeInsertMetodoPagamento = exports.executeInsertCompanhiaAerea = void 0;
-
 const oracledb_1 = __importDefault(require("oracledb"));
-
 const config_1 = require("./config");
-
+//insere um dado de companhia aerea no banco de dados
 const executeInsertCompanhiaAerea = (nomeCompanhiaAerea) => __awaiter(void 0, void 0, void 0, function* () {
-
     let resp = { result: undefined, err: null };
-
     let connection;
     try {
         connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
-
-        let insertString = `INSERT INTO COMPANHIA_AEREA
+        let insertString = `INSERT INTO COMPANHIA_AEREA 
         (ID_COMPANHIA_AEREA, NOME_COMPANHIA)
         VALUES (ID_COMPANHIA_SEQ.NEXTVAL, '` + nomeCompanhiaAerea + `')`;
-
         console.log(insertString);
         let resInsert = yield connection.execute(insertString);
-
         yield connection.commit();
-
         const rowsInserted = resInsert.rowsAffected;
-
         if (rowsInserted !== undefined && rowsInserted === 1) {
             resp.result = rowsInserted;
-        } else {
+        }
+        else {
             resp.err = 'Erro ao inserir dado na tabela';
         }
-    } catch (e) {
+    }
+    catch (e) {
         if (e instanceof Error) {
             resp.err = e.message;
             console.log(e.message);
-        } else {
+        }
+        else {
             resp.err = "Erro ao conectar ao oracle. Sem detalhes";
         }
-    } finally {
+    }
+    finally {
         if (connection !== undefined) {
             yield connection.close();
         }
@@ -62,6 +52,7 @@ const executeInsertCompanhiaAerea = (nomeCompanhiaAerea) => __awaiter(void 0, vo
     }
 });
 exports.executeInsertCompanhiaAerea = executeInsertCompanhiaAerea;
+//insere um dado de companhia aerea no banco de dados
 const executeInsertMetodoPagamento = (nomeMetodo) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
@@ -97,7 +88,8 @@ const executeInsertMetodoPagamento = (nomeMetodo) => __awaiter(void 0, void 0, v
         return resp;
     }
 });
-exports.executeInsertMetodoPagamento = executeInsertMetodoPagamento; 
+exports.executeInsertMetodoPagamento = executeInsertMetodoPagamento;
+// insere um dado de cidade no banco de dados 
 const executeInsertCidade = (nomeCidade) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
@@ -134,6 +126,7 @@ const executeInsertCidade = (nomeCidade) => __awaiter(void 0, void 0, void 0, fu
     }
 });
 exports.executeInsertCidade = executeInsertCidade;
+//atualiza a o aeroporto de ida e de volta de um trecho
 const executeInsertTrecho = (saida, chegada) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
@@ -166,6 +159,7 @@ const executeInsertTrecho = (saida, chegada) => __awaiter(void 0, void 0, void 0
     }
 });
 exports.executeInsertTrecho = executeInsertTrecho;
+//atualiza a o aeroporto de ida e de volta de um trecho
 const executeInsertAeroporto = (idCidade, nomeAeroporto, sigla) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
@@ -198,6 +192,7 @@ const executeInsertAeroporto = (idCidade, nomeAeroporto, sigla) => __awaiter(voi
     }
 });
 exports.executeInsertAeroporto = executeInsertAeroporto;
+//atualiza a o aeroporto de ida e de volta de um trecho
 const executeInsertVenda = (nome, email, idAssento, idVoo, pagamento) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
@@ -228,6 +223,7 @@ const executeInsertVenda = (nome, email, idAssento, idVoo, pagamento) => __await
     }
 });
 exports.executeInsertVenda = executeInsertVenda;
+//atualiza a o aeroporto de ida e de volta de um trecho
 const executeInsertVoo = (trecho, aeronave, dataVoo, hora_partida, hora_chegada, preco) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
@@ -260,6 +256,7 @@ const executeInsertVoo = (trecho, aeronave, dataVoo, hora_partida, hora_chegada,
     }
 });
 exports.executeInsertVoo = executeInsertVoo;
+//atualiza a o aeroporto de ida e de volta de um trecho
 const executeInsertAeronave = (modelo, identificacao, fabricante, anoFabricacao, compahiaAerea, numAssento) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
@@ -292,6 +289,3 @@ const executeInsertAeronave = (modelo, identificacao, fabricante, anoFabricacao,
     }
 });
 exports.executeInsertAeronave = executeInsertAeronave;
-=======
-exports.executeInsertCompanhiaAerea =
->>>>>>> e3e6be7f255c5b92fc0ab6efe464bd3ca79ddaff
