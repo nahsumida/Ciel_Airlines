@@ -16,20 +16,20 @@ exports.executeInsertVenda = exports.executeInsertAeroporto = exports.executeIns
 const oracledb_1 = __importDefault(require("oracledb"));
 const config_1 = require("./config");
 //insere um dado de companhia aerea no banco de dados
-const executeInsertCompanhiaAerea = (nomeCompanhiaAerea) => __awaiter(void 0, void 0, void 0, function* () {
-    let resp = { result: undefined, err: null };
+const executeInsertCompanhiaAerea = (nomeCompanhiaAerea) => __awaiter(void 0, void 0, void 0, function* () { // Essa função insere dados em uma tabela chamada `COMPANHIA_AEREA` no banco de dados Oracle
+    let resp = { result: undefined, err: null }; // Declara um objeto `resp` que será usado para armazenar o resultado da operação de inserção. `result` será o número de registros inseridos e `err` será uma mensagem de erro, se houver.
     let connection;
     try {
-        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
-        let insertString = `INSERT INTO COMPANHIA_AEREA 
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs); // Estabelece uma conexão com o banco de dados Oracle usando as informações de conexão definidas em `config_1.oraConnAttribs`.
+        let insertString = `INSERT INTO COMPANHIA_AEREA // Constrói uma string SQL para realizar a operação de inserção com base nos parâmetros fornecidos.
         (ID_COMPANHIA_AEREA, NOME_COMPANHIA)
         VALUES (ID_COMPANHIA_SEQ.NEXTVAL, '` + nomeCompanhiaAerea + `')`;
         console.log(insertString);
-        let resInsert = yield connection.execute(insertString);
-        yield connection.commit();
-        const rowsInserted = resInsert.rowsAffected;
-        if (rowsInserted !== undefined && rowsInserted === 1) {
-            resp.result = rowsInserted;
+        let resInsert = yield connection.execute(insertString); // Executa a operação de inserção no banco de dados.
+        yield connection.commit(); // Confirma as alterações feitas na transação.
+        const rowsInserted = resInsert.rowsAffected; // Obtém o número de registros afetados pela operação de inserção.
+        if (rowsInserted !== undefined && rowsInserted === 1) { //Verifica se a operação foi bem-sucedida com base no número de registros inseridos.
+            resp.result = rowsInserted; // Atribui o número de registros inseridos ao campo `result` do objeto `resp`.
         }
         else {
             resp.err = 'Erro ao inserir dado na tabela';
@@ -44,7 +44,8 @@ const executeInsertCompanhiaAerea = (nomeCompanhiaAerea) => __awaiter(void 0, vo
             resp.err = "Erro ao conectar ao oracle. Sem detalhes";
         }
     }
-    finally {
+    finally { // O bloco `finally` garante que a conexão com o banco de dados será fechada, independentemente de a operação ser bem-sucedida ou falhar.
+
         if (connection !== undefined) {
             yield connection.close();
         }
