@@ -38,19 +38,33 @@
                         <img id="pix" src="../../assets/img/pix.jpg">
                         <label for="Codigo" style="text-align: center;">hdsfhga-sfhjsagfhgahsgfd-g743657249999jj777778ggghg</label>
                         <button onclick="confirmar()">Confirmar</button>
+                        <p id="status" class="statusError"></p>
                         <button onclick="voltar()">Voltar</button>
             </div>
     <script>
-        // Obtenha os dados armazenados em sessionStorage
-        //'sessionStorege' armazena dados de forma simples e sem expiração, ou seja, ficam lá enquanto não apagarmos por código ou pelo próprio navegado
-        const nomeConfirmado = sessionStorage.getItem('nomeConfirmado');
-        const emailConfirmado = sessionStorage.getItem('emailConfirmado');
-        const metodoPagamento = sessionStorage.getItem('metodoPagamento');
-        const idAssento = sessionStorage.getItem('idAssento');
+      function MessageStatus(msg, error){
+        var pStatus = document.getElementById("status");
 
+        if(error === true){
+            pStatus.className = " statusError";
+        }
+        else{
+            pStatus.className = 'statusSuccess';
+        }
+        pStatus.textContent = msg;
+      }
+
+        // Obter os dados armazenados em sessionStorage
+        //'sessionStorege' armazena dados de forma simples e sem expiração, ou seja, ficam lá enquanto a guia estiver aberta (sessao)
+        const nome = sessionStorage.getItem('nomeConfirmado');
+        const email = sessionStorage.getItem('emailConfirmado');
+        const pagamento = sessionStorage.getItem('metodoPagamento');
+        const idAssento = sessionStorage.getItem('idAssento');
+        const idVoo = obterParametroUrl('idVoo');
         
       function fetchInserir(body) {
-          const requestOptions = {
+        console.log("cheguei no fetch")
+        const requestOptions = {
               method: 'PUT', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
           };
           return fetch('http://localhost:3000/insertVenda', requestOptions).then(T => T.json())
@@ -58,17 +72,17 @@
 
       function inserirVenda() {
         fetchInserir({
-          nome: nomeConfirmado,
-          email:emailConfirmado,
+          nome: nome,
+          email:email,
           idAssento: idAssento,
           idVoo: idVoo,
-          pagamento:metodoPagamento
+          pagamento:pagamento
         })
             .then(customResponse => {
                 if (customResponse.status === "SUCCESS") {
-                    MessageStatus("Cidade cadastrada... ", false);
+                    MessageStatus("Venda cadastrada... ", false);
                 } else {
-                    MessageStatus("Erro ao cadastrar cidade...: " + customResponse.message, true);
+                    MessageStatus("Erro ao cadastrar Venda...: " + customResponse.message, true);
                     console.log(customResponse.message);
                 }
             })
@@ -78,15 +92,22 @@
             });
     }
 
-      const idVoo = obterParametroUrl('idVoo');
+      
       //função para o botão, abre uma pagina html
       function voltar(){
         window.location.href = `dados.html?idVoo=${idVoo}`;
       }
       //função para o botão, abre uma pagina html
       function confirmar(){
+        // Obter os dados armazenados em sessionStorage
+        //'sessionStorege' armazena dados de forma simples e sem expiração, ou seja, ficam lá enquanto a guia estiver aberta (sessao)
+        const nome = sessionStorage.getItem('nomeConfirmado');
+        const email = sessionStorage.getItem('emailConfirmado');
+        const pagamento = sessionStorage.getItem('metodoPagamento');
+        const idAssento = sessionStorage.getItem('idAssento');
+        const idVoo = obterParametroUrl('idVoo');
         inserirVenda();
-        window.location.href = 'aprovado.html';
+        //window.location.href = 'aprovado.html';
       }
 
       function obterParametroUrl(nome) {

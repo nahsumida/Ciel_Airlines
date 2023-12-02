@@ -176,13 +176,5 @@ document.addEventListener("DOMContentLoaded", function () {
     const dataSelectUpdate = document.getElementById('dataSelectUpdate');
     listarComboBox(dataSelectDelete, fetchListarCidade);
     listarComboBox(dataSelectUpdate, fetchListarCidade);
-    
-
-    const btnAlterar = document.getElementById("btnAlterar");
-
-    if (btnAlterar) {
-        btnAlterar.addEventListener('click',function(){
-        Alterar(selectedValue, nomeCidade); // chama funcao para alterar 
-    })
-}});
+});
 

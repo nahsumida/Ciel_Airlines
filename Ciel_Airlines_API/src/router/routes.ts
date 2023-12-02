@@ -548,7 +548,7 @@ route.delete("/deleteCidade", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idCidade as number;
-console.log(id)
+  console.log(id)
   let resp = executeDeleteByID('CIDADE', id);
 
   if ((await resp).err != null){

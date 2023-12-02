@@ -48,11 +48,15 @@ function createVooCard( origem, destino, data, preco, idVoo) {
     // Preencher o card com informações
     VooCard.innerHTML = `
         <div class="voo-details">
-            <div><p>Origem</p><h2>${origem}</h2></div>
-            <div><img src="../../../src/assets/img/aviaoIcon.png"></div>
-            <div><p>Destino</p><h2>${destino}</h2></div>
-            <div><h2>${data}</h2></div>
-            <div class="voo-preco">R$${preco}</div>
+            <div class= "row">
+                <div class="col"><p>Origem</p><h6>${origem}</h6></div>
+                <div class="col" id="img"><img src="../../../src/assets/img/aviaoIcon.png"></div>
+                <div class="col"><p>Destino</p><h6>${destino}</h6></div>
+            </div>
+            <div class="row" id="divide">
+                <div class="col"><h6>${data}</h6></div>
+                <div class ="col" id="voo-preco">R$${preco}</div>
+            </div>
         </div>  
     `;
     //adiciona o botao 
@@ -88,8 +92,8 @@ function BuscarVoo(aeroSaida, aeroChegada, dataVoo){
             const horaChegada = item[3];
             const preco = item[4];
             const aeronave = item[5];
-            const aeroSaida = item[6];
-            const aeroChegada = item[7];
+            const aeroSaida = item[7];
+            const aeroChegada = item[6];
 
             // Exemplo de uso da função
             createVooCard(aeroSaida, aeroChegada, dataV, preco, idVoo);
@@ -157,11 +161,5 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("data: ",dataVoo);
         sessionStorage.setItem('dataVoo', dataVoo); 
     });
-   /*
-    var search = document.getElementById("search");
-        
-    search.addEventListener("click", function(){
-        //console.log(selectedValue1, selectedValue2, dataVoo);
-        window.location.href = `buscaVoo.html`;
-    })*/
+
 });

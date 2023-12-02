@@ -23,9 +23,9 @@ ul li .nav-link:hover{
 
 }
 #voo_container {
-    max-width: 800px;
-    margin: 20px auto;
+    max-width: 900px;
     width:fit-content;
+    padding: 0
 }
 
 .voo-card {
@@ -34,6 +34,7 @@ ul li .nav-link:hover{
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 16px;
+    margin-top: 16px;
     margin-bottom: 16px;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -50,11 +51,14 @@ ul li .nav-link:hover{
     flex-direction: flex;
     align-items: center;
     text-align: center;
-    padding-right: 16px;
+    padding-right: 0;
+    width: fit-content;	
+    font-size: medium;
 }
 
 .voo-details div {
-    padding-left: 40px;
+    padding-left: 10px;
+    padding-right:10px
 }
 
 .voo-details p {
@@ -62,26 +66,35 @@ ul li .nav-link:hover{
     color:#dc48b0d0;
 }
 
-.voo-details h2
+.voo-details h6
  {
     margin: 0;
-    font-size: 25px;
+    font-size: 18px;
 }
 
-.voo-preco {
+#voo-preco {
     color: #dc48b0d0;
     font-size: 20px;
     font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
 }
 
-.voo-details img {
-    width: 24px;
-    height: 24px;
-    margin-top: 12px;
+.voo-details #img {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.voo-details #img img {
+    width: 30px;
 }
 
 button{
-    padding: 2px 15px;
+    padding: 2px 10px;
     font-size: 13px;
     font-weight: bold;
     text-decoration: none;
@@ -96,4 +109,28 @@ button{
 button:hover {
     background-color: #de91c7d0;
     color: #ffffff; 
+ }
+
+ @media (max-width:785px) {
+    #voo_container {
+        /*margin: 20px auto;*/
+        width:fit-content;
+        margin: 10px auto;
+        font-size: 10px
+    }
+    .voo-details h6{
+        font-size: 16px;
+    }
+    .voo-card {
+        padding: 10px;
+        display:grid;
+    }
+    .voo-details {
+        display:flex;
+        flex-direction: column;
+    }
+    #divide{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
  }
