@@ -4,7 +4,7 @@ import { executeSelectAll, executeSelectByID, executeSelectAssentoByVoo,
          executeSelectTrechoByID, executeSelectTrecho, executeSelectAeronave,
          executeSelectAeroporto, executeSelectAeroportoByID, 
          executeSelectAeronaveByID, executeSelectVoo, executeSelectVooByID, 
-         searchTrecho, searchVoo, executeSelectVenda } from '../adapter/oraclebd/select';
+         searchTrecho, searchVoo, executeSelectVenda, executeSelectVendaByAssento } from '../adapter/oraclebd/select';
 import { executeDeleteByID} from '../adapter/oraclebd/delete';
 import { executeInsertCompanhiaAerea, executeInsertMetodoPagamento, 
          executeInsertCidade, executeInsertAeroporto, executeInsertTrecho, 
@@ -75,13 +75,27 @@ route.get("/selectVenda", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-/*
-route.get("/selectVendaByID", async(req:any, res:any)=>{
+
+route.post("/selectVendaByAssento", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
+
+  const id = req.body.idAssento as number;
+  console.log(id)
+  let resp = executeSelectVendaByAssento(id);
+
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } 
+
+  cr.payload = (await resp).result;
+  cr.message = "Dado excluido";
+  cr.status = "SUCCESS"; 
   
   res.send(cr);
 });
-*/
+
 route.delete("/deleteVenda", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 

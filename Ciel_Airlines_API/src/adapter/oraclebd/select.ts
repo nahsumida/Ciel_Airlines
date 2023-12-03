@@ -514,3 +514,57 @@ export const executeSelectVenda = async() => {
         return resp;  
     }
 }
+
+//seleciona todas as linhas da tabela 
+export const executeSelectVendaByAssento = async(idAssento: number) => {
+    let resp: DatabaseResponse = { result: undefined, err: null};
+    let connection;
+
+    try{
+        connection = await oracledb.getConnection(oraConnAttribs);
+
+        let selectString = `SELECT
+        v.ID_VENDA,
+        v.NOME_PASSAGEIRO,
+        v.EMAIL_PASSAGEIRO,
+        A.CODIGO,
+        M.NOME_METODO,
+        ve.DATA,
+        ve.ID_VOO,
+        saida.SIGLA,
+        chegada.SIGLA
+    FROM
+        VENDA V
+    JOIN
+        ASSENTO A ON A.ID_ASSENTO = V.ASSENTO
+    Join
+        METODO_PAGAMENTO M ON M.ID_METODO_PAGAMENTO = V.PAGAMENTO
+    join
+        voo ve on ve.ID_VOO = v.ID_VOO
+    JOIN
+        trecho T on t.ID_TRECHO = ve.TRECHO
+    join
+        AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_SAIDA
+    join
+        AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_CHEGADA
+    where Assento =` + idAssento
+
+        console.log(selectString);
+        let resSelect = await connection.execute(selectString);
+
+        resp.result = resSelect.rows;
+    } catch(e){
+        if(e instanceof Error){
+            resp.err = e.message;
+            console.log(e.message);
+        }else{
+            resp.err = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    } finally {
+        if(connection !== undefined){
+            await connection.close();
+        }
+      
+        return resp;  
+    }
+}
