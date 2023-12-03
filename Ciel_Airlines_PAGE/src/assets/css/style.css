@@ -161,6 +161,27 @@ footer {
 .admin-button a:hover {
     background-color: #bc529c;
 }
+.totalcard {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.totalcard .card img {
+    width: 300px;
+    height: 300px;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 10px;
+}
+
+.titulo-card {
+    color: #95427c;
+    font-weight: 600;
+}
 
 @media (max-width:785px) {
     .navigation{
@@ -217,6 +238,5 @@ footer {
         width: 125%;
     }
 }
-
-
+}
 
