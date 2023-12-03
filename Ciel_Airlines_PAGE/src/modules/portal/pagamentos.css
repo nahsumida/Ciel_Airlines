@@ -71,3 +71,48 @@ img#pix{
     width: 300px;
     height: 300px;
 }
+footer {
+    background-color: #f8ece1;
+    border: 10px 10px;
+    color: #95427c;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 8px auto;
+}
+
+.footer-left{
+    align-items: center;
+}
+
+.footer-left ul {
+    list-style: none;
+}
+
+.footer-left li {
+    margin-bottom: 12px;
+}
+
+.footer-left a {
+    text-decoration: none;
+    color:#bc529c;
+}
+
+.admin-button a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #bc529c;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.admin-button a:hover {
+    background-color: #bc529c;
+}
