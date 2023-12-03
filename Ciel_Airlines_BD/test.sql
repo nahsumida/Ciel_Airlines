@@ -170,9 +170,9 @@ select * from trecho
 ALTER TABLE aeronave modify numAssentos number not null;
 update aeronave set NUMASSENTOS = 36 where ID_AERONAVE=3;
 
-select * from ASSENTO where STATUS like 'undefined'
+select * from ASSENTO where ID_ASSENTO=148
 
-update ASSENTO set status='INDISPONIVEL' WHERE ID_ASSENTO=240
-Update assento set status = 'INDISPONIVEL' where id_assento = 234
+update ASSENTO set status='INDISPONIVEL' WHERE ID_ASSENTO=
+Update assento set status = 'INDISPONIVEL' where id_assento = 153
 
 select * from venda

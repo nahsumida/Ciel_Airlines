@@ -495,11 +495,10 @@ const executeSelectVenda = () => __awaiter(void 0, void 0, void 0, function* () 
         v.EMAIL_PASSAGEIRO,
         A.CODIGO,
         M.NOME_METODO,
-        ve.HORA_PARTIDA,
-        ve.HORA_CHEGADA,
         ve.DATA,
-        saida.NOME_AEROPORTO,
-        chegada.NOME_AEROPORTO
+        ve.ID_VOO,
+        saida.SIGLA,
+        chegada.SIGLA
     FROM
         VENDA V
     JOIN
