@@ -1,6 +1,7 @@
 {
-  "name": "pi",
+  "name": "ciel_airlines",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "env": "npm init && npm i express cors dotenv helmet morgan express-async-errors && npm i -D typescript ts-node @types/express @types/cors @types/helmet @types/dotenv @types/morgan && npm i oracledb",
@@ -12,14 +13,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "asyncawait": "^3.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
     "helmet": "^7.1.0",
-    "morgan": "^1.10.0",
-    "oracledb": "^6.2.0"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
@@ -27,9 +26,7 @@
     "@types/express": "^4.17.21",
     "@types/helmet": "^4.0.0",
     "@types/morgan": "^1.9.9",
-    "@types/oracledb": "^6.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.2"
-  },
-  "description": ""
+  }
 }

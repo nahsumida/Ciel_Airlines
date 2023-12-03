@@ -272,11 +272,13 @@ btnConfirmar.addEventListener('click', function() {
             MessageStatus("Por favor, selecione apenas um assento antes de confirmar.", true);
         } 
     }else{
+        sessionStorage.setItem('idAssento', idAssento);
         const idVoo = obterParametroUrl('idVoo');
         // Redirecionar para a prox página com o ID do assento e do Voo na URL
         window.location.href = `informacoes.html?idAssento=${idAssento}&idVoo=${idVoo}`;
     }
 });
+
 // funcao para pegar o parametro idVoo passado na url
 function obterParametroUrl(nome) {
     const urlParams = new URLSearchParams(window.location.search);

@@ -48,18 +48,12 @@ function ListarCidade() {
             console.log("Falha grave ao listar." + e)
         });
 }
+
 /*
 INSERIR
 */
 //validações campo vazio
-function preencheuID() {
-    let resultado = false;
-    const IDSelecionado = document.getElementById('IDCidade').value;
-    if (IDSelecionado.length > 0) {
-        resultado = true;
-    }
-    return resultado;
-}
+
 function preencheuNomeCidade() {
     let resultado = false;
     const NomeSelecionado = document.getElementById('nomeCidade').value;
@@ -176,5 +170,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const dataSelectUpdate = document.getElementById('dataSelectUpdate');
     listarComboBox(dataSelectDelete, fetchListarCidade);
     listarComboBox(dataSelectUpdate, fetchListarCidade);
+
+    
+
 });
 

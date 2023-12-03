@@ -99,6 +99,8 @@ function listarComboBoxVoo(element) {
             console.log("Falha grave ao listar." + e);
         });
 }
+
+
 function fetchListarTrecho(body){
     const requestOptions = {
         method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
@@ -107,13 +109,15 @@ function fetchListarTrecho(body){
     return fetch('http://localhost:3000/selectTrecho', requestOptions).then(T => T.json())
 }
 
-function ListarTrechoComboBox() {
-    const newTrecho = document.getElementById('newTrecho');
+//listar as combo box com os trechos cadastradas
+function ListarTrechoComboBox(selectBoxId) {
+    const selectBox = document.getElementById(selectBoxId);
+
     fetchListarTrecho()
         .then(customResponse => {
             if (customResponse.status === "SUCCESS") {
-                // Limpa qualquer conteúdo anterior da tabela
-                dataSelectDelete.innerHTML = '';
+                // Limpa qualquer conteúdo anterior da combobox
+                selectBox.innerHTML = '';
                 customResponse.payload.forEach(item => {
                     const idTrecho = item[0];
                     const nome1 = item[3]; //colunas db
@@ -121,7 +125,7 @@ function ListarTrechoComboBox() {
                     const option = document.createElement('option');
                     option.value = idTrecho; // Valor da opção
                     option.text = `${nome1} - ${nome2}`; // Texto visível
-                    newTrecho.appendChild(option);
+                    selectBox.appendChild(option);
                 });
             } else {
                 MessageStatus("Erro ao listar cidades...: " + customResponse.message, true);
@@ -143,20 +147,22 @@ function fetchListarAeronave(body){
 return fetch('http://localhost:3000/selectAeronave', requestOptions).then(T => T.json())
 }
 
-function ListarAeronaveComboBox() {
-    const newTrecho = document.getElementById('newAeronave');
+//listar as combo box com as aeronaves cadastradas
+function ListarAeronaveComboBox(selectBoxId) {
+    const selectBox = document.getElementById(selectBoxId);
+
     fetchListarAeronave()
         .then(customResponse => {
             if (customResponse.status === "SUCCESS") {
-                // Limpa qualquer conteúdo anterior da tabela
-                dataSelectDelete.innerHTML = '';
+                // Limpa qualquer conteúdo anterior da combobox
+                selectBox.innerHTML = '';
                 customResponse.payload.forEach(item => {
                     const idaero = item[0];
                     const nome = item[5]; //colunas db
                     const option = document.createElement('option');
                     option.value = idaero; // Valor da opção
                     option.text = `${nome}`; // Texto visível
-                    newAeronave.appendChild(option);
+                    selectBox.appendChild(option);
                 });
             } else {
                 MessageStatus("Erro ao listar aeronaves...: " + customResponse.message, true);
@@ -168,11 +174,151 @@ function ListarAeronaveComboBox() {
             console.log("Falha grave ao listar." + e)
         });
 }
+
+
+/* 
+INSERIR
+*/
+
+//verificacao dos campos
+function preencheuHoraPartida(){
+    let resultado = false;
+
+    const HoraSelecionada = document.getElementById('HoraPartida').value;
+    if(HoraSelecionada.length > 0){
+        resultado = true;
+    }
+    return resultado;
+}
+
+function preencheuHoraChegada(){
+    let resultado = false;
+
+    const HoraSelecionada = document.getElementById('HoraChegada').value;
+    if(HoraSelecionada.length > 0){
+        resultado = true;
+    }
+    return resultado;
+}
+
+function selecionouTrecho(){
+    let resultado = false;
+
+    const valMapaSelecionado = document.getElementById('Trecho').value;
+    if(valfabricanteSelecionado > 0){
+        resultado = true;
+    }
+    return resultado;
+}
+
+function selecionouAeronave(){
+    let resultado = false;
+
+    const valAeronaveSelecionada = document.getElementById('Aeronave').value;
+    if(valAeronaveSelecionada !== 0){
+        resultado = true;
+    }
+    return resultado;
+}
+
+function preencheuPreco(){
+    let resultado = false;
+
+    const HoraSelecionada = document.getElementById('preco').value;
+    if(HoraSelecionada.length > 0){
+        resultado = true;
+    }
+    return resultado;
+}
+
+
+function MessageStatus(msg, error){
+    var pStatus = document.getElementById("status");
+
+    if(error === true){
+        pStatus.className = " statusError";
+    }
+    else{
+        pStatus.className = 'statusSucess'
+    }
+    pStatus.textContent = msg;
+}
+
+function fetchInserir(body){
+    const requestOptions = {
+        method: 'PUT', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+    };
+
+    return fetch('http://localhost:3000/insertVoo', requestOptions).then(T => T.json())
+}
+
+function inserirVoo(){
+    if(!preencheuHoraPartida()){
+        MessageStatus("Preencha a hora da partida!", true);
+        return
+    }
+    if(!preencheuHoraChegada()){
+        MessageStatus("preencha a hora de chegada!", true);
+        return
+    }
+    
+    if(!preencheuPreco()){
+        MessageStatus("Preencha o valor do voo!", true);
+        return
+    }
+    if(!selecionouTrecho()){
+        MessageStatus("Selecione o trecho do voo!", true);
+        return
+    }
+    if(!selecionouAeronave()){
+        MessageStatus("Selecione a Aeronave!", true);
+        return
+    }
+
+    const Data = document.getElementById("Data").value;
+    const Trecho = document.getElementById("Trecho").value;
+    const HoraPartida = document.getElementById("HoraPartida").value;
+    const HoraChegada = document.getElementById("HoraChegada").value;
+    const Preco = document.getElementById("preco").value;
+    const Aeronave = document.getElementById("Aeronave").value;
+
+    fetchInserir({
+        Data: Data, 
+        Trecho: Trecho ,
+        HoraPartida: HoraPartida,
+        HoraChegada: HoraChegada,
+        Preco: Preco,
+        Aeronave: Aeronave
+        })
+        .then(customResponse => {
+        if(customResponse.status === "SUCCESS"){
+            MessageStatus("Voo cadastrado... ", false);
+        }else{
+            MessageStatus("Erro ao cadastrar voo...: " + customResponse.message, true);
+            console.log(customResponse.message);
+        }
+        })
+        .catch((e)=>{
+            MessageStatus("Erro técnico ao cadastrar... Contate o suporte.", true);
+            console.log("Falha grave ao cadastrar." + e)
+        });
+}
+
+
+
+
 /*CHAMADA DAS FUNÇÕES NO CARREGAMENTO DA PAGINA*/
 document.addEventListener("DOMContentLoaded", function () {
     console.log("eu carreguei")
     ListarVoo();
-    ListarTrechoComboBox();
+
+    // Chama a função para listar trechos na caixa de seleção 
+    ListarTrechoComboBox('newTrecho');
+    ListarTrechoComboBox('Trecho');
+
+    // Chama a função para listar aeronaves na caixa de seleção 
+    ListarAeronaveComboBox('newAeronave');
+    ListarAeronaveComboBox('Aeronave');
 
     // chama a funcao para listar voos dentro da caixa select delete e update
     const dataSelectDelete = document.getElementById('dataSelectDelete');
@@ -180,6 +326,4 @@ document.addEventListener("DOMContentLoaded", function () {
     const dataSelectUpdate = document.getElementById('dataSelectUpdate');
     listarComboBoxVoo(dataSelectUpdate);
 
-    // Chama a função para listar aeronaves na caixa de seleção de update 'newAeronave'
-    ListarAeronaveComboBox();
 });

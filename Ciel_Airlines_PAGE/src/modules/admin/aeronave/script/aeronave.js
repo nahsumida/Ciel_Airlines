@@ -9,7 +9,9 @@ function MessageStatus(msg, error){
     }
     pStatus.textContent = msg;
 }
-
+/*
+LISTAR
+*/
 //Funcao envia request para o endpoint
 function fetchListarAeronave(body){
     console.log("cheguei no fim")
@@ -79,7 +81,7 @@ function fetchListarCompanhia(body){
 
 function fetchInserir(body){
     const requestOptions = {
-        method: 'POST', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+        method: 'PUT', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
 
     return fetch('http://localhost:3000/insertAeronave', requestOptions).then(T => T.json())
@@ -166,10 +168,10 @@ function inserirAeronave(CompanhiaAerea){
         MessageStatus("Selecione o Fabricante!", true);
         return;
     }
-    if(!totalAssentosValido()){
+    /*if(!totalAssentosValido()){
         MessageStatus("Preencha  o total de assentos.", true);
         return;
-    }
+    }*/
     if(!selecionouCompanhia()){
         MessageStatus("Selecione uma Companhia Aérea!", true);
         return;

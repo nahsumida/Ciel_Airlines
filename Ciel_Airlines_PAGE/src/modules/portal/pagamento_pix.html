@@ -58,7 +58,7 @@
         //'sessionStorege' armazena dados de forma simples e sem expiração, ou seja, ficam lá enquanto a guia estiver aberta (sessao)
         const nome = sessionStorage.getItem('nomeConfirmado');
         const email = sessionStorage.getItem('emailConfirmado');
-        const pagamento = sessionStorage.getItem('metodoPagamento');
+        const idMetodo = sessionStorage.getItem('metodoPagamento');
         const idAssento = sessionStorage.getItem('idAssento');
         const idVoo = obterParametroUrl('idVoo');
         
@@ -76,7 +76,7 @@
           email:email,
           idAssento: idAssento,
           idVoo: idVoo,
-          pagamento:pagamento
+          idMetodo:idMetodo
         })
             .then(customResponse => {
                 if (customResponse.status === "SUCCESS") {
@@ -99,21 +99,15 @@
       }
       //função para o botão, abre uma pagina html
       function confirmar(){
-        // Obter os dados armazenados em sessionStorage
-        //'sessionStorege' armazena dados de forma simples e sem expiração, ou seja, ficam lá enquanto a guia estiver aberta (sessao)
-        const nome = sessionStorage.getItem('nomeConfirmado');
-        const email = sessionStorage.getItem('emailConfirmado');
-        const pagamento = sessionStorage.getItem('metodoPagamento');
-        const idAssento = sessionStorage.getItem('idAssento');
-        const idVoo = obterParametroUrl('idVoo');
         inserirVenda();
-        //window.location.href = 'aprovado.html';
+        window.location.href = 'aprovado.html';
       }
 
       function obterParametroUrl(nome) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(nome);
       }
+
     </script>
 </body>
 </html>

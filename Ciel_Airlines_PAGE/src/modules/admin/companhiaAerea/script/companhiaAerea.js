@@ -12,7 +12,7 @@ function MessageStatus(msg, error){
 
 
 // LISTAR 
-function fetchListar(body){
+function fetchListarCompanhia(body){
     const requestOptions = {
         method: 'GET', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
@@ -22,7 +22,7 @@ function fetchListar(body){
 
 function ListarCompanhia(){
     const dataBody = document.getElementById('dataBody');
-    fetchListar()
+    fetchListarCompanhia()
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
             
@@ -50,52 +50,47 @@ function ListarCompanhia(){
             console.log("Falha grave ao listar." + e)
         });
 }
-function ListarCompanhiaComboBox() {
-    const dataSelectDelete = document.getElementById('dataSelectDelete');
-    const dataSelectUpdate = document.getElementById('dataSelectUpdate');
-    fetchListar()
+/*
+INSERIR
+*/
+//validações campo vazio
+function preencheuNomeCompanhia() {
+    let resultado = false;
+    const NomeSelecionado = document.getElementById('nomeCompanhia').value;
+    if (NomeSelecionado.length > 0) {
+        resultado = true;
+    }
+    return resultado;
+}
+//Funcao envia request para o endpoint para listar Cidades
+function fetchInserir(body) {
+    const requestOptions = {
+        method: 'PUT', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
+    };
+    return fetch('http://localhost:3000/insertCompanhiaAerea', requestOptions).then(T => T.json())
+}
+//Funcao que insere cidade digitada
+function inserirCompanhia() {
+    if (!preencheuNomeCompanhia()) {
+        MessageStatus("Preencha o nome da Companhia!", true);
+        return
+    }
+    const nomeCompanhia = document.getElementById("nomeCompanhia").value;
+    console.log(nomeCompanhia);
+    fetchInserir({
+        nomeCompanhiaAerea: nomeCompanhia
+    })
         .then(customResponse => {
             if (customResponse.status === "SUCCESS") {
-                // Limpa qualquer conteúdo anterior da tabela
-                dataSelectDelete.innerHTML = '';
-                customResponse.payload.forEach(item => {
-                    const idCompanhiaAerea = item[0];
-                    const nome = item[1]; //colunas db
-                    const option = document.createElement('option');
-                    option.value = idCompanhiaAerea; // Valor da opção
-                    option.text = `${nome}`; // Texto visível
-                    dataSelectDelete.appendChild(option);
-                });
+                MessageStatus("Companhia cadastrada... ", false);
             } else {
-                MessageStatus("Erro ao listar cidades...: " + customResponse.message, true);
+                MessageStatus("Erro ao cadastrar companhia...: " + customResponse.message, true);
                 console.log(customResponse.message);
             }
         })
         .catch((e) => {
-            MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-            console.log("Falha grave ao listar." + e)
-        });
-        fetchListar()
-        .then(customResponse => {
-            if (customResponse.status === "SUCCESS") {
-                // Limpa qualquer conteúdo anterior da tabela
-                    dataSelectUpdate.innerHTML = '';
-                    customResponse.payload.forEach(item => {
-                    const idCompanhiaAerea = item[0];
-                    const nome = item[1]; //colunas db
-                    const option = document.createElement('option');
-                    option.value = idCompanhiaAerea; // Valor da opção
-                    option.text = `${nome}`; // Texto visível
-                    dataSelectUpdate.appendChild(option);
-                });
-            } else {
-                MessageStatus("Erro ao listar cidades...: " + customResponse.message, true);
-                console.log(customResponse.message);
-            }
-        })
-        .catch((e) => {
-            MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-            console.log("Falha grave ao listar." + e)
+            MessageStatus("Erro técnico ao cadastrar... Contate o suporte.", true);
+            console.log("Falha grave ao cadastrar." + e)
         });
 }
 
@@ -166,8 +161,12 @@ function Alterar() {
         console.log("Falha grave ao listar." + e)
     });
 }
+
 document.addEventListener("DOMContentLoaded", function() {
     ListarCompanhia();
-    ListarCompanhiaComboBox();
-    
+
+    const dataSelectDelete = document.getElementById('dataSelectDelete');
+    const dataSelectUpdate = document.getElementById('dataSelectUpdate');
+    listarComboBox(dataSelectDelete, fetchListarCompanhia);
+    listarComboBox(dataSelectUpdate, fetchListarCompanhia);
 });
