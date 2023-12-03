@@ -25,7 +25,7 @@ function selecionarVoo(idVoo) {
   }
 
 // Função para criar um card de voo dinamicamente
-function createVooCard( origem, destino, data, preco, idVoo) {
+function createVooCard( origem, destino, data, preco, idVoo, titulo) {
     const VooContainer = document.getElementById('voo_container');
 
     // Criar o elemento do card de voo
@@ -47,6 +47,7 @@ function createVooCard( origem, destino, data, preco, idVoo) {
     });
     // Preencher o card com informações
     VooCard.innerHTML = `
+        <h5 style="text-align: left">${titulo}</h5>
         <div class="voo-details">
             <div class= "row">
                 <div class="col"><p>Origem</p><h6>${origem}</h6></div>
@@ -75,7 +76,7 @@ function fetchBuscarVoo(body){
 }
 
 //funcao para listar voo da busca
-function BuscarVoo(aeroSaida, aeroChegada, dataVoo){
+function BuscarVoo(aeroSaida, aeroChegada, dataVoo, titulo){
     fetchBuscarVoo({
         "dataVoo": dataVoo,
         "aeroSaida": aeroSaida,
@@ -96,7 +97,7 @@ function BuscarVoo(aeroSaida, aeroChegada, dataVoo){
             const aeroChegada = item[6];
 
             // Exemplo de uso da função
-            createVooCard(aeroSaida, aeroChegada, dataV, preco, idVoo);
+            createVooCard(aeroSaida, aeroChegada, dataV, preco, idVoo, titulo);
             //createVooCard(voo.origem, voo.destino, voo.data, voo.preco, voo.idVoo)
         });
     }else{
@@ -110,20 +111,6 @@ function BuscarVoo(aeroSaida, aeroChegada, dataVoo){
     });
 }
 
-//exemplos para adicionar voos
-/*const listaDeVoos = [
-    { origem: 'Cidade A', destino: 'Cidade B', data: '2023-12-01', preco: 500, idVoo: 1 },
-    { origem: 'Cidade C', destino: 'Cidade D', data: '2023-12-02', preco: 600, idVoo: 2 },
-    { origem: 'Cidade E', destino: 'Cidade F', data: '2023-12-03', preco: 700, idVoo: 3 },
-    { origem: 'Cidade G', destino: 'Cidade H', data: '2023-12-04', preco: 800, idVoo: 4 }
-];
-  // Função para adicionar os voos à página
-function adicionarVoos() {
-    // Loop através da lista de voos e chama a função createVooCard para cada um
-    for (const voo of listaDeVoos) {
-        createVooCard(voo.origem, voo.destino, voo.data, voo.preco, voo.idVoo);
-    }
-}*/
 
 //chamada das funcoes no carregamento da pagina
 document.addEventListener("DOMContentLoaded", function() {
@@ -137,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     //armazenar aeroportos escolhidos
-    var selectbox1 = document.getElementById("aeroSaidaSelect"); // caixa de seleção com id "pagamentoSelect"
+    var selectbox1 = document.getElementById("aeroSaidaSelect"); // caixa de seleção com id "aeroSaidaSelect"
     selectbox1.addEventListener("change",function(){
         var selectedIndex1 = selectbox1.selectedIndex; // Índice da opção selecionada
         var selectedOption1 = selectbox1.options[selectedIndex1]; // Opção selecionada
@@ -146,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function() {
         sessionStorage.setItem('aeroSaida', selectedValue1); //objeto js para armazenar informaçoes durante uma sessão
     });
 
-    var selectbox2 = document.getElementById("aeroChegadaSelect"); // caixa de seleção com id "pagamentoSelect"
+    var selectbox2 = document.getElementById("aeroChegadaSelect"); // caixa de seleção com id "aeroChegadaSelect"
         selectbox2.addEventListener("change",function(){
         var selectedIndex2 = selectbox2.selectedIndex; // Índice da opção selecionada
         var selectedOption2 = selectbox2.options[selectedIndex2]; // Opção selecionada
@@ -155,11 +142,30 @@ document.addEventListener("DOMContentLoaded", function() {
         sessionStorage.setItem('aeroChegada', selectedValue2); 
     });
 
-    //armazenar data escolhida
+    //armazenar data de volta escolhida
     Data.addEventListener("change",function(){
         var dataVoo = document.getElementById("Data").value;
-        console.log("data: ",dataVoo);
+        console.log("data de ida: ",dataVoo);
         sessionStorage.setItem('dataVoo', dataVoo); 
     });
 
+    let volta = false;
+    console.log("tem volta:", volta);
+    sessionStorage.setItem('volta',volta);
+    //armazenar data escolhida
+    if (DataVolta){
+        volta = true;
+        console.log("tem volta:", volta);
+        DataVolta.addEventListener("change",function(){
+            var dataVooVolta = document.getElementById("DataVolta").value;
+            console.log("data de volta: ",dataVooVolta);
+            sessionStorage.setItem('dataVooVolta', dataVooVolta); 
+            sessionStorage.setItem('volta',volta);
+        });
+    } else {
+        // dupla validaçao para o valor de "volta" ser armazenado "false"
+        volta = false;
+        console.log("tem volta:", volta);
+        sessionStorage.setItem('volta',volta);
+    }
 });

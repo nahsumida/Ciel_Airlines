@@ -17,11 +17,10 @@
           </a>
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-              <a class="nav-link active custom-nav-link" aria-current="true" href="#">Passagens</a>
-            </li>
+                <a class="nav-link" href="buscaVoo.html">Voltar</a>
+              </li>
             <li class="nav-item">
-              <a class="nav-link" href="portalbusca.html">Voltar</a>
-            </li>
+              <a class="nav-link active custom-nav-link" aria-current="true" href="#">Passagens</a>
             </li>
           </ul>
         </div>
@@ -272,10 +271,25 @@ btnConfirmar.addEventListener('click', function() {
             MessageStatus("Por favor, selecione apenas um assento antes de confirmar.", true);
         } 
     }else{
-        sessionStorage.setItem('idAssento', idAssento);
-        const idVoo = obterParametroUrl('idVoo');
-        // Redirecionar para a prox página com o ID do assento e do Voo na URL
-        window.location.href = `informacoes.html?idAssento=${idAssento}&idVoo=${idVoo}`;
+        //variavel para consultar se há escolha de voo de volta, retorna true ou false
+        volta = sessionStorage.getItem('volta');
+
+        if (volta === "true"){
+        // guarda o id do assento selecionado
+        //sessionStorage.setItem('idAssento1', idAssento);
+        sessionStorage.setItem('volta',false);
+        
+        window.location.href = `buscaVoo.html`;
+
+        } else {
+            //sessionStorage.setItem('idAssento', idAssento);
+            const idVoo = obterParametroUrl('idVoo');
+            // Redirecionar para a prox página com o ID do assento e do Voo na URL
+            window.location.href = `informacoes.html?idAssento=${idAssento}&idVoo=${idVoo}`;
+            
+            
+        }
+
     }
 });
 

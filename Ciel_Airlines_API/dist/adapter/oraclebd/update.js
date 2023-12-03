@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.executeUpdateAeroporto = exports.executeUpdateTrecho = exports.executeUpdateAssento = exports.executeUpdateCidade = exports.executeUpdateMetodoPagamento = exports.executeUpdateCompanhiaAerea = void 0;
-const oracledb_1 = __importDefault(require("oracledb"));
-const config_1 = require("./config");
+const oracledb_2 = __importDefault(require("oracledb"));
+const config_2 = require("./config");
 //atualiza um dado de companhia aerea no banco de dados
 const executeUpdateCompanhiaAerea = (id, nomeCompanhiaAerea) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
@@ -23,7 +23,7 @@ const executeUpdateCompanhiaAerea = (id, nomeCompanhiaAerea) => __awaiter(void 0
     SET NOME_COMPANHIA = '` + nomeCompanhiaAerea + `'
     WHERE ID_COMPANHIA_AEREA = ` + id;
     try {
-        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
         console.log(updateString);
         const resUpdate = yield connection.execute(updateString);
         yield connection.commit();
@@ -60,7 +60,7 @@ const executeUpdateMetodoPagamento = (id, nomeMetodo) => __awaiter(void 0, void 
     SET NOME_METODO = '` + nomeMetodo + `'
     WHERE ID_METODO_PAGAMENTO = ` + id;
     try {
-        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
         console.log(updateString);
         const resUpdate = yield connection.execute(updateString);
         yield connection.commit();
@@ -94,7 +94,7 @@ const executeUpdateCidade = (id, nomeCidade) => __awaiter(void 0, void 0, void 0
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
         let updateString = `Update cidade set nome_cidade = '` + nomeCidade + `' where id_cidade = ` + id;
         console.log(updateString);
         let resUpdate = yield connection.execute(updateString);
@@ -126,7 +126,7 @@ const executeUpdateAssento = (id, status) => __awaiter(void 0, void 0, void 0, f
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
         let updateString = `Update assento set status = '` + status + `' where id_assento = ` + id;
         console.log(updateString);
         let resUpdate = yield connection.execute(updateString);
@@ -158,7 +158,7 @@ const executeUpdateTrecho = (id, aeroSaida, aeroChegada) => __awaiter(void 0, vo
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
         let updateString = `Update trecho set aero_saida = ` + aeroSaida + `, aero_chegada = ` + aeroChegada + ` where id_trecho = ` + id;
         console.log(updateString);
         let resUpdate = yield connection.execute(updateString);
@@ -190,7 +190,7 @@ const executeUpdateAeroporto = (id, idCidade, nomeAeroporto, sigla) => __awaiter
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
+        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
         let updateString = `update AEROPORTO set id_cidade=` + idCidade + ` ,nome_aeroporto='` + nomeAeroporto + `', sigla='` + sigla + `' where ID_AEROPORTO = ` + id;
         console.log(updateString);
         let resUpdate = yield connection.execute(updateString);
