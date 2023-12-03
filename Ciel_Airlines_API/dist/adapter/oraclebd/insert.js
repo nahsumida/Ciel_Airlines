@@ -198,8 +198,11 @@ const executeInsertVenda = (nome, email, idAssento, idVoo, pagamento) => __await
     let connection;
     try {
         connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
-        let updateString = `insert into venda (id_venda, nome_passageiro, EMAIL_PASSAGEIRO, ASSENTO, id_voo, pagamento) values (ID_VENDA_SEQ.nextval, '` + nome + `', '` + email + `', ` + idAssento + `,` + idVoo + `,` + pagamento + `)`;
-        let resInsert = yield connection.execute(updateString);
+        let insertString = `insert into venda (id_venda, nome_passageiro, EMAIL_PASSAGEIRO, ASSENTO, id_voo, pagamento) values (ID_VENDA_SEQ.nextval, '` + nome + `', '` + email + `', ` + idAssento + `,` + idVoo + `,` + pagamento + `)`;
+        let resInsert = yield connection.execute(insertString);
+        yield connection.commit();
+        let updateString = `update ASSENTO set status='INDISPONIVEL' WHERE ID_ASSENTO=` + idAssento;
+        yield connection.execute(updateString);
         yield connection.commit();
         const rowsInserted = resInsert.rowsAffected;
         if (rowsInserted !== undefined && rowsInserted === 1) {
