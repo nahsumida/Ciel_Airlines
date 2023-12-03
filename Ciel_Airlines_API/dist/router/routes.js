@@ -72,33 +72,22 @@ route.get("/selectVendaByID", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-
-route.get("/deleteVenda", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-
-  const id = req.body.idVenda as number;
-
-  // mudaro a funcao de venda para atualizar o assento do voo
-  let resp = executeDeleteByID('AERONAVE', id);
-
-  if ((await resp).err != null){
-    cr.message = (await resp).err;
-    cr.status = "ERROR";
+*/
+exports.route.delete("/deleteVenda", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const id = req.body.idVenda;
+    // mudaro a funcao de venda para atualizar o assento do voo 
+    let resp = (0, delete_1.executeDeleteByID)('VENDA', id);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
+    cr.status = "SUCCESS";
     res.send(cr);
-  }
-
-  cr.payload = (await resp).result;
-  cr.message = "Dado excluido";
-  cr.status = "SUCCESS";
-  
-  res.send(cr);
-});
-
-route.get("/updateVenda", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});*/
+}));
 exports.route.put("/insertVenda", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const nome = req.body.nome;
@@ -381,6 +370,11 @@ exports.route.post("/updateAssento", (req, res) => __awaiter(void 0, void 0, voi
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idAssento;
     const status = req.body.status;
+    if (status === 'undefined') {
+        cr.message = "valor invalido";
+        cr.status = "ERROR";
+        res.send(cr);
+    }
     let resp = (0, update_1.executeUpdateAssento)(id, status);
     if ((yield resp).err != null) {
         cr.message = (yield resp).err;

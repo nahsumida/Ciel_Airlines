@@ -164,8 +164,15 @@ join
     AEROPORTO saida on saida.ID_AEROPORTO = t.AERO_SAIDA
 join
     AEROPORTO chegada on chegada.ID_AEROPORTO = t.AERO_CHEGADA
+where v.ASSENTO = 154
 
-select * from aeronave
+select * from trecho
 ALTER TABLE aeronave modify numAssentos number not null;
 update aeronave set NUMASSENTOS = 36 where ID_AERONAVE=3;
 
+select * from ASSENTO where STATUS like 'undefined'
+
+update ASSENTO set status='INDISPONIVEL' WHERE ID_ASSENTO=240
+Update assento set status = 'INDISPONIVEL' where id_assento = 234
+
+select * from venda

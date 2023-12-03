@@ -194,10 +194,16 @@ export const executeInsertVenda = async(nome: any, email: any, idAssento: number
     try{
         connection = await oracledb.getConnection(oraConnAttribs);
 
-        let updateString = `insert into venda (id_venda, nome_passageiro, EMAIL_PASSAGEIRO, ASSENTO, id_voo, pagamento) values (ID_VENDA_SEQ.nextval, '` + nome + `', '`+email+`', ` + idAssento + `,` + idVoo + `,` +  pagamento +`)`
+        let insertString = `insert into venda (id_venda, nome_passageiro, EMAIL_PASSAGEIRO, ASSENTO, id_voo, pagamento) values (ID_VENDA_SEQ.nextval, '` + nome + `', '`+email+`', ` + idAssento + `,` + idVoo + `,` +  pagamento +`)`
         
       
-        let resInsert = await connection.execute(updateString);
+        let resInsert = await connection.execute(insertString);
+
+        await connection.commit();
+
+        let updateString = `update ASSENTO set status='INDISPONIVEL' WHERE ID_ASSENTO=` + idAssento
+
+        await connection.execute(updateString);
 
         await connection.commit();
 

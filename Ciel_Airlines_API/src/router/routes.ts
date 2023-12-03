@@ -57,7 +57,6 @@ route.post("/searchVoo", async(req:any, res:any)=>{
   }
 });
 
-
 // VENDA
 route.get("/selectVenda", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
@@ -82,14 +81,14 @@ route.get("/selectVendaByID", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-
-route.get("/deleteVenda", async(req:any, res:any)=>{
+*/
+route.delete("/deleteVenda", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idVenda as number;
 
   // mudaro a funcao de venda para atualizar o assento do voo 
-  let resp = executeDeleteByID('AERONAVE', id);
+  let resp = executeDeleteByID('VENDA', id);
 
   if ((await resp).err != null){
     cr.message = (await resp).err;
@@ -103,12 +102,6 @@ route.get("/deleteVenda", async(req:any, res:any)=>{
   
   res.send(cr);
 });
-
-route.get("/updateVenda", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});*/
 
 route.put("/insertVenda", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
@@ -489,6 +482,12 @@ route.post("/updateAssento", async(req:any, res:any)=>{
   
   const id = req.body.idAssento as number;
   const status = req.body.status as string;
+
+  if (status === 'undefined'){
+    cr.message = "valor invalido";
+    cr.status = "ERROR";
+    res.send(cr);
+  }
 
   let resp = executeUpdateAssento(id,status);
 

@@ -80,8 +80,9 @@ return fetch('http://localhost:3000/updateAssento', requestOptions).then(T => T.
 }
 
 function UpdateStatus(idAssento, newStatus) {
+    console.log(newStatus)
     fetchAlterar({
-        id: idAssento,
+        idAssento: idAssento,
         status: newStatus
     })
         .then(customResponse => {
