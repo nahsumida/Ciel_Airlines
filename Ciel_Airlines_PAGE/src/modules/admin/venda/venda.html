@@ -84,10 +84,10 @@
                                     <th class="">Email</th>
                                     <th class="">Assento</th>
                                     <th class="">Pagamento</th>
-                                    <th class="">Saida</th>
-                                    <th class="">Chegada</th>
+                                    <th class="">Voo</th>
                                     <th class="">Data</th>
-
+                                    <th class="">Partida</th>
+                                    <th class="">Chegada</th>
                                     </tr>
                                 </thead>
                                 <tbody id="dataBody"></tbody>
@@ -95,9 +95,9 @@
                         </section>
                         <!--Seção de Excluir uma Venda-->
                         <p>
-                            <button type="button" onclick="btnExcluir();" class="functionButton" id="btn-s-excluir" name="btnExcluir"><h6>Excluir  ></h6></button>
+                            <button type="button" onclick="" class="functionButton" id="btn-s-excluir" name="btnExcluir"><h6>Excluir  ></h6></button>
                         </p>
-                        <section class="sectionExcluir">
+                        <section class="sectionExcluirVenda">
                             <form>
                                 <div class="row" id="block">
                                     <div class="col">
@@ -106,8 +106,7 @@
                                        </p>
                                        <p id="status" class="statusError"></p>
                                        <p id="button">
-                                           <script src="./script/venda.js"></script>     
-                                           <button id="btnExcluir">Confirmar</button>
+                                           <button id="btnExcluir" onclick="Excluir();">Confirmar</button>
                                         </p>
                                     </div></div>
                             </form>

@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Recarrega a página
             location.reload();
         });
-    }
+    }
 });
 
 
