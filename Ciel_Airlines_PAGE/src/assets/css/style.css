@@ -96,8 +96,28 @@ nav ul li a:hover{
     width: 800px;
 }
 
+.contSobre{
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+}
+
+.contSobre .sobre-text {
+    width: 900px;
+    padding: 50px 40px;
+    background: #f0e5da;
+    text-align: justify;
+}
+
+.sobre-text h2{
+    color: #95427c;
+}
+
 footer {
-    background-color:#efd5ba;
+    margin: -8px;
+    border: 10px 10px;
     color: #95427c;
     padding: 30px 0;
     text-align: center;
@@ -108,7 +128,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 8px auto;
 }
 
 .footer-left{
@@ -127,7 +147,6 @@ footer {
     text-decoration: none;
     color:#bc529c;
 }
-
 
 .admin-button a {
     display: inline-block;
@@ -197,4 +216,6 @@ footer {
         width: 125%;
     }
 }
+
+
 
