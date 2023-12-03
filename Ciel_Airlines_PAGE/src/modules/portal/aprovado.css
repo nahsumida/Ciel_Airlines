@@ -49,6 +49,7 @@ a#btn:hover {
 
 }
 
+
 /* bilhete do voo*/
 .container#ticket{
     border-radius: 2px;
@@ -61,11 +62,10 @@ a#btn:hover {
     padding: 20px;
     width: 100%;
     text-align: center;
-}
-table{
     border: 2px solid #ddd;
     border-style:dashed;
 }
+
 th#main{
     text-align: center;
     padding-bottom: 20px;
@@ -79,7 +79,17 @@ th#main{
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
+#saida{
+    padding-left:70px;
+    margin-left:20px;
 
+}
+#chegada{
+    padding-right:70px;
+    margin-right:20px;
+
+}
+/*rodapé*/
 footer {
     background-color: #f8ece1;
     border: 10px 10px;

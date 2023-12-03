@@ -24,6 +24,16 @@ function selecionarVoo(idVoo) {
       window.location.href = `newMapa.html?idVoo=${idVoo}`;
   }
 
+
+//funcao para formatar data vinda do banco para o padrao dd/mm/yyyy
+function formatarData(data) {
+    const dataObj = new Date(data);
+    const dia = String(dataObj.getDate()).padStart(2, '0');
+    const mes = String(dataObj.getMonth() + 1).padStart(2, '0');
+    const ano = dataObj.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+}
+
 // Função para criar um card de voo dinamicamente
 function createVooCard( origem, destino, data, preco, idVoo, titulo) {
     const VooContainer = document.getElementById('voo_container');
@@ -55,7 +65,7 @@ function createVooCard( origem, destino, data, preco, idVoo, titulo) {
                 <div class="col"><p>Destino</p><h6>${destino}</h6></div>
             </div>
             <div class="row" id="divide">
-                <div class="col"><h6>${data}</h6></div>
+                <div class="col"><h6>${formatarData(data)}</h6></div>
                 <div class ="col" id="voo-preco">R$${preco}</div>
             </div>
         </div>  

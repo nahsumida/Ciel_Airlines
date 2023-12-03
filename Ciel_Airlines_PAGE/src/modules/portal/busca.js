@@ -15,8 +15,6 @@
     // caso o elemento volta seja verdadeiro, pega a data de volta armazenada
     // chama funcao de busca do voo (aeroporto destino e partida invertidos)
    if(volta !== "false"){
-      idAssento1 = sessionStorage.getItem('idAssento1');
-      console.log('id ASSENTO 1:', idAssento1);
       var dataVooVolta = sessionStorage.getItem('dataVooVolta');
       BuscarVoo(aeroChegada, aeroSaida, dataVooVolta, "VOLTA");
     }
