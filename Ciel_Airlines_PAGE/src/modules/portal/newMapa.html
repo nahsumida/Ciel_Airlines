@@ -274,20 +274,27 @@ btnConfirmar.addEventListener('click', function() {
         //variavel para consultar se há escolha de voo de volta, retorna true ou false
         volta = sessionStorage.getItem('volta');
 
+        //obtem id do voo passado pela URL
+        const idVoo = obterParametroUrl('idVoo');
+
         if (volta === "true"){
-        // guarda o id do assento selecionado
-        //sessionStorage.setItem('idAssento1', idAssento);
-        sessionStorage.setItem('volta',false);
         
+        // guarda o id do assento selecionado
+        sessionStorage.setItem('idAssento1', idAssento);
+
+        // guarda o id do primeiro voo selecionado
+        sessionStorage.setItem('idVoo1', idVoo); 
+        sessionStorage.setItem('volta','voltou');
         window.location.href = `buscaVoo.html`;
 
         } else {
-            //sessionStorage.setItem('idAssento', idAssento);
-            const idVoo = obterParametroUrl('idVoo');
+            sessionStorage.setItem('idAssento', idAssento);
+
+            // guarda o id do voo selecionado
+            sessionStorage.setItem('idVoo', idVoo);
+            
             // Redirecionar para a prox página com o ID do assento e do Voo na URL
-            window.location.href = `informacoes.html?idAssento=${idAssento}&idVoo=${idVoo}`;
-            
-            
+            window.location.href = `informacoes.html?idAssento=${idAssento}&idVoo=${idVoo}`;           
         }
 
     }
@@ -313,8 +320,7 @@ document.addEventListener("DOMContentLoaded", function() {
         ListarAssentos(idVoo);
     } else {
         console.error('ID do Voo não encontrado na URL.');
-    }
-     
+    }    
 });
 
     </script>

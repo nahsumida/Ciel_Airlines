@@ -41,6 +41,7 @@
                         <p id="status" class="statusError"></p>
                         <button onclick="voltar()">Voltar</button>
             </div>
+<<<<<<< Updated upstream
     <footer>
       <div class="footer-content">
           <div class="imgFooter">
@@ -57,73 +58,10 @@
           <p>&copy; 2023.CielArlines</p>
       </div>
   </footer>
+=======
+    <script src="pagamento.js"></script>
+>>>>>>> Stashed changes
     <script>
-      function MessageStatus(msg, error){
-        var pStatus = document.getElementById("status");
-
-        if(error === true){
-            pStatus.className = " statusError";
-        }
-        else{
-            pStatus.className = 'statusSuccess';
-        }
-        pStatus.textContent = msg;
-      }
-
-        // Obter os dados armazenados em sessionStorage
-        //'sessionStorege' armazena dados de forma simples e sem expiração, ou seja, ficam lá enquanto a guia estiver aberta (sessao)
-        const nome = sessionStorage.getItem('nomeConfirmado');
-        const email = sessionStorage.getItem('emailConfirmado');
-        const idMetodo = sessionStorage.getItem('metodoPagamento');
-        const idAssento = sessionStorage.getItem('idAssento');
-        const idVoo = obterParametroUrl('idVoo');
-        
-      function fetchInserir(body) {
-        console.log("cheguei no fetch")
-        const requestOptions = {
-              method: 'PUT', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
-          };
-          return fetch('http://localhost:3000/insertVenda', requestOptions).then(T => T.json())
-      }
-
-      function inserirVenda() {
-        fetchInserir({
-          nome: nome,
-          email:email,
-          idAssento: idAssento,
-          idVoo: idVoo,
-          idMetodo:idMetodo
-        })
-            .then(customResponse => {
-                if (customResponse.status === "SUCCESS") {
-                    MessageStatus("Venda cadastrada... ", false);
-                } else {
-                    MessageStatus("Erro ao cadastrar Venda...: " + customResponse.message, true);
-                    console.log(customResponse.message);
-                }
-            })
-            .catch((e) => {
-                MessageStatus("Erro técnico ao cadastrar... Contate o suporte.", true);
-                console.log("Falha grave ao cadastrar." + e)
-            });
-    }
-
-      
-      //função para o botão, abre uma pagina html
-      function voltar(){
-        window.location.href = `dados.html?idVoo=${idVoo}`;
-      }
-      //função para o botão, abre uma pagina html
-      function confirmar(){
-        inserirVenda();
-        window.location.href = 'aprovado.html';
-      }
-
-      function obterParametroUrl(nome) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(nome);
-      }
-
     </script>
 </body>
 </html>

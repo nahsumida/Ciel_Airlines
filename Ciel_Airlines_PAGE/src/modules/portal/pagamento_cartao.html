@@ -44,19 +44,19 @@
             <input type="text" id="numero" name="numerocart" oninput="this.value=this.value.replace(/[^0-9]/g,'').substring(0, 16)" placeholder="Numero do seu Cartão" >
 
             <label for="CVV">CVV:</label>
-            <input type="text" id="numero" name="numero" oninput="this.value=this.value.replace(/[^0-9]/g,'').substring(0, 3)" placeholder="CVV" >
+            <input type="text" id="cvv" name="CVV" oninput="this.value=this.value.replace(/[^0-9]/g,'').substring(0, 3)" placeholder="CVV" >
 
             <label for="vencimento">Data de Validade:</label>
             <input type="date" id="Validade" name="Data de Validade" placeholder="Data de Validade" required>
 
-            <button onclick="confirmar()">Confirmar</button> <!--chama função js-->
+            <button id="confirmarBtn">Confirmar</button> <!--chama função js-->
             <button onclick="voltar()">Voltar</button> <!--chama função js-->
             <p id="status" class="statusError"></p>
-
         </form>
 
         <div id="mensagem"></div>
     </div>
+<<<<<<< Updated upstream
     <footer>
       <div class="footer-content">
           <div class="imgFooter">
@@ -74,59 +74,19 @@
       </div>
   </footer>
     <script src="portal.js"></script>
+=======
+    <script src="pagamento.js"></script>
+>>>>>>> Stashed changes
     <script>
-        // Obtenha os dados armazenados em sessionStorage
-        //'sessionStorege' armazena dados de forma simples e sem expiração, ou seja, ficam lá enquanto não apagarmos por código ou pelo próprio navegado
-        const nomeConfirmado = sessionStorage.getItem('nomeConfirmado');
-        const emailConfirmado = sessionStorage.getItem('emailConfirmado');
-        const metodoPagamento = sessionStorage.getItem('metodoPagamento');
-        const idAssento = sessionStorage.getItem('idAssento');
+      document.addEventListener("DOMContentLoaded", function() {
 
-        
-      function fetchInserir(body) {
-          const requestOptions = {
-              method: 'PUT', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
-          };
-          return fetch('http://localhost:3000/insertVenda', requestOptions).then(T => T.json())
-      }
-
-      function inserirVenda() {
-        fetchInserir({
-          nome: nomeConfirmado,
-          email:emailConfirmado,
-          idAssento: idAssento,
-          idVoo: idVoo,
-          pagamento:metodoPagamento
-        })
-            .then(customResponse => {
-                if (customResponse.status === "SUCCESS") {
-                    MessageStatus("Venda cadastrada... ", false);
-                } else {
-                    MessageStatus("Erro ao cadastrar cidade...: " + customResponse.message, true);
-                    console.log(customResponse.message);
-                }
-            })
-            .catch((e) => {
-                MessageStatus("Erro técnico ao cadastrar... Contate o suporte.", true);
-                console.log("Falha grave ao cadastrar." + e)
-            });
-    }
-
-      const idVoo = obterParametroUrl('idVoo');
-      //função para o botão, abre uma pagina html
-      function voltar(){
-        window.location.href = `dados.html?idVoo=${idVoo}`;
-      }
-      //função para o botão, abre uma pagina html
-      function confirmar(){
-        inserirVenda();
-        window.location.href = 'aprovado.html';
-      }
-
-      function obterParametroUrl(nome) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(nome);
-      }
+        // adiciona evendo de clique ao botao de confirmar para chamar as funcoes
+        const confirmarBtn = document.getElementById('confirmarBtn');
+        confirmarBtn.addEventListener('click', function(event) {
+            event.preventDefault(); // Impede a recarga da página (regcarga automatica do tipo formulario)
+            validar(); // Chama a função de validação
+        });
+     });
     </script>
 </body>
 </html>
