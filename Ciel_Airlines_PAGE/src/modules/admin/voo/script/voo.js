@@ -204,8 +204,8 @@ function preencheuHoraChegada(){
 function selecionouTrecho(){
     let resultado = false;
 
-    const valMapaSelecionado = document.getElementById('Trecho').value;
-    if(valfabricanteSelecionado > 0){
+    const Trecho = document.getElementById('Trecho').value;
+    if(Trecho > 0){
         resultado = true;
     }
     return resultado;
@@ -244,7 +244,9 @@ function MessageStatus(msg, error){
     pStatus.textContent = msg;
 }
 
+// envia request com rota de inserçao do voo
 function fetchInserir(body){
+    console.log("chegueii no fetch");
     const requestOptions = {
         method: 'PUT', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
@@ -252,7 +254,9 @@ function fetchInserir(body){
     return fetch('http://localhost:3000/insertVoo', requestOptions).then(T => T.json())
 }
 
+// funcao para inserir Voo
 function inserirVoo(){
+    //chamada das funcoes de verificacao de campo vazio
     if(!preencheuHoraPartida()){
         MessageStatus("Preencha a hora da partida!", true);
         return
@@ -275,6 +279,7 @@ function inserirVoo(){
         return
     }
 
+    // atribui os campos preenchidos em variáveis
     const Data = document.getElementById("Data").value;
     const Trecho = document.getElementById("Trecho").value;
     const HoraPartida = document.getElementById("HoraPartida").value;
@@ -282,13 +287,14 @@ function inserirVoo(){
     const Preco = document.getElementById("preco").value;
     const Aeronave = document.getElementById("Aeronave").value;
 
+    // chamada da rota 
     fetchInserir({
-        Data: Data, 
-        Trecho: Trecho ,
-        HoraPartida: HoraPartida,
-        HoraChegada: HoraChegada,
-        Preco: Preco,
-        Aeronave: Aeronave
+        dataVoo: Data, 
+        trecho: Trecho ,
+        horaPartida: HoraPartida,
+        horaChegada: HoraChegada,
+        preco: Preco,
+        aeronave: Aeronave
         })
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
@@ -307,23 +313,3 @@ function inserirVoo(){
 
 
 
-/*CHAMADA DAS FUNÇÕES NO CARREGAMENTO DA PAGINA*/
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("eu carreguei")
-    ListarVoo();
-
-    // Chama a função para listar trechos na caixa de seleção 
-    ListarTrechoComboBox('newTrecho');
-    ListarTrechoComboBox('Trecho');
-
-    // Chama a função para listar aeronaves na caixa de seleção 
-    ListarAeronaveComboBox('newAeronave');
-    ListarAeronaveComboBox('Aeronave');
-
-    // chama a funcao para listar voos dentro da caixa select delete e update
-    const dataSelectDelete = document.getElementById('dataSelectDelete');
-    listarComboBoxVoo(dataSelectDelete);
-    const dataSelectUpdate = document.getElementById('dataSelectUpdate');
-    listarComboBoxVoo(dataSelectUpdate);
-
-});

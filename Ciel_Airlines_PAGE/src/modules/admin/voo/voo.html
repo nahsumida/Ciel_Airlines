@@ -108,9 +108,7 @@
                                             <label for="Trecho">Trecho:</label><br/>
                                             <select name="Trecho" id="Trecho">
                                             <option value="0" selected>Selecione: </option>
-                                            <option value=""></option>
-                                            <option value=""></option>
-                                            <option value=""></option>
+                                            
                                             </select>
                                         </p>
                         
@@ -133,7 +131,7 @@
                                         <p>
                                             <label for="Aeronave">Aeronave:</label><br/>
                                             <select name="Aeronave" id="Aeronave">
-                                            <option value="0" selected>Selecione: </option>
+                                            <option value="0" selected disabled>Selecione: </option>
                                             </select>
                                         </p>
                                     </div>
@@ -240,5 +238,30 @@
     <!--referenciando os .js-->
     <script src="../display.js"></script>
     <script src="./script/voo.js"></script>
+    <script>
+    
+    // DOM nesse html para nao dar conflito em outro html referenciando "voo.js"
+    /*CHAMADA DAS FUNÇÕES NO CARREGAMENTO DA PAGINA*/
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("eu carreguei")
+        ListarVoo();
+    
+        // Chama a função para listar trechos na caixa de seleção 
+        ListarTrechoComboBox('newTrecho');
+        ListarTrechoComboBox('Trecho');
+    
+        // Chama a função para listar aeronaves na caixa de seleção 
+        ListarAeronaveComboBox('newAeronave');
+        ListarAeronaveComboBox('Aeronave');
+    
+        // chama a funcao para listar voos dentro da caixa select delete e update
+        const dataSelectDelete = document.getElementById('dataSelectDelete');
+        listarComboBoxVoo(dataSelectDelete);
+        const dataSelectUpdate = document.getElementById('dataSelectUpdate');
+        listarComboBoxVoo(dataSelectUpdate);
+        
+    });
+    </script>
+
 </body>
 </html>

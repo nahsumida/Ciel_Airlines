@@ -74,7 +74,7 @@
                             <h4><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M280-120q-33 0-56.5-23.5T200-200v-440q0-33 23.5-56.5T280-720h80v-100q0-25 17.5-42.5T420-880h120q25 0 42.5 17.5T600-820v100h80q33 0 56.5 23.5T760-640v440q0 33-23.5 56.5T680-120q0 17-11.5 28.5T640-80q-17 0-28.5-11.5T600-120H360q0 17-11.5 28.5T320-80q-17 0-28.5-11.5T280-120Zm0-80h400v-440H280v440Zm40-40h60v-360h-60v360Zm130 0h60v-360h-60v360Zm130 0h60v-360h-60v360ZM480-420Zm-60-300h120v-100H420v100Z"/></svg>                             
                                 ASSENTOS</h4>
                         </div>
-                        <!--Listar Tabela Assentos-->
+                        <!-- Tabela Assentos-->
                         <section class="selectTable">
                             <table id="tblCompanhia" cellpadding="5" cellspacing="5">
                                 <thead>
@@ -88,41 +88,37 @@
                                 <tbody id="dataBody"></tbody>
                             </table>
                         </section>
+                        <!--Seçao para escolher o id do voo que você quer ver o assento-->
+                        <section class="sectionCadastrar">
+                            <form>
+                                <div class="row" id="block">
+                                    <p>Selecione o ID do Voo para ver seus assentos:</p>
+                                    <div class="col">
+                                        <p>       
+                                            <select id="dataSelectListar"></select>
+                                        </p> 
+                                        <button type="button" id="btnListar" >Selecionar</button>
+                                    </div>   
+                            </form>    
+                        </section>
                         <!--Seção de Alterar um Assento-->
                         <p>
-                            <button type="button" onclick="btnAlterar();" id="btn-s-alterar" class="functionButton" name="btnAlterar"><h6>Alterar  ></h6></button>
+                            <button type="button" onclick="" id="btn-s-alterar" class="functionButton" name="btnAlterar"><h6>Alterar  ></h6></button>
                         </p>
                         <section class="sectionAlterar" id="assentos">
                             <form>
                                 <div class="row" id="block">
                                     <div class="col">
-                                    <p>     
-                                        <label for="dataSelect">Selecione o ID:</label><br/>          
-                                        <select id="dataSelect"></select>
-                                        <script src=""></script>     
-                                    </p>
-                                    <button type="button" onclick="btnAlterarInfo();" id="btnConfirmarAltInfo" name="btnConfirmar">Confirmar</button>
-                                    </div>
-                                </div>
-                                <p id="status" class="statusError"></p>
-                                
-                            </form>
-                        </section>
-                        <section id="AlterarInfo-assentos" >
-                            <form>
-                                <div class="row" id="block">
-                                    <div class="col">
                                         <p>
-                                            <label for="statusAssento">Status:</label><br/>
-                                            <input type="text" id="status" name="statusAssento" maxlength="20"/>
+                                            <label for="id">ID Assento:</label><br/>
+                                            <input type="text" id="idAssento" name="id" maxlength="20"/>
                                         </p>
-                                    </div>
+                                        <p>
+                                            <label for="ststs">:</label><br/>
+                                            <input type="text" id="newAssento" name="ststs" maxlength="20"/>
+                                        </p>
+                                    <div class="col"><button id="btnUpdate">Alterar</button></div>     
                                 </div>
-                                <div class="row" id="buttons">
-                                    <script src=""> </script>
-                                    <div class="col"><button id="btnAlterar">Alterar</button></div>     
-                                </div>
-
                                 <p id="status" class="statusError"></p>
                             </form>
                         </section>
@@ -133,6 +129,8 @@
     </main>
     <!--referenciando os .js-->
     <script src="../display.js"></script>
-    <script src="./aeronave.js"></script>
+    <script src="../voo/script/voo.js"></script>
+    <script src="script/mapaAssento.js"></script>
+
 </body>
 </html>
