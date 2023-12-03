@@ -66,13 +66,21 @@ exports.route.get("/selectVenda", (req, res) => __awaiter(void 0, void 0, void 0
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-/*
-route.get("/selectVendaByID", async(req:any, res:any)=>{
-  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
-  res.send(cr);
-});
-*/
+exports.route.post("/selectVendaByAssento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let cr = { status: "ERROR", message: "", payload: undefined };
+    const id = req.body.idAssento;
+    console.log(id);
+    let resp = (0, select_1.executeSelectVendaByAssento)(id);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    cr.payload = (yield resp).result;
+    cr.message = "Dado excluido";
+    cr.status = "SUCCESS";
+    res.send(cr);
+}));
 exports.route.delete("/deleteVenda", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idVenda;
