@@ -212,7 +212,7 @@ main form select {
     border-radius: 2px;
 }
 
-main form #Data{
+main form input[type="date"] {
     width:178px;
 }
 main form button{

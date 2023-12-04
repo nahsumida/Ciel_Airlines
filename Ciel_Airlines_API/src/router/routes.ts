@@ -213,7 +213,7 @@ route.delete("/deleteVoo", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/updateVoo", async(req:any, res:any)=>{
+route.post("/updateVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   res.send(cr);

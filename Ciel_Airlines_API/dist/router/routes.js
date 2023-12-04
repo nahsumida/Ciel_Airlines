@@ -168,7 +168,7 @@ exports.route.delete("/deleteVoo", (req, res) => __awaiter(void 0, void 0, void 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.get("/updateVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/updateVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     res.send(cr);
 }));

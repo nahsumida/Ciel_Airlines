@@ -346,3 +346,47 @@ function ExcluirVoo(){
 }
 
 
+/*
+ALTERAR
+*/
+
+function fetchAlterarVoo(body) {
+    const requestOptions = {
+        method: 'POST', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
+    };
+    return fetch('http://localhost:3000/updateVoo', requestOptions).then(T => T.json())
+}
+function AlterarVoo() {
+    var selectElementUpdate = document.getElementById("dataSelectUpdate"); // caixa de seleçao do id
+    var selectedIndex = selectElementUpdate.selectedIndex; // Índice da opção selecionada
+    var selectedOption = selectElementUpdate.options[selectedIndex]; // Opção selecionada
+    var selectedValue = selectedOption.value; // //valor da opcao a ser selecionada
+
+    // atribui os campos preenchidos em variáveis
+    const Data = document.getElementById("newData").value;
+    const Trecho = document.getElementById("newTrecho").value;
+    const HoraPartida = document.getElementById("newhoraPartida").value;
+    const HoraChegada = document.getElementById("newhoraChegada").value;
+    const Preco = document.getElementById("newpreco").value;
+    const Aeronave = document.getElementById("newAeronave").value;
+
+    fetchAlterarVoo({
+        dataVoo: Data, 
+        trecho: Trecho ,
+        horaPartida: HoraPartida,
+        horaChegada: HoraChegada,
+        preco: Preco,
+        aeronave: Aeronave
+        })
+        .then(customResponse => {
+            if (customResponse.Companhia === "SUCCESS") {
+                MessageStatus("Cidade alterada... ", false);
+            } else {MessageStatus("Erro ao alterar Companhia...: " + customResponse.message, true);
+            console.log(customResponse.message);
+        }
+    })
+    .catch((e) => {
+        MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
+        console.log("Falha grave ao listar." + e)
+    });
+}

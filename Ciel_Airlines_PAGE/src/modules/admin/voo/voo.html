@@ -192,7 +192,7 @@
                                     <div class="col">
                                         <p>  
                                             <label for="dataVoo">Data:</label><br/>
-                                            <input type="text" id="newdataVoo" name="dataVoo"/>
+                                            <input type="date" id="newdataVoo" name="dataVoo"/>
                                         </p>
                                         <p>  
                                             <label for="Trecho">Trecho:</label><br/>
@@ -223,9 +223,7 @@
                                     </div>
                                 </div>
                                 <div class="row" id="buttons">
-                                    <script src=""> </script>
-                                    <div class="col"><button type="button" src id="btnSair" name="btnVoltar">Voltar</button> </div>
-                                    <div class="col"><button id="btnAlterar">Alterar</button></div>     
+                                    <div class="col"><button id="btnAlterar" onclick="AlterarVoo();">Alterar</button></div>     
                                 </div>
                                 <p id="status" class="statusError"></p>
                             </form>
