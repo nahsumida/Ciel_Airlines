@@ -265,10 +265,11 @@ const executeInsertAeronave = (modelo, identificacao, fabricante, anoFabricacao,
     let connection;
     try {
         connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
-        let updateString = `INSERT INTO AERONAVE 
+        let insertString = `INSERT INTO AERONAVE 
         (ID_AERONAVE, MODELO, NUM_IDENTIFICACAO, FABRICANTE, ANO_FABRICACAO, COMPANHIA_AEREA, NUMASSENTOS) 
         VALUES (ID_AERONAVE_SEQ.nextval, '` + modelo + `', '` + identificacao + `', '` + fabricante + `', ` + anoFabricacao + `,` + compahiaAerea + `, ` + numAssento + `)`;
-        let resInsert = yield connection.execute(updateString);
+        console.log(insertString);
+        let resInsert = yield connection.execute(insertString);
         yield connection.commit();
         const rowsInserted = resInsert.rowsAffected;
         if (rowsInserted !== undefined && rowsInserted === 1) {

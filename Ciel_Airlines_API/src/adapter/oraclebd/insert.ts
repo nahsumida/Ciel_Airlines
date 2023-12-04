@@ -195,7 +195,6 @@ export const executeInsertVenda = async(nome: any, email: any, idAssento: number
         connection = await oracledb.getConnection(oraConnAttribs);
 
         let insertString = `insert into venda (id_venda, nome_passageiro, EMAIL_PASSAGEIRO, ASSENTO, id_voo, pagamento) values (ID_VENDA_SEQ.nextval, '` + nome + `', '`+email+`', ` + idAssento + `,` + idVoo + `,` +  pagamento +`)`
-        
       
         let resInsert = await connection.execute(insertString);
 
@@ -269,11 +268,12 @@ export const executeInsertAeronave = async(modelo: string, identificacao: any, f
     try{
         connection = await oracledb.getConnection(oraConnAttribs);
 
-        let updateString = `INSERT INTO AERONAVE 
+        let insertString = `INSERT INTO AERONAVE 
         (ID_AERONAVE, MODELO, NUM_IDENTIFICACAO, FABRICANTE, ANO_FABRICACAO, COMPANHIA_AEREA, NUMASSENTOS) 
         VALUES (ID_AERONAVE_SEQ.nextval, '` + modelo + `', '` + identificacao + `', '` + fabricante + `', ` + anoFabricacao + `,`  + compahiaAerea + `, ` + numAssento + `)`
       
-        let resInsert = await connection.execute(updateString);
+        console.log(insertString)
+        let resInsert = await connection.execute(insertString);
 
         await connection.commit();
 

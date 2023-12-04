@@ -151,7 +151,7 @@ function selecionouCompanhia(){
     return resultado;
 }
 
-function inserirAeronave(CompanhiaAerea){
+function inserirAeronave(){
     if(!preencheuModelo()){
         MessageStatus("Preencha modelo!", true);
         return;
@@ -177,21 +177,25 @@ function inserirAeronave(CompanhiaAerea){
         return;
     }
     
-    
     const Modelo = document.getElementById("Modelo").value;
     const NumIdentificacao = document.getElementById("NumIdentificacao").value;
     var text = document.getElementById('fabricante').options[document.getElementById('fabricante').selectedIndex].text;
     const anoFabricacao = document.getElementById("anoFabricacao").value;
-    //const Total_assentos = document.getElementById("Total_assentos").value;
-    CompanhiaAerea = document.getElementById("CompanhiaAerea").value;
+    const numAssentos = document.getElementById("numAssentos").value;
+    var selectElementUpdate = document.getElementById("CompanhiaAerea"); // caixa de seleçao do id
+    var selectedIndex = selectElementUpdate.selectedIndex; // Índice da opção selecionada
+    var selectedOption = selectElementUpdate.options[selectedIndex]; // Opção selecionada
+    var selectedValue = selectedOption.value; // //valor da opcao a ser selecionada
+console.log(numAssentos);
+console.log(selectedValue)
 
     fetchInserir({
         modelo: Modelo, 
         numIdentificacao: NumIdentificacao ,
         fabricante: text,
         anoFabricacao: anoFabricacao,
-        companhiaAerea : CompanhiaAerea,
-        //totalAssento: Total_assentos
+        compahiaAerea : selectedValue,
+        numAssento: numAssentos
         })
         .then(customResponse => {
         if(customResponse.status === "SUCCESS"){
@@ -207,6 +211,84 @@ function inserirAeronave(CompanhiaAerea){
         });
 }
 
+function fetchExcluirAeronave(body){
+    const requestOptions = {
+        method: 'POST', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+    };
+
+    return fetch('http://localhost:3000/deleteAeronave', requestOptions).then(T => T.json())
+}
+
+function ExcluirA() {
+    var selectElementDelete = document.getElementById("dataSelectDelete"); //caixa de select
+    var selectedIndex = selectElementDelete.selectedIndex; // Índice da opção selecionada
+    var selectedOption = selectElementDelete.options[selectedIndex]; // Opção selecionada
+    var selectedValue = selectedOption.value; //valor da opcao a ser excluída
+
+    console.log("ID selecionado para exclusão:", selectedValue);
+    fetchExcluirAeronave({
+        idAeronave: selectedValue,
+    })
+        .then(customResponse => {
+            console.log("Resposta do servidor:", customResponse);
+            if (customResponse.status === "SUCCESS") {
+                MessageStatus("Companhia excluida... ", false);
+            } else {
+                MessageStatus("Erro ao excluir companhia...: " + customResponse.message, true);
+                console.log(customResponse.message);
+            }
+        })
+        .catch((e) => {
+            MessageStatus("Erro técnico ao excluir... Contate o suporte.", true);
+            console.log("Falha grave ao excluir." + e)
+        });
+    }
+
+/* 
+ALTERAR
+*/
+
+function fetchAlterarAeronave(body) {
+    const requestOptions = {
+        method: 'POST', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
+    };
+    return fetch('http://localhost:3000/updateAeronave', requestOptions).then(T => T.json())
+}
+
+function AlterarAeronave() {
+    var selectElementUpdate = document.getElementById("dataSelectUpdate"); // caixa de seleçao do id
+    var selectedIndex = selectElementUpdate.selectedIndex; // Índice da opção selecionada
+    var selectedOption = selectElementUpdate.options[selectedIndex]; // Opção selecionada
+    var selectedValue = selectedOption.value; // //valor da opcao a ser selecionada
+
+
+    const Modelo = document.getElementById("newModelo").value;
+    const NumIdentificacao = document.getElementById("newNumIdentificacao").value;
+    var fabricante = document.getElementById('newfabricante').options[document.getElementById('newfabricante').selectedIndex].text;
+    const anoFabricacao = document.getElementById("newanoFabricacao").value;
+    const CompanhiaAerea = document.getElementById("newCompanhiaAerea").value;
+
+    fetchAlterarAeronave({
+        idAeronave: selectedValue,
+        modelo: Modelo, 
+        numIdentificacao: NumIdentificacao ,
+        fabricante: fabricante,
+        anoFabricacao: anoFabricacao,
+        compahiaAerea : CompanhiaAerea,
+        })
+        .then(customResponse => {
+        if(customResponse.status === "SUCCESS"){
+            MessageStatus("Aeronave alterada... ", false);
+        }else{
+            MessageStatus("Erro ao alterar aeronave...: " + customResponse.message, true);
+            console.log(customResponse.message);
+        }
+        })
+        .catch((e)=>{
+            MessageStatus("Erro técnico ao alterar... Contate o suporte.", true);
+            console.log("Falha grave ao alterar." + e)
+        });
+}
 
 /*CHAMADA DAS FUNÇÕES NO CARREGAMENTO DA PAGINA*/
 document.addEventListener("DOMContentLoaded", function () {
@@ -222,5 +304,6 @@ document.addEventListener("DOMContentLoaded", function () {
     listarComboBoxporID(dataSelectDelete,fetchListarAeronave)
     const dataSelectUpdate = document.getElementById('dataSelectUpdate');
     listarComboBoxporID(dataSelectUpdate,fetchListarAeronave)
-
+    const newCompanhiaAerea = document.getElementById('newCompanhiaAerea');
+    listarComboBox(newCompanhiaAerea,fetchListarCompanhia);
 });

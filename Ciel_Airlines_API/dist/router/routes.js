@@ -238,7 +238,7 @@ exports.route.post("/selectAeronaveByID", (req, res) => __awaiter(void 0, void 0
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.delete("/deleteAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/deleteAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idAeronave;
     let resp = (0, delete_1.executeDeleteByID)('AERONAVE', id);

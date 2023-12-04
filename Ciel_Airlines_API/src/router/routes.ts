@@ -305,7 +305,7 @@ route.post("/selectAeronaveByID", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.delete("/deleteAeronave", async(req:any, res:any)=>{
+route.post("/deleteAeronave", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idAeronave as number;
