@@ -16,6 +16,7 @@ import { executeUpdateCompanhiaAerea, executeUpdateMetodoPagamento,
          executeUpdateAeroporto } from "../adapter/oraclebd/update";
 
 import { CustomResponse } from '../model/customResponse';
+import { validateTrecho } from "src/domain/trecho/trecho";
 export const route = express.Router();
 
 // SEARCH 
@@ -896,9 +897,12 @@ route.post("/updateTrecho", async(req:any, res:any)=>{
   const id = req.body.idTrecho as number;
   const aeroSaida = req.body.aeroSaida as number;
   const aeroChegada = req.body.aeroChegada as number;
+ 
+  let trecho = executeSelectTrechoByID(id)
 
+  let trechoValidado = validateTrecho((await trecho).result[0],(await trecho).result[1] , aeroSaida, aeroChegada)
 
-  let resp = executeUpdateTrecho(id,aeroSaida, aeroChegada);
+  let resp = executeUpdateTrecho(id,trechoValidado.aeroSaida, trechoValidado.aeroChegada);
 
   if ((await resp).err != null){
     cr.message = (await resp).err;

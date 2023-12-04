@@ -13,14 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.executeInsertAeronave = exports.executeInsertVoo = exports.executeInsertVenda = exports.executeInsertAeroporto = exports.executeInsertTrecho = exports.executeInsertCidade = exports.executeInsertMetodoPagamento = exports.executeInsertCompanhiaAerea = void 0;
-const oracledb_2 = __importDefault(require("oracledb"));
-const config_2 = require("./config");
+const oracledb_1 = __importDefault(require("oracledb"));
+const config_1 = require("./config");
 //insere um dado de companhia aerea no banco de dados
 const executeInsertCompanhiaAerea = (nomeCompanhiaAerea) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let insertString = `INSERT INTO COMPANHIA_AEREA 
         (ID_COMPANHIA_AEREA, NOME_COMPANHIA)
         VALUES (ID_COMPANHIA_SEQ.NEXTVAL, '` + nomeCompanhiaAerea + `')`;
@@ -57,7 +57,7 @@ const executeInsertMetodoPagamento = (nomeMetodo) => __awaiter(void 0, void 0, v
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let insertString = `INSERT INTO METODO_PAGAMENTO 
         (ID_METODO_PAGAMENTO, NOME_METODO)
         VALUES (ID_METODO_SEQ.NEXTVAL, '` + nomeMetodo + `')`;
@@ -94,7 +94,7 @@ const executeInsertCidade = (nomeCidade) => __awaiter(void 0, void 0, void 0, fu
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let insertString = `INSERT INTO CIDADE
         (ID_CIDADE, NOME_CIDADE)
         VALUES (ID_CIDADE_SEQ.NEXTVAL, '` + nomeCidade + `')`;
@@ -131,7 +131,7 @@ const executeInsertTrecho = (saida, chegada) => __awaiter(void 0, void 0, void 0
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let updateString = `INSERT INTO TRECHO 
         (ID_TRECHO, AERO_SAIDA, AERO_CHEGADA)
         VALUES (ID_TRECHO_SEQ.NEXTVAL,` + saida + `,` + chegada + `)`;
@@ -164,7 +164,7 @@ const executeInsertAeroporto = (idCidade, nomeAeroporto, sigla) => __awaiter(voi
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let updateString = `INSERT INTO AEROPORTO 
         (ID_AEROPORTO, ID_CIDADE, NOME_AEROPORTO, SIGLA)
         VALUES (ID_AEROPORTO_SEQ.NEXTVAL, ` + idCidade + `,'` + nomeAeroporto + `','` + sigla + `')`;
@@ -197,7 +197,7 @@ const executeInsertVenda = (nome, email, idAssento, idVoo, pagamento) => __await
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let insertString = `insert into venda (id_venda, nome_passageiro, EMAIL_PASSAGEIRO, ASSENTO, id_voo, pagamento) values (ID_VENDA_SEQ.nextval, '` + nome + `', '` + email + `', ` + idAssento + `,` + idVoo + `,` + pagamento + `)`;
         let resInsert = yield connection.execute(insertString);
         yield connection.commit();
@@ -231,7 +231,7 @@ const executeInsertVoo = (trecho, aeronave, dataVoo, hora_partida, hora_chegada,
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let updateString = `insert into voo 
         (ID_VOO, TRECHO, AERONAVE, DATA, HORA_PARTIDA, HORA_CHEGADA, PRECO) 
         VALUES (id_voo_seq.nextval, ` + trecho + `,` + aeronave + `, TO_DATE('` + dataVoo + `', 'yyyy-mm-dd'), '` + hora_partida + `', '` + hora_chegada + `', ` + preco + `)`;
@@ -264,7 +264,7 @@ const executeInsertAeronave = (modelo, identificacao, fabricante, anoFabricacao,
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let updateString = `INSERT INTO AERONAVE 
         (ID_AERONAVE, MODELO, NUM_IDENTIFICACAO, FABRICANTE, ANO_FABRICACAO, COMPANHIA_AEREA, NUMASSENTOS) 
         VALUES (ID_AERONAVE_SEQ.nextval, '` + modelo + `', '` + identificacao + `', '` + fabricante + `', ` + anoFabricacao + `,` + compahiaAerea + `, ` + numAssento + `)`;

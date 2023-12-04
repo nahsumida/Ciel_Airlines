@@ -18,6 +18,7 @@ const select_1 = require("../adapter/oraclebd/select");
 const delete_1 = require("../adapter/oraclebd/delete");
 const insert_1 = require("../adapter/oraclebd/insert");
 const update_1 = require("../adapter/oraclebd/update");
+const trecho_1 = require("src/domain/trecho/trecho");
 exports.route = express_1.default.Router();
 // SEARCH 
 //pesquisa de voos de um trecho especifico filtrado por data
@@ -666,7 +667,9 @@ exports.route.post("/updateTrecho", (req, res) => __awaiter(void 0, void 0, void
     const id = req.body.idTrecho;
     const aeroSaida = req.body.aeroSaida;
     const aeroChegada = req.body.aeroChegada;
-    let resp = (0, update_1.executeUpdateTrecho)(id, aeroSaida, aeroChegada);
+    let trecho = (0, select_1.executeSelectTrechoByID)(id);
+    let trechoValidado = (0, trecho_1.validateTrecho)((yield trecho).result[0], (yield trecho).result[1], aeroSaida, aeroChegada);
+    let resp = (0, update_1.executeUpdateTrecho)(id, trechoValidado.aeroSaida, trechoValidado.aeroChegada);
     if ((yield resp).err != null) {
         cr.message = (yield resp).err;
         cr.status = "ERROR";

@@ -14,14 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.vendaRouter = void 0;
 const express_1 = __importDefault(require("express"));
-const oracledb_2 = __importDefault(require("oracledb"));
+const oracledb_1 = __importDefault(require("oracledb"));
 const dotenv_1 = __importDefault(require("dotenv"));
 exports.vendaRouter = express_1.default.Router();
 dotenv_1.default.config();
 exports.vendaRouter.get("/listarVenda", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined, };
     try {
-        const connection = yield oracledb_2.default.getConnection({
+        const connection = yield oracledb_1.default.getConnection({
             user: process.env.ORACLE_DB_USER,
             password: process.env.ORACLE_DB_SECRET,
             connectString: process.env.ORACLE_DB_CONN_STR

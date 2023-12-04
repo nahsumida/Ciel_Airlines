@@ -13,14 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.executeSelectVendaByAssento = exports.executeSelectVenda = exports.searchTrecho = exports.searchVoo = exports.executeSelectVoo = exports.executeSelectVooByID = exports.executeSelectAeroportoByID = exports.executeSelectAeroporto = exports.executeSelectAeronaveByID = exports.executeSelectAeronave = exports.executeSelectTrechoByID = exports.executeSelectTrecho = exports.executeSelectAssentoByVoo = exports.executeSelectByID = exports.executeSelectAll = void 0;
-const oracledb_2 = __importDefault(require("oracledb"));
-const config_2 = require("./config");
+const oracledb_1 = __importDefault(require("oracledb"));
+const config_1 = require("./config");
 //seleciona todas as linhas da tabela 
 const executeSelectAll = (table) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = 'SELECT * FROM ' + table;
         console.log(selectString);
         let resSelect = yield connection.execute(selectString);
@@ -48,7 +48,7 @@ const executeSelectByID = (table, id) => __awaiter(void 0, void 0, void 0, funct
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT * FROM ` + table + ` WHERE ID_` + table + ` = ` + id;
         console.log(selectString);
         let resSelect = yield connection.execute(selectString);
@@ -74,7 +74,7 @@ const executeSelectAssentoByVoo = (table, idVoo) => __awaiter(void 0, void 0, vo
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT * FROM ` + table + ` WHERE ID_VOO = ` + idVoo + ` order by ID_Assento`;
         console.log(selectString);
         let resSelect = yield connection.execute(selectString);
@@ -100,7 +100,7 @@ const executeSelectTrecho = () => __awaiter(void 0, void 0, void 0, function* ()
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT
                                 T.ID_TRECHO,
                                 T.AERO_SAIDA,
@@ -139,7 +139,7 @@ const executeSelectTrechoByID = (id) => __awaiter(void 0, void 0, void 0, functi
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT
                                 T.ID_TRECHO,
                                 T.AERO_SAIDA,
@@ -177,7 +177,7 @@ const executeSelectAeronave = () => __awaiter(void 0, void 0, void 0, function* 
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT
                                 A.ID_AERONAVE,
                                 C.NOME_COMPANHIA,
@@ -213,7 +213,7 @@ const executeSelectAeronaveByID = (id) => __awaiter(void 0, void 0, void 0, func
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT
                                 A.ID_AERONAVE,
                                 C.NOME_COMPANHIA,
@@ -251,7 +251,7 @@ const executeSelectAeroporto = () => __awaiter(void 0, void 0, void 0, function*
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT
                                 A.ID_AEROPORTO,
                                 A.NOME_AEROPORTO,
@@ -286,7 +286,7 @@ const executeSelectAeroportoByID = (id) => __awaiter(void 0, void 0, void 0, fun
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT
                                 A.ID_AEROPORTO,
                                 A.NOME_AEROPORTO,   
@@ -321,7 +321,7 @@ const executeSelectVooByID = (id) => __awaiter(void 0, void 0, void 0, function*
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT
         v.ID_VOO,
         v.data,
@@ -367,7 +367,7 @@ const executeSelectVoo = () => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT
         v.ID_VOO,
         v.data,
@@ -411,7 +411,7 @@ const searchVoo = (idTrecho, dataVoo) => __awaiter(void 0, void 0, void 0, funct
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT
         v.ID_VOO,
         v.data,
@@ -457,7 +457,7 @@ const searchTrecho = (aeroSaida, aeroChegada) => __awaiter(void 0, void 0, void 
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `select id_trecho from trecho where AERO_SAIDA = ` + aeroSaida + ` and aero_chegada = ` + aeroChegada;
         console.log(selectString);
         let resSelect = yield connection.execute(selectString);
@@ -488,7 +488,7 @@ const executeSelectVenda = () => __awaiter(void 0, void 0, void 0, function* () 
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT
         v.ID_VENDA,
         v.NOME_PASSAGEIRO,
@@ -539,7 +539,7 @@ const executeSelectVendaByAssento = (idAssento) => __awaiter(void 0, void 0, voi
     let resp = { result: undefined, err: null };
     let connection;
     try {
-        connection = yield oracledb_2.default.getConnection(config_2.oraConnAttribs);
+        connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
         let selectString = `SELECT
         v.ID_VENDA,
         v.NOME_PASSAGEIRO,
