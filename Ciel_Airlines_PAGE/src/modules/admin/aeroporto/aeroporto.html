@@ -131,7 +131,7 @@
                                        <p id="status" class="statusError"></p>
                                        <p id="button">
                                            <script src="./script/aeroporto.js"></script>     
-                                           <button id="btnExcluir" onclick="Excluir();">Confirmar</button>
+                                           <button id="btnExcluir" onclick="ExcluirAeroporto();">Confirmar</button>
                                         </p>
                                     </div></div>
                             </form>
@@ -166,17 +166,16 @@
                                         </p>
                                         <p>
                                             <label for="nomeAeroporto"> Nome Aeroporto:</label><br/>
-                                            <input type="text" id="nomeAeroporto" name="nomeAeroporto" maxlength="35"/>
+                                            <input type="text" id="newnomeAeroporto" name="nomeAeroporto" maxlength="35"/>
                                         </p>
                                         <p>
                                             <label for="siglaAeroporto">Sigla Aeroporto:</label><br/>
-                                            <input type="text" id="siglaAeroporto" name="siglaAeroporto"/>
+                                            <input type="text" id="newsiglaAeroporto" name="siglaAeroporto"/>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="row" id="buttons">
-                                    <script src=""> </script>
-                                    <div class="col"><button id="btnAlterar">Alterar</button></div>     
+                                    <div class="col"><button id="btnAlterar" onclick="AlterarAeroporto();">Alterar</button></div>     
                                 </div>
 
                                 <p id="status" class="statusError"></p>
