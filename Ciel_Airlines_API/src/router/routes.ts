@@ -16,7 +16,7 @@ import { executeUpdateCompanhiaAerea, executeUpdateMetodoPagamento,
          executeUpdateAeroporto } from "../adapter/oraclebd/update";
 
 import { CustomResponse } from '../model/customResponse';
-import { validateTrecho } from "src/domain/trecho/trecho";
+import { validateTrecho } from "../domain/trecho/trecho";
 export const route = express.Router();
 
 // SEARCH 

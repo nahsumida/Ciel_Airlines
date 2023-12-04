@@ -18,7 +18,7 @@ const select_1 = require("../adapter/oraclebd/select");
 const delete_1 = require("../adapter/oraclebd/delete");
 const insert_1 = require("../adapter/oraclebd/insert");
 const update_1 = require("../adapter/oraclebd/update");
-const trecho_1 = require("src/domain/trecho/trecho");
+const trecho_1 = require("../domain/trecho/trecho");
 exports.route = express_1.default.Router();
 // SEARCH 
 //pesquisa de voos de um trecho especifico filtrado por data

@@ -1,4 +1,4 @@
-import { TrechoResponse } from "./model";
+import { TrechoResponse } from "src/domain/trecho/model";
 
 export function validateTrecho(aeroSaidaBanco: number, aeroChegadaBanco: number,aeroSaida: number, aeroChegada: number){
     let tr: TrechoResponse = {aeroSaida: aeroSaida, aeroChegada: aeroChegada};

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "env": "npm init && npm i express cors dotenv helmet morgan express-async-errors && npm i -D typescript ts-node @types/express @types/cors @types/helmet @types/dotenv @types/morgan && npm i oracledb",
+    "env": "npm init && npm i express cors dotenv helmet morgan oracledb express-async-errors && npm i -D typescript ts-node @types/express @types/cors @types/helmet @types/dotenv @types/morgan @types/oracledb && npm i oracledb",
     "dev": "npx nodemon src/server.ts --watch 'src/' -e ts",
     "build": "npx tsc",
     "start": "node ./dist/server.js"
@@ -27,6 +27,7 @@
     "@types/express": "^4.17.21",
     "@types/helmet": "^4.0.0",
     "@types/morgan": "^1.9.9",
+    "@types/oracledb": "^6.0.4",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.2"
   }
