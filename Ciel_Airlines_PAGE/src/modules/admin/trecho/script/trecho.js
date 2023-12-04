@@ -111,13 +111,19 @@ function ListarTrecho(){
 
 
 // Função para listar opções de trecho em um elemento de caixa de seleção
-//essa funcao é diferente das outras de listar comboBox, pois o id é o mesmo valor que aparecerá
-// no texto visivel da caixa
+// Essa função é diferente das outras de listar comboBox, pois o id é o mesmo valor que aparecerá
+// no texto visível da caixa
 function listarComboBoxTrecho(element) {
     fetchListarTrecho()
         .then(customResponse => {
             if (customResponse.status === "SUCCESS") {
                 element.innerHTML = '';
+
+                // Adiciona a opção inicial "Selecione:"
+                const selectOption = document.createElement('option');
+                selectOption.value = ''; // Valor vazio
+                selectOption.text = 'Selecione:'; // Texto visível
+                element.appendChild(selectOption);
 
                 // Looping que cria opções na caixa de seleção
                 customResponse.payload.forEach(item => {
@@ -140,6 +146,7 @@ function listarComboBoxTrecho(element) {
             console.log("Falha grave ao listar." + e);
         });
 }
+
 
 
 // CADASTRAR
@@ -182,34 +189,6 @@ function inserirTrecho(){
             console.log("Falha grave ao cadastrar." + e)
         });
 }
-
-/*            
-document.addEventListener("DOMContentLoaded", function() {
-    listarAeroportoSaida();
-    listarAeroportoChegada();
-
-    const button = document.getElementById("btnCadastrar");
-    var selectSaida = document.getElementById("aeroSaida");
-    var selectChegada = document.getElementById("aeroChegada");
-
-    if (button) {
-        button.addEventListener('click', function() {
-            var selectedIndex = selectSaida.selectedIndex; // Índice da opção selecionada
-            var selectedOption = selectSaida.options[selectedIndex]; // Opção selecionada
-            var selectedSaida = selectedOption.value; 
-
-            var selectedIndex1 = selectChegada.selectedIndex; // Índice da opção selecionada
-            var selectedOption1 = selectChegada.options[selectedIndex1]; // Opção selecionada
-            var selectedChegada = selectedOption1.value;
-
-            console.log("aa" , selectedSaida)
-            console.log("bb" , selectedChegada)
-
-            inserirTrecho(selectedSaida, selectedChegada);
-        });
-    }
-});*/
-
 
 /*
 EXCLUIR
@@ -319,10 +298,25 @@ document.addEventListener("DOMContentLoaded", function() {
     listarComboBoxTrecho(dataSelectUpdate);
 
     // Chama a função para listar aeroportos na caixa de seleção 'aeroSaida'
-    const newaeroSaida = document.getElementById('newaeroSaida');
+    var newaeroSaida = document.getElementById('newaeroSaida');
     listarComboBox(newaeroSaida,fetchListarAero);
 
     // Chama a função para listar aeroportos na caixa de seleção 'aeroChegada'
-    const newaeroChegada = document.getElementById('newaeroChegada');
+    var newaeroChegada = document.getElementById('newaeroChegada');
     listarComboBox(newaeroChegada,fetchListarAero);
+
+
+   /* newaeroSaida.addEventListener("change",function(){
+        var selectedIndex1 = newaeroSaida.selectedIndex; // Índice da opção selecionada
+        var selectedOption1 = newaeroSaida.options[selectedIndex1]; // Opção selecionada
+        var selectedValue1 = selectedOption1.value; // Valor da opção selecionada
+        console.log('Aero1:', selectedValue1);
+    });
+
+    newaeroChegada.addEventListener("change",function(){
+        var selectedIndex = newaeroChegada.selectedIndex; // Índice da opção selecionada
+        var selectedOption = newaeroChegada.options[selectedIndex]; // Opção selecionada
+        var selectedValue = selectedOption.value; // Valor da opção selecionada
+        console.log('Aero2:', selectedValue);
+    });*/
 });

@@ -310,6 +310,39 @@ function inserirVoo(){
         });
 }
 
+/*
+EXCLUIR
+*/
 
+function fetchExcluirVoo(body){
+    const requestOptions = {
+        method: 'DELETE', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+    };
+
+    return fetch('http://localhost:3000/deleteVoo', requestOptions).then(T => T.json())
+}
+
+function ExcluirVoo(){
+    var selectElementDelete = document.getElementById("dataSelectDelete"); //caixa de select
+    var selectedIndex = selectElementDelete.selectedIndex; // Índice da opção selecionada
+    var selectedOption = selectElementDelete.options[selectedIndex]; // Opção selecionada
+    var selectedValue = selectedOption.value; //valor da opcao a ser excluída
+
+    fetchExcluirVoo({
+        idVoo: selectedValue, 
+    })
+        .then(customResponse => {
+        if(customResponse.status === "SUCCESS"){
+            MessageStatus("voo excluido... ", false);
+        }else{
+            MessageStatus("Erro ao excluir voo...: " + customResponse.message, true);
+            console.log(customResponse.message);
+        }
+        })
+        .catch((e)=>{
+            MessageStatus("Erro técnico ao excluir... Contate o suporte.", true);
+            console.log("Falha grave ao excluir." + e)
+        });
+}
 
 

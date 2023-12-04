@@ -64,6 +64,13 @@ function listarComboBox(element, fetchFunction) {
             if (customResponse.status === "SUCCESS") {
                 element.innerHTML = '';
 
+                // Adiciona a opção inicial "Selecione:"
+                const selectOption = document.createElement('option');
+                selectOption.value = ''; // Valor vazio
+                selectOption.text = 'Selecione:'; // Texto visível
+                element.appendChild(selectOption);
+
+                //looping para cada opcao com valor
                 customResponse.payload.forEach(item => {
                     const id = item[0];
                     const nome = item[1];

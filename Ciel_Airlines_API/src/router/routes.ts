@@ -193,7 +193,7 @@ route.get("/selectVooByID", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/deleteVoo", async(req:any, res:any)=>{
+route.delete("/deleteVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idVoo as number;
@@ -303,7 +303,7 @@ route.delete("/deleteAeronave", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.get("/updateAeronave", async(req:any, res:any)=>{
+route.post("/updateAeronave", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
   
   res.send(cr);
@@ -898,6 +898,9 @@ route.post("/updateTrecho", async(req:any, res:any)=>{
   const aeroSaida = req.body.aeroSaida as number;
   const aeroChegada = req.body.aeroChegada as number;
  
+  console.log("aero saida:", aeroSaida);
+  console.log("aero chegada:", aeroChegada);
+
   let trecho = executeSelectTrechoByID(id)
 
   let trechoValidado = validateTrecho((await trecho).result[0],(await trecho).result[1] , aeroSaida, aeroChegada)
