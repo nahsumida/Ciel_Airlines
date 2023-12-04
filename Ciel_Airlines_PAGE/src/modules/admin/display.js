@@ -66,7 +66,7 @@ function listarComboBox(element, fetchFunction) {
 
                 // Adiciona a opção inicial "Selecione:"
                 const selectOption = document.createElement('option');
-                selectOption.value = ''; // Valor vazio
+                selectOption.value = 'undefined'; // Valor vazio
                 selectOption.text = 'Selecione:'; // Texto visível
                 element.appendChild(selectOption);
 
