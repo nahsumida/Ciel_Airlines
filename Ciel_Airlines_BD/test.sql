@@ -175,6 +175,8 @@ select * from ASSENTO where ID_ASSENTO=148
 update ASSENTO set status='INDISPONIVEL' WHERE ID_ASSENTO=
 Update assento set status = 'INDISPONIVEL' where id_assento = 153
 
-    select * from AERONAVE;
+    select * from VOO;
 
-update aeronave set modelo='aaa', NUM_IDENTIFICACAO = 'aaa', FABRICANTE = 'aaa', ANO_FABRICACAO=2002, COMPANHIA_AEREA = 21 where ID_AERONAVE = 6
+update aeronave set modelo='aaa', NUM_IDENTIFICACAO = 'aaa', FABRICANTE = 'aaa', ANO_FABRICACAO=2002, COMPANHIA_AEREA = 21 where ID_AERONAVE = 6;
+
+update voo set data=TO_DATE('2023-12-24', 'yyyy-mm-dd'), trecho=61, HORA_CHEGADA='10:00', HORA_PARTIDA='07:00', preco=1200, AERONAVE=2 where ID_VOO = 11

@@ -218,12 +218,15 @@ route.get("/deleteVoo", async(req:any, res:any)=>{
 route.post("/updateVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
-  let id = req.body.idAeroporto as number;
-  const idCidade = req.body.idCidade as number;
-  const nomeAeroporto = req.body.nomeAeroporto as string;
-  const sigla = req.body.sigla as string;
+  let id = req.body.idVoo as number;
+  const data = req.body.dataVoo as string;
+  const trecho = req.body.trecho as number;
+  const horaPartida = req.body.horaPartida as string;
+  const horaChegada = req.body.horaChegada as string;
+  const preco = req.body.preco as number;
+  const aeronave = req.body.aeronave as number;
 
-  let resp = executeUpdateVoo(id, idCidade, nomeAeroporto, sigla);
+  let resp = executeUpdateVoo(id, data, trecho, horaChegada, horaPartida, preco, aeronave);
   console.log(resp)
   if ((await resp).err != null){
     cr.message = (await resp).err;

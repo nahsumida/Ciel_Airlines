@@ -169,11 +169,14 @@ exports.route.get("/deleteVoo", (req, res) => __awaiter(void 0, void 0, void 0, 
 }));
 exports.route.post("/updateVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
-    let id = req.body.idAeroporto;
-    const idCidade = req.body.idCidade;
-    const nomeAeroporto = req.body.nomeAeroporto;
-    const sigla = req.body.sigla;
-    let resp = (0, update_1.executeUpdateVoo)(id, idCidade, nomeAeroporto, sigla);
+    let id = req.body.idVoo;
+    const data = req.body.dataVoo;
+    const trecho = req.body.trecho;
+    const horaPartida = req.body.horaPartida;
+    const horaChegada = req.body.horaChegada;
+    const preco = req.body.preco;
+    const aeronave = req.body.aeronave;
+    let resp = (0, update_1.executeUpdateVoo)(id, data, trecho, horaChegada, horaPartida, preco, aeronave);
     console.log(resp);
     if ((yield resp).err != null) {
         cr.message = (yield resp).err;

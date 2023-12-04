@@ -252,12 +252,12 @@ const executeUpdateAeronave = (id, modelo, numIdentificacao, fabricante, anoFabr
 });
 exports.executeUpdateAeronave = executeUpdateAeronave;
 //atualiza os dados de um assento de id especifico
-const executeUpdateVoo = (id, idCidade, nomeAeroporto, sigla) => __awaiter(void 0, void 0, void 0, function* () {
+const executeUpdateVoo = (id, data, trecho, horaChegada, horaPartida, preco, aeronave) => __awaiter(void 0, void 0, void 0, function* () {
     let resp = { result: undefined, err: null };
     let connection;
     try {
         connection = yield oracledb_1.default.getConnection(config_1.oraConnAttribs);
-        let updateString = `update AEROPORTO set id_cidade=` + idCidade + ` ,nome_aeroporto='` + nomeAeroporto + `', sigla='` + sigla + `' where ID_AEROPORTO = ` + id;
+        let updateString = `update voo set data=TO_DATE('` + data + `', 'yyyy-mm-dd'), trecho=` + trecho + `, HORA_CHEGADA='` + horaChegada + `', HORA_PARTIDA='` + horaPartida + `', preco=` + preco + `, AERONAVE=` + aeronave + ` where ID_VOO =` + id;
         console.log(updateString);
         let resUpdate = yield connection.execute(updateString);
         console.log(resUpdate);
