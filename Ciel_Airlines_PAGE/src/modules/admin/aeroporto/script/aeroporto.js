@@ -27,33 +27,6 @@ function fetchListarCidade(body) {
     return fetch('http://localhost:3000/selectCidade', requestOptions).then(T => T.json())
 }
 
-/*
-function listarCidades(){
-    fetchListarCidade()
-        .then(customResponse => {
-        if(customResponse.status === "SUCCESS"){
-            IDCidade.innerHTML = '';
-
-            customResponse.payload.forEach(item => {
-                const idcidade = item[2];
-                const nome = item[3];
-
-                const option = document.createElement('option');
-                option.value = idcidade; // Valor da opção
-                option.text = `${nome}`; // Texto visível
-
-                IDCidade.appendChild(option);
-            });
-        }else{
-            MessageStatus("Erro ao listar cidade...: " + customResponse.message, true);
-            console.log(customResponse.message);
-        }
-        })
-        .catch((e)=>{
-            MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-            console.log("Falha grave ao listar." + e)
-        });
-}*/
 
 function ListarAeroporto(){
     const dataBody = document.getElementById('dataBody');
@@ -182,42 +155,14 @@ function inserirAeroporto(idCidade){
 
 //EXCLUIR
 
-//Funcao para lista as opções com os dados da tabela dentro de uma caixa de selecao
-function ListarAeroportoComboBox(element) {
-    fetchListar()
-        .then(customResponse => {
-            if (customResponse.status === "SUCCESS") {
-                element.innerHTML = '';
-
-                customResponse.payload.forEach(item => {
-                    const idAeroporto = item[0];
-                    const nomeAeroporto = item[1];
-
-                    const option = document.createElement('option');
-                    option.value = idAeroporto; // Valor da opção
-                    option.text = `${nomeAeroporto}`; // Texto visível
-
-                    element.appendChild(option);
-                });
-            } else {
-                MessageStatus("Erro ao listar Trecho...: " + customResponse.message, true);
-                console.log(customResponse.message);
-            }
-        })
-        .catch((e) => {
-            MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-            console.log("Falha grave ao listar." + e);
-        });
-}
-
-//Funcao envia request para o endpoint para deletar Cidades
+//Funcao envia request para o endpoint para deletar Aeroporto
 function fetchExcluir(body) {
     const requestOptions = {
         method: 'DELETE', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
     };
     return fetch('http://localhost:3000/deleteAeroporto', requestOptions).then(T => T.json())
 }
-function Excluir() {
+function ExcluirAeroporto() {
     var selectElementDelete = document.getElementById("dataSelectDelete"); //caixa de select
     var selectedIndex = selectElementDelete.selectedIndex; // Índice da opção selecionada
     var selectedOption = selectElementDelete.options[selectedIndex]; // Opção selecionada
@@ -280,3 +225,44 @@ document.addEventListener("DOMContentLoaded", function() {
 
  
 });
+
+/*
+ALTERAR
+*/
+
+function fetchAlterarAeroporto(body) {
+    console.log("cheguei no fetch");
+    const requestOptions = {
+        method: 'POST', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
+    };
+    return fetch('http://localhost:3000/updateAeroporto', requestOptions).then(T => T.json())
+}
+function AlterarAeroporto() {
+    var selectElementUpdate = document.getElementById("dataSelectUpdate"); // caixa de seleçao do id
+    var selectedIndex = selectElementUpdate.selectedIndex; // Índice da opção selecionada
+    var selectedOption = selectElementUpdate.options[selectedIndex]; // Opção selecionada
+    var selectedValue = selectedOption.value; // //valor da opcao a ser selecionada
+
+    // atribui os campos preenchidos em variáveis
+    const newCidade = document.getElementById("newIDCidade").value;
+    const newnomeAeroporto = document.getElementById("newnomeAeroporto").value;
+    const newsiglaAeroporto = document.getElementById("newsiglaAeroporto").value;
+
+    fetchAlterarAeroporto({
+        idAeroporto: selectedValue,
+        idCidade: newCidade,
+        nomeAeroporto: newnomeAeroporto,
+        sigla: newsiglaAeroporto
+        })
+        .then(customResponse => {
+            if (customResponse.Companhia === "SUCCESS") {
+                MessageStatus("Cidade alterada... ", false);
+            } else {MessageStatus("Erro ao alterar Companhia...: " + customResponse.message, true);
+            console.log(customResponse.message);
+        }
+    })
+    .catch((e) => {
+        MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
+        console.log("Falha grave ao listar." + e)
+    });
+}
