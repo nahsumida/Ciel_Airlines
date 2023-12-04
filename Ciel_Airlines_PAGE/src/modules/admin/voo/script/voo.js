@@ -351,6 +351,7 @@ ALTERAR
 */
 
 function fetchAlterarVoo(body) {
+    console.log("cheguei no fetch");
     const requestOptions = {
         method: 'POST', headers: { 'Content-Type': "application/json" }, body: JSON.stringify(body)
     };
@@ -363,7 +364,7 @@ function AlterarVoo() {
     var selectedValue = selectedOption.value; // //valor da opcao a ser selecionada
 
     // atribui os campos preenchidos em variáveis
-    const Data = document.getElementById("newData").value;
+    const Data = document.getElementById("newdataVoo").value;
     const Trecho = document.getElementById("newTrecho").value;
     const HoraPartida = document.getElementById("newhoraPartida").value;
     const HoraChegada = document.getElementById("newhoraChegada").value;
@@ -371,6 +372,7 @@ function AlterarVoo() {
     const Aeronave = document.getElementById("newAeronave").value;
 
     fetchAlterarVoo({
+        idVoo: selectedValue,
         dataVoo: Data, 
         trecho: Trecho ,
         horaPartida: HoraPartida,
@@ -380,13 +382,13 @@ function AlterarVoo() {
         })
         .then(customResponse => {
             if (customResponse.Companhia === "SUCCESS") {
-                MessageStatus("Cidade alterada... ", false);
-            } else {MessageStatus("Erro ao alterar Companhia...: " + customResponse.message, true);
+                MessageStatus("Voo alterada... ", false);
+            } else {MessageStatus("Erro ao alterar Voo...: " + customResponse.message, true);
             console.log(customResponse.message);
         }
     })
     .catch((e) => {
-        MessageStatus("Erro técnico ao listar... Contate o suporte.", true);
-        console.log("Falha grave ao listar." + e)
+        MessageStatus("Erro técnico ao alterar... Contate o suporte.", true);
+        console.log("Falha grave ao alterar." + e)
     });
 }
