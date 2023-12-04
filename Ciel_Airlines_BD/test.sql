@@ -175,4 +175,6 @@ select * from ASSENTO where ID_ASSENTO=148
 update ASSENTO set status='INDISPONIVEL' WHERE ID_ASSENTO=
 Update assento set status = 'INDISPONIVEL' where id_assento = 153
 
-select * from venda
+    select * from AERONAVE;
+
+update aeronave set modelo='aaa', NUM_IDENTIFICACAO = 'aaa', FABRICANTE = 'aaa', ANO_FABRICACAO=2002, COMPANHIA_AEREA = 21 where ID_AERONAVE = 6

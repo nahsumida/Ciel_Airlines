@@ -18,7 +18,6 @@ const select_1 = require("../adapter/oraclebd/select");
 const delete_1 = require("../adapter/oraclebd/delete");
 const insert_1 = require("../adapter/oraclebd/insert");
 const update_1 = require("../adapter/oraclebd/update");
-const trecho_1 = require("../domain/trecho/trecho");
 exports.route = express_1.default.Router();
 // SEARCH 
 //pesquisa de voos de um trecho especifico filtrado por data
@@ -154,7 +153,7 @@ exports.route.get("/selectVooByID", (req, res) => __awaiter(void 0, void 0, void
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.delete("/deleteVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.get("/deleteVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idVoo;
     let resp = (0, delete_1.executeDeleteByID)('VOO', id);
@@ -170,7 +169,23 @@ exports.route.delete("/deleteVoo", (req, res) => __awaiter(void 0, void 0, void 
 }));
 exports.route.post("/updateVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
-    res.send(cr);
+    let id = req.body.idAeroporto;
+    const idCidade = req.body.idCidade;
+    const nomeAeroporto = req.body.nomeAeroporto;
+    const sigla = req.body.sigla;
+    let resp = (0, update_1.executeUpdateVoo)(id, idCidade, nomeAeroporto, sigla);
+    console.log(resp);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    else {
+        cr.payload = (yield resp).result;
+        cr.message = "Dado inserido";
+        cr.status = "SUCCESS";
+        res.send(cr);
+    }
 }));
 exports.route.put("/insertVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
@@ -236,7 +251,25 @@ exports.route.delete("/deleteAeronave", (req, res) => __awaiter(void 0, void 0, 
 }));
 exports.route.post("/updateAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
-    res.send(cr);
+    let id = req.body.idAeronave;
+    const modelo = req.body.modelo;
+    const numIdentificacao = req.body.numIdentificacao;
+    const fabricante = req.body.fabricante;
+    const anoFabricacao = req.body.anoFabricacao;
+    const compahiaAerea = req.body.compahiaAerea;
+    let resp = (0, update_1.executeUpdateAeronave)(id, modelo, numIdentificacao, fabricante, anoFabricacao, compahiaAerea);
+    console.log(resp);
+    if ((yield resp).err != null) {
+        cr.message = (yield resp).err;
+        cr.status = "ERROR";
+        res.send(cr);
+    }
+    else {
+        cr.payload = (yield resp).result;
+        cr.message = "Dado inserido";
+        cr.status = "SUCCESS";
+        res.send(cr);
+    }
 }));
 exports.route.put("/insertAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
@@ -500,7 +533,7 @@ exports.route.post("/selectCompanhiaAereaByID", (req, res) => __awaiter(void 0, 
     cr.status = "SUCCESS";
     res.send(cr);
 }));
-exports.route.delete("/deleteCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.route.post("/deleteCompanhiaAerea", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined };
     const id = req.body.idCompanhiaAerea;
     let resp = (0, delete_1.executeDeleteByID)('COMPANHIA_AEREA', id);
@@ -667,11 +700,7 @@ exports.route.post("/updateTrecho", (req, res) => __awaiter(void 0, void 0, void
     const id = req.body.idTrecho;
     const aeroSaida = req.body.aeroSaida;
     const aeroChegada = req.body.aeroChegada;
-    console.log("aero saida:", aeroSaida);
-    console.log("aero chegada:", aeroChegada);
-    let trecho = (0, select_1.executeSelectTrechoByID)(id);
-    let trechoValidado = (0, trecho_1.validateTrecho)((yield trecho).result[0], (yield trecho).result[1], aeroSaida, aeroChegada);
-    let resp = (0, update_1.executeUpdateTrecho)(id, trechoValidado.aeroSaida, trechoValidado.aeroChegada);
+    let resp = (0, update_1.executeUpdateTrecho)(id, aeroSaida, aeroChegada);
     if ((yield resp).err != null) {
         cr.message = (yield resp).err;
         cr.status = "ERROR";

@@ -13,10 +13,12 @@ import { executeInsertCompanhiaAerea, executeInsertMetodoPagamento,
          executeInsertAeronave} from "../adapter/oraclebd/insert";
 import { executeUpdateCompanhiaAerea, executeUpdateMetodoPagamento, 
          executeUpdateCidade, executeUpdateAssento, executeUpdateTrecho,
-         executeUpdateAeroporto } from "../adapter/oraclebd/update";
+         executeUpdateAeroporto, 
+         executeUpdateAeronave,
+         executeUpdateVoo} from "../adapter/oraclebd/update";
 
 import { CustomResponse } from '../model/customResponse';
-import { validateTrecho } from "../domain/trecho/trecho";
+
 export const route = express.Router();
 
 // SEARCH 
@@ -193,7 +195,7 @@ route.get("/selectVooByID", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.delete("/deleteVoo", async(req:any, res:any)=>{
+route.get("/deleteVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idVoo as number;
@@ -215,8 +217,25 @@ route.delete("/deleteVoo", async(req:any, res:any)=>{
 
 route.post("/updateVoo", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
+
+  let id = req.body.idAeroporto as number;
+  const idCidade = req.body.idCidade as number;
+  const nomeAeroporto = req.body.nomeAeroporto as string;
+  const sigla = req.body.sigla as string;
+
+  let resp = executeUpdateVoo(id, idCidade, nomeAeroporto, sigla);
+  console.log(resp)
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } else {
+    cr.payload = (await resp).result;
+    cr.message = "Dado inserido";
+    cr.status = "SUCCESS"; 
+    
   res.send(cr);
+  }
 });
 
 route.put("/insertVoo", async(req:any, res:any)=>{
@@ -305,8 +324,27 @@ route.delete("/deleteAeronave", async(req:any, res:any)=>{
 
 route.post("/updateAeronave", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
-  
+
+  let id = req.body.idAeronave as number;
+  const modelo = req.body.modelo as string;
+  const numIdentificacao = req.body.numIdentificacao as string;
+  const fabricante = req.body.fabricante as string;
+  const anoFabricacao = req.body.anoFabricacao as number;
+  const compahiaAerea = req.body.compahiaAerea as number;
+
+  let resp = executeUpdateAeronave(id, modelo, numIdentificacao, fabricante, anoFabricacao, compahiaAerea);
+  console.log(resp)
+  if ((await resp).err != null){
+    cr.message = (await resp).err;
+    cr.status = "ERROR";
+    res.send(cr);
+  } else {
+    cr.payload = (await resp).result;
+    cr.message = "Dado inserido";
+    cr.status = "SUCCESS"; 
+    
   res.send(cr);
+  }
 });
 
 route.put("/insertAeronave", async(req:any, res:any)=>{
@@ -415,7 +453,6 @@ route.post("/updateAeroporto", async(req:any, res:any)=>{
     
   res.send(cr);
   }
-
 });
 
 route.put("/insertAeroporto", async(req:any, res:any)=>{
@@ -664,7 +701,7 @@ route.post("/selectCompanhiaAereaByID", async(req:any, res:any)=>{
   res.send(cr);
 });
 
-route.delete("/deleteCompanhiaAerea", async(req:any, res:any)=>{
+route.post("/deleteCompanhiaAerea", async(req:any, res:any)=>{
   let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined};
 
   const id = req.body.idCompanhiaAerea as number;
@@ -897,15 +934,9 @@ route.post("/updateTrecho", async(req:any, res:any)=>{
   const id = req.body.idTrecho as number;
   const aeroSaida = req.body.aeroSaida as number;
   const aeroChegada = req.body.aeroChegada as number;
- 
-  console.log("aero saida:", aeroSaida);
-  console.log("aero chegada:", aeroChegada);
 
-  let trecho = executeSelectTrechoByID(id)
 
-  let trechoValidado = validateTrecho((await trecho).result[0],(await trecho).result[1] , aeroSaida, aeroChegada)
-
-  let resp = executeUpdateTrecho(id,trechoValidado.aeroSaida, trechoValidado.aeroChegada);
+  let resp = executeUpdateTrecho(id,aeroSaida, aeroChegada);
 
   if ((await resp).err != null){
     cr.message = (await resp).err;

@@ -133,9 +133,9 @@ function preencheuFab(){
 
 function totalAssentosValido(){
     let resultado = false;
-    const strAssento = document.getElementById('Total_assentos').value;
+    const strAssento = document.getElementById('numAssentos').value;
     const assentos = parseInt(strAssento);
-    if(assentos >0){
+    if(assentos > 0){
         resultado = true;
     }
     return resultado;
@@ -168,10 +168,10 @@ function inserirAeronave(CompanhiaAerea){
         MessageStatus("Selecione o Fabricante!", true);
         return;
     }
-    /*if(!totalAssentosValido()){
+    if(!totalAssentosValido()){
         MessageStatus("Preencha  o total de assentos.", true);
         return;
-    }*/
+    }
     if(!selecionouCompanhia()){
         MessageStatus("Selecione uma Companhia Aérea!", true);
         return;

@@ -97,14 +97,14 @@ function inserirCompanhia() {
 // EXCLUIR
 function fetchExcluir(body){
     const requestOptions = {
-        method: 'DELETE', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
+        method: 'POST', headers: {'Content-Type' : "application/json"}, body: JSON.stringify(body)
     };
 
     return fetch('http://localhost:3000/deleteCompanhiaAerea', requestOptions).then(T => T.json())
 }
 
 
-function Excluir() {
+function ExcluirCA() {
     var selectElementDelete = document.getElementById("dataSelectDelete"); //caixa de select
     var selectedIndex = selectElementDelete.selectedIndex; // Índice da opção selecionada
     var selectedOption = selectElementDelete.options[selectedIndex]; // Opção selecionada
@@ -127,7 +127,7 @@ function Excluir() {
             MessageStatus("Erro técnico ao excluir... Contate o suporte.", true);
             console.log("Falha grave ao excluir." + e)
         });
-}
+    }
 
 // ALTERAR
 function fetchAlterar(body) {
@@ -136,6 +136,7 @@ function fetchAlterar(body) {
     };
     return fetch('http://localhost:3000/updateCompanhiaAerea', requestOptions).then(T => T.json())
 }
+
 function Alterar() {
     var selectElementUpdate = document.getElementById("dataSelectUpdate"); // caixa de seleçao do id
     var selectedIndex = selectElementUpdate.selectedIndex; // Índice da opção selecionada
@@ -170,3 +171,4 @@ document.addEventListener("DOMContentLoaded", function() {
     listarComboBox(dataSelectDelete, fetchListarCompanhia);
     listarComboBox(dataSelectUpdate, fetchListarCompanhia);
 });
+
