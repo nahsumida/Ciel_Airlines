@@ -1,3 +1,7 @@
+/* ARQUIVO REFERENCIADO POR TODAS OS ARQUIVOS .HTML DO ADMIN*/
+
+
+
 /*função para alterar a visibilidade de uma seção dentro de um bloco*/
 function sectionView(sectionOn, sectionsOff ){
 

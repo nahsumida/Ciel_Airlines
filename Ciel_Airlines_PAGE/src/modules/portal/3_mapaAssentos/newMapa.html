@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="../../../assets/css/newMapa.css">
+        <link rel="icon" href="../../../assets/img/logo.png">
+        <title>Ciel | Escolher Assento</title>
+    </head>
+    <body>
+    <!--Navbar-->
+    <div class="card text-center" id="nav">
+        <div class="card-header" id="nav">
+          <a class="navbar-brand" href="#">
+            <img src="../../../../src/assets/img/logo_nome.png" alt="Logo" width="200" height="70" alt="logo" draggable="false" >
+          </a>
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="../2_busca/buscaVoo.html">Voltar</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link active custom-nav-link" aria-current="true" href="#">Passagens</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body" id="nav">
+          <div class="background-img">
+            <h5 class="card-title" id="nav">PASSAGENS</h5>
+            <p class="card-text" id="nav">Escolha seu assento e confirme</p>
+            <div class="container text-center"><button id="btnConfirmar">Confirmar</button></div>
+            <p id="status" class="statusError"></p>
+          </div>
+        </div>
+    </div>
+      <!--inicio do mapa de asssentos-->
+        <div class="container-fundo">
+            <p class="card-text" id="nav"><img src="../../../assets/img/setaD.png">Saídas</p>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <div class="col"><th id="aStyle">A</th></div>
+                        <div class="col"><th id="bStyle">B</th></div>
+                    </tr>
+                </thead>
+                <tbody id="dataBody"></tbody>
+            </table>
+        </div>
+        </div>
+    </body>
+    <script src="./script/mapa.js">
+    </script>
+</html>

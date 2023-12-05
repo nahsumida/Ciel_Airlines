@@ -21,9 +21,8 @@ function obterParametroUrl(nome) {
 function selecionarVoo(idVoo) {
     console.log(`voo selecionado com ID: ${idVoo}`); // verificacao no console
       // Redirecionar para a prox página com o ID do voo na URL
-      window.location.href = `newMapa.html?idVoo=${idVoo}`;
+      window.location.href = `../../../modules/portal/3_mapaAssentos/newMapa.html?idVoo=${idVoo}`;
   }
-
 
 //funcao para formatar data vinda do banco para o padrao dd/mm/yyyy
 function formatarData(data) {
@@ -61,7 +60,7 @@ function createVooCard( origem, destino, data, preco, idVoo, titulo) {
         <div class="voo-details">
             <div class= "row">
                 <div class="col"><p>Origem</p><h6>${origem}</h6></div>
-                <div class="col" id="img"><img src="../../../src/assets/img/aviaoIcon.png"></div>
+                <div class="col" id="img"><img src="../../../../src/assets/img/aviaoIcon.png"></div>
                 <div class="col"><p>Destino</p><h6>${destino}</h6></div>
             </div>
             <div class="row" id="divide">

@@ -83,7 +83,7 @@ function confirmar(){
 
     // chama funcao para inserir venda
     inserirVenda(idAssento, idVoo);
-    window.location.href = 'aprovado.html';
+    window.location.href = '../6_aprovado/aprovado.html';
 }
 
 // funcao para validar dados do cartao de credito e inserir venda chamando a func "confirmar()"

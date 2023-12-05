@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dados</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="dados.css">
-    <link rel="icon" href="../../assets/img/logo.png">
+    <link rel="stylesheet" href="../../../assets/css/dados.css">
+    <link rel="icon" href="../../../assets/img/logo.png">
 </head>
 <body>
   <!--navBar-->
     <div class="card text-center" id="nav">
         <div class="card-header" id="nav">
           <a class="navbar-brand" href="#">
-            <img src="../../../src/assets/img/logo_nome.png" alt="Logo" width="200" height="70" alt="logo" draggable="false" >
+            <img src="../../../../src/assets/img/logo_nome.png" alt="Logo" width="200" height="70" alt="logo" draggable="false" >
           </a>
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
               <a class="nav-link active custom-nav-link" aria-current="true" href="#">Passagens</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="portalbusca.html">Home</a>
+              <a class="nav-link" href="../1_portal/portalbusca.html">Home</a>
             </li>
             </li>
           </ul>
@@ -55,20 +55,20 @@
     <footer>
       <div class="footer-content">
           <div class="imgFooter">
-              <img src="../../assets/img/logo_nome.png">
+              <img src="../../../assets/img/logo_nome.png">
           </div>
           <div class="footer-left">
               <h3>Contato</h3>
               <ul>
-                <a href="#"><img src="../../assets/img/icon_facebook.png"></a>
-                <a href="#"><img src="../../assets/img/icon_instagram.png"></a>
-                <a href="#"><img src="../../assets/img/icon_linkedin.png"></a>
+                <a href="#"><img src="../../../assets/img/icon_facebook.png"></a>
+                <a href="#"><img src="../../../assets/img/icon_instagram.png"></a>
+                <a href="#"><img src="../../../assets/img/icon_linkedin.png"></a>
               </ul>
           </div>
           <p>&copy; 2023.CielArlines</p>
       </div>
   </footer>
-    <script src="portal.js"></script>
+    <script src="../1_portal/script/portal.js"></script>
     <script>
         // Obtenha os dados armazenados em sessionStorage
         //'sessionStorege' armazena dados de forma simples e sem expiração, ou seja, ficam lá enquanto não apagarmos por código ou pelo próprio navegado
@@ -108,9 +108,9 @@
 
           var metodoPag = sessionStorage.getItem('metodoPagamento');
           if (metodoPag === "1"){
-            window.location.href = `pagamento_pix.html?idVoo=${idVoo}`;
+            window.location.href = `../../portal/5_pagamento/pagamento_pix.html?idVoo=${idVoo}`;
           } else if (metodoPag === "2"){
-            window.location.href = `pagamento_cartao.html?idVoo=${idVoo}`;
+            window.location.href = `../../portal/5_pagamento/pagamento_cartao.html?idVoo=${idVoo}`;
           }
         }
     </script>
